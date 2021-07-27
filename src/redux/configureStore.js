@@ -10,7 +10,7 @@ import { connectRouter } from 'connected-react-router';
 
 const history = createBrowserHistory();
 const rootReducer = combineReducers({
-	router: connectRouter(history),
+  router: connectRouter(history),
 });
 
 // history 넣기, 로거사용

@@ -6,16 +6,28 @@ module.exports = {
   },
   extends: [
     'airbnb',
-    'prettier/react',
-    'eslint:recommended',
+    'plugin:react/recommended',
     'plugin:prettier/recommended',
   ],
   rules: {
-    'react/jsx-filename-extension': [
+    'react/prop-types': 0,
+    'no-undef': 0,
+    'react/require-default-props': 0,
+    'import/no-extraneous-dependencies': 0,
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-props-no-spreading': 'off',
+    'no-param-reassign': [
+      'error',
+      { props: true, ignorePropertyModificationsFor: ['draft'] },
+    ],
+    'prettier/prettier': [
       'error',
       {
-        extensions: ['.js', '.jsx'],
+        endOfLine: 'auto',
       },
     ],
+    'no-use-before-define': 'off',
+    'import/no-unresolved': 'off',
+    'no-underscore-dangle': 'off',
   },
 };
