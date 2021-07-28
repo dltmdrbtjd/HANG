@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from '../../elements/Button/index';
 import Grid from '../../elements/Grid/index';
+import Text from '../../elements/Text/index';
 
 const Home = () => {
   return (
@@ -12,7 +13,7 @@ const Home = () => {
         maxWidth="768px"
         bgColor="brandColor"
       >
-        ㅎㅇㅋㅋ
+        <Text>ㅎㅇㅎㅇㅎㅇㅎㅇㅎ</Text>
       </Grid>
     </>
   );
