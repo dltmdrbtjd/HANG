@@ -1,11 +1,9 @@
 import React from 'react';
 import { Button, Grid, Input, TextArea, Section } from '../../elements/index';
-import Logo from '../../elements/Logo';
 
 const Home = () => {
   return (
     <Section bgColor="gray">
-      <Logo />
       <Button fs="xl">ㅎㅇㅎㅇ</Button>
       <TextArea label="자기소개" placeholder="자기소개를 작성해주세요" />
       <Input label="로그인" placeholder="로그인" />
