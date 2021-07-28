@@ -1,0 +1,19 @@
+import styled from 'styled-components';
+
+const InputStyle = styled.input`
+  border: none;
+  border-radius: ${props => props.radius};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  padding: ${props => props.padding};
+  background-color: ${props => props.theme.color[props.bgColor]};
+  color: ${props => props.theme.color[props.color]};
+  font-size: ${props => props.theme.fontSize[props.fs]};
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export default InputStyle;
