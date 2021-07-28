@@ -1,7 +1,12 @@
 import React from 'react';
-import Text from '../../elements/Text/index';
-import { Button, Grid, Input, TextArea, Section } from '../../elements/index';
-
+import {
+  Text,
+  Button,
+  Grid,
+  Input,
+  TextArea,
+  Section,
+} from '../../elements/index';
 
 const Home = () => {
   return (
