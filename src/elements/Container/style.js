@@ -5,7 +5,12 @@ const ContainerStyle = styled.div`
   max-width: 1024px;
   margin: 0 auto;
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (max-width: 768px) {
+    max-width: none;
+    width: 95%;
+  }
+
+  @media only screen and (max-width: 424px) {
     max-width: none;
     width: 95%;
   }
