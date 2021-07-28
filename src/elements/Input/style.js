@@ -9,10 +9,23 @@ const InputStyle = styled.input`
   background-color: ${props => props.theme.color[props.bgColor]};
   color: ${props => props.theme.color[props.color]};
   font-size: ${props => props.theme.fontSize[props.fs]};
+  box-shadow: ${props => props.shadow};
   box-sizing: border-box;
 
   &:focus {
     outline: none;
+  }
+
+  &::placeholder {
+    color: ${props => props.theme.color.gray};
+  }
+
+  &::-webkit-input-placeholder {
+    color: ${props => props.theme.color.gray};
+  }
+
+  &:-ms-input-placeholder {
+    color: ${props => props.theme.color.gray};
   }
 `;
 
