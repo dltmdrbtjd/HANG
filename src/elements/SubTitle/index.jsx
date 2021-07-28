@@ -8,7 +8,7 @@ const SubTitle = ({ children, ...props }) => {
 SubTitle.defaultProps = {
   width: '100%',
   color: 'black',
-  fw: 600,
+  fw: 'semiBold',
 };
 
 export default SubTitle;

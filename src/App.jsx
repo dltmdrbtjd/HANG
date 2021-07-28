@@ -10,6 +10,8 @@ import { Section } from './elements/index';
 import Header from './components/Header/index';
 // pages
 import Home from './pages/Home/index';
+import Login from './pages/Login/index';
+import SignUp from './pages/SignUp/index';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
       <Section>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={SignUp} />
         </Switch>
       </Section>
     </ConnectedRouter>

@@ -6,11 +6,6 @@ const ContainerStyle = styled.div`
   height: ${props => props.height};
   margin: 0 auto;
 
-  @media only screen and (max-width: 768px) {
-    max-width: none;
-    width: 95%;
-  }
-
   @media only screen and (max-width: 424px) {
     max-width: none;
     width: 95%;

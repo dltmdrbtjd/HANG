@@ -32,5 +32,6 @@ module.exports = {
     'no-use-before-define': 'off',
     'import/no-unresolved': 'off',
     'no-underscore-dangle': 'off',
+    'react/display-name': 'off',
   },
 };

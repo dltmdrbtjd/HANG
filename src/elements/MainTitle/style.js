@@ -7,7 +7,7 @@ const MainTitleStyle = styled.h2`
   margin: ${props => props.margin};
   color: ${props => props.theme.color[props.color]};
   font-size: ${props => props.theme.fontSize[props.fs]};
-  font-weight: ${props => props.fw};
+  font-weight: ${props => props.theme.fontWeight[props.fw]};
   line-height: ${props => props.ls};
   text-align: ${props => props.textAlign};
   box-sizing: border-box;
