@@ -23,6 +23,7 @@ const GridStyle = styled.div`
   bottom: ${props => props.bottom};
   z-index: ${props => props.z};
   box-sizing: border-box;
+  transform: translate(${props => props.translate});
 `;
 
 export default GridStyle;
