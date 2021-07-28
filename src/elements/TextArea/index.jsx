@@ -1,10 +1,15 @@
 import React from 'react';
 import TextAreaStyle from './style';
+import Text from '../Text/index';
 
 const TextArea = ({ _onChange, value, placeholder, rows, label, ...props }) => {
   return (
     <>
-      {label && <p style={{ margin: '0 0 12px 0', fontSize: 'md' }}>{label}</p>}
+      {label && (
+        <Text margin="0 0 12px 0" fs="md">
+          {label}
+        </Text>
+      )}
       <TextAreaStyle
         onChange={_onChange}
         value={value}

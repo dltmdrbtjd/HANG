@@ -1,5 +1,6 @@
 import React from 'react';
 import InputStyle from './style';
+import Text from '../Text/index';
 
 const Input = ({
   label,
@@ -12,7 +13,11 @@ const Input = ({
 }) => {
   return (
     <>
-      {label && <p style={{ margin: '0 0 12px 0', fontSize: 'md' }}>{label}</p>}
+      {label && (
+        <Text margin="0 0 12px 0" fs="md">
+          {label}
+        </Text>
+      )}
       <InputStyle
         value={value}
         placeholder={placeholder}
