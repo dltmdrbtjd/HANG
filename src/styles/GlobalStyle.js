@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     overflow: hidden;
     box-sizing: border-box;
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     font-size: 12px;
     @media only screen and (min-width : 768px){
       font-size: 14px;
