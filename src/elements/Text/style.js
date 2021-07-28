@@ -10,6 +10,7 @@ const TextStyle = styled.p`
   padding: ${props => props.padding};
   line-height: ${props => props.lh};
   letter-spacing: ${props => props.ls};
+  text-align: ${props => props.textAlign};
   overflow: ${props => props.overflow};
   white-space: pre-line;
   word-break: ${props => props.wb};

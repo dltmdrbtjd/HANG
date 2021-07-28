@@ -1,8 +1,8 @@
 import React from 'react';
 import TextStyle from './style';
 
-const Text = ({ children }) => {
-  return <TextStyle>{children}</TextStyle>;
+const Text = ({ children, ...props }) => {
+  return <TextStyle {...props}>{children}</TextStyle>;
 };
 
 Text.defaultProps = {
