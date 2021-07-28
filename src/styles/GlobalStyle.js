@@ -6,13 +6,14 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    color: ${({ theme }) => theme.color.black};
   }
   
   ${reset};
   body {
     overflow: hidden;
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: ${({ theme }) => theme.fontSize.md};
     line-height: 1.5;
     @media only screen and (min-width : 768px){
       font-size: 14px;
