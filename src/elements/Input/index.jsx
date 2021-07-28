@@ -26,6 +26,8 @@ const Input = ({
 };
 
 Input.defaultProps = {
+  _onChange: () => {},
+  _onKeyPress: () => {},
   label: false,
   type: 'text',
   placeholder: '',
