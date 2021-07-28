@@ -12,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     box-sizing: border-box;
     font-size: 12px;
+    line-height: 1.5;
     @media only screen and (min-width : 768px){
       font-size: 14px;
     }
