@@ -1,17 +1,15 @@
 import React from 'react';
 import SectionStyle from './style';
 
-const Section = ({ children, ...props }) => {
-  return (
-    <>
-      <SectionStyle {...props}>{children}</SectionStyle>
-    </>
-  );
-};
+// components
+import Container from '../Container/index';
 
-Section.defaultProps = {
-  width: '100%',
-  height: '100%',
+const Section = ({ children }) => {
+  return (
+    <SectionStyle>
+      <Container>{children}</Container>
+    </SectionStyle>
+  );
 };
 
 export default Section;
