@@ -1,13 +1,22 @@
 import React from 'react';
 import LogoStyle from './style';
+// components
+import Link from '../Link/index';
+// images
+import LogoImg from '../../Images/Symbol.png';
 
-const SubTitle = props => {
-  return <LogoStyle {...props}>Hang</LogoStyle>;
+const Logo = props => {
+  return (
+    <LogoStyle {...props}>
+      <Link href="/" width="100%" height="100%">
+        Hang
+      </Link>
+    </LogoStyle>
+  );
 };
 
-SubTitle.defaultProps = {
-  imgUrl:
-    'https://naver.worksmobile.com/wp-content/uploads/img@2x-1024x512.png',
+Logo.defaultProps = {
+  imgUrl: LogoImg,
 };
 
-export default SubTitle;
+export default Logo;
