@@ -10,6 +10,7 @@ const TextAreaStyle = styled.textarea`
   color: ${props => props.theme.color[props.color]};
   font-size: ${props => props.theme.fontSize[props.fs]};
   box-sizing: border-box;
+  resize: none;
 
   &:focus {
     outline: none;
