@@ -5,12 +5,14 @@ import Link from '../Link/index';
 // images
 import LogoImg from '../../Images/Symbol.png';
 
-const Logo = props => {
+const Logo = ({ href, ...props }) => {
   return (
     <LogoStyle {...props}>
-      <Link href="/" width="100%" height="100%">
-        Hang
-      </Link>
+      {href && (
+        <Link href={href} width="100%" height="100%">
+          Hang
+        </Link>
+      )}
     </LogoStyle>
   );
 };

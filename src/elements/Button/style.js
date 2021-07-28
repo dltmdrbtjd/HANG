@@ -14,6 +14,10 @@ const ButtonStyle = styled.button`
   border-radius: ${props => props.radius};
   box-sizing: border-box;
   cursor: pointer;
+
+  &:disabled {
+    background-color: ${props => props.theme.color[props.disColor]};
+  }
 `;
 
 export default ButtonStyle;
