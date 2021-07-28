@@ -14,13 +14,9 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     box-sizing: border-box;
     font-size: ${({ theme }) => theme.fontSize.md};
+    font-weight: ${({ theme }) => theme.fontWeight.regular};
+    background-color: ${({ theme }) => theme.color.bgColor};
     line-height: 1.5;
-    @media only screen and (min-width : 768px){
-      font-size: 14px;
-    }
-    @media only screen and (min-width : 1024px){
-      font-size:16px;
-    }
   }
 
   button, input {
