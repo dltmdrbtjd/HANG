@@ -1,5 +1,7 @@
 import React from 'react';
+import Text from '../../elements/Text/index';
 import { Button, Grid, Input, TextArea, Section } from '../../elements/index';
+
 
 const Home = () => {
   return (
@@ -13,7 +15,7 @@ const Home = () => {
         maxWidth="768px"
         bgColor="brandColor"
       >
-        ㅎㅇㅋㅋ
+        <Text>ㅎㅇㅎㅇㅎㅇㅎㅇㅎ</Text>
       </Grid>
     </Section>
   );
