@@ -7,13 +7,17 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from './redux/configureStore';
 // pages
 import Home from './pages/Home/index';
+// components
+import { Section } from './elements/index';
 
 function App() {
   return (
     <ConnectedRouter history={history}>
-      <Switch>
-        <Route path="/" exact component={Home} />
-      </Switch>
+      <Section>
+        <Switch>
+          <Route path="/" exact component={Home} />
+        </Switch>
+      </Section>
     </ConnectedRouter>
   );
 }
