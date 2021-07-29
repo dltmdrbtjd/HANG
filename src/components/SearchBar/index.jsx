@@ -4,7 +4,7 @@ import { Grid, Input } from '../../elements/index';
 
 const SearchBar = () => {
   return (
-    <Grid margin="10px 0 0 0" position="relative">
+    <Grid margin="28px 0 0 0" position="relative">
       <Input placeholder="가이디/트리비를 검색하세요." />
       <Grid
         width="30px"
