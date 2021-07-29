@@ -3,8 +3,15 @@ import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 // elements
-import { Logo, Grid, Button, Label, Link } from '../../elements/index';
-import ValidateInput from '../SignUp/ValidateInput/index';
+import {
+  Logo,
+  Grid,
+  Button,
+  Label,
+  Link,
+  Text,
+  Input,
+} from '../../elements/index';
 // image
 import LogoImg from '../../Images/Logo.png';
 
@@ -18,14 +25,12 @@ const Login = () => {
       <Formik
         initialValues={{ userId: '', password: '' }}
         validationSchema={yup.object({
-          userId: yup.string().min(6).max(14).required(),
-          password: yup.string().min(8).max(20).required(),
+          userId: yup.string().required(),
+          password: yup.string().required(),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
         }}
       >
         {formik => (
@@ -35,16 +40,10 @@ const Login = () => {
                 아이디
               </Label>
 
-              <ValidateInput
+              <Input
                 id="userId"
                 placeholder="아이디를 입력하세요"
-                status={
-                  formik.touched.userId && formik.errors.userId
-                    ? 'danger'
-                    : null
-                }
-                _onChange={formik.handleChange}
-                value={formik.values.userId}
+                {...formik.getFieldProps('userId')}
               />
             </Grid>
 
@@ -53,19 +52,17 @@ const Login = () => {
                 비밀번호
               </Label>
 
-              <ValidateInput
+              <Input
                 id="password"
                 type="password"
                 placeholder="비밀번호를 입력하세요"
-                status={
-                  formik.touched.password && formik.errors.password
-                    ? 'danger'
-                    : null
-                }
-                _onChange={formik.handleChange}
-                value={formik.values.password}
+                {...formik.getFieldProps('password')}
               />
             </Grid>
+
+            <Text fs="sm" margin="12px 8px 0" color="danger">
+              가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
+            </Text>
 
             <Grid position="absolute" bottom="20px" left="0">
               <Button fs="la" fw="bold" type="submit" width="100%">

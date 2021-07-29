@@ -4,11 +4,11 @@ const setSpanWithStatus = status => {
   switch (status) {
     case 'danger':
       return css`
-        color: #ff0005;
+        color: ${({ theme }) => theme.color.danger};
       `;
     case 'safe':
       return css`
-        color: #00c314;
+        color: ${({ theme }) => theme.color.safe};
       `;
     default:
       return null;

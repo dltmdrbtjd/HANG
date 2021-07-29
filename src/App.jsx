@@ -22,7 +22,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={SignUp} />
+          <Route path="/signup/:page" exact component={SignUp} />
         </Switch>
       </Section>
     </ConnectedRouter>
