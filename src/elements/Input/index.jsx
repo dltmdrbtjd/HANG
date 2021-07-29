@@ -1,10 +1,10 @@
 import React from 'react';
 import InputStyle from './style';
-import Text from '../Text/index';
 
 const Input = ({
-  label,
+  id,
   type,
+  name,
   value,
   placeholder,
   _onChange,
@@ -12,28 +12,22 @@ const Input = ({
   ...props
 }) => {
   return (
-    <>
-      {label && (
-        <Text margin="0 0 12px 0" fs="md">
-          {label}
-        </Text>
-      )}
-      <InputStyle
-        value={value}
-        placeholder={placeholder}
-        type={type}
-        onChange={_onChange}
-        onKeyPress={_onKeyPress}
-        {...props}
-      />
-    </>
+    <InputStyle
+      id={id}
+      value={value}
+      placeholder={placeholder}
+      type={type}
+      onChange={_onChange}
+      onKeyPress={_onKeyPress}
+      name={name}
+      {...props}
+    />
   );
 };
 
 Input.defaultProps = {
   _onChange: () => {},
   _onKeyPress: () => {},
-  label: false,
   type: 'text',
   placeholder: '',
   width: '100%',
@@ -43,6 +37,7 @@ Input.defaultProps = {
   fs: 'md',
   padding: '0 12px',
   radius: '14px',
+  shadow: 'inset 0px 2px 3px rgba(136, 136, 136, 0.25)',
 };
 
 export default Input;
