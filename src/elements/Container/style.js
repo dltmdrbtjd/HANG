@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ContainerStyle = styled.div`
   position: relative;
-  padding-top: ${props => (props.isPadding || props.height ? 0 : '90px')};
+  padding: ${props => (props.isPadding || props.height ? 0 : '90px 0')};
   box-sizing: border-box;
   max-width: 1024px;
   height: ${props => props.height};
