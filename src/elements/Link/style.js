@@ -12,7 +12,8 @@ const LinkStyle = styled(Link)`
   font-size: ${props => props.theme.fontSize[props.fs]};
   font-weight: ${props => props.theme.fontWeight[props.fw]};
   line-height: ${props => props.ls};
-  text-align: ${props => props.textAlign};
+  justify-content: ${props => props.hoz};
+  align-items: ${props => props.ver};
   box-sizing: border-box;
 `;
 

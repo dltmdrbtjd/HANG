@@ -4,6 +4,7 @@ import Section from './Section/index';
 import Container from './Container/index';
 import TextArea from './TextArea/index';
 import Input from './Input/index';
+import Label from './Label/index';
 import Text from './Text/index';
 import MainTitle from './MainTitle/index';
 import SubTitle from './SubTitle/index';
@@ -19,6 +20,7 @@ export {
   Container,
   TextArea,
   Input,
+  Label,
   Text,
   MainTitle,
   SubTitle,
