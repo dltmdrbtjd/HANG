@@ -9,11 +9,14 @@ const LinkStyle = styled(Link)`
   padding: ${props => props.padding};
   margin: ${props => props.margin};
   color: ${props => props.theme.color[props.color]};
+  background-color: ${props => props.theme.color[props.bgcolor]};
   font-size: ${props => props.theme.fontSize[props.fs]};
   font-weight: ${props => props.theme.fontWeight[props.fw]};
   line-height: ${props => props.ls};
   justify-content: ${props => props.hoz};
   align-items: ${props => props.ver};
+  border: ${props => props.border};
+  border-radius: ${props => props.radius};
   box-sizing: border-box;
 `;
 

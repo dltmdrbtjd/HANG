@@ -16,24 +16,12 @@ const ValidateInput = ({
   value,
   _onChange,
 }) => {
-  if (!status)
-    return (
-      <Input
-        placeholder={placeholder}
-        value={value}
-        name={name}
-        type={type}
-        id={id}
-        _onChange={_onChange}
-      />
-    );
-
   return (
     <Grid
       position="relative"
       radius="14px"
       shadow="inset 0px 2px 3px rgba(136, 136, 136, 0.25)"
-      padding="0 12px 0 0"
+      padding={status ? '0 12px 0 0' : 0}
       bgColor="white"
       display="flex"
       hoz="space-between"
@@ -41,9 +29,9 @@ const ValidateInput = ({
       border={status === 'danger' ? 'solid #FF0005' : 'none'}
     >
       <Input
-        width="90%"
+        width={status ? '90%' : '100%'}
         shadow="none"
-        padding="0 0 0 12px"
+        padding={status ? '0 0 0 12px' : '0 12px'}
         bgColor="none"
         placeholder={placeholder}
         value={value}
@@ -53,13 +41,15 @@ const ValidateInput = ({
         _onChange={_onChange}
       />
 
-      <SpanStyle status={status}>
-        {status === 'danger' ? (
-          <HighlightOffIcon />
-        ) : (
-          <CheckCircleOutlineIcon />
-        )}
-      </SpanStyle>
+      {status ? (
+        <SpanStyle status={status}>
+          {status === 'danger' ? (
+            <HighlightOffIcon />
+          ) : (
+            <CheckCircleOutlineIcon />
+          )}
+        </SpanStyle>
+      ) : null}
     </Grid>
   );
 };

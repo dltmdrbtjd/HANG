@@ -1,11 +1,17 @@
 import React from 'react';
 // components
 import SelectBox from '../../components/SelectBox';
+import StatusBar from './StatusBar';
 
-const SignUp = () => {
-  const contents = ['10대', '20대', '30대', '40대', '50대', '60대 이상'];
+const SignUp = ({ match }) => {
+  const { page } = match.params;
 
-  return <SelectBox initailOption="연령대 선택" contents={contents} />;
+  return (
+    <>
+      <StatusBar curPage={page} />
+      <SelectBox initailOption="연령대 선택" />
+    </>
+  );
 };
 
 export default SignUp;

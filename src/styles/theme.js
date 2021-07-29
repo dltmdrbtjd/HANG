@@ -32,6 +32,8 @@ const color = {
   darkG: '#686868',
   extraDarkG: '#2C2C2C',
   white: '#FDFDFD',
+  danger: '#FF0005',
+  safe: '00C314',
 };
 
 const theme = {
