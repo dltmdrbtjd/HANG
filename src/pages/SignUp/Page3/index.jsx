@@ -69,7 +69,7 @@ const SignUpPage3 = () => {
           지역 선택
         </Text>
 
-        <AreaSelectBox />
+        <AreaSelectBox toggle />
       </Grid>
 
       <Link

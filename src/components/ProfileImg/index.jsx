@@ -4,88 +4,47 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // elements
 import { Grid, Image } from '../../elements/index';
 
-const ProfileImg = ({ size, imgUrl }) => {
-  switch (size) {
-    case 'large':
-      return (
-        <Grid
-          display="flex"
-          hoz="center"
-          ver="center"
-          width="100px"
-          height="100px"
-          overflow="hidden"
-          radius="50%"
-          color="gray"
-        >
-          {imgUrl ? (
-            <Image src={imgUrl} alt="profile image" />
-          ) : (
-            <AccountCircleIcon style={{ fontSize: '100px' }} />
-          )}
-        </Grid>
-      );
+const ProfileImg = ({ size = 'medium', imgUrl }) => {
+  const setProfileImageSize = {
+    large: {
+      width: '100px',
+      height: '100px',
+      fontSize: '100px',
+    },
 
-    case 'medium':
-      return (
-        <Grid
-          display="flex"
-          hoz="center"
-          ver="center"
-          width="60px"
-          height="60px"
-          overflow="hidden"
-          radius="50%"
-          color="gray"
-        >
-          {imgUrl ? (
-            <Image src={imgUrl} alt="profile image" />
-          ) : (
-            <AccountCircleIcon style={{ fontSize: '60px' }} />
-          )}
-        </Grid>
-      );
+    medium: {
+      width: '60px',
+      height: '60px',
+      fontSize: '60px',
+    },
 
-    case 'small':
-      return (
-        <Grid
-          display="flex"
-          hoz="center"
-          ver="center"
-          width="20px"
-          height="20px"
-          overflow="hidden"
-          radius="50%"
-          color="gray"
-        >
-          {imgUrl ? (
-            <Image src={imgUrl} alt="profile image" />
-          ) : (
-            <AccountCircleIcon style={{ fontSize: '20px' }} />
-          )}
-        </Grid>
-      );
+    small: {
+      width: '20px',
+      height: '20px',
+      fontSize: '20px',
+    },
+  };
 
-    default:
-      return (
-        <Grid
-          display="flex"
-          hoz="center"
-          ver="center"
-          width="60px"
-          height="60px"
-          overflow="hidden"
-          radius="50%"
-          color="gray"
-        >
-          {imgUrl ? (
-            <Image src={imgUrl} alt="profile image" />
-          ) : (
-            <AccountCircleIcon style={{ fontSize: '60px' }} />
-          )}
-        </Grid>
-      );
-  }
+  return (
+    <Grid
+      display="flex"
+      hoz="center"
+      ver="center"
+      width={setProfileImageSize[size].width}
+      height={setProfileImageSize[size].height}
+      overflow="hidden"
+      radius="50%"
+      color="gray"
+    >
+      {imgUrl ? (
+        <Image src={imgUrl} alt="profile image" />
+      ) : (
+        <AccountCircleIcon
+          style={{ fontSize: `${setProfileImageSize[size].fontSize}` }}
+        />
+      )}
+    </Grid>
+  );
 };
 
 export default ProfileImg;
