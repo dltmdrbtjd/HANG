@@ -68,6 +68,4 @@ const SelectBox = ({ initailOption, contents, ...props }) => {
   );
 };
 
-SelectBox.defaultProps = {};
-
 export default SelectBox;
