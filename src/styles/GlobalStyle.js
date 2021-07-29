@@ -7,13 +7,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     color: ${({ theme }) => theme.color.black};
+    font-size: ${({ theme }) => theme.fontSize.md};
+    font-weight: ${({ theme }) => theme.fontWeight.regular};
   }
   
   ${reset};
   body {
     box-sizing: border-box;
-    font-size: ${({ theme }) => theme.fontSize.md};
-    font-weight: ${({ theme }) => theme.fontWeight.regular};
     background-color: ${({ theme }) => theme.color.bgColor};
     line-height: 1.5;
   }

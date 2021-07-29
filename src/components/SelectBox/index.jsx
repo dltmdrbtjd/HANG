@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 // material
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // style
-import ListWrapper, { SpanStyle } from './style';
+import ListWrapper, { SpanStyle, ListStyle } from './style';
 // elements
 import { Button, Strong, Image, Grid } from '../../elements/index';
 // image
@@ -30,40 +30,43 @@ const SelectBox = ({ initailOption, contents, ...props }) => {
   };
 
   return (
-    <Grid width="132px">
-      <Button
-        width="100%"
-        bgColor="bgColor"
-        radius="0"
-        padding="0"
-        ref={anchorRef}
-        _onClick={handleToggle}
-        color="black"
-        shadow="none"
-      >
-        <SpanStyle angle={angle}>
-          <Strong fw="regular">{option}</Strong>
-          <Image width="10px" src={Arrow} alt="arrow" />
-        </SpanStyle>
-      </Button>
+    <Grid position="relative" height="48px" margin="0 0 15px">
+      <Grid width="132px" position="absolute" top="0" left="0">
+        <Button
+          width="100%"
+          bgColor="bgColor"
+          radius="0"
+          padding="0"
+          ref={anchorRef}
+          _onClick={handleToggle}
+          color="black"
+          shadow="none"
+        >
+          <SpanStyle angle={angle}>
+            <Strong fw="regular">{option}</Strong>
+            <Image width="10px" src={Arrow} alt="arrow" />
+          </SpanStyle>
+        </Button>
 
-      {open && (
-        <ClickAwayListener onClickAway={handleClose}>
-          <ListWrapper {...props}>
-            {contents.map(content => (
-              <li
-                key={(Date.now() + Math.random()).toString(36)}
-                onClick={event => {
-                  setOption(content);
-                  handleClose(event);
-                }}
-              >
-                {content}
-              </li>
-            ))}
-          </ListWrapper>
-        </ClickAwayListener>
-      )}
+        {open && (
+          <ClickAwayListener onClickAway={handleClose}>
+            <ListWrapper {...props}>
+              {contents.map(content => (
+                <ListStyle
+                  bgColor={option === content ? 'skyblue' : null}
+                  key={(Date.now() + Math.random()).toString(36)}
+                  onClick={event => {
+                    setOption(content);
+                    handleClose(event);
+                  }}
+                >
+                  {content}
+                </ListStyle>
+              ))}
+            </ListWrapper>
+          </ClickAwayListener>
+        )}
+      </Grid>
     </Grid>
   );
 };

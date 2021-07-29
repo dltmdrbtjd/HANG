@@ -1,17 +1,18 @@
-import Grid from './Grid/index';
-import Button from './Button/index';
-import Section from './Section/index';
-import Container from './Container/index';
-import TextArea from './TextArea/index';
-import Input from './Input/index';
-import Label from './Label/index';
-import Text from './Text/index';
-import MainTitle from './MainTitle/index';
-import SubTitle from './SubTitle/index';
-import Strong from './Strong/index';
-import Link from './Link/index';
-import Image from './Image/index';
-import Logo from './Logo/index';
+import Grid from './Grid';
+import Button from './Button';
+import Section from './Section';
+import Container from './Container';
+import TextArea from './TextArea';
+import Input from './Input';
+import InputRadio from './InputRadio';
+import Label from './Label';
+import Text from './Text';
+import MainTitle from './MainTitle';
+import SubTitle from './SubTitle';
+import Strong from './Strong';
+import Link from './Link';
+import Image from './Image';
+import Logo from './Logo';
 
 export {
   Grid,
@@ -20,6 +21,7 @@ export {
   Container,
   TextArea,
   Input,
+  InputRadio,
   Label,
   Text,
   MainTitle,

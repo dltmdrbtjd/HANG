@@ -30,20 +30,21 @@ const ListWrapper = styled.ul`
   overflow: auto;
   background-color: ${({ theme }) => theme.color.white};
   ${commonStyle};
+`;
 
-  li {
-    width: 100%;
-    height: 32px;
-    padding: 0 12px;
-    font-size: ${({ theme }) => theme.fontSize.sm};
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
+export const ListStyle = styled.li`
+  width: 100%;
+  height: 32px;
+  padding: 0 12px;
+  font-size: ${({ theme }) => theme.fontSize.sm};
+  background-color: ${props => props.theme.color[props.bgColor]};
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 
-    &:hover {
-      background: ${({ theme }) => theme.color.skyblue};
-    }
+  &:hover {
+    background: ${({ theme }) => theme.color.skyblue};
   }
 `;
 
