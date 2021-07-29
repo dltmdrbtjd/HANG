@@ -1,31 +1,20 @@
 import React from 'react';
-// history
-// style
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 // import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { history } from '../../redux/configureStore';
+
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
-const SearchCard = ({ username, age, city, gender, imgUrl }) => {
+const ProfileCard = ({ username, age, city, gender, text, imgUrl }) => {
   return (
     <Grid
-      _onClick={() => {
-        history.push('/detail');
-      }}
-      padding="10px 0"
+      padding="20px 0"
+      margin="10px 0 0 0"
+      radius="14px"
+      bgColor="white"
+      shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
     >
-      <Grid
-        position="relative"
-        display="flex"
-        hoz="center"
-        ver="center"
-        padding="10px 0"
-        margin="10px 0 0 0"
-        radius="14px"
-        bgColor="white"
-        shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
-      >
+      <Grid position="relative" display="flex" hoz="center" ver="center">
         <ProfileImg imgUrl={imgUrl} />
         <Grid width="75%" margin="0 0 0 10px">
           <Text fs="la" fw="bold">
@@ -45,8 +34,11 @@ const SearchCard = ({ username, age, city, gender, imgUrl }) => {
           <FavoriteBorderIcon />
         </Grid>
       </Grid>
+      <Grid margin="10px 0 0 0" padding="0 20px">
+        <Text fs="sm">{text}</Text>
+      </Grid>
     </Grid>
   );
 };
 
-export default SearchCard;
+export default ProfileCard;
