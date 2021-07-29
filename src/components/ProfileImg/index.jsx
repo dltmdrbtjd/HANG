@@ -1,4 +1,6 @@
 import React from 'react';
+// icon
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // elements
 import { Grid, Image } from '../../elements/index';
 
@@ -14,8 +16,13 @@ const ProfileImg = ({ size, imgUrl }) => {
           height="100px"
           overflow="hidden"
           radius="50%"
+          color="gray"
         >
-          <Image src={imgUrl} alt="profile image" />
+          {imgUrl ? (
+            <Image src={imgUrl} alt="profile image" />
+          ) : (
+            <AccountCircleIcon style={{ fontSize: '100px' }} />
+          )}
         </Grid>
       );
 
@@ -29,8 +36,13 @@ const ProfileImg = ({ size, imgUrl }) => {
           height="60px"
           overflow="hidden"
           radius="50%"
+          color="gray"
         >
-          <Image src={imgUrl} alt="profile image" />
+          {imgUrl ? (
+            <Image src={imgUrl} alt="profile image" />
+          ) : (
+            <AccountCircleIcon style={{ fontSize: '60px' }} />
+          )}
         </Grid>
       );
 
@@ -44,8 +56,13 @@ const ProfileImg = ({ size, imgUrl }) => {
           height="20px"
           overflow="hidden"
           radius="50%"
+          color="gray"
         >
-          <Image src={imgUrl} alt="profile image" />
+          {imgUrl ? (
+            <Image src={imgUrl} alt="profile image" />
+          ) : (
+            <AccountCircleIcon style={{ fontSize: '20px' }} />
+          )}
         </Grid>
       );
 
@@ -59,8 +76,13 @@ const ProfileImg = ({ size, imgUrl }) => {
           height="60px"
           overflow="hidden"
           radius="50%"
+          color="gray"
         >
-          <Image src={imgUrl} alt="profile image" />
+          {imgUrl ? (
+            <Image src={imgUrl} alt="profile image" />
+          ) : (
+            <AccountCircleIcon style={{ fontSize: '60px' }} />
+          )}
         </Grid>
       );
   }

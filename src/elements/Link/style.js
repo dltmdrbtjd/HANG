@@ -17,6 +17,7 @@ const LinkStyle = styled(Link)`
   align-items: ${props => props.ver};
   border: ${props => props.border};
   border-radius: ${props => props.radius};
+  box-shadow: ${props => props.shadow};
   box-sizing: border-box;
 `;
 

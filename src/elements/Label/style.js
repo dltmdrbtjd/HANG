@@ -7,7 +7,15 @@ const LabelStyle = styled.label`
   margin: ${props => props.margin};
   padding: ${props => props.padding};
   line-height: ${props => props.lh};
+  width: ${props => props.width};
+  height: ${props => props.height};
+  position: ${props => props.position};
+  top: ${props => props.top};
+  right: ${props => props.right};
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
   box-sizing: border-box;
+  z-index: ${props => props.z};
 `;
 
 export default LabelStyle;

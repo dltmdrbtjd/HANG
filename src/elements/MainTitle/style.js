@@ -8,8 +8,10 @@ const MainTitleStyle = styled.h2`
   color: ${props => props.theme.color[props.color]};
   font-size: ${props => props.theme.fontSize[props.fs]};
   font-weight: ${props => props.theme.fontWeight[props.fw]};
+  letter-spacing: ${props => props.ls};
   line-height: ${props => props.ls};
   text-align: ${props => props.textAlign};
+  word-break: keep-all;
   box-sizing: border-box;
 `;
 
