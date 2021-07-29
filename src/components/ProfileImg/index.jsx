@@ -19,7 +19,7 @@ const ProfileImg = ({ size, imgUrl }) => {
         </Grid>
       );
 
-    case 'midium':
+    case 'medium':
       return (
         <Grid
           display="flex"
