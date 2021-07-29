@@ -8,6 +8,7 @@ import { history } from './redux/configureStore';
 // components
 import { Section } from './elements/index';
 import Header from './components/Header/index';
+import Navigation from './components/Navigation/index';
 // pages
 import Home from './pages/Home/index';
 import Login from './pages/Login/index';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/signup" exact component={SignUp} />
         </Switch>
       </Section>
+      <Navigation />
     </ConnectedRouter>
   );
 }
