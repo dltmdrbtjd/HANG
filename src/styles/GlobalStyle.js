@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
   
   ${reset};
   body {
-    overflow: hidden;
     box-sizing: border-box;
     font-size: ${({ theme }) => theme.fontSize.md};
     font-weight: ${({ theme }) => theme.fontWeight.regular};
