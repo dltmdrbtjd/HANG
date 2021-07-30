@@ -10,7 +10,7 @@ const ButtonStyle = styled.button`
   font-size: ${props => props.theme.fontSize[props.fs]};
   font-weight: ${props => props.theme.fontWeight[props.fw]};
   box-shadow: ${props => props.shadow};
-  border: none;
+  border: ${props => props.border};
   border-radius: ${props => props.radius};
   box-sizing: border-box;
   cursor: pointer;
