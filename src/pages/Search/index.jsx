@@ -54,7 +54,7 @@ const Search = () => {
         <Grid display="flex" hoz="flex-end">
           <Button
             bgColor={!traveler ? 'gray' : 'brandColor'}
-            padding="8px 30px"
+            padding="8px 20px"
             _onClick={Travelerhandler}
           >
             여행자
@@ -63,7 +63,7 @@ const Search = () => {
             bgColor={!guide ? 'gray' : 'brandColor'}
             margin="0 0 0 10px"
             _onClick={Guidehandler}
-            padding="4px 30px"
+            padding="4px 20px"
           >
             길잡이
           </Button>
