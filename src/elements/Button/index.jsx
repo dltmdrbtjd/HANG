@@ -26,6 +26,7 @@ Button.defaultProps = {
   bgColor: 'brandColor',
   disColor: 'semiLightG',
   color: 'white',
+  border: 'none',
 };
 
 export default Button;
