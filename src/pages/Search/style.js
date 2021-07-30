@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const ButtonStyle = styled.button`
-  background-color: ${props => props.theme.color[props.bgColor]};
+const CategoryBtn = styled.button`
+  background-color: ${props => props.bgColor};
   width: ${props => props.width};
   height: ${props => props.height};
   padding: ${props => props.padding};
@@ -14,10 +14,6 @@ const ButtonStyle = styled.button`
   border-radius: ${props => props.radius};
   box-sizing: border-box;
   cursor: pointer;
-
-  &:disabled {
-    background-color: ${props => props.theme.color[props.disColor]};
-  }
 `;
 
-export default ButtonStyle;
+export default CategoryBtn;
