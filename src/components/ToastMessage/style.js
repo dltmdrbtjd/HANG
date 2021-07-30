@@ -18,11 +18,11 @@ const ToastMessageStyle = styled.div`
   width: 376px;
   height: 54px;
   text-align: center;
-  border: 1px solid #c4c4c4;
   border-radius: 14px;
-  background-color: ${({ theme }) => theme.color.white};
+  background-color: ${({ theme }) => theme.color.skyblue};
+  box-shadow: 0 4px 4px rgba(134, 134, 134, 0.3);
   position: fixed;
-  bottom: 50px;
+  bottom: 120px;
   left: 50%;
   transform: translateX(-50%);
   animation: ${toast} 2s;
