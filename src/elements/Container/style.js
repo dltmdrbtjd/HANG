@@ -11,7 +11,7 @@ const ContainerStyle = styled.div`
 
   @media only screen and (max-width: 424px) {
     max-width: none;
-    width: 95%;
+    width: 90%;
   }
 `;
 
