@@ -6,6 +6,7 @@ import AreaSelectBox from '../../components/AreaSelectBox';
 import SearchCard from '../../components/SearchCard';
 // style
 import { Button, Grid, Text, Strong } from '../../elements';
+import CategoryBtn from './style';
 
 const Search = () => {
   const [cityOpen, setCityOpen] = useState(false);
@@ -43,35 +44,54 @@ const Search = () => {
         hoz="space-between"
       >
         <Grid>
-          <Button
-            bgColor={!cityOpen ? 'gray' : 'brandColor'}
+          <CategoryBtn
+            shadow="0 4px 4px rgba(134,134,134,0.3)"
+            radius="14px"
+            color={!cityOpen ? 'gray' : 'brandColor'}
+            bgColor={
+              !cityOpen ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
+            }
+            border={!cityOpen ? '2px solid #c4c4c4' : '2px solid #ff9900'}
             padding="8px 30px"
-            _onClick={CityOpenhandler}
+            onClick={CityOpenhandler}
+            fw="bold"
           >
             지역
-          </Button>
+          </CategoryBtn>
         </Grid>
         <Grid display="flex" hoz="flex-end">
-          <Button
-            bgColor={!traveler ? 'gray' : 'brandColor'}
+          <CategoryBtn
+            shadow="0 4px 4px rgba(134,134,134,0.3)"
+            radius="14px"
+            color={!traveler ? 'gray' : 'brandColor'}
+            bgColor={
+              !traveler ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
+            }
+            border={!traveler ? '2px solid #c4c4c4' : '2px solid #ff9900'}
             padding="8px 20px"
-            _onClick={Travelerhandler}
+            onClick={Travelerhandler}
+            fw="bold"
           >
             여행자
-          </Button>
-          <Button
-            bgColor={!guide ? 'gray' : 'brandColor'}
+          </CategoryBtn>
+          <CategoryBtn
+            shadow="0 4px 4px rgba(134,134,134,0.3)"
+            radius="14px"
+            color={!guide ? 'gray' : 'brandColor'}
+            bgColor={!guide ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'}
+            border={!guide ? '2px solid #c4c4c4' : '2px solid #ff9900'}
+            padding="8px 20px"
+            onClick={Guidehandler}
             margin="0 0 0 10px"
-            _onClick={Guidehandler}
-            padding="4px 20px"
+            fw="bold"
           >
             길잡이
-          </Button>
+          </CategoryBtn>
         </Grid>
       </Grid>
       <AreaSelectBox toggle={cityOpen} />
-      <Button width="100%" margin="10px 0 0 0">
-        검 색 하 기
+      <Button fw="bold" width="100%" margin="10px 0 0 0">
+        검색
       </Button>
       <Text margin="40px 0 0 0">
         <Strong>서울특별시 종로구</Strong>의 여행자입니다.
