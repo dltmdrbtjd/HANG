@@ -33,8 +33,6 @@ Input.defaultProps = {
   width: '100%',
   height: '48px',
   bgColor: 'white',
-  color: 'black',
-  fs: 'md',
   padding: '0 12px',
   radius: '14px',
   shadow: 'inset 0px 2px 3px rgba(136, 136, 136, 0.25)',

@@ -3,28 +3,10 @@ import React from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // elements
 import { Grid, Image } from '../../elements/index';
+// style
+import setProfileImageSize from './style';
 
 const ProfileImg = ({ size = 'medium', imgUrl }) => {
-  const setProfileImageSize = {
-    large: {
-      width: '100px',
-      height: '100px',
-      fontSize: '100px',
-    },
-
-    medium: {
-      width: '60px',
-      height: '60px',
-      fontSize: '60px',
-    },
-
-    small: {
-      width: '20px',
-      height: '20px',
-      fontSize: '20px',
-    },
-  };
-
   return (
     <Grid
       display="flex"

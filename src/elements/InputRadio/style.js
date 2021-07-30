@@ -8,6 +8,7 @@ const RadioStyle = styled.input`
     height: 20px;
     border-radius: 100%;
     margin-right: 10px;
+    cursor: pointer;
   }
 
   &[type='radio'] {

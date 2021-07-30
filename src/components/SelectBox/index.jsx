@@ -30,7 +30,7 @@ const SelectBox = ({ initailOption, contents, ...props }) => {
   };
 
   return (
-    <Grid position="relative" height="48px" margin="0 0 15px">
+    <Grid position="relative" height="48px" margin="0 0 15px" z="9">
       <Grid width="132px" position="absolute" top="0" left="0">
         <Button
           width="100%"
