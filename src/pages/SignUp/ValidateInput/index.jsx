@@ -3,21 +3,23 @@ import React from 'react';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 // elements
-import { Grid, Input } from '../../../elements/index';
+import { Grid, Input } from '../../../elements';
 // style
 import SpanStyle from './style';
 
 const ValidateInput = ({
-  placeholder,
-  type,
   id,
-  status,
+  type,
   name,
   value,
+  placeholder,
   _onChange,
+  status,
+  width,
 }) => {
   return (
     <Grid
+      width={width}
       position="relative"
       radius="14px"
       shadow="inset 0px 2px 3px rgba(136, 136, 136, 0.25)"

@@ -17,7 +17,12 @@ const Navigation = () => {
 
   const path = useLocation().pathname;
 
-  if (path.includes('/signup') || path.includes('/login')) return null;
+  if (
+    path.includes('/signup') ||
+    path.includes('/login') ||
+    path.includes('/onboarding')
+  )
+    return null;
 
   return (
     <NavigationStyle>

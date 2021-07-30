@@ -1,14 +1,32 @@
 import React from 'react';
 // icon
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { ImageCreators } from '../../redux/modules/image';
 // elements
-import { Grid, Label } from '../../elements';
-// components
-import ProfileImg from '../ProfileImg';
+import { Grid, Label, Image } from '../../elements';
 // style
 import InputImageStyle from './style';
 
 const InputImage = () => {
+  const dispatch = useDispatch();
+  const profilePre = useSelector(state => state.image.profilePre);
+
+  const selectFile = event => {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+
+    if (file) {
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        dispatch(ImageCreators.setProfilePre(reader.result));
+      };
+    }
+  };
+
   return (
     <Grid position="relative" width="100px" height="100px" margin="0 auto 30px">
       <Label
@@ -25,9 +43,24 @@ const InputImage = () => {
         id="input--image"
         type="file"
         accept="image/png, image/jpeg"
+        onChange={selectFile}
       />
 
-      <ProfileImg size="large" src="" />
+      <Grid
+        height="100%"
+        display="flex"
+        hoz="center"
+        ver="center"
+        radius="50%"
+        overflow="hidden"
+        color="gray"
+      >
+        {profilePre ? (
+          <Image src={profilePre} />
+        ) : (
+          <AccountCircleIcon style={{ fontSize: '100px' }} />
+        )}
+      </Grid>
 
       <Grid
         width="34px"

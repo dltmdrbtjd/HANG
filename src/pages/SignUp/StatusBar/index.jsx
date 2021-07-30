@@ -13,11 +13,11 @@ const StatusBar = ({ curPage }) => {
         {pageNav.map((page, idx) => {
           let color = 'gray';
 
-          if (page === parseInt(curPage, 10)) color = 'brandColor';
-          else if (page < parseInt(curPage, 10)) color = 'white';
+          if (page === curPage) color = 'brandColor';
+          else if (page < curPage) color = 'white';
 
           return (
-            <Fragment key={(Date.now() + Math.random()).toString(36)}>
+            <Fragment key={(page * Date.now() + Math.random()).toString(36)}>
               {page <= curPage ? (
                 <Link
                   href={`/signup/${page}`}

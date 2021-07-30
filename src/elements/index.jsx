@@ -1,6 +1,5 @@
 import Grid from './Grid';
 import Button from './Button';
-import Section from './Section';
 import Container from './Container';
 import TextArea from './TextArea';
 import Input from './Input';
@@ -17,7 +16,6 @@ import Logo from './Logo';
 export {
   Grid,
   Button,
-  Section,
   Container,
   TextArea,
   Input,
