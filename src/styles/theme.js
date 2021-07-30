@@ -9,6 +9,7 @@ const fontSize = {
   md: calRem(16),
   lg: calRem(18),
   la: calRem(20),
+  sxl: calRem(24),
   xl: calRem(26),
   xxl: calRem(28),
 };
