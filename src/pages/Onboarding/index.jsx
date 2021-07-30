@@ -56,7 +56,7 @@ const Onboarding = ({ match }) => {
   });
 
   return (
-    <Grid position="relative" width="95%" height="100vh" margin="0 auto">
+    <Grid position="relative" height="100vh" margin="0 auto">
       <StatusBar curPage={page} />
 
       {page === 1 ? (

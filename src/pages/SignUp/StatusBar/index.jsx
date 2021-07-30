@@ -8,7 +8,7 @@ const StatusBar = ({ curPage }) => {
   const pageNav = [1, 2, 3];
 
   return (
-    <Grid display="flex" hoz="center" padding="30px 0 0" margin="0 0 30px">
+    <Grid display="flex" hoz="center" padding="50px 0 0" margin="0 0 50px">
       <Grid display="flex" ver="center" width="auto">
         {pageNav.map((page, idx) => {
           let color = 'gray';
