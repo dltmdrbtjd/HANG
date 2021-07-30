@@ -8,7 +8,11 @@ const Container = ({ children, ...props }) => {
   return (
     <ContainerStyle
       {...props}
-      isPadding={path.includes('/signup') || path.includes('/login')}
+      isPadding={
+        path.includes('/signup') ||
+        path.includes('/login') ||
+        path.includes('/onboarding')
+      }
     >
       {children}
     </ContainerStyle>

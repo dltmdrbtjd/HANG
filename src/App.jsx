@@ -6,10 +6,11 @@ import { ConnectedRouter } from 'connected-react-router';
 // redux
 import { history } from './redux/configureStore';
 // components
-import { Section } from './elements/index';
+import Section from './components/Section';
 import Header from './components/Header/index';
 import Navigation from './components/Navigation/index';
 // pages
+import Onboarding from './pages/Onboarding';
 import Home from './pages/Home/index';
 import Login from './pages/Login/index';
 import SignUp from './pages/SignUp/index';
@@ -24,12 +25,14 @@ function App() {
       <Section>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/onboarding/:page" exact component={Onboarding} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup/:page" exact component={SignUp} />
           <Route path="/search" exact component={Search} />
           <Route path="/detail" exact component={Detail} />
         </Switch>
       </Section>
+
       <Navigation />
     </ConnectedRouter>
   );

@@ -8,8 +8,12 @@ import logger from 'redux-logger';
 import { createBrowserHistory } from 'history';
 import { connectRouter } from 'connected-react-router';
 
+// reducer
+import image from './modules/image';
+
 const history = createBrowserHistory();
 const rootReducer = combineReducers({
+  image,
   router: connectRouter(history),
 });
 

@@ -1,7 +1,7 @@
 import Grid from './Grid';
 import Button from './Button';
-import Section from './Section';
 import Container from './Container';
+import BlurBox from './BlurBox';
 import TextArea from './TextArea';
 import Input from './Input';
 import InputRadio from './InputRadio';
@@ -17,8 +17,8 @@ import Logo from './Logo';
 export {
   Grid,
   Button,
-  Section,
   Container,
+  BlurBox,
   TextArea,
   Input,
   InputRadio,
