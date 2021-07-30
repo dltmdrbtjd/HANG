@@ -5,7 +5,7 @@ const GuideRequestStyle = styled.div`
   height: 80vh;
   padding: 20px;
   box-sizing: border-box;
-  background-color: ${({ theme }) => theme.color.semiLightG};
+  background-color: ${({ theme }) => theme.color.white};
   position: absolute;
   bottom: 0;
   border-radius: 14px 14px 0 0;
