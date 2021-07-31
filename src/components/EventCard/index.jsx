@@ -6,7 +6,15 @@ import Modal from '../Modal';
 // style
 import { Grid, Text, MainTitle, Button } from '../../elements';
 
-const EventCard = ({ date, city, text, subText, sub2Text }) => {
+const EventCard = ({
+  date,
+  city,
+  text,
+  subText,
+  sub2Text,
+  btnText,
+  toastMessage,
+}) => {
   const [toastMsg, setToastMsg] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -50,7 +58,7 @@ const EventCard = ({ date, city, text, subText, sub2Text }) => {
           subText={subText}
           subText2={sub2Text}
         />
-        {toastMsg && <ToastMessage msg="길잡이 신청이 완료되었습니다!" />}
+        {toastMsg && <ToastMessage msg={toastMessage} />}
       </Grid>
       <Button
         margin="0 0 20px 0"
@@ -58,7 +66,7 @@ const EventCard = ({ date, city, text, subText, sub2Text }) => {
         width="100%"
         _onClick={openModalHandler}
       >
-        길잡이 되어주기
+        {btnText}
       </Button>
     </>
   );
