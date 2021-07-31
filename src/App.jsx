@@ -7,15 +7,17 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from './redux/configureStore';
 // components
 import Section from './components/Section';
-import Header from './components/Header/index';
-import Navigation from './components/Navigation/index';
+import Header from './components/Header';
+import Navigation from './components/Navigation';
 // pages
 import Onboarding from './pages/Onboarding';
-import Home from './pages/Home/index';
-import Login from './pages/Login/index';
-import SignUp from './pages/SignUp/index';
-import Search from './pages/Search/index';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import Search from './pages/Search';
 import Detail from './pages/Detail';
+import MyPage from './pages/MyPage';
+import Noti from './pages/Noti';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/signup/:page" exact component={SignUp} />
           <Route path="/search" exact component={Search} />
           <Route path="/detail" exact component={Detail} />
+          <Route path="/mypage" exact component={MyPage} />
+          <Route path="/noti" exact component={Noti} />
         </Switch>
       </Section>
 

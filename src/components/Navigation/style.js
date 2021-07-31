@@ -12,10 +12,6 @@ const NavigationStyle = styled.ul`
   box-shadow: 0 -4px 4px rgba(134, 134, 134, 0.3);
   background-color: ${({ theme }) => theme.color.lightG};
   cursor: pointer;
-
-  .Click {
-    color: ${({ theme }) => theme.color.brandColor};
-  }
 `;
 
 const Navigationicons = styled.li`
@@ -23,6 +19,11 @@ const Navigationicons = styled.li`
   flex-direction: column;
   align-items: center;
   text-align: center;
+
+  &.Click,
+  &.Click p {
+    color: ${({ theme }) => theme.color.brandColor};
+  }
 `;
 
 export { NavigationStyle, Navigationicons };
