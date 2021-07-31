@@ -5,7 +5,7 @@ const toast = keyframes`
     opacity: 0;
   }
   50% {
-    opacity: 1;
+    opacity: 0.8;
   }
   100% {
     opacity: 0;

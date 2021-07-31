@@ -23,7 +23,7 @@ module.exports = {
     'react/no-array-index-key': 0,
     'no-param-reassign': [
       'error',
-      { props: true, ignorePropertyModificationsFor: ['draft'] },
+      { props: true, ignorePropertyModificationsFor: ['draft', 'config'] },
     ],
     'prettier/prettier': [
       'error',

@@ -16,6 +16,8 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
+import GuideRequest from './pages/Detail/GuideRequest';
+import Favorite from './pages/Favorite';
 import MyPage from './pages/MyPage';
 import Noti from './pages/Noti';
 
@@ -32,6 +34,8 @@ function App() {
           <Route path="/signup/:page" exact component={SignUp} />
           <Route path="/search" exact component={Search} />
           <Route path="/detail" exact component={Detail} />
+          <Route path="/detail/request" exact component={GuideRequest} />
+          <Route path="/favorite" exact component={Favorite} />
           <Route path="/mypage" exact component={MyPage} />
           <Route path="/noti" exact component={Noti} />
         </Switch>
