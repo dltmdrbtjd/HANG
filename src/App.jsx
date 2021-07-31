@@ -16,6 +16,8 @@ import Login from './pages/Login/index';
 import SignUp from './pages/SignUp/index';
 import Search from './pages/Search/index';
 import Detail from './pages/Detail';
+import GuideRequest from './pages/Detail/GuideRequest';
+import Favorite from './pages/Favorite';
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
           <Route path="/signup/:page" exact component={SignUp} />
           <Route path="/search" exact component={Search} />
           <Route path="/detail" exact component={Detail} />
+          <Route path="/detail/request" exact component={GuideRequest} />
+          <Route path="/favorite" exact component={Favorite} />
         </Switch>
       </Section>
 
