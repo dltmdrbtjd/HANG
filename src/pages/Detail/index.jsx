@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 // style
 import { Grid, MainTitle, Button } from '../../elements';
+import { history } from '../../redux/configureStore';
 
 // component
 import ProfileCard from '../../components/ProfileCard';
 import EventCard from '../../components/EventCard';
 import ToastMessage from '../../components/ToastMessage';
-import GuideRequest from '../../components/GuideRequest';
 
 const Detail = () => {
   const [toastMsg, setToastMsg] = useState(false);
 
   const GuideHandler = () => {
-    setToastMsg(true);
+    history.push('/detail/request');
   };
 
   useEffect(() => {
@@ -43,9 +43,10 @@ const Detail = () => {
         city="서울특별시 강남구"
         text="안녕하세요 저는 서울에 살고있구요 떡볶이를 엄청좋아해요 특히 엽떡에
         허니콤보 먹으면 바로 헤븐 같이 먹으러가요 ! ㅎㅎㅎ"
+        subText="dltmdrbtjd님의"
+        sub2Text="길잡이가 되어주시겠습니까?"
       />
       {toastMsg && <ToastMessage msg="길잡이 부탁이 완료되었습니다!" />}
-      <GuideRequest />
     </Grid>
   );
 };
