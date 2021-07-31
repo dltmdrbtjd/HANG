@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import HeaderStyle from './style';
 // components
 import { Container, Logo, Grid } from '../../elements';
-import Noti from './Noti';
+import NotiBadge from './NotiBadge';
 
 const Header = () => {
   const path = useLocation().pathname;
@@ -20,7 +20,7 @@ const Header = () => {
       <Container height="66px">
         <Grid height="100%" display="flex" hoz="flex-end" ver="center">
           <Logo width="36px" height="36px" href="/" />
-          <Noti />
+          <NotiBadge />
         </Grid>
       </Container>
     </HeaderStyle>

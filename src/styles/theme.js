@@ -31,7 +31,7 @@ const color = {
   semiLightG: '#E7E7E7',
   gray: '#C4C4C4',
   darkG: '#686868',
-  extraDarkG: '#2C2C2C',
+  black: '#2C2C2C',
   white: '#FDFDFD',
   danger: '#FF0005',
   safe: '00C314',

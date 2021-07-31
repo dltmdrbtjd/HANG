@@ -69,7 +69,7 @@ const Navigation = () => {
       <Navigationicons
         className={on === 5 ? 'Click' : ''}
         onClick={() => {
-          history.push('/myinfo');
+          history.push('/mypage');
           setOn(5);
         }}
       >
