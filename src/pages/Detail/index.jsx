@@ -45,6 +45,8 @@ const Detail = () => {
         허니콤보 먹으면 바로 헤븐 같이 먹으러가요 ! ㅎㅎㅎ"
         subText="dltmdrbtjd님의"
         sub2Text="길잡이가 되어주시겠습니까?"
+        btnText="길잡이 되어주기"
+        toastMessage="길잡이 신청이 완료되었습니다."
       />
       {toastMsg && <ToastMessage msg="길잡이 부탁이 완료되었습니다!" />}
     </Grid>
