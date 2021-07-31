@@ -6,7 +6,7 @@ import Modal from '../Modal';
 // style
 import { Grid, Text, MainTitle, Button } from '../../elements';
 
-const EventCard = ({ date, city, text }) => {
+const EventCard = ({ date, city, text, subText, sub2Text }) => {
   const [toastMsg, setToastMsg] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -30,24 +30,37 @@ const EventCard = ({ date, city, text }) => {
     }
   }, [toastMsg]);
   return (
-    <Grid
-      padding="20px 20px"
-      margin="10px 0 10px 0"
-      radius="14px"
-      bgColor="white"
-      shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
-    >
-      <Text>{date}</Text>
-      <MainTitle fs="la">{city}</MainTitle>
-      <Text margin="10px 0 0 0" fs="sm">
-        {text}
-      </Text>
-      <Button margin="12px 0 0 0" width="100%" _onClick={openModalHandler}>
+    <>
+      <Grid
+        padding="20px 20px"
+        margin="10px 0 0 0"
+        radius="14px 14px 0 0"
+        bgColor="white"
+        shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
+      >
+        <Text>{date}</Text>
+        <MainTitle fs="la">{city}</MainTitle>
+        <Text margin="10px 0 0 0" fs="sm">
+          {text}
+        </Text>
+        <Modal
+          open={modal}
+          close={closeModalHandler}
+          agree={agreeModalHandler}
+          subText={subText}
+          subText2={sub2Text}
+        />
+        {toastMsg && <ToastMessage msg="길잡이 신청이 완료되었습니다!" />}
+      </Grid>
+      <Button
+        margin="0 0 20px 0"
+        radius="0 0 14px 14px"
+        width="100%"
+        _onClick={openModalHandler}
+      >
         길잡이 되어주기
       </Button>
-      <Modal open={modal} close={closeModalHandler} agree={agreeModalHandler} />
-      {toastMsg && <ToastMessage msg="길잡이 신청이 완료되었습니다!" />}
-    </Grid>
+    </>
   );
 };
 
