@@ -25,9 +25,9 @@ const GuideRequest = () => {
   };
 
   const myPromise = [
-    { city: 'seoul', promise: '서울에갑니다', date: '07.25 ~ 07.26' },
-    { city: 'busan', promise: '부산에갑니다.', date: '08.10 ~ 08.15' },
-    { city: '제주도', promise: '제주도간드아!!', date: '09.11 ~ 09.12' },
+    { city: 'seoul', promise: '서울특별시 관악구', date: '07.25 ~ 07.26' },
+    { city: 'busan', promise: '부산특별시 중구', date: '08.10 ~ 08.15' },
+    { city: '제주도', promise: '제주도 서귀포시', date: '09.11 ~ 09.12' },
   ];
   return (
     <>
@@ -53,18 +53,21 @@ const GuideRequest = () => {
             />
           </Grid>
           <label id={item.city}>
-            <Text>{item.date}</Text>
-            <Text>{item.promise}</Text>
+            <Text fs="sm">{item.date}</Text>
+            <Text fs="la" fw="bold">
+              {item.promise}
+            </Text>
           </label>
         </Grid>
       ))}
-      <Grid position="fixed" bottom="90px" left="0">
-        <Button
-          padding="16px 0"
-          radius="none"
-          width="100%"
-          _onClick={openModalHandler}
-        >
+      <Grid
+        width="90%"
+        position="fixed"
+        bottom="120px"
+        left="50%"
+        translate="-50%,0"
+      >
+        <Button padding="16px 0" width="100%" _onClick={openModalHandler}>
           선택 완료
         </Button>
       </Grid>
