@@ -12,8 +12,8 @@ const TextStyle = styled.p`
   letter-spacing: ${props => props.ls};
   text-align: ${props => props.textAlign};
   overflow: ${props => props.overflow};
-  white-space: pre-line;
   word-break: ${props => props.wb};
+  white-space: pre-line;
   box-sizing: border-box;
   text-overflow: ellipsis;
   display: -webkit-box;

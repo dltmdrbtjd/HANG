@@ -1,0 +1,56 @@
+@import url('react-date-range/dist/styles.css');
+@import url('react-date-range/dist/theme/default.css');
+
+.rdrDateRangeWrapper,
+.rdrMonths,
+.rdrMonth {
+  width: 100%;
+}
+
+.rdrDateRangeWrapper {
+  position: relative;
+  top: 10px;
+  border-radius: 14px;
+  font-size: 14px;
+  overflow: hidden;
+  border: 0.5px solid #e7e7e7;
+}
+
+.rdrMonthAndYearPickers {
+  font-size: 18px;
+}
+
+.rdrMonthName {
+  display: none;
+}
+
+.rdrMonth {
+  padding: 0;
+}
+
+.rdrNextPrevButton {
+  background: none;
+}
+
+.rdrNextButton i {
+  border-width: 6px 6px 6px 8px;
+}
+
+.rdrPprevButton i {
+  border-width: 6px 8px 6px 6px;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span,
+.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span,
+.rdrDayToday .rdrDayNumber span:after {
+  color: #2c2c2c;
+}
+
+.rdrDay:not(.rdrDayPassive) .rdrInRange ~ .rdrDayNumber span:after,
+.rdrDay:not(.rdrDayPassive) .rdrStartEdge ~ .rdrDayNumber span:after,
+.rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span:after,
+.rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span:after {
+  background: #d4f0ff;
+}
