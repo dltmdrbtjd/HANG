@@ -12,9 +12,9 @@ const setProfileImageSize = {
   },
 
   small: {
-    width: '20px',
-    height: '20px',
-    fontSize: '20px',
+    width: '42px',
+    height: '42px',
+    fontSize: '42px',
   },
 };
 

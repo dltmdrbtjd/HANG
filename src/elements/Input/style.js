@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const InputStyle = styled.input`
-  border: none;
+  border: ${props => props.border};
   background: none;
   border-radius: ${props => props.radius};
   width: ${props => props.width};

@@ -19,7 +19,7 @@ const GuideToggle = () => {
       shadow="inset 2px 2px 3px rgba(136, 82, 0, 0.25)"
       bgColor={checked ? 'brandColor' : 'gray'}
       _onClick={handleToggle}
-      addStyle={ButtonStyle}
+      addstyle={ButtonStyle}
     >
       <ToggleLabelStyle checked={checked} />
       <ToggleNameStyle checked={checked}>
