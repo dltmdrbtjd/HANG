@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// redux store
+// serviceWorker
 import { Provider } from 'react-redux';
+import * as serviceWorker from './serviceWorkerRegistration';
+// redux store
 // theme
 import GlobalThemeProvider from './styles/GlobalThemeProvider';
 
@@ -16,3 +18,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
+
+serviceWorker.register();
