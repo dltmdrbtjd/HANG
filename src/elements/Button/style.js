@@ -15,7 +15,7 @@ const ButtonStyle = styled.button`
   box-sizing: border-box;
   cursor: pointer;
 
-  ${props => props.addStyle};
+  ${props => props.addstyle};
 
   &:disabled {
     background-color: ${props => props.theme.color[props.disColor]};

@@ -19,7 +19,12 @@ import Detail from './pages/Detail';
 import GuideRequest from './pages/Detail/GuideRequest';
 import Favorite from './pages/Favorite';
 import MyPage from './pages/MyPage';
+import MyPromise from './pages/MyPage/Promise';
+import MyPageModify from './pages/MyPage/Modify';
+import CreateTrip from './pages/MyPage/CreateTrip';
 import Noti from './pages/Noti';
+import Chat from './pages/Chat';
+import ChatRoom from './pages/Chat/Room';
 
 function App() {
   return (
@@ -37,7 +42,12 @@ function App() {
           <Route path="/detail/request" exact component={GuideRequest} />
           <Route path="/favorite" exact component={Favorite} />
           <Route path="/mypage" exact component={MyPage} />
+          <Route path="/mypage/promise" exact component={MyPromise} />
+          <Route path="/mypage/modify" exact component={MyPageModify} />
+          <Route path="/mypage/create_trip" exact component={CreateTrip} />
           <Route path="/noti" exact component={Noti} />
+          <Route path="/chat" exact component={Chat} />
+          <Route path="/chat/room" exact component={ChatRoom} />
         </Switch>
       </Section>
 

@@ -10,6 +10,7 @@ Text.defaultProps = {
   color: 'black',
   overflow: 'hidden',
   wb: 'break-all',
+  ws: 'pre-line',
 };
 
 export default Text;

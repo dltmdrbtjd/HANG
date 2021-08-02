@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const TextStyle = styled.p`
   width: ${props => props.width};
@@ -13,12 +13,23 @@ const TextStyle = styled.p`
   text-align: ${props => props.textAlign};
   overflow: ${props => props.overflow};
   word-break: ${props => props.wb};
-  white-space: pre-line;
+  white-space: ${props => props.ws};
   box-sizing: border-box;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: ${props => props.clamp};
+
+  ${props => {
+    if (props.clamp) {
+      return css`
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: ${props.clamp};
+      `;
+    }
+
+    return null;
+  }}
+
+  ${props => props.addstyle};
 `;
 
 export default TextStyle;

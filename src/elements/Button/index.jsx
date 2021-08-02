@@ -20,7 +20,6 @@ const Button = forwardRef(
 Button.defaultProps = {
   disabled: false,
   type: 'button',
-  shadow: '0 4px 4px rgba(134,134,134,0.3)',
   radius: '14px',
   padding: '12px 0',
   bgColor: 'brandColor',

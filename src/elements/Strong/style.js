@@ -6,6 +6,8 @@ const StrongStyle = styled.strong`
   font-size: ${props => props.theme.fontSize[props.fs]};
   font-weight: ${props => props.theme.fontWeight[props.fw]};
   line-height: ${props => props.ls};
+
+  ${props => props.addstyle};
 `;
 
 export default StrongStyle;

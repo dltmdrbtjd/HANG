@@ -28,6 +28,8 @@ const GridStyle = styled.div`
   box-shadow: ${props => props.shadow};
   box-sizing: border-box;
   transform: translate(${props => props.translate});
+
+  ${props => props.addstyle};
 `;
 
 export default GridStyle;

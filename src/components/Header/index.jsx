@@ -11,7 +11,8 @@ const Header = () => {
   if (
     path.includes('/signup') ||
     path.includes('/login') ||
-    path.includes('/onboarding')
+    path.includes('/onboarding') ||
+    path.includes('/chat/room')
   )
     return null;
 
