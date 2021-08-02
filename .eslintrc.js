@@ -10,6 +10,11 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   rules: {
+    'react/destructuring-assignment': 0,
+    'no-unused-vars': 0,
+    'consistent-return': 0,
+    'no-restricted-globals': 0,
+    'import/extensions': 0,
     'jsx-a11y/label-has-associated-control': 0,
     'array-callback-return': 0,
     'jsx-a11y/click-events-have-key-events': 0,
@@ -23,7 +28,15 @@ module.exports = {
     'react/no-array-index-key': 0,
     'no-param-reassign': [
       'error',
-      { props: true, ignorePropertyModificationsFor: ['draft', 'config'] },
+      {
+        props: true,
+        ignorePropertyModificationsFor: [
+          'draft',
+          'config',
+          'registration',
+          'props',
+        ],
+      },
     ],
     'prettier/prettier': [
       'error',

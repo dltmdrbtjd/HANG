@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+// query
+import queryString from 'query-string';
 // components
 import SearchBar from '../../components/SearchBar';
 import AreaSelectBox from '../../components/AreaSelectBox';
@@ -8,16 +10,43 @@ import SearchCard from '../../components/SearchCard';
 import { Button, Grid, Text, Strong } from '../../elements';
 import CategoryBtn from './style';
 
-const Search = () => {
+const Search = props => {
+  // 지역,여행자,길잡이 state
   const [cityOpen, setCityOpen] = useState(false);
   const [traveler, setTraveler] = useState(false);
   const [guide, setGuide] = useState(false);
 
+  // 도시,구 state
+  const [city, setCity] = useState('');
+  const [gu, setGu] = useState('');
+
+  // 검색한 username state
+  const [finduser, setFindUser] = useState('');
+
+  // 검색한 도시,구 state
+  const [cityName, setCityName] = useState('');
+  const [guName, setGuName] = useState('');
+  console.log(
+    `Component => src/pages/Search.jsx :`,
+    city,
+    gu,
+    traveler,
+    guide,
+    finduser,
+  );
+
+  const query = queryString.parse(location.search);
+  console.log(`Component => src/pages/Search.jsx :`, query.keyword);
+
   const CityOpenhandler = () => {
     if (!cityOpen) {
       setCityOpen(true);
+      setCity('서울특별시');
+      setGu('종로구');
     } else {
       setCityOpen(false);
+      setCity('');
+      setGu('');
     }
   };
   const Travelerhandler = () => {
@@ -34,9 +63,23 @@ const Search = () => {
       setGuide(false);
     }
   };
+
+  const SearchHandler = () => {
+    setCityName(city);
+    setGuName(gu);
+    console.log(
+      `Component => src/pages/Search.jsx :`,
+      city,
+      gu,
+      traveler,
+      guide,
+      finduser,
+    );
+  };
+
   return (
     <>
-      <SearchBar />
+      <SearchBar setFindUser={setFindUser} />
       <Grid
         width="100%"
         margin="10px 0 10px 0"
@@ -89,12 +132,18 @@ const Search = () => {
           </CategoryBtn>
         </Grid>
       </Grid>
-      <AreaSelectBox toggle={cityOpen} />
-      <Button fw="bold" width="100%" margin="10px 0 0 0">
+      <AreaSelectBox toggle={cityOpen} setGu={setGu} setCity={setCity} />
+      <Button
+        _onClick={SearchHandler}
+        fw="bold"
+        width="100%"
+        margin="10px 0 0 0"
+      >
         검색
       </Button>
       <Text margin="40px 0 0 0">
-        <Strong>서울특별시 종로구</Strong>의 여행자입니다.
+        <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
+        {guName ? ` ${guName} 의 여행자입니다.` : ''}
       </Text>
       <SearchCard
         username="새싹몬"
