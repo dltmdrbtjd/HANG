@@ -35,7 +35,7 @@ Input.defaultProps = {
   bgColor: 'white',
   padding: '0 12px',
   radius: '14px',
-  shadow: 'inset 0px 2px 3px rgba(136, 136, 136, 0.25)',
+  border: '1px solid #E7E7E7',
 };
 
 export default Input;

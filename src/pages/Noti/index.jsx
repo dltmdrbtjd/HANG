@@ -6,7 +6,7 @@ import AlaremCard from './AlarmCard';
 
 const Noti = () => {
   return (
-    <>
+    <Grid margin="-24px 0 80px">
       <AlaremCard />
       <AlaremCard />
       <AlaremCard />
@@ -32,7 +32,7 @@ const Noti = () => {
           전체삭제
         </Button>
       </Grid>
-    </>
+    </Grid>
   );
 };
 

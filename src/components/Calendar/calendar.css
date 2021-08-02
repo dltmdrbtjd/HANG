@@ -8,8 +8,8 @@
 }
 
 .rdrDateRangeWrapper {
-  position: relative;
-  top: 10px;
+  position: absolute;
+  top: 95px;
   border-radius: 14px;
   font-size: 14px;
   overflow: hidden;
