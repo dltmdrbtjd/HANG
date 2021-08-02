@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -24,6 +24,11 @@ const SignUp = ({ match }) => {
   let { page } = match.params;
   page = parseInt(page, 10);
 
+  const [city, setCity] = useState('');
+  const [gu, setGu] = useState('');
+  // city, gu 나오는지 체크해본거라서 추후에 삭제해주시면 됩니다^^
+  console.log(`Component => src/pages/SignUp.jsx :`, city, gu);
+
   const title = [
     '번호\u00A0인증이 필요한\u00A0서비스\u00A0입니다',
     '행에서\u00A0사용할 아이디와\u00A0비밀번호를\u00A0입력해주세요',
@@ -35,6 +40,11 @@ const SignUp = ({ match }) => {
     agencyOptions: ['SKT', 'KT', 'LG U+', '알뜰폰'],
     ageOptions: ['10대', '20대', '30대', '40대', '50대', '60대 이상'],
   };
+
+  useEffect(() => {
+    setCity('서울특별시');
+    setGu('종로구');
+  }, []);
 
   return (
     <>
@@ -271,7 +281,7 @@ const SignUp = ({ match }) => {
                       지역 선택
                     </Text>
 
-                    <AreaSelectBox toggle />
+                    <AreaSelectBox toggle setGu={setGu} setCity={setCity} />
                   </Grid>
 
                   <Button type="submit" fs="la" fw="bold" width="100%">
