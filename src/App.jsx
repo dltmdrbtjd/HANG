@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 // redux
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 // Router
 import { Route, Switch } from 'react-router-dom';
@@ -28,14 +28,14 @@ import Noti from './pages/Noti';
 import Chat from './pages/Chat';
 import ChatRoom from './pages/Chat/Room';
 // reducer
-// import { UserCreators } from './redux/modules/user';
+import { UserCreators } from './redux/modules/user';
 
 function App() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(UserCreators.userAuthDB());
-  // }, []);
+  useEffect(() => {
+    dispatch(UserCreators.userAuthDB());
+  }, []);
 
   return (
     <ConnectedRouter history={history}>

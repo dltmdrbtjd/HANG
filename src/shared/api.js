@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
-  baseURL: 'http://54.180.143.198:3000/',
+  baseURL: 'https://soujinko.shop/',
   withCredentials: true,
 });
 

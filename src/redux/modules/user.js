@@ -33,7 +33,6 @@ const userAuthDB = () => {
     apis
       .Auth()
       .then(res => {
-        console.log(res);
         dispatch(userAuth(res.data));
       })
       .catch(err => {
