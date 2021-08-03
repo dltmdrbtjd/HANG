@@ -2,6 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 // api
 import apis from '../../shared/api';
+// reducer
+import { ImageCreators } from './image';
 
 const AUTH = 'user/AUTH';
 const LOG_OUT = 'user/LOG_OUT';
@@ -10,10 +12,8 @@ const DUP_NICK_CHECK = 'user/DUP_NICK_CHECK';
 
 const userAuth = createAction(AUTH, user => ({ user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
-const dupIdCheck = createAction(DUP_ID_CHECK, isIdChecked => ({ isIdChecked }));
-const dupNickCheck = createAction(DUP_NICK_CHECK, isNickChecked => ({
-  isNickChecked,
-}));
+const dupIdCheck = createAction(DUP_ID_CHECK);
+const dupNickCheck = createAction(DUP_NICK_CHECK);
 
 const initialState = {
   userInfo: {
@@ -27,14 +27,14 @@ const initialState = {
 };
 
 const userAuthDB = () => {
-  return function (dispatch) {
+  return (dispatch, getState, { history }) => {
     apis
       .Auth()
       .then(res => {
         dispatch(userAuth(res.data));
       })
-      .catch(err => {
-        console.error(err);
+      .catch(() => {
+        history.replace('/login');
       });
   };
 };
@@ -48,7 +48,7 @@ const phoneAuthDB = authInfo => {
 };
 
 const duplicateIdCheckDB = userId => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .Duplicate(userId)
       .then(res => {
@@ -60,7 +60,7 @@ const duplicateIdCheckDB = userId => {
 };
 
 const duplicateNickCheckDB = nickname => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .Duplicate(nickname)
       .then(res => {
@@ -71,35 +71,34 @@ const duplicateNickCheckDB = nickname => {
   };
 };
 
-const signUpDB = userInfo => {
-  // if (!image) {
-  //   console.log(userInfo);
+const signUpDB = (image, userInfo) => {
+  return (dispatch, getState) => {
+    if (!image) {
+      apis
+        .SignUp(userInfo)
+        .then(res => {
+          console.log(res);
+          console.log(userInfo);
+        })
+        .catch(err => console.log(err));
 
-  // }
+      return;
+    }
 
-  apis
-    .SignUp(userInfo)
-    .then(res => {
-      console.log(res);
-      console.log(userInfo);
-    })
-    .catch(err => console.log(err));
+    dispatch(
+      ImageCreators.uploadProfileImgDB(image, () => {
+        const profileUrl = getState().image.profileImg;
+
+        apis
+          .SignUp({ ...userInfo, profileImg: profileUrl })
+          .catch(err => console.log(err));
+      }),
+    );
+  };
 };
 
-// return function (dispatch, getState) {
-//   dispatch(
-//     ImageCreators.uploadProfileImgDB(image, () => {
-//       const profileUrl = getState().image.profileImg;
-
-//       apis
-//         .SignUp({ ...userInfo, profileImg: profileUrl })
-//         .catch(err => console.log(err));
-//     }),
-//   );
-// };
-
 const logInDB = userInfo => {
-  return function (dispatch) {
+  return dispatch => {
     console.log(userInfo);
 
     apis
@@ -115,7 +114,7 @@ const logInDB = userInfo => {
 };
 
 const logOutDB = () => {
-  return function (dispatch) {
+  return dispatch => {
     dispatch(logOut({ userId: null, nickname: null, profileImg: null }));
   };
 };
@@ -134,14 +133,14 @@ export default handleActions(
         draft.isLogin = false;
       }),
 
-    [DUP_ID_CHECK]: (state, action) =>
+    [DUP_ID_CHECK]: state =>
       produce(state, draft => {
-        draft.isIdChecked = action.payload.isIdChecked;
+        draft.isIdChecked = true;
       }),
 
-    [DUP_NICK_CHECK]: (state, action) =>
+    [DUP_NICK_CHECK]: state =>
       produce(state, draft => {
-        draft.isNickChecked = action.payload.isNickChecked;
+        draft.isNickChecked = true;
       }),
   },
   initialState,

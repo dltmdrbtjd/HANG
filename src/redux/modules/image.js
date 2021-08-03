@@ -26,7 +26,7 @@ const initialState = {
 };
 
 const uploadProfileImgDB = (image, callBack) => {
-  return function (dispatch) {
+  return dispatch => {
     // dispatch(uploaded(true));
 
     const upload = new AWS.S3.ManagedUpload({

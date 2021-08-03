@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// router
+import { BrowserRouter } from 'react-router-dom';
 // serviceWorker
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorkerRegistration';
@@ -13,7 +15,9 @@ import App from './App';
 ReactDOM.render(
   <Provider store={store}>
     <GlobalThemeProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </GlobalThemeProvider>
   </Provider>,
   document.getElementById('root'),
