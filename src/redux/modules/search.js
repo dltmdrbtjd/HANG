@@ -15,7 +15,7 @@ const initialState = {
 };
 // search page useEffect시 사용
 const SearchLoadDB = MainSearch => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .Search(MainSearch)
       .then(res => {
@@ -27,7 +27,7 @@ const SearchLoadDB = MainSearch => {
 };
 // 검색버튼 클릭시 사용
 const SearchSendDB = content => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .Search(content)
       .then(res => {

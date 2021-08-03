@@ -27,7 +27,7 @@ const initialState = {
 };
 
 const userAuthDB = () => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .Auth()
       .then(res => {
@@ -48,7 +48,7 @@ const phoneAuthDB = authInfo => {
 };
 
 const duplicateIdCheckDB = userId => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .Duplicate(userId)
       .then(res => {
@@ -60,7 +60,7 @@ const duplicateIdCheckDB = userId => {
 };
 
 const duplicateNickCheckDB = nickname => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .Duplicate(nickname)
       .then(res => {
@@ -99,7 +99,7 @@ const signUpDB = userInfo => {
 // };
 
 const logInDB = userInfo => {
-  return function (dispatch) {
+  return dispatch => {
     console.log(userInfo);
 
     apis
@@ -115,7 +115,7 @@ const logInDB = userInfo => {
 };
 
 const logOutDB = () => {
-  return function (dispatch) {
+  return dispatch => {
     dispatch(logOut({ userId: null, nickname: null, profileImg: null }));
   };
 };
