@@ -29,9 +29,7 @@ const Navigation = () => {
       setOn(1);
     } else if (path.includes('/favorite')) {
       setOn(2);
-    } else if (path.includes('/')) {
-      setOn(3);
-    } else if (path.includes('/chat')) {
+    } else if (path.includes('/chat') || path.includes('/chat/room')) {
       setOn(4);
     } else if (path.includes('/mypage')) {
       setOn(5);
@@ -45,7 +43,7 @@ const Navigation = () => {
   return (
     <NavigationStyle>
       <Navigationicons
-        className={on === 1 ? 'Click' : ''}
+        className={path.includes('/search') ? 'Click' : ''}
         onClick={() => {
           history.push('/search');
         }}
@@ -54,7 +52,7 @@ const Navigation = () => {
         <Text margin="6px 0 0 0">검색</Text>
       </Navigationicons>
       <Navigationicons
-        className={on === 2 ? 'Click' : ''}
+        className={path.includes('/favorite') ? 'Click' : ''}
         onClick={() => {
           history.push('/favorite');
         }}
@@ -66,13 +64,14 @@ const Navigation = () => {
         className={on === 3 ? 'Click' : ''}
         onClick={() => {
           history.push('/');
+          setOn(3);
         }}
       >
         <HomeOutlinedIcon style={{ fontSize: 35 }} />
         <Text margin="6px 0 0 0">홈</Text>
       </Navigationicons>
       <Navigationicons
-        className={on === 4 ? 'Click' : ''}
+        className={path.includes('/chat') ? 'Click' : ''}
         onClick={() => {
           history.push('/chat');
         }}
@@ -81,7 +80,7 @@ const Navigation = () => {
         <Text margin="6px 0 0 0">채팅</Text>
       </Navigationicons>
       <Navigationicons
-        className={on === 5 ? 'Click' : ''}
+        className={path.includes('/mypage') ? 'Click' : ''}
         onClick={() => {
           history.push('/mypage');
         }}
