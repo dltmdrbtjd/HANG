@@ -16,7 +16,7 @@ const initialState = {
 
 // 즐겨찾기 페이지 load시 사용
 const FavoriteLoadDB = () => {
-  return function (dispatch, getState, { history }) {
+  return dispatch => {
     apis
       .LikeLoad()
       .then(res => {
@@ -29,7 +29,7 @@ const FavoriteLoadDB = () => {
 
 // 즐겨찾기 버튼 toggle시 사용
 const FavoriteToggleDB = () => {
-  return function (dispatch, getState, { history }) {
+  return dispatch => {
     dispatch(FavoriteToggle(like));
   };
 };

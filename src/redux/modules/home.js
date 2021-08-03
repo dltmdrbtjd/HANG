@@ -25,7 +25,7 @@ const initialState = {
 
 // main home load시 사용
 const HomeLoadDB = () => {
-  return function (dispatch) {
+  return dispatch => {
     apis
       .MainLoad()
       .then(res => {

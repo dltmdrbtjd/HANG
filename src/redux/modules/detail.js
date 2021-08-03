@@ -18,7 +18,7 @@ const initialState = {
 };
 
 const DetailLoadDB = () => {
-  return function (dispatch, getState, { history }) {
+  return dispatch => {
     dispatch(DetailLoad());
   };
 };
