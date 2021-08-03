@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 // elements
-import { Grid, Link } from '../../../elements/index';
+import { Grid, Button } from '../../../elements/index';
 // style
 import HrStyle from './style';
 
-const StatusBar = ({ curPage }) => {
+const StatusBar = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
 
   return (
@@ -19,32 +19,32 @@ const StatusBar = ({ curPage }) => {
           return (
             <Fragment key={(page * Date.now() + Math.random()).toString(36)}>
               {page <= curPage ? (
-                <Link
-                  href={`/signup/${page}`}
-                  display="flex"
-                  hoz="center"
-                  ver="center"
+                <Button
+                  padding="0"
                   radius="50%"
-                  width="16px"
-                  height="16px"
+                  width="25px"
+                  height="25px"
                   color={color}
-                  bgcolor={page < curPage ? 'brandColor' : null}
-                  fs="xs"
+                  bgColor={page < curPage ? 'brandColor' : 'none'}
+                  fs="sm"
                   fw="bold"
                   border={`1px solid ${
                     page <= curPage ? '#FF9900' : '#C4C4C4'
                   }`}
+                  _onClick={() => {
+                    setPage(page);
+                  }}
                 >
                   {page}
-                </Link>
+                </Button>
               ) : (
                 <Grid
                   display="flex"
                   hoz="center"
                   ver="center"
                   radius="50%"
-                  width="16px"
-                  height="16px"
+                  width="25px"
+                  height="25px"
                   color="gray"
                   fs="xs"
                   fw="bold"

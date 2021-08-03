@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Router
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 // redux
 import { history } from './redux/configureStore';
@@ -45,7 +45,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/onboarding/:page" exact component={Onboarding} />
           <Route path="/login" exact component={Login} />
-          <Route path="/signup/:page" exact component={SignUp} />
+          <Route path="/signup" exact component={SignUp} />
           <Route path="/search" exact component={Search} />
           <Route path="/detail" exact component={Detail} />
           <Route path="/detail/request" exact component={GuideRequest} />
