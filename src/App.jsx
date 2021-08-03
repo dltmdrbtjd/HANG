@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // Router
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 // redux
 import { history } from './redux/configureStore';
@@ -29,12 +29,28 @@ import ChatRoom from './pages/Chat/Room';
 // reducer
 import { UserCreators } from './redux/modules/user';
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
+  const checkLoggedIn = useSelector(state => state.user.loginSuccess);
 
   useEffect(() => {
-    dispatch(UserCreators.userAuthDB());
+    if (checkLoggedIn) dispatch(UserCreators.userAuthDB());
   }, []);
+
+  if (!checkLoggedIn) {
+    return (
+      <Section>
+        {history.location.pathname === '/signup' ? (
+          <Route path="/signup" exact component={SignUp} />
+        ) : (
+          <>
+            <Redirect to="/login" />
+            <Route path="/login" exact component={Login} />
+          </>
+        )}
+      </Section>
+    );
+  }
 
   return (
     <ConnectedRouter history={history}>
@@ -44,9 +60,9 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/onboarding/:page" exact component={Onboarding} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup/:page" exact component={SignUp} />
           <Route path="/search" exact component={Search} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={SignUp} />
           <Route path="/detail" exact component={Detail} />
           <Route path="/detail/request" exact component={GuideRequest} />
           <Route path="/favorite" exact component={Favorite} />
@@ -63,6 +79,6 @@ function App() {
       <Navigation />
     </ConnectedRouter>
   );
-}
+};
 
 export default App;

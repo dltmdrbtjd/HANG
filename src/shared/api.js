@@ -1,8 +1,10 @@
 import axios from 'axios';
+// cookie
+import { getCookie } from './cookie';
 
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
-  baseURL: 'https://soujinko.shop/',
+  baseURL: 'https://soujinko.shop',
   withCredentials: true,
 });
 
@@ -10,6 +12,7 @@ const instance = axios.create({
 instance.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';
   config.headers['X-Requested-With'] = 'XMLHttpRequest';
+  config.headers.token = getCookie();
   config.headers.Accept = 'application/json';
   return config;
 });
@@ -23,6 +26,7 @@ const apis = {
   Pauth: authInfo => instance.post('/api/users/p_auth', authInfo),
   Duplicate: user => instance.post('/api/users/duplicate', user),
   Login: user => instance.post('/api/users/signin', user),
+  LogOut: () => instance.delete('/api/users/signout'),
 
   // alarm
   AlarmPatch: alarm => instance.patch('/api/alarm', alarm),

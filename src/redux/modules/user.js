@@ -4,14 +4,20 @@ import produce from 'immer';
 import apis from '../../shared/api';
 // reducer
 import { ImageCreators } from './image';
+// cookie
+import { getCookie, setCookie, delCookie } from '../../shared/cookie';
 
 const AUTH = 'user/AUTH';
 const LOG_OUT = 'user/LOG_OUT';
+const CHECK_LOGGED_IN = 'user/CHECK_LOGGED_IN';
 const DUP_ID_CHECK = 'user/DUP_ID_CHECK';
 const DUP_NICK_CHECK = 'user/DUP_NICK_CHECK';
 
 const userAuth = createAction(AUTH, user => ({ user }));
 const logOut = createAction(LOG_OUT, user => ({ user }));
+const checkSuccessfulLogin = createAction(CHECK_LOGGED_IN, isSuccess => ({
+  isSuccess,
+}));
 const dupIdCheck = createAction(DUP_ID_CHECK);
 const dupNickCheck = createAction(DUP_NICK_CHECK);
 
@@ -21,20 +27,24 @@ const initialState = {
     nickname: null,
     profileImg: null,
   },
-  isLogin: false,
-  isIdChecked: false,
-  idNickChecked: false,
+
+  loginSuccess: Boolean(getCookie()),
+
+  duplicateCheck: {
+    idChecked: false,
+    nickChecked: false,
+  },
 };
 
 const userAuthDB = () => {
-  return (dispatch, getState, { history }) => {
+  return dispatch => {
     apis
       .Auth()
       .then(res => {
         dispatch(userAuth(res.data));
       })
       .catch(() => {
-        history.replace('/login');
+        dispatch(checkSuccessfulLogin(false));
       });
   };
 };
@@ -52,7 +62,6 @@ const duplicateIdCheckDB = userId => {
     apis
       .Duplicate(userId)
       .then(res => {
-        console.log(res);
         dispatch(dupIdCheck(res.data));
       })
       .catch(err => console.error(err));
@@ -64,7 +73,6 @@ const duplicateNickCheckDB = nickname => {
     apis
       .Duplicate(nickname)
       .then(res => {
-        console.log(res);
         dispatch(dupNickCheck(res.data));
       })
       .catch(err => console.log(err));
@@ -72,13 +80,12 @@ const duplicateNickCheckDB = nickname => {
 };
 
 const signUpDB = (image, userInfo) => {
-  return (dispatch, getState) => {
+  return (dispatch, getState, { history }) => {
     if (!image) {
       apis
         .SignUp(userInfo)
-        .then(res => {
-          console.log(res);
-          console.log(userInfo);
+        .then(() => {
+          history.replace('/welcome');
         })
         .catch(err => console.log(err));
 
@@ -98,24 +105,35 @@ const signUpDB = (image, userInfo) => {
 };
 
 const logInDB = userInfo => {
-  return dispatch => {
-    console.log(userInfo);
-
+  return (dispatch, getState, { history }) => {
     apis
       .Login(userInfo)
       .then(res => {
-        console.log(res);
-        dispatch(userAuthDB());
+        setCookie(res.data.accessToken);
       })
-      .catch(err => {
-        console.error(err);
+      .then(() => {
+        dispatch(userAuthDB());
+        dispatch(checkSuccessfulLogin(true));
+        history.replace('/');
+      })
+      .catch(() => {
+        dispatch(checkSuccessfulLogin(false));
       });
   };
 };
 
 const logOutDB = () => {
   return dispatch => {
-    dispatch(logOut({ userId: null, nickname: null, profileImg: null }));
+    apis
+      .LogOut()
+      .then(() => {
+        delCookie();
+      })
+      .then(() => {
+        dispatch(logOut({ userId: null, nickname: null, profileImg: null }));
+        dispatch(checkSuccessfulLogin(false));
+      })
+      .catch(err => console.error(err));
   };
 };
 
@@ -124,13 +142,17 @@ export default handleActions(
     [AUTH]: (state, action) =>
       produce(state, draft => {
         draft.userInfo = action.payload.user;
-        draft.isLogin = true;
+      }),
+
+    [CHECK_LOGGED_IN]: (state, action) =>
+      produce(state, draft => {
+        draft.loginSuccess = action.payload.isSuccess;
       }),
 
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {
         draft.userInfo = action.payload.user;
-        draft.isLogin = false;
+        draft.loginSuccess = false;
       }),
 
     [DUP_ID_CHECK]: state =>
