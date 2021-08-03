@@ -7,7 +7,7 @@ import { MainTitle } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // reducer
-import { UserCreators } from '../../redux/modules/user';
+// import { UserCreators } from '../../redux/modules/user';
 // pages
 import PhoneAuth from './PhoneAuth';
 import EnterIdPwd from './EnterIdPwd';

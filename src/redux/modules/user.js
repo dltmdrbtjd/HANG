@@ -2,8 +2,6 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 // api
 import apis from '../../shared/api';
-// reducer
-import { ImageCreators } from './image';
 
 const AUTH = 'user/AUTH';
 const LOG_OUT = 'user/LOG_OUT';
