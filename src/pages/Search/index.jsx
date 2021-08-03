@@ -26,17 +26,30 @@ const Search = props => {
   // 검색한 도시,구 state
   const [cityName, setCityName] = useState('');
   const [guName, setGuName] = useState('');
-  console.log(
-    `Component => src/pages/Search.jsx :`,
-    city,
-    gu,
+
+  // 서버에 보낼 검색 데이터
+  const content = {
+    keyword: finduser,
+    area: {
+      region: city,
+      city: gu,
+    },
     traveler,
     guide,
-    finduser,
-  );
+  };
+  console.log(`Component => src/pages/Search.jsx :`, content);
 
   const query = queryString.parse(location.search);
-  console.log(`Component => src/pages/Search.jsx :`, query.keyword);
+  const MainSearch = {
+    keyword: query.keyword,
+    area: {
+      region: city,
+      city: gu,
+    },
+    traveler,
+    guide,
+  };
+  console.log(`Component => src/pages/Search.jsx :`, MainSearch);
 
   const CityOpenhandler = () => {
     if (!cityOpen) {
@@ -143,7 +156,7 @@ const Search = props => {
       </Button>
       <Text margin="40px 0 0 0">
         <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
-        {guName ? ` ${guName} 의 여행자입니다.` : ''}
+        {guName ? ` ${guName}의 검색 목록입니다.` : ''}
       </Text>
       <SearchCard
         username="새싹몬"
