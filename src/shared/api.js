@@ -2,12 +2,14 @@ import axios from 'axios';
 
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
-  baseURL: 'http//localhost:3000/',
+  baseURL: 'https://soujinko.shop/',
+  withCredentials: true,
 });
 
 // 추후에 token 추가시 추가 작성바랍니다.
 instance.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';
+  config.headers['X-Requested-With'] = 'XMLHttpRequest';
   config.headers.Accept = 'application/json';
   return config;
 });
@@ -15,9 +17,11 @@ instance.interceptors.request.use(config => {
 // 사용할 api들
 const apis = {
   // user
+  Auth: () => instance.get('/api/users'),
+  SMSAuth: phone => instance.post('/api/users/sms_auth', phone),
   SignUp: user => instance.post('/api/users', user),
-  Pauth: number => instance.post('/api/pauth', number),
-  Duplicate: id => instance.post('/api/duplicate', id),
+  Pauth: authInfo => instance.post('/api/users/p_auth', authInfo),
+  Duplicate: user => instance.post('/api/users/duplicate', user),
   Login: user => instance.post('/api/users/signin', user),
 
   // alarm
