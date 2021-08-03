@@ -1,19 +1,13 @@
 import React from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
+// history
+import { history } from '../../redux/configureStore';
 // elements
-import {
-  Logo,
-  Grid,
-  Button,
-  Label,
-  Link,
-  Text,
-  Input,
-} from '../../elements/index';
+import { Logo, Grid, Button, Label, Text, Input } from '../../elements/index';
 // image
 import LogoImg from '../../Images/Logo.png';
 // reducer
@@ -21,6 +15,11 @@ import { UserCreators } from '../../redux/modules/user';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const checkLoggedIn = useSelector(state => state.user.loginSuccess);
+
+  if (checkLoggedIn) {
+    window.location.replace('/');
+  }
 
   return (
     <>
@@ -31,8 +30,8 @@ const Login = () => {
       <Formik
         initialValues={{ userId: '', password: '' }}
         validationSchema={yup.object({
-          userId: yup.string().required(),
-          password: yup.string().required(),
+          userId: yup.string().required('아이디를 입력해주세요'),
+          password: yup.string().required('비밀번호를 입력해주세요'),
         })}
         onSubmit={(values, { setSubmitting }) => {
           dispatch(UserCreators.logInDB(values));
@@ -42,7 +41,7 @@ const Login = () => {
         {formik => (
           <form onSubmit={formik.handleSubmit}>
             <Grid margin="0 0 30px">
-              <Label id="userId" lh="2" fs="lg" fw="semiBold">
+              <Label id="userId" lh="2.3" fs="lg" fw="semiBold">
                 아이디
               </Label>
 
@@ -51,10 +50,16 @@ const Login = () => {
                 placeholder="아이디를 입력하세요"
                 {...formik.getFieldProps('userId')}
               />
+
+              {formik.touched.userId && formik.errors.userId ? (
+                <Text fs="sm" color="danger" margin="8px 8px 0">
+                  {formik.errors.userId}
+                </Text>
+              ) : null}
             </Grid>
 
             <Grid>
-              <Label id="password" lh="2" fs="lg" fw="semiBold">
+              <Label id="password" lh="2.3" fs="lg" fw="semiBold">
                 비밀번호
               </Label>
 
@@ -64,11 +69,17 @@ const Login = () => {
                 placeholder="비밀번호를 입력하세요"
                 {...formik.getFieldProps('password')}
               />
+
+              {formik.touched.password && formik.errors.password ? (
+                <Text fs="sm" color="danger" margin="8px 8px 0">
+                  {formik.errors.password}
+                </Text>
+              ) : null}
             </Grid>
 
-            <Text fs="sm" margin="12px 8px 0" color="danger">
+            {/* <Text fs="sm" color="danger" margin="12px 8px 0">
               가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
-            </Text>
+            </Text> */}
 
             <Grid position="absolute" bottom="20px" left="0">
               <Button fs="la" fw="bold" type="submit" width="100%">
@@ -76,27 +87,33 @@ const Login = () => {
               </Button>
 
               <Grid>
-                <Link
-                  href="/find"
+                <Button
                   width="50%"
                   padding="17px 0"
+                  bgColor="bgColor"
                   fs="sm"
                   hoz="center"
                   color="darkG"
+                  _onCLick={() => {
+                    history.push('/signup');
+                  }}
                 >
                   아이디 / 비밀번호 찾기
-                </Link>
+                </Button>
 
-                <Link
-                  href="/signup"
+                <Button
                   width="50%"
                   padding="17px 0"
+                  bgColor="bgColor"
                   fs="sm"
                   hoz="center"
                   color="darkG"
+                  _onCLick={() => {
+                    history.push('/signup');
+                  }}
                 >
                   회원가입
-                </Link>
+                </Button>
               </Grid>
             </Grid>
           </form>

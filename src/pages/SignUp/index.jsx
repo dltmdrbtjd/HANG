@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+// redux
+import { useSelector } from 'react-redux';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -7,17 +9,20 @@ import { MainTitle } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // reducer
-// import { UserCreators } from '../../redux/modules/user';
+import { UserCreators } from '../../redux/modules/user';
 // pages
 import PhoneAuth from './PhoneAuth';
 import EnterIdPwd from './EnterIdPwd';
 import FillOutProfile from './FillOutProfile';
 import Welcome from './Welcome';
 
-const SignUp = ({ match }) => {
-  const { page } = match.params;
+const SignUp = () => {
+  const checkLoggedIn = useSelector(state => state.user.loginSuccess);
+
+  const [page, setPage] = useState(1);
 
   const [city, setCity] = useState('서울특별시');
+  const [region, setRegion] = useState('종로구');
   const [gender, setGender] = useState('여성');
   const [age, setAge] = useState('');
 
@@ -30,8 +35,7 @@ const SignUp = ({ match }) => {
       age: parseInt(age, 10),
     };
 
-    console.log(userInfo);
-    // UserCreators.signUpDB(userInfo);
+    UserCreators.signUpDB(userInfo);
   };
 
   const title = [
@@ -41,9 +45,13 @@ const SignUp = ({ match }) => {
     '당신만의\u00A0행복한\u00A0여행이 시작됩니다!',
   ];
 
+  if (checkLoggedIn) {
+    window.location.replace('/');
+  }
+
   return (
     <>
-      <StatusBar curPage={parseInt(page, 10)} />
+      <StatusBar curPage={page} setPage={setPage} />
 
       <MainTitle fs="xl" fw="extraBold" ls="-1px" margin="0 0 30px">
         {title[page - 1]}
@@ -73,6 +81,7 @@ const SignUp = ({ match }) => {
               <PhoneAuth
                 pNum={formik.values.pNum}
                 setPnum={formik.handleChange('pNum')}
+                setPage={setPage}
               />
             ) : null}
 
@@ -82,6 +91,7 @@ const SignUp = ({ match }) => {
                 setUserId={formik.handleChange('userId')}
                 password={formik.values.password}
                 setPassword={formik.handleChange('password')}
+                setPage={setPage}
               />
             ) : null}
 

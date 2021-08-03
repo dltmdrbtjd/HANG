@@ -1,8 +1,6 @@
 import React from 'react';
 // redux
 import { useDispatch } from 'react-redux';
-// history
-import { history } from '../../../redux/configureStore';
 // elements
 import { Grid, Button, Text, Label } from '../../../elements';
 // components
@@ -10,7 +8,7 @@ import ValidateInput from '../ValidateInput';
 // reducer
 import { UserCreators } from '../../../redux/modules/user';
 
-const EnterIdPwd = ({ userId, setUserId, password, setPassword }) => {
+const EnterIdPwd = ({ userId, setUserId, password, setPassword, setPage }) => {
   const dispatch = useDispatch();
 
   const duplicateIdCheck = () => {
@@ -97,7 +95,7 @@ const EnterIdPwd = ({ userId, setUserId, password, setPassword }) => {
           width="100%"
           disabled={!(userId && password)}
           _onClick={() => {
-            history.push('/signup/3');
+            setPage(3);
           }}
         >
           다음

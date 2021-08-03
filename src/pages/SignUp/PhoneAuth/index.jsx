@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// history
-import { history } from '../../../redux/configureStore';
 // elements
 import { Grid, Button } from '../../../elements';
 // components
@@ -8,7 +6,7 @@ import ValidateInput from '../ValidateInput';
 // reducer
 import { UserCreators } from '../../../redux/modules/user';
 
-const PhoneAuth = ({ pNum, setPnum }) => {
+const PhoneAuth = ({ pNum, setPnum, setPage }) => {
   const [authNum, setAuthNum] = useState('');
 
   const userPhoneAuth = () => {
@@ -73,7 +71,7 @@ const PhoneAuth = ({ pNum, setPnum }) => {
           width="100%"
           disabled={!pNum}
           _onClick={() => {
-            history.push('/signup/2');
+            setPage(2);
           }}
         >
           다음
