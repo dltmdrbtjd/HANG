@@ -63,7 +63,6 @@ const SignUp = ({ match }) => {
           nickname: yup.string().required(),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          alert(JSON.stringify(values, null, 2));
           signUp(values);
           setSubmitting(false);
         }}
