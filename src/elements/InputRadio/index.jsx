@@ -5,7 +5,7 @@ import Label from '../Label';
 import RadioStyle from './style';
 import Grid from '../Grid';
 
-const InputRadio = ({ name, list }) => {
+const InputRadio = ({ name, list, setState }) => {
   const [checked, setChecked] = useState(0);
 
   return (
@@ -23,6 +23,7 @@ const InputRadio = ({ name, list }) => {
             checked={checked === idx}
             onChange={() => {
               setChecked(idx);
+              setState(idx);
             }}
           />
 

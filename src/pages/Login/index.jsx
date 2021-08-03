@@ -1,4 +1,6 @@
 import React from 'react';
+// redux
+import { useDispatch } from 'react-redux';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -14,8 +16,12 @@ import {
 } from '../../elements/index';
 // image
 import LogoImg from '../../Images/Logo.png';
+// reducer
+import { UserCreators } from '../../redux/modules/user';
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <Grid height="300px" position="relative">
@@ -29,7 +35,7 @@ const Login = () => {
           password: yup.string().required(),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          alert(JSON.stringify(values, null, 2));
+          dispatch(UserCreators.logInDB(values));
           setSubmitting(false);
         }}
       >

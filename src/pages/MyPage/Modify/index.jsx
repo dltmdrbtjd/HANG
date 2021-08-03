@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // elements
 import { Grid, MainTitle, SubTitle, Button, TextArea } from '../../../elements';
 // container
@@ -7,6 +7,10 @@ import ValidateInput from '../../SignUp/ValidateInput';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 
 const MyPageModify = () => {
+  const [city, setCity] = useState(null);
+  const [gu, setGu] = useState(null);
+  console.log(city);
+
   return (
     <>
       <Grid>
@@ -34,7 +38,7 @@ const MyPageModify = () => {
           지역 선택
         </SubTitle>
 
-        <AreaSelectBox toggle />
+        <AreaSelectBox toggle setCity={setCity} setGu={setGu} />
       </Grid>
 
       <Grid margin="60px 0 0">
