@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+// redux
+// import { useDispatch } from 'react-redux';
 
 // Router
 import { Route, Switch } from 'react-router-dom';
@@ -25,8 +27,16 @@ import CreateTrip from './pages/MyPage/CreateTrip';
 import Noti from './pages/Noti';
 import Chat from './pages/Chat';
 import ChatRoom from './pages/Chat/Room';
+// reducer
+// import { UserCreators } from './redux/modules/user';
 
 function App() {
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(UserCreators.userAuthDB());
+  // }, []);
+
   return (
     <ConnectedRouter history={history}>
       <Header />

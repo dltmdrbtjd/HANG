@@ -11,25 +11,22 @@
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+    />
     <title>HANG</title>
   </head>
   <body>
     <div id="root"></div>
   </body>
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('worker.js').then(function(registration) {
-          console.log('Worker registration successful', registration.scope);
-        }, function(err) {
-          console.log('Worker registration failed', err);
-        }).catch(function(err) {
-          console.log(err);
-        });
-      });
-    } else {
-      console.log('Service Worker is not supported by browser.');
-    }
+  <script type="text/html">
+    if ('serviceWorker' in navigator) { window.addEventListener('load', function
+    () { navigator.serviceWorker .register('worker.js') .then( function
+    (registration) { console.log('Worker registration successful',
+    registration.scope); }, function (err) { console.log('Worker registration
+    failed', err); }, ) .catch(function (err) { console.log(err); }); }); } else
+    { console.log('Service Worker is not supported by browser.'); }
   </script>
 </html>

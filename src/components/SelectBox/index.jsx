@@ -8,7 +8,7 @@ import { Button, Strong, Image, Grid } from '../../elements/index';
 // image
 import Arrow from '../../Images/arrow.png';
 
-const SelectBox = ({ initailOption, contents, ...props }) => {
+const SelectBox = ({ initailOption, contents, setState, ...props }) => {
   const [option, setOption] = useState(initailOption);
   const [angle, setAngle] = useState(180);
   const [open, setOpen] = useState(false);
@@ -58,6 +58,7 @@ const SelectBox = ({ initailOption, contents, ...props }) => {
                   onClick={event => {
                     setOption(content);
                     handleClose(event);
+                    setState(content);
                   }}
                 >
                   {content}

@@ -2,6 +2,8 @@ import React from 'react';
 // icon
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+// image upload
+import imageCompression from 'browser-image-compression';
 // redux
 import { useSelector, useDispatch } from 'react-redux';
 import { ImageCreators } from '../../redux/modules/image';
@@ -14,16 +16,28 @@ const InputImage = () => {
   const dispatch = useDispatch();
   const profilePre = useSelector(state => state.image.profilePre);
 
-  const selectFile = event => {
-    const reader = new FileReader();
-    const file = event.target.files[0];
+  const selectFile = async event => {
+    const options = {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 500,
+      useWebWorker: true,
+    };
 
-    if (file) {
-      reader.readAsDataURL(file);
+    try {
+      const reader = new FileReader();
+      const file = event.target.files[0];
 
-      reader.onload = () => {
-        dispatch(ImageCreators.setProfilePre(reader.result));
-      };
+      const compressedFile = await imageCompression(file, options);
+
+      if (file) {
+        reader.readAsDataURL(compressedFile);
+
+        reader.onload = () => {
+          dispatch(ImageCreators.uploadProfileImgDB(compressedFile));
+        };
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -80,7 +94,5 @@ const InputImage = () => {
     </Grid>
   );
 };
-
-InputImage.defaultProps = {};
 
 export default InputImage;

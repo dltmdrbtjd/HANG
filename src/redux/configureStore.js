@@ -10,10 +10,12 @@ import { connectRouter } from 'connected-react-router';
 
 // reducer
 import image from './modules/image';
+import user from './modules/user';
 
 const history = createBrowserHistory();
 const rootReducer = combineReducers({
   image,
+  user,
   router: connectRouter(history),
 });
 
