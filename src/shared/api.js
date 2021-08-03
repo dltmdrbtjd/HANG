@@ -1,4 +1,6 @@
 import axios from 'axios';
+// cookie
+import { getCookie } from './cookie';
 
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
@@ -10,6 +12,7 @@ const instance = axios.create({
 instance.interceptors.request.use(config => {
   config.headers['Content-Type'] = 'application/json; charset=utf-8';
   config.headers['X-Requested-With'] = 'XMLHttpRequest';
+  config.headers.token = getCookie();
   config.headers.Accept = 'application/json';
   return config;
 });

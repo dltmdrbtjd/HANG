@@ -4,6 +4,8 @@ import produce from 'immer';
 import apis from '../../shared/api';
 // reducer
 import { ImageCreators } from './image';
+// cookie
+import { getCookie, setCookie, delCookie } from '../../shared/cookie';
 
 const AUTH = 'user/AUTH';
 const LOG_OUT = 'user/LOG_OUT';
@@ -26,7 +28,7 @@ const initialState = {
     profileImg: null,
   },
 
-  loginSuccess: false,
+  loginSuccess: Boolean(getCookie()),
 
   duplicateCheck: {
     idChecked: false,
@@ -40,10 +42,9 @@ const userAuthDB = () => {
       .Auth()
       .then(res => {
         dispatch(userAuth(res.data));
-        dispatch(checkSuccessfulLogin(true));
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        dispatch(checkSuccessfulLogin(false));
       });
   };
 };
@@ -104,12 +105,16 @@ const signUpDB = (image, userInfo) => {
 };
 
 const logInDB = userInfo => {
-  return dispatch => {
+  return (dispatch, getState, { history }) => {
     apis
       .Login(userInfo)
+      .then(res => {
+        setCookie(res.data.accessToken);
+      })
       .then(() => {
         dispatch(userAuthDB());
         dispatch(checkSuccessfulLogin(true));
+        history.replace('/');
       })
       .catch(() => {
         dispatch(checkSuccessfulLogin(false));
@@ -121,9 +126,12 @@ const logOutDB = () => {
   return dispatch => {
     apis
       .LogOut()
-      .then(res => {
-        console.log(res);
+      .then(() => {
+        delCookie();
+      })
+      .then(() => {
         dispatch(logOut({ userId: null, nickname: null, profileImg: null }));
+        dispatch(checkSuccessfulLogin(false));
       })
       .catch(err => console.error(err));
   };
