@@ -124,7 +124,7 @@ const Search = props => {
               !traveler ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
             }
             border={!traveler ? '2px solid #c4c4c4' : '2px solid #ff9900'}
-            padding="8px 20px"
+            padding="8px 15px"
             onClick={Travelerhandler}
             fw="bold"
           >
@@ -136,7 +136,7 @@ const Search = props => {
             color={!guide ? 'gray' : 'brandColor'}
             bgColor={!guide ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'}
             border={!guide ? '2px solid #c4c4c4' : '2px solid #ff9900'}
-            padding="8px 20px"
+            padding="8px 15px"
             onClick={Guidehandler}
             margin="0 0 0 10px"
             fw="bold"
