@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-// redux
-import { useSelector } from 'react-redux';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -17,8 +15,6 @@ import FillOutProfile from './FillOutProfile';
 import Welcome from './Welcome';
 
 const SignUp = () => {
-  const checkLoggedIn = useSelector(state => state.user.loginSuccess);
-
   const [page, setPage] = useState(1);
 
   const [city, setCity] = useState('서울특별시');
@@ -44,10 +40,6 @@ const SignUp = () => {
     '행에서\u00A0사용할 프로필을\u00A0설정해주세요',
     '당신만의\u00A0행복한\u00A0여행이 시작됩니다!',
   ];
-
-  if (checkLoggedIn) {
-    window.location.replace('/');
-  }
 
   return (
     <>

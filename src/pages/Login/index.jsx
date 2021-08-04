@@ -1,6 +1,6 @@
 import React from 'react';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -15,11 +15,6 @@ import { UserCreators } from '../../redux/modules/user';
 
 const Login = () => {
   const dispatch = useDispatch();
-  const checkLoggedIn = useSelector(state => state.user.loginSuccess);
-
-  if (checkLoggedIn) {
-    window.location.replace('/');
-  }
 
   return (
     <>
@@ -92,9 +87,8 @@ const Login = () => {
                   padding="17px 0"
                   bgColor="bgColor"
                   fs="sm"
-                  hoz="center"
                   color="darkG"
-                  _onCLick={() => {
+                  _onClick={() => {
                     history.push('/signup');
                   }}
                 >
@@ -106,9 +100,8 @@ const Login = () => {
                   padding="17px 0"
                   bgColor="bgColor"
                   fs="sm"
-                  hoz="center"
                   color="darkG"
-                  _onCLick={() => {
+                  _onClick={() => {
                     history.push('/signup');
                   }}
                 >
