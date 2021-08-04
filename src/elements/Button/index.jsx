@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import ButtonStyle from './style';
 
 const Button = forwardRef(
-  ({ disabled, type, _onClick, _onSubmit, children, ...props }, ref) => {
+  ({ disabled, type, _onClick, children, ...props }, ref) => {
     return (
       <ButtonStyle
         type={type}

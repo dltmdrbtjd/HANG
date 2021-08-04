@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // Router
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Switch, useLocation } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
+import PublicRoute from './shared/PublicRoute';
+import PrivateRoute from './shared/PrivateRoute';
 // redux
 import { history } from './redux/configureStore';
 // components
@@ -28,29 +30,17 @@ import Chat from './pages/Chat';
 import ChatRoom from './pages/Chat/Room';
 // reducer
 import { UserCreators } from './redux/modules/user';
+// cookie
+import { getCookie } from './shared/cookie';
 
 const App = () => {
+  const path = useLocation().pathname;
+
   const dispatch = useDispatch();
-  const checkLoggedIn = useSelector(state => state.user.loginSuccess);
 
   useEffect(() => {
-    if (checkLoggedIn) dispatch(UserCreators.userAuthDB());
+    if (getCookie()) dispatch(UserCreators.userAuthDB());
   }, []);
-
-  if (!checkLoggedIn) {
-    return (
-      <Section>
-        {history.location.pathname === '/signup' ? (
-          <Route path="/signup" exact component={SignUp} />
-        ) : (
-          <>
-            <Redirect to="/login" />
-            <Route path="/login" exact component={Login} />
-          </>
-        )}
-      </Section>
-    );
-  }
 
   return (
     <ConnectedRouter history={history}>
@@ -58,21 +48,25 @@ const App = () => {
 
       <Section>
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/onboarding/:page" exact component={Onboarding} />
-          <Route path="/search" exact component={Search} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={SignUp} />
-          <Route path="/detail" exact component={Detail} />
-          <Route path="/detail/request" exact component={GuideRequest} />
-          <Route path="/favorite" exact component={Favorite} />
-          <Route path="/mypage" exact component={MyPage} />
-          <Route path="/mypage/promise" exact component={MyPromise} />
-          <Route path="/mypage/modify" exact component={MyPageModify} />
-          <Route path="/mypage/create_trip" exact component={CreateTrip} />
-          <Route path="/noti" exact component={Noti} />
-          <Route path="/chat" exact component={Chat} />
-          <Route path="/chat/room" exact component={ChatRoom} />
+          <PublicRoute path="/login" component={Login} exact />
+          <PublicRoute path="/signup" component={SignUp} exact />
+          <PublicRoute path="/onboarding/:page" component={Onboarding} exact />
+          <PrivateRoute path="/" component={Home} exact />
+          <PrivateRoute path="/search" component={Search} exact />
+          <PrivateRoute path="/detail" component={Detail} exact />
+          <PrivateRoute path="/detail/request" component={GuideRequest} exact />
+          <PrivateRoute path="/favorite" component={Favorite} exact />
+          <PrivateRoute path="/mypage" component={MyPage} exact />
+          <PrivateRoute path="/mypage/promise" component={MyPromise} exact />
+          <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
+          <PrivateRoute
+            path="/mypage/create_trip"
+            component={CreateTrip}
+            exact
+          />
+          <PrivateRoute path="/noti" component={Noti} exact />
+          <PrivateRoute path="/chat" component={Chat} exact />
+          <PrivateRoute path="/chat/room" component={ChatRoom} exact />
         </Switch>
       </Section>
 

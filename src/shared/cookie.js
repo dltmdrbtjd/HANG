@@ -15,6 +15,6 @@ const delCookie = () => {
   ).toUTCString()};`;
 };
 
-const token = getCookie();
+const isLogin = () => Boolean(getCookie());
 
-export { getCookie, setCookie, delCookie, token };
+export { getCookie, setCookie, delCookie, isLogin };

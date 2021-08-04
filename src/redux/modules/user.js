@@ -123,7 +123,7 @@ const logInDB = userInfo => {
 };
 
 const logOutDB = () => {
-  return dispatch => {
+  return (dispatch, getState, { history }) => {
     apis
       .LogOut()
       .then(() => {
@@ -132,6 +132,7 @@ const logOutDB = () => {
       .then(() => {
         dispatch(logOut({ userId: null, nickname: null, profileImg: null }));
         dispatch(checkSuccessfulLogin(false));
+        history.replace('/login');
       })
       .catch(err => console.error(err));
   };
