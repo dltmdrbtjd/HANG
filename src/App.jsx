@@ -34,8 +34,6 @@ import { UserCreators } from './redux/modules/user';
 import { getCookie } from './shared/cookie';
 
 const App = () => {
-  const path = useLocation().pathname;
-
   const dispatch = useDispatch();
 
   useEffect(() => {
