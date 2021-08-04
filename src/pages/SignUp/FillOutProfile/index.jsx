@@ -1,6 +1,6 @@
 import React from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // elements
 import { Grid, Button, Text, Label, InputRadio } from '../../../elements';
 // components
@@ -13,12 +13,16 @@ import { UserCreators } from '../../../redux/modules/user';
 
 const FillOutProfile = ({
   nickname,
+  nickErrorMsg,
   setNickname,
+  age,
   setAge,
   setGender,
   setRegion,
   setCity,
+  setProfile,
 }) => {
+  const nickDupCheck = useSelector(state => state.user.duplicateCheck.nickname);
   const dispatch = useDispatch();
 
   const duplicateNickCheck = () => {
@@ -29,7 +33,7 @@ const FillOutProfile = ({
 
   return (
     <>
-      <InputImage />
+      <InputImage setProfile={setProfile} />
 
       <Grid margin="0 0 15px">
         <Label fs="lg" id="nickname" lh="2" fw="semiBold">
@@ -44,10 +48,14 @@ const FillOutProfile = ({
             name="nickname"
             value={nickname}
             _onChange={setNickname}
+            status={
+              (nickErrorMsg && 'danger') || (nickDupCheck.status && 'safe')
+            }
           />
 
           <Button
             width="42%"
+            disabled={!nickname || nickErrorMsg}
             _onClick={() => {
               duplicateNickCheck();
             }}
@@ -55,6 +63,18 @@ const FillOutProfile = ({
             중복 확인
           </Button>
         </Grid>
+
+        {nickErrorMsg ? (
+          <Text fs="sm" color="danger" margin="8px 0 0">
+            {nickErrorMsg}
+          </Text>
+        ) : null}
+
+        {!nickErrorMsg && !nickDupCheck.status ? (
+          <Text fs="sm" color="danger" margin="8px 0 0">
+            {nickDupCheck.errorMsg}
+          </Text>
+        ) : null}
       </Grid>
 
       <Grid display="flex" hoz="space-between">
@@ -96,7 +116,14 @@ const FillOutProfile = ({
         <AreaSelectBox toggle setGu={setRegion} setCity={setCity} />
       </Grid>
 
-      <Button type="submit" fs="la" fw="bold" width="100%" margin="0 0 20px">
+      <Button
+        disabled={!nickDupCheck.status || !age}
+        type="submit"
+        fs="la"
+        fw="bold"
+        width="100%"
+        margin="0 0 20px"
+      >
         다음
       </Button>
     </>

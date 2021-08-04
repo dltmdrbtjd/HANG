@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 // Router
-import { Switch, useLocation } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import PublicRoute from './shared/PublicRoute';
 import PrivateRoute from './shared/PrivateRoute';
@@ -17,6 +17,7 @@ import Onboarding from './pages/Onboarding';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Welcome from './pages/SignUp/Welcome';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
 import GuideRequest from './pages/Detail/GuideRequest';
@@ -37,7 +38,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (getCookie()) dispatch(UserCreators.userAuthDB());
+    if (getCookie()) dispatch(UserCreators.getUserInfoDB());
   }, []);
 
   return (
@@ -48,6 +49,7 @@ const App = () => {
         <Switch>
           <PublicRoute path="/login" component={Login} exact />
           <PublicRoute path="/signup" component={SignUp} exact />
+          <PublicRoute path="/signup/welcome" component={Welcome} exact />
           <PublicRoute path="/onboarding/:page" component={Onboarding} exact />
           <PrivateRoute path="/" component={Home} exact />
           <PrivateRoute path="/search" component={Search} exact />
