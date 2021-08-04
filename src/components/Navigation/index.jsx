@@ -24,28 +24,13 @@ const Navigation = () => {
   )
     return null;
 
-  const PathChangeHandler = () => {
-    if (path.includes('/search')) {
-      setOn(1);
-    } else if (path.includes('/favorite')) {
-      setOn(2);
-    } else if (path.includes('/chat') || path.includes('/chat/room')) {
-      setOn(4);
-    } else if (path.includes('/mypage')) {
-      setOn(5);
-    }
-  };
-
-  useEffect(() => {
-    PathChangeHandler();
-  }, [path]);
-
   return (
     <NavigationStyle>
       <Navigationicons
         className={path.includes('/search') ? 'Click' : ''}
         onClick={() => {
           history.push('/search');
+          setOn(1);
         }}
       >
         <SearchIcon style={{ fontSize: 35 }} />
@@ -55,6 +40,7 @@ const Navigation = () => {
         className={path.includes('/favorite') ? 'Click' : ''}
         onClick={() => {
           history.push('/favorite');
+          setOn(2);
         }}
       >
         <FavoriteBorderIcon style={{ fontSize: 35 }} />
@@ -74,6 +60,7 @@ const Navigation = () => {
         className={path.includes('/chat') ? 'Click' : ''}
         onClick={() => {
           history.push('/chat');
+          setOn(4);
         }}
       >
         <SmsOutlinedIcon style={{ fontSize: 35 }} />
@@ -83,6 +70,7 @@ const Navigation = () => {
         className={path.includes('/mypage') ? 'Click' : ''}
         onClick={() => {
           history.push('/mypage');
+          setOn(5);
         }}
       >
         <PermIdentityIcon style={{ fontSize: 35 }} />
