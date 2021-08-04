@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // router
 import { useLocation } from 'react-router';
 // style
@@ -13,8 +13,6 @@ import { Navigationicons, NavigationStyle } from './style';
 import { history } from '../../redux/configureStore';
 
 const Navigation = () => {
-  const [on, setOn] = useState(3);
-
   const path = useLocation().pathname;
 
   if (
@@ -30,7 +28,6 @@ const Navigation = () => {
         className={path.includes('/search') ? 'Click' : ''}
         onClick={() => {
           history.push('/search');
-          setOn(1);
         }}
       >
         <SearchIcon style={{ fontSize: 35 }} />
@@ -40,17 +37,15 @@ const Navigation = () => {
         className={path.includes('/favorite') ? 'Click' : ''}
         onClick={() => {
           history.push('/favorite');
-          setOn(2);
         }}
       >
         <FavoriteBorderIcon style={{ fontSize: 35 }} />
         <Text margin="6px 0 0 0">관심목록</Text>
       </Navigationicons>
       <Navigationicons
-        className={on === 3 ? 'Click' : ''}
+        className={path === '/' ? 'Click' : ''}
         onClick={() => {
           history.push('/');
-          setOn(3);
         }}
       >
         <HomeOutlinedIcon style={{ fontSize: 35 }} />
@@ -60,7 +55,6 @@ const Navigation = () => {
         className={path.includes('/chat') ? 'Click' : ''}
         onClick={() => {
           history.push('/chat');
-          setOn(4);
         }}
       >
         <SmsOutlinedIcon style={{ fontSize: 35 }} />
@@ -70,7 +64,6 @@ const Navigation = () => {
         className={path.includes('/mypage') ? 'Click' : ''}
         onClick={() => {
           history.push('/mypage');
-          setOn(5);
         }}
       >
         <PermIdentityIcon style={{ fontSize: 35 }} />
