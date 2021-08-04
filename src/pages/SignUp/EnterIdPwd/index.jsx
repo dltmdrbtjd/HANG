@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // elements
 import { Grid, Button, Text, Label } from '../../../elements';
 // components
@@ -8,8 +8,19 @@ import ValidateInput from '../ValidateInput';
 // reducer
 import { UserCreators } from '../../../redux/modules/user';
 
-const EnterIdPwd = ({ userId, setUserId, password, setPassword, setPage }) => {
+const EnterIdPwd = ({
+  userId,
+  setUserId,
+  password,
+  setPassword,
+  setPage,
+  idErrorMsg,
+  pwdErrorMsg,
+}) => {
+  const idDupCheck = useSelector(state => state.user.duplicateCheck.id);
   const dispatch = useDispatch();
+
+  const [pwdCheck, setPwdCheck] = useState('');
 
   const duplicateIdCheck = () => {
     dispatch(UserCreators.duplicateIdCheckDB({ userId }));
@@ -31,10 +42,12 @@ const EnterIdPwd = ({ userId, setUserId, password, setPassword, setPage }) => {
               name="userId"
               value={userId}
               _onChange={setUserId}
+              status={(idErrorMsg && 'danger') || (idDupCheck.status && 'safe')}
             />
 
             <Button
               width="42%"
+              disabled={!userId || idErrorMsg}
               _onClick={() => {
                 duplicateIdCheck();
               }}
@@ -42,6 +55,18 @@ const EnterIdPwd = ({ userId, setUserId, password, setPassword, setPage }) => {
               중복 확인
             </Button>
           </Grid>
+
+          {idErrorMsg ? (
+            <Text fs="sm" color="danger" margin="8px 0 0">
+              {idErrorMsg}
+            </Text>
+          ) : null}
+
+          {!idErrorMsg && !idDupCheck.status ? (
+            <Text fs="sm" color="danger" margin="8px 0 0">
+              {idDupCheck.errorMsg}
+            </Text>
+          ) : null}
         </Grid>
 
         <Grid>
@@ -49,41 +74,44 @@ const EnterIdPwd = ({ userId, setUserId, password, setPassword, setPage }) => {
             비밀번호
           </Label>
 
-          <Grid
-            display="flex"
-            hoz="space-between"
-            ver="center"
-            margin="0 0 15px"
-          >
+          <Grid margin="0 0 15px">
             <ValidateInput
               id="password"
               placeholder="비밀번호 입력"
               type="password"
-              width="55%"
               name="password"
               value={password}
               _onChange={setPassword}
+              status={
+                (pwdErrorMsg && 'danger') ||
+                (password && !pwdErrorMsg && 'safe')
+              }
             />
 
-            <Text fs="xs" width="42%">
-              *8자&nbsp;이상,
-              <br />
-              문자/숫자/기호&nbsp;포함
-            </Text>
+            {pwdErrorMsg ? (
+              <Text fs="sm" color="danger" margin="8px 0 0">
+                {pwdErrorMsg}
+              </Text>
+            ) : null}
           </Grid>
 
-          <Grid display="flex" hoz="space-between" ver="center">
+          <Grid>
             <ValidateInput
               placeholder="비밀번호 재확인"
               type="password"
-              width="55%"
+              value={pwdCheck}
+              _onChange={e => setPwdCheck(e.target.value)}
+              status={
+                (pwdCheck !== password && 'danger') ||
+                (pwdCheck && pwdCheck === password && 'safe')
+              }
             />
 
-            <Text fs="xs" width="42%">
-              비밀번호를
-              <br />
-              다시 한번 입력해주세요
-            </Text>
+            {pwdCheck !== password ? (
+              <Text fs="sm" color="danger" margin="8px 0 0">
+                비밀번호가 일치하지 않습니다
+              </Text>
+            ) : null}
           </Grid>
         </Grid>
       </Grid>
@@ -93,7 +121,7 @@ const EnterIdPwd = ({ userId, setUserId, password, setPassword, setPage }) => {
           fs="la"
           fw="bold"
           width="100%"
-          disabled={!(userId && password)}
+          disabled={!idDupCheck.status || pwdErrorMsg || pwdCheck !== password}
           _onClick={() => {
             setPage(3);
           }}

@@ -31,7 +31,7 @@ const color = {
   black: '#2C2C2C',
   white: '#FDFDFD',
   danger: '#FF0005',
-  safe: '00C314',
+  safe: '#00C314',
 };
 
 const theme = {

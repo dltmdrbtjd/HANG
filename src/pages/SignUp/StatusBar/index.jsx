@@ -25,15 +25,19 @@ const StatusBar = ({ curPage, setPage }) => {
                   width="25px"
                   height="25px"
                   color={color}
-                  bgColor={page < curPage ? 'brandColor' : 'none'}
+                  bgColor={page < curPage ? 'brandColor' : 'bgColor'}
                   fs="sm"
                   fw="bold"
                   border={`1px solid ${
                     page <= curPage ? '#FF9900' : '#C4C4C4'
                   }`}
-                  _onClick={() => {
-                    setPage(page);
-                  }}
+                  _onClick={
+                    setPage
+                      ? () => {
+                          setPage(page);
+                        }
+                      : null
+                  }
                 >
                   {page}
                 </Button>
@@ -46,7 +50,7 @@ const StatusBar = ({ curPage, setPage }) => {
                   width="25px"
                   height="25px"
                   color="gray"
-                  fs="xs"
+                  fs="sm"
                   fw="bold"
                   border="1px solid #C4C4C4"
                 >

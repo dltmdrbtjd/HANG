@@ -5,21 +5,19 @@ import apis from '../../shared/api';
 // reducer
 import { ImageCreators } from './image';
 // cookie
-import { getCookie, setCookie, delCookie } from '../../shared/cookie';
+import { setCookie, delCookie } from '../../shared/cookie';
 
-const AUTH = 'user/AUTH';
-const LOG_OUT = 'user/LOG_OUT';
-const CHECK_LOGGED_IN = 'user/CHECK_LOGGED_IN';
-const DUP_ID_CHECK = 'user/DUP_ID_CHECK';
-const DUP_NICK_CHECK = 'user/DUP_NICK_CHECK';
+const GET_USER_INFO = 'user/GET_USER_INFO';
+const PHONE_AUTH = 'user/PHONE_AUTH';
+const DUPLICATE_CHECK = 'user/DUPLICATE_CHECK';
+const SET_LOGIN_STATUS = 'user/SET_LOGIN_STATUS';
 
-const userAuth = createAction(AUTH, user => ({ user }));
-const logOut = createAction(LOG_OUT, user => ({ user }));
-const checkSuccessfulLogin = createAction(CHECK_LOGGED_IN, isSuccess => ({
-  isSuccess,
+const getUserInfo = createAction(GET_USER_INFO, userInfo => ({ userInfo }));
+const authPhone = createAction(PHONE_AUTH, status => ({ status }));
+const duplicateCheck = createAction(DUPLICATE_CHECK, status => ({ status }));
+const setLoginStatus = createAction(SET_LOGIN_STATUS, status => ({
+  status,
 }));
-const dupIdCheck = createAction(DUP_ID_CHECK);
-const dupNickCheck = createAction(DUP_NICK_CHECK);
 
 const initialState = {
   userInfo: {
@@ -28,54 +26,167 @@ const initialState = {
     profileImg: null,
   },
 
-  loginSuccess: Boolean(getCookie()),
+  loginStatus: {
+    status: false,
+    errorMsg: '',
+  },
 
   duplicateCheck: {
-    idChecked: false,
-    nickChecked: false,
+    id: {
+      status: false,
+      errorMsg: '',
+    },
+
+    nickname: {
+      status: false,
+      errorMsg: '',
+    },
+  },
+
+  phoneAuth: {
+    phoneVali: {
+      status: false,
+      errorMsg: '',
+    },
+
+    smsVali: {
+      status: false,
+      errorMsg: '',
+    },
   },
 };
 
-const userAuthDB = () => {
-  return dispatch => {
+const getUserInfoDB = () => {
+  return (dispatch, getState, { history }) => {
     apis
       .Auth()
-      .then(res => {
-        dispatch(userAuth(res.data));
+      .then(({ data }) => {
+        dispatch(getUserInfo(data));
       })
       .catch(() => {
-        dispatch(checkSuccessfulLogin(false));
+        dispatch(
+          setLoginStatus({
+            status: false,
+            errorMsg: '토큰이 만료되었습니다. 다시 로그인 해주세요',
+          }),
+        );
+        history.replace('/login');
       });
   };
 };
 
 const smsAuthDB = phone => {
-  apis.SMSAuth(phone).catch(err => console.error(err));
+  return (dispatch, getState) => {
+    const phoneAuth = getState().user.phoneAuth;
+
+    apis
+      .SMSAuth(phone)
+      .then(() => {
+        dispatch(
+          authPhone({
+            ...phoneAuth,
+            phoneVali: {
+              status: true,
+              errorMsg: '',
+            },
+          }),
+        );
+      })
+      .catch(err => {
+        dispatch(
+          authPhone({
+            ...phoneAuth,
+            phoneVali: {
+              status: false,
+              errorMsg: '이미 등록된 전화번호입니다.',
+            },
+          }),
+        );
+      });
+  };
 };
 
 const phoneAuthDB = authInfo => {
-  apis.Pauth(authInfo).catch(err => console.error(err));
+  return (dispatch, getState) => {
+    const phoneAuth = getState().user.phoneAuth;
+
+    apis
+      .Pauth(authInfo)
+      .then(() => {
+        dispatch(
+          authPhone({
+            ...phoneAuth,
+            smsVali: {
+              status: true,
+              errorMsg: '',
+            },
+          }),
+        );
+      })
+      .catch(err => {
+        dispatch(
+          authPhone({
+            ...phoneAuth,
+            smsVali: {
+              status: false,
+              errorMsg: '인증 번호가 유효하지 않습니다.',
+            },
+          }),
+        );
+      });
+  };
 };
 
 const duplicateIdCheckDB = userId => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const dupIdCheck = getState().user.duplicateCheck;
+
     apis
       .Duplicate(userId)
-      .then(res => {
-        dispatch(dupIdCheck(res.data));
+      .then(() => {
+        dispatch(
+          duplicateCheck({
+            ...dupIdCheck,
+            id: { status: true, errorMsg: '' },
+          }),
+        );
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        dispatch(
+          duplicateCheck({
+            ...dupIdCheck,
+            id: { status: false, errorMsg: '이미 등록된 아이디입니다.' },
+          }),
+        );
+      });
   };
 };
 
 const duplicateNickCheckDB = nickname => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const dupNickCheck = getState().user.duplicateCheck;
+
     apis
       .Duplicate(nickname)
-      .then(res => {
-        dispatch(dupNickCheck(res.data));
+      .then(() => {
+        dispatch(
+          duplicateCheck({
+            ...dupNickCheck,
+            nickname: { status: true, errorMsg: '' },
+          }),
+        );
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        dispatch(
+          duplicateCheck({
+            ...dupNickCheck,
+            nickname: {
+              status: false,
+              errorMsg: '중복되는 닉네임이 있습니다.',
+            },
+          }),
+        );
+      });
   };
 };
 
@@ -85,7 +196,7 @@ const signUpDB = (image, userInfo) => {
       apis
         .SignUp(userInfo)
         .then(() => {
-          history.replace('/welcome');
+          history.replace('/signup/welcome');
         })
         .catch(err => console.log(err));
 
@@ -98,6 +209,9 @@ const signUpDB = (image, userInfo) => {
 
         apis
           .SignUp({ ...userInfo, profileImg: profileUrl })
+          .then(() => {
+            history.replace('/signup/welcome');
+          })
           .catch(err => console.log(err));
       }),
     );
@@ -112,12 +226,24 @@ const logInDB = userInfo => {
         setCookie(res.data.accessToken);
       })
       .then(() => {
-        dispatch(userAuthDB());
-        dispatch(checkSuccessfulLogin(true));
+        dispatch(getUserInfoDB());
+        dispatch(
+          setLoginStatus({
+            status: true,
+            errorMsg: '',
+          }),
+        );
+      })
+      .then(() => {
         history.replace('/');
       })
       .catch(() => {
-        dispatch(checkSuccessfulLogin(false));
+        dispatch(
+          setLoginStatus({
+            status: false,
+            errorMsg: '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.',
+          }),
+        );
       });
   };
 };
@@ -130,8 +256,11 @@ const logOutDB = () => {
         delCookie();
       })
       .then(() => {
-        dispatch(logOut({ userId: null, nickname: null, profileImg: null }));
-        dispatch(checkSuccessfulLogin(false));
+        dispatch(
+          getUserInfo({ userId: null, nickname: null, profileImg: null }),
+        );
+      })
+      .then(() => {
         history.replace('/login');
       })
       .catch(err => console.error(err));
@@ -140,37 +269,31 @@ const logOutDB = () => {
 
 export default handleActions(
   {
-    [AUTH]: (state, action) =>
+    [GET_USER_INFO]: (state, action) =>
       produce(state, draft => {
-        draft.userInfo = action.payload.user;
+        draft.userInfo = action.payload.userInfo;
       }),
 
-    [CHECK_LOGGED_IN]: (state, action) =>
+    [PHONE_AUTH]: (state, action) =>
       produce(state, draft => {
-        draft.loginSuccess = action.payload.isSuccess;
+        draft.phoneAuth = action.payload.status;
       }),
 
-    [LOG_OUT]: (state, action) =>
+    [DUPLICATE_CHECK]: (state, action) =>
       produce(state, draft => {
-        draft.userInfo = action.payload.user;
-        draft.loginSuccess = false;
+        draft.duplicateCheck = action.payload.status;
       }),
 
-    [DUP_ID_CHECK]: state =>
+    [SET_LOGIN_STATUS]: (state, action) =>
       produce(state, draft => {
-        draft.isIdChecked = true;
-      }),
-
-    [DUP_NICK_CHECK]: state =>
-      produce(state, draft => {
-        draft.isNickChecked = true;
+        draft.loginStatus = action.payload.status;
       }),
   },
   initialState,
 );
 
 const UserCreators = {
-  userAuthDB,
+  getUserInfoDB,
   smsAuthDB,
   phoneAuthDB,
   duplicateIdCheckDB,

@@ -1,6 +1,6 @@
 import React from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -15,6 +15,7 @@ import { UserCreators } from '../../redux/modules/user';
 
 const Login = () => {
   const dispatch = useDispatch();
+  const loginStatus = useSelector(state => state.user.loginStatus);
 
   return (
     <>
@@ -72,9 +73,11 @@ const Login = () => {
               ) : null}
             </Grid>
 
-            {/* <Text fs="sm" color="danger" margin="12px 8px 0">
-              가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.
-            </Text> */}
+            {!loginStatus.status ? (
+              <Text fs="sm" color="danger" margin="12px 8px 0">
+                {loginStatus.errorMsg}
+              </Text>
+            ) : null}
 
             <Grid position="absolute" bottom="20px" left="0">
               <Button fs="la" fw="bold" type="submit" width="100%">

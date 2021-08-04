@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+// redux
+import { useDispatch } from 'react-redux';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -13,14 +15,19 @@ import PhoneAuth from './PhoneAuth';
 import EnterIdPwd from './EnterIdPwd';
 import FillOutProfile from './FillOutProfile';
 import Welcome from './Welcome';
+// validation
+import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [page, setPage] = useState(1);
 
   const [city, setCity] = useState('서울특별시');
   const [region, setRegion] = useState('종로구');
-  const [gender, setGender] = useState('여성');
+  const [gender, setGender] = useState(0);
   const [age, setAge] = useState('');
+  const [profile, setProfile] = useState(null);
 
   const signUp = values => {
     const userInfo = {
@@ -31,14 +38,13 @@ const SignUp = () => {
       age: parseInt(age, 10),
     };
 
-    UserCreators.signUpDB(userInfo);
+    dispatch(UserCreators.signUpDB(profile, userInfo));
   };
 
   const title = [
     '번호\u00A0인증이 필요한\u00A0서비스\u00A0입니다',
     '행에서\u00A0사용할 아이디와\u00A0비밀번호를\u00A0입력해주세요',
     '행에서\u00A0사용할 프로필을\u00A0설정해주세요',
-    '당신만의\u00A0행복한\u00A0여행이 시작됩니다!',
   ];
 
   return (
@@ -57,10 +63,30 @@ const SignUp = () => {
           nickname: '',
         }}
         validationSchema={yup.object({
-          pNum: yup.string().required(),
-          userId: yup.string().required(),
-          password: yup.string().required(),
-          nickname: yup.string().required(),
+          pNum: yup
+            .string()
+            .matches(
+              phoneRegExp,
+              '전화번호 형식이 맞지 않습니다.\n-를 제외한 숫자만 입력해주세요',
+            ),
+          userId: yup
+            .string()
+            .matches(
+              idRegExp,
+              '아이디는 영문자로 시작해야하며 영문자 또는 숫자만 사용가능합니다',
+            )
+            .min(6, '아이디를 6~14자 이내로 입력해주세요')
+            .max(14, '아이디를 6~14자 이내로 입력해주세요'),
+          password: yup
+            .string()
+            .matches(
+              pwdRegExp,
+              '비밀번호는 숫자, 영문자, 특수문자(!@#$%^&*()?_~)만 사용할 수 있습니다',
+            )
+            .min(8, '비밀번호를 8자 이상 입력해주세요'),
+          nickname: yup
+            .string()
+            .max(16, '닉네임은 16자까지 입력할 수 있습니다'),
         })}
         onSubmit={(values, { setSubmitting }) => {
           signUp(values);
@@ -74,6 +100,7 @@ const SignUp = () => {
                 pNum={formik.values.pNum}
                 setPnum={formik.handleChange('pNum')}
                 setPage={setPage}
+                errorMsg={formik.errors.pNum}
               />
             ) : null}
 
@@ -84,6 +111,8 @@ const SignUp = () => {
                 password={formik.values.password}
                 setPassword={formik.handleChange('password')}
                 setPage={setPage}
+                idErrorMsg={formik.errors.userId}
+                pwdErrorMsg={formik.errors.password}
               />
             ) : null}
 
@@ -91,10 +120,13 @@ const SignUp = () => {
               <FillOutProfile
                 nickname={formik.values.nickname}
                 setNickname={formik.handleChange('nickname')}
+                age={age}
                 setAge={setAge}
                 setGender={setGender}
                 setRegion={setRegion}
                 setCity={setCity}
+                setProfile={setProfile}
+                nickErrorMsg={formik.errors.nickname}
               />
             ) : null}
           </form>
