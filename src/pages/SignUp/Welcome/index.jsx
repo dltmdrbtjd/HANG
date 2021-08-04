@@ -1,12 +1,22 @@
 import React from 'react';
+// history
+import { history } from '../../../redux/configureStore';
 // elements
-import { Grid, Link, Image } from '../../../elements';
+import { Grid, Button, Image, MainTitle } from '../../../elements';
+// components
+import StatusBar from '../StatusBar';
 // images
-import WelcomeImg from '../../../Images/onboarding last page.gif';
+import WelcomeImg from '../../../Images/welcome.gif';
 
 const Welcome = () => {
   return (
     <>
+      <StatusBar curPage={4} />
+
+      <MainTitle fs="xl" fw="extraBold" ls="-1px" margin="0 0 30px">
+        당신만의&nbsp;행복한&nbsp;여행이 시작됩니다!
+      </MainTitle>
+
       <Grid
         position="absolute"
         top="50%"
@@ -21,20 +31,16 @@ const Welcome = () => {
       </Grid>
 
       <Grid position="absolute" bottom="20px" left="0">
-        <Link
-          href="/"
-          bgcolor="brandColor"
+        <Button
           fs="la"
           fw="bold"
           width="100%"
-          padding="12px 0"
-          color="white"
-          hoz="center"
-          radius="14px"
-          shadow="0 4px 4px rgba(134,134,134,0.3)"
+          _onClick={() => {
+            history.push('/login');
+          }}
         >
           시작하기
-        </Link>
+        </Button>
       </Grid>
     </>
   );

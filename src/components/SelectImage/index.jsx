@@ -12,7 +12,7 @@ import { Grid, Label, Image } from '../../elements';
 // style
 import InputImageStyle from './style';
 
-const InputImage = () => {
+const InputImage = ({ setProfile }) => {
   const dispatch = useDispatch();
   const profilePre = useSelector(state => state.image.profilePre);
 
@@ -33,7 +33,8 @@ const InputImage = () => {
         reader.readAsDataURL(compressedFile);
 
         reader.onload = () => {
-          dispatch(ImageCreators.uploadProfileImgDB(compressedFile));
+          setProfile(compressedFile);
+          dispatch(ImageCreators.setProfilePre(reader.result));
         };
       }
     } catch (error) {
