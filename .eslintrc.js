@@ -10,6 +10,7 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   rules: {
+    'no-unused-expressions': 0,
     'prefer-destructuring': 0,
     'react/destructuring-assignment': 0,
     'no-unused-vars': 0,
