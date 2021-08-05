@@ -6,15 +6,8 @@ import Modal from '../Modal';
 // style
 import { Grid, Text, MainTitle, Button } from '../../elements';
 
-const EventCard = ({
-  date,
-  city,
-  text,
-  subText,
-  sub2Text,
-  btnText,
-  toastMessage,
-}) => {
+const EventCard = ({ userInfo, ...props }) => {
+  const { sub2Text, btnText, toastMessage } = props;
   const [toastMsg, setToastMsg] = useState(false);
   const [modal, setModal] = useState(false);
 
@@ -46,16 +39,20 @@ const EventCard = ({
         bgColor="white"
         shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
       >
-        <Text>{date}</Text>
-        <MainTitle fs="la">{city}</MainTitle>
+        <Text>
+          {userInfo && userInfo.startDate} ~ {userInfo && userInfo.endDate}
+        </Text>
+        <MainTitle fs="la">
+          {userInfo && userInfo.region} {userInfo && userInfo.city}
+        </MainTitle>
         <Text margin="10px 0 0 0" fs="sm">
-          {text}
+          {userInfo && userInfo.tripInfo}
         </Text>
         <Modal
           open={modal}
           close={closeModalHandler}
           agree={agreeModalHandler}
-          subText={subText}
+          subText={userInfo && userInfo.nickname}
           subText2={sub2Text}
         />
         {toastMsg && <ToastMessage msg={toastMessage} />}

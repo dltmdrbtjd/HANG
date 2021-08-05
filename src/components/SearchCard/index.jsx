@@ -7,7 +7,7 @@ import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
-const SearchCard = ({ username, age, city, gender, imgUrl }) => {
+const SearchCard = ({ userInfo }) => {
   return (
     <Grid
       _onClick={() => {
@@ -26,13 +26,14 @@ const SearchCard = ({ username, age, city, gender, imgUrl }) => {
         bgColor="white"
         shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
       >
-        <ProfileImg imgUrl={imgUrl} />
+        <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
         <Grid width="75%" margin="0 0 0 10px">
           <Text fs="la" fw="bold">
-            {username}
+            {userInfo && userInfo.username}
           </Text>
           <Text color="darkG">
-            {gender} · {age} · {city}
+            {userInfo && userInfo.gender} · {userInfo && userInfo.age} ·
+            {userInfo && userInfo.region} {userInfo && userInfo.city}
           </Text>
         </Grid>
         <Grid
