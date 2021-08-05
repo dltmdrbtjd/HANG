@@ -42,7 +42,7 @@ const MyInfo = () => {
       <Grid display="flex" hoz="space-between" margin="60px 0 0" ver="center">
         <SubTitle fs="la">길잡이 설정</SubTitle>
 
-        <GuideToggle active={myInfo.guide} />
+        <GuideToggle active={Boolean(myInfo.guide)} />
       </Grid>
 
       <Grid margin="60px 0 15px" display="flex" hoz="space-between">

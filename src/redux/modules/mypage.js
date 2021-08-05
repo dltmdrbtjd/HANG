@@ -53,11 +53,14 @@ const GetMyInfoDB = () => {
 };
 
 const CreateTripEventDB = tripInfo => {
-  return dispatch => {
+  return (dispatch, getState, { history }) => {
     apis
       .CreateTripEvent(tripInfo)
       .then(({ data }) => {
         dispatch(createTripEvent({ ...tripInfo, tripId: data.newTripId }));
+      })
+      .then(() => {
+        history.goBack();
       })
       .catch(err => console.log(err));
   };

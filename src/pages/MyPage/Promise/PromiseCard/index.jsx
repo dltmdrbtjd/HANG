@@ -1,6 +1,6 @@
 import React from 'react';
-// moment
-import moment from 'moment';
+// date format
+import * as dateFns from 'date-fns';
 // icon
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
@@ -25,8 +25,8 @@ const PromiseCard = ({ promInfo, guide, received }) => {
           </Text>
 
           <Text>
-            {moment.utc(promInfo.startDate).format('MM.DD')} -{' '}
-            {moment.utc(promInfo.endDate).format('MM.DD')}
+            {dateFns.format(promInfo.startDate, 'MM.dd')} -{' '}
+            {dateFns.format(promInfo.endDate, 'MM.dd')}
           </Text>
 
           <Text fs="la" fw="bold">

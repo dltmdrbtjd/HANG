@@ -27,8 +27,8 @@ const MyPageModify = () => {
 
   const dispatch = useDispatch();
 
-  const [region, setRegion] = useState(userInfo.region);
-  const [city, setCity] = useState(userInfo.city);
+  const [region, setRegion] = useState('');
+  const [city, setCity] = useState('');
   const [profileImg, setProfileImg] = useState(userInfo.profileImg);
   const [modifyInfo, setModifyInfo] = useState({
     nickname: userInfo.nickname,
@@ -39,7 +39,7 @@ const MyPageModify = () => {
 
   const duplicateNickCheck = () => {
     dispatch(
-      UserCreators.duplicateNickCheckDB({ nickname: userInfo.nickname }),
+      UserCreators.duplicateNickCheckDB({ nickname: modifyInfo.nickname }),
     );
   };
 
@@ -51,7 +51,12 @@ const MyPageModify = () => {
       profileImg,
     };
 
-    dispatch(MypageCreators.UpdateProfileDB(updateInfo));
+    dispatch(
+      MypageCreators.UpdateProfileDB(
+        typeof profileImg === 'object' ? profileImg : null,
+        updateInfo,
+      ),
+    );
   };
 
   useEffect(() => {
@@ -66,7 +71,7 @@ const MyPageModify = () => {
           프로필 수정
         </MainTitle>
 
-        <InputImage setProfileImg={setProfileImg} />
+        <InputImage setProfile={setProfileImg} />
       </Grid>
 
       <Grid>

@@ -10,7 +10,7 @@ import { Button, Grid, SubTitle } from '../../elements';
 // style
 import './calendar.css';
 
-const Calendar = () => {
+const Calendar = ({ setSelectDate }) => {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -85,7 +85,10 @@ const Calendar = () => {
             locale={locales.ko}
             showMonthAndYearPickers={false}
             showDateDisplay={false}
-            onChange={selectDate => setDate([selectDate.selection])}
+            onChange={selectDate => {
+              setDate([selectDate.selection]);
+              setSelectDate([selectDate.selection]);
+            }}
             moveRangeOnFirstSelection={false}
             minDate={new Date()}
             ranges={date}

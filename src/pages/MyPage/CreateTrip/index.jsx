@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+// date format
+import * as dateFns from 'date-fns';
 // redux
 import { useDispatch } from 'react-redux';
-// moment
-import moment from 'moment';
 // elements
 import { Grid, MainTitle, SubTitle, Button, TextArea } from '../../../elements';
 // components
@@ -16,16 +16,20 @@ const CreateTrip = () => {
 
   const [region, setRegion] = useState('서울특별시');
   const [city, setCity] = useState('종로구');
-  const [startDate, setStartDate] = useState(moment().format('YYYY-MM-DD'));
-  const [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'));
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+    },
+  ]);
   const [tripInfo, setTripInfo] = useState('');
 
   const createTripEvent = () => {
     const trip = {
       region,
       city,
-      startDate,
-      endDate,
+      startDate: dateFns.format(date[0].startDate, 'yyyy-MM-dd'),
+      endDate: dateFns.format(date[0].endDate, 'yyyy-MM-dd'),
       tripInfo,
     };
 
@@ -38,7 +42,7 @@ const CreateTrip = () => {
         여행 일자를 선택해주세요
       </MainTitle>
 
-      <Calendar setStartDate={setStartDate} setEndDate={setEndDate} />
+      <Calendar setSelectDate={setDate} />
 
       <Grid margin="60px 0 0">
         <SubTitle fs="la" margin="0 0 12px">
