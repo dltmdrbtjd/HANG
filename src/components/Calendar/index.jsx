@@ -1,16 +1,29 @@
 import React, { useState, useRef } from 'react';
 import { DateRange } from 'react-date-range';
+// redux
+import { useSelector } from 'react-redux';
 // material
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // format
 import * as locales from 'react-date-range/dist/locale';
-import * as dateFns from 'date-fns';
+import moment from 'moment';
 // elements
 import { Button, Grid, SubTitle } from '../../elements';
 // style
 import './calendar.css';
 
 const Calendar = ({ setSelectDate }) => {
+  const tripList = useSelector(state => state.mypage.tripList);
+  const format = 'YYYY-MM-DD';
+
+  const disabledDates = tripList.reduce((acc, cur) => {
+    acc.push({
+      startDate: moment.utc(cur.startDate).format(format),
+      endDate: moment.utc(cur.endDate).format(format),
+    });
+    return acc;
+  }, []);
+
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -27,12 +40,12 @@ const Calendar = ({ setSelectDate }) => {
   const dateInterval = [
     {
       title: '시작일',
-      dateInfo: dateFns.format(date[0].startDate, 'yyyy-MM-dd'),
+      dateInfo: moment(date[0].startDate).format(format),
       ref: startDateRef,
     },
     {
       title: '종료일',
-      dateInfo: dateFns.format(date[0].endDate, 'yyyy-MM-dd'),
+      dateInfo: moment(date[0].endDate).format(format),
       ref: endDateRef,
     },
   ];
@@ -94,6 +107,16 @@ const Calendar = ({ setSelectDate }) => {
             ranges={date}
             rangeColors={['#D4F0FF']}
             direction="horizontal"
+            disabledDay={current => {
+              return disabledDates.some(disabledDate => {
+                const curDate = moment(current).format(format);
+
+                return moment(curDate).isBetween(
+                  moment(disabledDate.startDate).format(format),
+                  moment(disabledDate.endDate).format(format),
+                );
+              });
+            }}
           />
         </ClickAwayListener>
       ) : null}

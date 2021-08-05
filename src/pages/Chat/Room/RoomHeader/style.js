@@ -5,8 +5,9 @@ const RoomToggleWrapper = styled.ul`
   border: 1px solid ${({ theme }) => theme.color.semiLightG};
   box-sizing: border-box;
   position: absolute;
-  top: 5px;
+  top: ${props => props.top};
   right: 0;
+  z-index: 9;
 `;
 
 const RoomToggleList = styled.li`
