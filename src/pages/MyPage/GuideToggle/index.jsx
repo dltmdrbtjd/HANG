@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // elements
 import { Button } from '../../../elements';
 // style
@@ -13,6 +13,10 @@ const GuideToggle = ({ active }) => {
     setChecked(state => !state);
     MypageCreators.ToggleGuideDB();
   };
+
+  useEffect(() => {
+    setChecked(active);
+  }, [active]);
 
   return (
     <Button
@@ -31,7 +35,5 @@ const GuideToggle = ({ active }) => {
     </Button>
   );
 };
-
-GuideToggle.propTypes = {};
 
 export default GuideToggle;

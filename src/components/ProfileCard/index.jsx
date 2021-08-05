@@ -38,7 +38,7 @@ const ProfileCard = ({ userInfo }) => {
         ) : null}
       </Grid>
       <Grid margin="10px 0 0 0" padding="0 20px">
-        {userInfo.contents ? (
+        {userInfo.intro ? (
           <Text fs="sm">{userInfo.intro}</Text>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>

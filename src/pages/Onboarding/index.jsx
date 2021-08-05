@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 // history
 import { history } from '../../redux/configureStore';
 // elements
-import { MainTitle, Text, Strong, Image, Grid, Link } from '../../elements';
+import { MainTitle, Text, Strong, Image, Grid, Button } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // images
@@ -10,9 +10,8 @@ import OnboardingImg1 from '../../Images/onboarding1.svg';
 import OnboardingImg2 from '../../Images/onboarding2.svg';
 import OnboardingImg3 from '../../Images/onboarding3.svg';
 
-const Onboarding = ({ match }) => {
-  let { page } = match.params;
-  page = parseInt(page, 10);
+const Onboarding = () => {
+  const [page, setPage] = useState(1);
 
   const images = [OnboardingImg1, OnboardingImg2, OnboardingImg3];
   const texts = [
@@ -30,13 +29,13 @@ const Onboarding = ({ match }) => {
       if (movement > 70) {
         if (page >= 3) return;
 
-        history.push(`/onboarding/${page + 1}`);
+        setPage(curPage => curPage + 1);
       }
 
       if (movement < -70) {
         if (page <= 1) return;
 
-        history.push(`/onboarding/${page - 1}`);
+        setPage(curPage => curPage - 1);
       }
     };
 
@@ -53,7 +52,7 @@ const Onboarding = ({ match }) => {
 
       window.removeEventListener('touchend', createCalendar);
     };
-  });
+  }, [page]);
 
   return (
     <Grid position="relative" height="100vh" margin="0 auto">
@@ -100,32 +99,25 @@ const Onboarding = ({ match }) => {
 
       {page === 3 ? (
         <Grid position="absolute" bottom="20px" left="0">
-          <Link
-            href="/signup/1"
-            bgcolor="brandColor"
+          <Button
             fs="la"
             fw="bold"
             width="100%"
-            padding="12px 0"
-            color="white"
-            hoz="center"
-            radius="14px"
-            shadow="0 4px 4px rgba(134,134,134,0.3)"
             margin="0 0 15px"
+            _onClick={() => history.push('/signup')}
           >
             회원가입
-          </Link>
+          </Button>
 
-          <Link
-            href="/login"
+          <Button
             fs="sm"
-            width="100%"
-            padding="12px 0"
             color="darkG"
-            hoz="center"
+            bgColor="bgColor"
+            width="100%"
+            _onClick={() => history.push('/login')}
           >
             로그인
-          </Link>
+          </Button>
         </Grid>
       ) : null}
     </Grid>
