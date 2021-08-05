@@ -7,7 +7,8 @@ import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
-const SearchCard = ({ username, age, city, gender, imgUrl }) => {
+const SearchCard = ({ ...props }) => {
+  const { username, age, city, gender, imgUrl } = props;
   return (
     <Grid
       _onClick={() => {

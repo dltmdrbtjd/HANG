@@ -6,15 +6,8 @@ import Modal from '../Modal';
 // style
 import { Grid, Text, MainTitle, Button } from '../../elements';
 
-const EventCard = ({
-  date,
-  city,
-  text,
-  subText,
-  sub2Text,
-  btnText,
-  toastMessage,
-}) => {
+const EventCard = ({ ...props }) => {
+  const { date, city, text, subText, sub2Text, btnText, toastMessage } = props;
   const [toastMsg, setToastMsg] = useState(false);
   const [modal, setModal] = useState(false);
 
