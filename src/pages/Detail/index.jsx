@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 // style
+import { useSelector } from 'react-redux';
 import { Grid, MainTitle, Button } from '../../elements';
 import { history } from '../../redux/configureStore';
+// redux
 
 // component
 import ProfileCard from '../../components/ProfileCard';
@@ -9,6 +11,7 @@ import EventCard from '../../components/EventCard';
 import ToastMessage from '../../components/ToastMessage';
 
 const Detail = () => {
+  const eventlist = useSelector(state => state.detail.tripInfo);
   const [toastMsg, setToastMsg] = useState(false);
 
   const GuideHandler = () => {
@@ -39,11 +42,7 @@ const Detail = () => {
       </Button>
       <MainTitle fs="sxl">dltmdrbtjd님의 여행 이벤트</MainTitle>
       <EventCard
-        date="07.25 ~ 07.26"
-        city="서울특별시 강남구"
-        text="안녕하세요 저는 서울에 살고있구요 떡볶이를 엄청좋아해요 특히 엽떡에
-        허니콤보 먹으면 바로 헤븐 같이 먹으러가요 ! ㅎㅎㅎ"
-        subText="dltmdrbtjd님의"
+        userInfo={eventlist}
         sub2Text="길잡이가 되어주시겠습니까?"
         btnText="길잡이 되어주기"
         toastMessage="길잡이 신청이 완료되었습니다."
