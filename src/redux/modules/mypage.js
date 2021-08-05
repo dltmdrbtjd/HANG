@@ -111,6 +111,10 @@ const UpdateProfileDB = (image, profile) => {
   };
 };
 
+const ToggleGuideDB = () => {
+  apis.GuideToggle().catch(err => console.log(err));
+};
+
 export default handleActions(
   {
     [GET_MY_INFO]: (state, action) =>
@@ -151,6 +155,7 @@ const MypageCreators = {
   GetMyPromiseDB,
   UpdateProfileDB,
   CreateTripEventDB,
+  ToggleGuideDB,
 };
 
 export { MypageCreators };

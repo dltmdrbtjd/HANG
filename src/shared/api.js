@@ -60,7 +60,7 @@ const apis = {
   CancelPromise: type => instance.patch('/api/mypage/reject_confirm', type),
   RejectPromise: id => instance.patch('/api/mypage', id),
   ChangeInfo: info => instance.patch('/api/mypage', info),
-  GuideToggle: () => instance.patch('/api/mypage/update_guiddy'),
+  GuideToggle: () => instance.patch('/api/mypage/update_guide'),
   DeleteTrip: tripId => instance.delete('/api/mypage/create_trip', tripId),
   AddTrip: info => instance.post('/api/mypage/create_trip', info),
 

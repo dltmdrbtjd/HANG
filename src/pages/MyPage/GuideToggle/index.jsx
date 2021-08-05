@@ -3,12 +3,15 @@ import React, { useState } from 'react';
 import { Button } from '../../../elements';
 // style
 import { ButtonStyle, ToggleLabelStyle, ToggleNameStyle } from './style';
+// reducer
+import { MypageCreators } from '../../../redux/modules/mypage';
 
 const GuideToggle = ({ active }) => {
   const [checked, setChecked] = useState(active);
 
   const handleToggle = () => {
     setChecked(state => !state);
+    MypageCreators.ToggleGuideDB();
   };
 
   return (
