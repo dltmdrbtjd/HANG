@@ -1,75 +1,68 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
 // icon
-import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import EditIcon from '@material-ui/icons/Edit';
+// history
+import { history } from '../../redux/configureStore';
 // elements
-import { Grid, MainTitle, Link, SubTitle, Button } from '../../elements';
-// components
-import ProfileCard from '../../components/ProfileCard';
-import GuideToggle from './GuideToggle';
-import EventCard from '../../components/EventCard';
-// reducer
-import { UserCreators } from '../../redux/modules/user';
-import { MypageCreators } from '../../redux/modules/mypage';
+import { Grid, MainTitle, Button } from '../../elements';
+// page
+import MyInfo from './MyInfo';
+import MyPromise from './Promise';
+// style
+import { TabMenuWrapper, SetAlignItemsButton } from './style';
 
 const MyPage = () => {
-  const { myInfo, tripList } = useSelector(state => ({
-    myInfo: state.mypage.myInfo,
-    tripList: state.mypage.tripList,
-  }));
-
-  const dispatch = useDispatch();
-
-  const logOut = () => {
-    dispatch(UserCreators.logOutDB());
-  };
-
-  useEffect(() => {
-    dispatch(MypageCreators.GetMyInfoDB());
-  }, []);
+  const [page, setPage] = useState(0);
 
   return (
     <>
-      <Grid display="flex" ver="center" hoz="space-between">
-        <Grid display="flex" width="center">
-          <MainTitle fs="sxl" width="auto">
-            <Link href="/mypage">프로필</Link>
-          </MainTitle>
+      <Grid display="flex" ver="center" hoz="space-between" margin="0 0 16px">
+        <TabMenuWrapper>
+          <li
+            onClick={() => {
+              setPage(0);
+            }}
+          >
+            <MainTitle
+              width="auto"
+              fs="sxl"
+              color={page === 0 ? 'black' : 'gray'}
+            >
+              프로필
+            </MainTitle>
+          </li>
 
-          <MainTitle fs="sxl" width="auto" margin="0 0 0 20px">
-            <Link href="/mypage/promise" color="gray">
+          <li
+            onClick={() => {
+              setPage(1);
+            }}
+          >
+            <MainTitle
+              fs="sxl"
+              width="auto"
+              margin="0 0 0 20px"
+              color={page === 1 ? 'black' : 'gray'}
+            >
               나의 약속
-            </Link>
-          </MainTitle>
-        </Grid>
+            </MainTitle>
+          </li>
+        </TabMenuWrapper>
 
-        <Link href="/mypage/modify">
-          수정하기 <EditIcon style={{ marginLeft: '4px' }} />
-        </Link>
-      </Grid>
-
-      <ProfileCard userInfo={myInfo} />
-
-      <Grid display="flex" hoz="space-between" margin="60px 0 0" ver="center">
-        <SubTitle fs="la">길잡이 설정</SubTitle>
-
-        <GuideToggle />
-      </Grid>
-
-      <Grid margin="60px 0 15px" display="flex" hoz="space-between">
-        <SubTitle fs="la" width="auto">
-          {myInfo.nickname} 님의 여행 이벤트
-        </SubTitle>
-
-        <Link to="/mypage/create_trip" fs="sm" ver="center">
-          추가하기 <ControlPointIcon style={{ marginLeft: '4px' }} />
-        </Link>
-      </Grid>
-
-      <Button _onClick={logOut}>로그아웃</Button>
-
-      <EventCard btnText="삭제하기" />
+        {page === 0 ? (
+          <Button
+            padding="0"
+            bgColor="bgColor"
+            color="darkG"
+            addstyle={SetAlignItemsButton}
+            _onClick={() => {
+              history.push('/mypage/modify');
+            }}
+          >
+            수정하기 <EditIcon style={{ marginLeft: '4px' }} />
+          </Button>
+        ) : null}
+      </Grid>{' '}
+      {page === 0 ? <MyInfo /> : <MyPromise />}
     </>
   );
 };

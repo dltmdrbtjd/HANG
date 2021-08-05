@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
+// moment
+import moment from 'moment';
 // component
 import ToastMessage from '../ToastMessage';
 import Modal from '../Modal';
@@ -40,7 +41,8 @@ const EventCard = ({ userInfo, ...props }) => {
         shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
       >
         <Text>
-          {userInfo && userInfo.startDate} ~ {userInfo && userInfo.endDate}
+          {userInfo && moment.utc(userInfo.startDate).format('MM.DD')} ~{' '}
+          {userInfo && moment.utc(userInfo.endDate).format('MM.DD')}
         </Text>
         <MainTitle fs="la">
           {userInfo && userInfo.region} {userInfo && userInfo.city}
