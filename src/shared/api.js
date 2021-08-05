@@ -52,7 +52,10 @@ const apis = {
 
   // myinfo
   GetMyInfo: () => instance.get('/api/mypage'),
+  CreateTripEvent: tripInfo =>
+    instance.post('/api/mypage/create_trip', tripInfo),
   GetMyPromise: () => instance.get('/api/mypage/promise'),
+  UpdateProfile: userInfo => instance.patch('/api/mypage', userInfo),
   AgreePromise: promise => instance.post('/api/mypage', promise),
   CancelPromise: type => instance.patch('/api/mypage/reject_confirm', type),
   RejectPromise: id => instance.patch('/api/mypage', id),

@@ -205,10 +205,13 @@ const signUpDB = (image, userInfo) => {
 
     dispatch(
       ImageCreators.uploadProfileImgDB(image, () => {
-        const profileUrl = getState().image.profileImg;
+        const profileImg = getState().image.profileImg;
 
         apis
-          .SignUp({ ...userInfo, profileImg: profileUrl })
+          .SignUp({ ...userInfo, profileImg })
+          .then(() => {
+            ImageCreators.setProfilePre(null);
+          })
           .then(() => {
             history.replace('/signup/welcome');
           })

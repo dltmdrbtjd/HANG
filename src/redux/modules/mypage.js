@@ -2,15 +2,21 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 // api
 import apis from '../../shared/api';
+// reducer
+import { ImageCreators } from './image';
 
 const GET_MY_INFO = 'mypage/GET_MY_INFO';
 const GET_MY_TRIP_INFO = 'mypage/GET_MY_TRIP_INFO';
+const CREATE_TRIP_EVENT = 'mypage/CREATE_TRIP_EVENT';
 const GET_PROMISE_RECEIVED = 'mypage/GET_PROMISE_RECEIVED';
 const GET_PROMISE_REQUESTED = 'mypage/GET_PROMISE_REQUESTED';
 const GET_PROMISE_CONFIRMED = 'mypage/GET_PROMISE_CONFIRMED';
 
 const getMyInfo = createAction(GET_MY_INFO, myInfo => ({ myInfo }));
 const getMyTripInfo = createAction(GET_MY_TRIP_INFO, tripInfo => ({
+  tripInfo,
+}));
+const createTripEvent = createAction(CREATE_TRIP_EVENT, tripInfo => ({
   tripInfo,
 }));
 const getRecProm = createAction(GET_PROMISE_RECEIVED, receivedProm => ({
@@ -46,6 +52,17 @@ const GetMyInfoDB = () => {
   };
 };
 
+const CreateTripEventDB = tripInfo => {
+  return dispatch => {
+    apis
+      .CreateTripEvent(tripInfo)
+      .then(({ data }) => {
+        dispatch(createTripEvent({ ...tripInfo, tripId: data.newTripId }));
+      })
+      .catch(err => console.log(err));
+  };
+};
+
 const GetMyPromiseDB = () => {
   return dispatch => {
     apis
@@ -55,6 +72,42 @@ const GetMyPromiseDB = () => {
         dispatch(getReqProm(data.requested));
       })
       .catch(err => console.log(err));
+  };
+};
+
+const UpdateProfileDB = (image, profile) => {
+  return (dispatch, getState, { history }) => {
+    const myInfo = { ...getState().mypage.myInfo, ...profile };
+
+    if (!image) {
+      apis
+        .UpdateProfile(profile)
+        .then(() => {
+          dispatch(getMyInfo(myInfo));
+        })
+        .then(() => {
+          history.replace('/mypage');
+        })
+        .catch(err => console.log(err));
+
+      return;
+    }
+
+    dispatch(
+      ImageCreators.uploadProfileImgDB(image, () => {
+        const profileImg = getState().image.profileImg;
+
+        apis
+          .UpdateProfile({ ...profile, profileImg })
+          .then(() => {
+            dispatch(getMyInfo({ ...myInfo, profileImg }));
+          })
+          .then(() => {
+            history.replace('/mypage');
+          })
+          .catch(err => console.log(err));
+      }),
+    );
   };
 };
 
@@ -68,6 +121,11 @@ export default handleActions(
     [GET_MY_TRIP_INFO]: (state, action) =>
       produce(state, draft => {
         draft.tripList = action.payload.tripInfo;
+      }),
+
+    [CREATE_TRIP_EVENT]: (state, action) =>
+      produce(state, draft => {
+        draft.tripList.push(action.payload.tripInfo);
       }),
 
     [GET_PROMISE_RECEIVED]: (state, action) =>
@@ -91,6 +149,8 @@ export default handleActions(
 const MypageCreators = {
   GetMyInfoDB,
   GetMyPromiseDB,
+  UpdateProfileDB,
+  CreateTripEventDB,
 };
 
 export { MypageCreators };

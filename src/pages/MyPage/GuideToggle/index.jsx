@@ -4,8 +4,8 @@ import { Button } from '../../../elements';
 // style
 import { ButtonStyle, ToggleLabelStyle, ToggleNameStyle } from './style';
 
-const GuideToggle = () => {
-  const [checked, setChecked] = useState(false);
+const GuideToggle = ({ active }) => {
+  const [checked, setChecked] = useState(active);
 
   const handleToggle = () => {
     setChecked(state => !state);

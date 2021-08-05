@@ -23,7 +23,6 @@ import Detail from './pages/Detail';
 import GuideRequest from './pages/Detail/GuideRequest';
 import Favorite from './pages/Favorite';
 import MyPage from './pages/MyPage';
-import MyPromise from './pages/MyPage/Promise';
 import MyPageModify from './pages/MyPage/Modify';
 import CreateTrip from './pages/MyPage/CreateTrip';
 import Noti from './pages/Noti';
@@ -57,7 +56,6 @@ const App = () => {
           <PrivateRoute path="/detail/request" component={GuideRequest} exact />
           <PrivateRoute path="/favorite" component={Favorite} exact />
           <PrivateRoute path="/mypage" component={MyPage} exact />
-          <PrivateRoute path="/mypage/promise" component={MyPromise} exact />
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
           <PrivateRoute
             path="/mypage/create_trip"

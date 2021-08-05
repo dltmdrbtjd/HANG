@@ -23,8 +23,8 @@ const SignUp = () => {
 
   const [page, setPage] = useState(1);
 
-  const [city, setCity] = useState('서울특별시');
-  const [region, setRegion] = useState('종로구');
+  const [region, setRegion] = useState('서울특별시');
+  const [city, setCity] = useState('종로구');
   const [gender, setGender] = useState(0);
   const [age, setAge] = useState('');
   const [profile, setProfile] = useState(null);
@@ -87,6 +87,7 @@ const SignUp = () => {
             .min(8, '비밀번호를 8자 이상 입력해 주세요'),
           nickname: yup
             .string()
+            .min(1, '닉네임을 입력해주세요')
             .max(16, '닉네임은 16자까지 입력할 수 있습니다'),
         })}
         onSubmit={(values, { setSubmitting }) => {

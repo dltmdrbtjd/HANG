@@ -1,4 +1,6 @@
 import React from 'react';
+// moment
+import moment from 'moment';
 // icon
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
@@ -10,7 +12,7 @@ import ProfileImg from '../../../../components/ProfileImg';
 import { StrongAddStyle } from '../../../Noti/AlarmCard/style';
 import ArrowStyle from './style';
 
-const PromiseCard = ({ type }) => {
+const PromiseCard = ({ promInfo, guide, received }) => {
   return (
     <Grid bgColor="white" radius="16px" overflow="hidden">
       <Grid display="flex" ver="center" padding="32px 20px" position="relative">
@@ -18,23 +20,26 @@ const PromiseCard = ({ type }) => {
 
         <Grid width="auto" margin="0 0 0 14px">
           <Text margin="0 0 20px" overflow="visible">
-            <Strong>닉네임</Strong> 님에게{' '}
+            <Strong>{promInfo.nickname}</Strong> 님에게{' '}
             <Strong addstyle={StrongAddStyle}>길잡이</Strong> 요청
           </Text>
 
-          <Text>07.25 - 07.26</Text>
+          <Text>
+            {moment.utc(promInfo.startDate).format('MM.DD')} -{' '}
+            {moment.utc(promInfo.endDate).format('MM.DD')}
+          </Text>
 
           <Text fs="la" fw="bold">
-            경상남도 통영시
+            {promInfo.region} {promInfo.city}
           </Text>
         </Grid>
 
         <Strong color="darkG" addstyle={ArrowStyle}>
-          {type === 'received' ? <CallReceivedIcon /> : <CallMadeIcon />}
+          {guide ? <CallReceivedIcon /> : <CallMadeIcon />}
         </Strong>
       </Grid>
 
-      {type === 'received' ? (
+      {received ? (
         <Grid>
           <Button width="50%" radius="0" padding="15px 0">
             수락
