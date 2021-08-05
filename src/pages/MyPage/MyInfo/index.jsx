@@ -11,7 +11,6 @@ import ProfileCard from '../../../components/ProfileCard';
 import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
 // reducer
-import { UserCreators } from '../../../redux/modules/user';
 import { MypageCreators } from '../../../redux/modules/mypage';
 // style
 import { SetAlignItemsButton } from '../style';
@@ -26,10 +25,6 @@ const MyInfo = () => {
   );
 
   const dispatch = useDispatch();
-
-  const logOut = () => {
-    dispatch(UserCreators.logOutDB());
-  };
 
   useEffect(() => {
     dispatch(MypageCreators.GetMyInfoDB());
@@ -63,8 +58,6 @@ const MyInfo = () => {
           추가하기 <ControlPointIcon style={{ marginLeft: '4px' }} />
         </Button>
       </Grid>
-
-      <Button _onClick={logOut}>로그아웃</Button>
 
       {tripList.map(tripInfo => (
         <EventCard

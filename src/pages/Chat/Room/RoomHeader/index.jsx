@@ -65,7 +65,7 @@ const RoomHeader = () => {
 
           {open ? (
             <ClickAwayListener onClickAway={handleClose}>
-              <RoomToggleWrapper>
+              <RoomToggleWrapper top="70px">
                 <RoomToggleList>채팅방 나가기</RoomToggleList>
                 <RoomToggleList>신고하기</RoomToggleList>
               </RoomToggleWrapper>

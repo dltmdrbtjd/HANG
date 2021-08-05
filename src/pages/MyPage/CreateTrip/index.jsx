@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // date format
-import * as dateFns from 'date-fns';
+import moment from 'moment';
 // redux
 import { useDispatch } from 'react-redux';
 // elements
@@ -28,8 +28,8 @@ const CreateTrip = () => {
     const trip = {
       region,
       city,
-      startDate: dateFns.format(date[0].startDate, 'yyyy-MM-dd'),
-      endDate: dateFns.format(date[0].endDate, 'yyyy-MM-dd'),
+      startDate: moment.utc(date[0].startDate).format('YYYY-MM-DD'),
+      endDate: moment.utc(date[0].endDate).format('YYYY-MM-DD'),
       tripInfo,
     };
 
