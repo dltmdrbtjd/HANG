@@ -1,30 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 // elements
-import { Grid, MainTitle, SubTitle, Link } from '../../../elements';
+import { Grid, SubTitle } from '../../../elements';
 // component
 import PromiseCard from './PromiseCard';
+// reducer
+import { MypageCreators } from '../../../redux/modules/mypage';
 
 const MyPromise = () => {
+  const { received, requested, confirmed } = useSelector(
+    state => ({
+      received: state.mypage.receivedProm,
+      requested: state.mypage.requestedProm,
+      confirmed: state.mypage.confirmedProm,
+    }),
+    shallowEqual,
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(MypageCreators.GetMyPromiseDB());
+  }, []);
+
   return (
-    <>
-      <Grid display="flex">
-        <MainTitle fs="sxl" width="auto">
-          <Link href="/mypage" color="gray">
-            프로필
-          </Link>
-        </MainTitle>
-
-        <MainTitle fs="sxl" width="auto" margin="0 0 0 20px">
-          <Link href="/mypage/promise">나의 약속</Link>
-        </MainTitle>
-      </Grid>
-
+    <Grid margin="0 0 60px">
       <Grid margin="60px 0 0">
         <SubTitle fs="la" margin="0 0 15px">
           받은 요청
         </SubTitle>
 
-        <PromiseCard type="received" />
+        {received.slice(3).map(promInfo => (
+          <PromiseCard
+            key={(Date.now() + Math.random()).toString(36)}
+            received
+            promInfo={promInfo}
+          />
+        ))}
       </Grid>
 
       <Grid margin="60px 0 0">
@@ -32,7 +43,13 @@ const MyPromise = () => {
           보낸 요청
         </SubTitle>
 
-        <PromiseCard />
+        {requested.slice(3).map(promInfo => (
+          <PromiseCard
+            key={(Date.now() + Math.random()).toString(36)}
+            guide
+            promInfo={promInfo}
+          />
+        ))}
       </Grid>
 
       <Grid margin="60px 0 0">
@@ -40,9 +57,15 @@ const MyPromise = () => {
           확정한 약속
         </SubTitle>
 
-        <PromiseCard />
+        {confirmed.slice(3).map(promInfo => (
+          <PromiseCard
+            key={(Date.now() + Math.random()).toString(36)}
+            guide={promInfo.guide}
+            promInfo={promInfo}
+          />
+        ))}
       </Grid>
-    </>
+    </Grid>
   );
 };
 
