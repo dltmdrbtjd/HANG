@@ -5,7 +5,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
-const ProfileCard = ({ username, age, city, gender, text, imgUrl }) => {
+const ProfileCard = ({ userInfo }) => {
   return (
     <Grid
       padding="20px 0"
@@ -15,27 +15,34 @@ const ProfileCard = ({ username, age, city, gender, text, imgUrl }) => {
       shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
     >
       <Grid position="relative" display="flex" hoz="center" ver="center">
-        <ProfileImg imgUrl={imgUrl} />
+        <ProfileImg imgUrl={userInfo.profileImg} />
         <Grid width="75%" margin="0 0 0 10px">
           <Text fs="la" fw="bold">
-            {username}
+            {userInfo.nickname}
           </Text>
           <Text color="darkG">
-            {gender} · {age} · {city}
+            {userInfo.gender} · {userInfo.age} · {userInfo.region}{' '}
+            {userInfo.city}
           </Text>
         </Grid>
-        <Grid
-          width="auto"
-          color="darkG"
-          position="absolute"
-          top="10px"
-          right="10px"
-        >
-          <FavoriteBorderIcon />
-        </Grid>
+        {{}.hasOwnProperty.call(userInfo, 'like') ? (
+          <Grid
+            width="auto"
+            color="darkG"
+            position="absolute"
+            top="10px"
+            right="10px"
+          >
+            <FavoriteBorderIcon />
+          </Grid>
+        ) : null}
       </Grid>
       <Grid margin="10px 0 0 0" padding="0 20px">
-        <Text fs="sm">{text}</Text>
+        {userInfo.contents ? (
+          <Text fs="sm">{userInfo.intro}</Text>
+        ) : (
+          <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>
+        )}
       </Grid>
     </Grid>
   );

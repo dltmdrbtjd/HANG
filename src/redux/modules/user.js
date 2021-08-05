@@ -67,7 +67,7 @@ const getUserInfoDB = () => {
         dispatch(
           setLoginStatus({
             status: false,
-            errorMsg: '토큰이 만료되었습니다. 다시 로그인 해주세요',
+            errorMsg: '토큰이 만료되었습니다. 다시 로그인해 주세요',
           }),
         );
         history.replace('/login');

@@ -14,6 +14,7 @@ import home from './modules/home';
 import search from './modules/search';
 import user from './modules/user';
 import favorite from './modules/favorite';
+import mypage from './modules/mypage';
 
 const history = createBrowserHistory();
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   image,
   home,
   search,
+  mypage,
   router: connectRouter(history),
 });
 
