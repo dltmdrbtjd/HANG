@@ -15,14 +15,14 @@ const ProfileCard = ({ userInfo }) => {
       shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
     >
       <Grid position="relative" display="flex" hoz="center" ver="center">
-        <ProfileImg imgUrl={userInfo.profileImg} />
+        <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
         <Grid width="75%" margin="0 0 0 10px">
           <Text fs="la" fw="bold">
-            {userInfo.nickname}
+            {userInfo && userInfo.nickname}
           </Text>
           <Text color="darkG">
-            {userInfo.gender} · {userInfo.age} · {userInfo.region}{' '}
-            {userInfo.city}
+            {userInfo && userInfo.gender} · {userInfo && userInfo.age} ·{' '}
+            {userInfo && userInfo.region} {userInfo && userInfo.city}
           </Text>
         </Grid>
         {{}.hasOwnProperty.call(userInfo, 'like') ? (
