@@ -15,9 +15,11 @@ import search from './modules/search';
 import user from './modules/user';
 import favorite from './modules/favorite';
 import mypage from './modules/mypage';
+import detail from './modules/detail';
 
 const history = createBrowserHistory();
 const rootReducer = combineReducers({
+  detail,
   user,
   favorite,
   image,
