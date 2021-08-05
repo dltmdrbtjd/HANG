@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 // elements
@@ -14,13 +14,13 @@ const EnterIdPwd = ({
   password,
   setPassword,
   setPage,
+  pwdCheck,
+  setPwdCheck,
   idErrorMsg,
   pwdErrorMsg,
 }) => {
   const idDupCheck = useSelector(state => state.user.duplicateCheck.id);
   const dispatch = useDispatch();
-
-  const [pwdCheck, setPwdCheck] = useState('');
 
   const duplicateIdCheck = () => {
     dispatch(UserCreators.duplicateIdCheckDB({ userId }));

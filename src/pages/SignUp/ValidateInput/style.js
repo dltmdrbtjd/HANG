@@ -20,13 +20,13 @@ const setGridWithStatus = status => {
     case 'danger':
       return css`
         padding-right: 12px;
-        border: solid ${({ theme }) => theme.color.danger};
+        border: 1px solid ${({ theme }) => theme.color.danger};
       `;
 
     case 'safe':
       return css`
         padding-right: 12px;
-        border: solid ${({ theme }) => theme.color.safe};
+        border: 1px solid ${({ theme }) => theme.color.safe};
       `;
 
     default:
