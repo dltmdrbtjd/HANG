@@ -1,5 +1,5 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 // icon
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import EditIcon from '@material-ui/icons/Edit';
@@ -11,13 +11,23 @@ import GuideToggle from './GuideToggle';
 import EventCard from '../../components/EventCard';
 // reducer
 import { UserCreators } from '../../redux/modules/user';
+import { MypageCreators } from '../../redux/modules/mypage';
 
 const MyPage = () => {
+  const { myInfo, tripList } = useSelector(state => ({
+    myInfo: state.mypage.myInfo,
+    tripList: state.mypage.tripList,
+  }));
+
   const dispatch = useDispatch();
 
   const logOut = () => {
     dispatch(UserCreators.logOutDB());
   };
+
+  useEffect(() => {
+    dispatch(MypageCreators.GetMyInfoDB());
+  }, []);
 
   return (
     <>
@@ -39,7 +49,7 @@ const MyPage = () => {
         </Link>
       </Grid>
 
-      <ProfileCard />
+      <ProfileCard userInfo={myInfo} />
 
       <Grid display="flex" hoz="space-between" margin="60px 0 0" ver="center">
         <SubTitle fs="la">길잡이 설정</SubTitle>
@@ -49,7 +59,7 @@ const MyPage = () => {
 
       <Grid margin="60px 0 15px" display="flex" hoz="space-between">
         <SubTitle fs="la" width="auto">
-          닉네임 님의 여행 이벤트
+          {myInfo.nickname} 님의 여행 이벤트
         </SubTitle>
 
         <Link to="/mypage/create_trip" fs="sm" ver="center">
@@ -63,7 +73,5 @@ const MyPage = () => {
     </>
   );
 };
-
-MyPage.defaultProps = {};
 
 export default MyPage;

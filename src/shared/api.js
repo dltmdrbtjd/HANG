@@ -51,7 +51,8 @@ const apis = {
   LikeLoad: () => instance.get('/api/like'),
 
   // myinfo
-  MyinfoLoad: () => instance.get('/api/mypage'),
+  GetMyInfo: () => instance.get('/api/mypage'),
+  GetMyPromise: () => instance.get('/api/mypage/promise'),
   AgreePromise: promise => instance.post('/api/mypage', promise),
   CancelPromise: type => instance.patch('/api/mypage/reject_confirm', type),
   RejectPromise: id => instance.patch('/api/mypage', id),
