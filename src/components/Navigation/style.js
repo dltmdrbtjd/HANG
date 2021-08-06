@@ -12,6 +12,7 @@ const NavigationStyle = styled.ul`
   box-shadow: 0 -4px 4px rgba(134, 134, 134, 0.3);
   background-color: ${({ theme }) => theme.color.lightG};
   cursor: pointer;
+  z-index: 3;
 `;
 
 const Navigationicons = styled.li`
