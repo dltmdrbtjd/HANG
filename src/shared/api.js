@@ -47,7 +47,7 @@ const apis = {
 
   // favorite
   Like: targetPk => instance.post('/api/like', targetPk),
-  UnLike: targetPk => instance.post('/api/like', targetPk),
+  UnLike: targetPk => instance.delete('/api/like', targetPk),
   LikeLoad: () => instance.get('/api/like'),
 
   // myinfo

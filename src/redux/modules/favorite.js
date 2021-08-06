@@ -5,13 +5,14 @@ import produce from 'immer';
 import apis from '../../shared/api';
 
 const LOAD = 'favorite/load';
-const TOGGLE = 'favorite/toggle';
+const DEL = 'favorite/delete';
 
 const FavoriteLoad = createAction(LOAD, list => ({ list }));
-const FavoriteToggle = createAction(TOGGLE, like => ({ like }));
+const FavoriteDelete = createAction(DEL, userPk => ({ userPk }));
 
 const initialState = {
   list: [],
+  boolean: 0,
 };
 
 // 즐겨찾기 페이지 load시 사용
@@ -20,17 +21,34 @@ const FavoriteLoadDB = () => {
     apis
       .LikeLoad()
       .then(res => {
-        console.log(res);
-        dispatch(FavoriteLoad(res.data));
+        dispatch(FavoriteLoad(res.data.likeusers));
       })
       .catch(err => console.log(err));
   };
 };
 
 // 즐겨찾기 버튼 toggle시 사용
-const FavoriteToggleDB = () => {
+const FavoriteAddDB = targetPk => {
+  return () => {
+    apis
+      .Like(targetPk)
+      .then(() => {})
+      .catch(err => console.error(err));
+  };
+};
+
+const FavoriteDelDB = targetPk => {
+  return () => {
+    apis
+      .UnLike({ data: targetPk })
+      .then(() => {})
+      .catch(err => console.error(err));
+  };
+};
+
+const FavoriteDelHandler = userPk => {
   return dispatch => {
-    dispatch(FavoriteToggle(like));
+    dispatch(FavoriteDelete(userPk));
   };
 };
 
@@ -40,14 +58,23 @@ export default handleActions(
       produce(state, draft => {
         draft.list = action.payload.list;
       }),
-    [TOGGLE]: (state, action) => produce(state, draft => {}),
+    [DEL]: (state, action) =>
+      produce(state, draft => {
+        let idx = draft.list.findIndex(i => i.userPk === action.payload.userPk);
+
+        if (idx !== -1) {
+          draft.list.splice(idx, 1);
+        }
+      }),
   },
   initialState,
 );
 
 const FavoriteCreators = {
   FavoriteLoadDB,
-  FavoriteToggleDB,
+  FavoriteAddDB,
+  FavoriteDelDB,
+  FavoriteDelHandler,
 };
 
 export { FavoriteCreators };
