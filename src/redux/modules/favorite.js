@@ -5,12 +5,10 @@ import produce from 'immer';
 import apis from '../../shared/api';
 
 const LOAD = 'favorite/load';
-const ADD = 'favorite/add';
 const DEL = 'favorite/delete';
 
 const FavoriteLoad = createAction(LOAD, list => ({ list }));
-const AddLike = createAction(ADD, boolean => ({ boolean }));
-const DelLike = createAction(DEL, boolean => ({ boolean }));
+const FavoriteDelete = createAction(DEL, userPk => ({ userPk }));
 
 const initialState = {
   list: [],
@@ -31,26 +29,26 @@ const FavoriteLoadDB = () => {
 
 // 즐겨찾기 버튼 toggle시 사용
 const FavoriteAddDB = targetPk => {
-  return (dispatch, getState) => {
-    let number = getState().favorite.boolean;
+  return () => {
     apis
       .Like(targetPk)
-      .then(() => {
-        // dispatch(AddLike(number + 1));
-      })
+      .then(() => {})
       .catch(err => console.error(err));
   };
 };
 
 const FavoriteDelDB = targetPk => {
-  return (dispatch, getState) => {
-    let number = getState().favorite.boolean;
+  return () => {
     apis
       .UnLike({ data: targetPk })
-      .then(() => {
-        // dispatch(DelLike(number - 1));
-      })
+      .then(() => {})
       .catch(err => console.error(err));
+  };
+};
+
+const FavoriteDelHandler = userPk => {
+  return dispatch => {
+    dispatch(FavoriteDelete(userPk));
   };
 };
 
@@ -60,14 +58,14 @@ export default handleActions(
       produce(state, draft => {
         draft.list = action.payload.list;
       }),
-    // [ADD]: (state, action) =>
-    //   produce(state, draft => {
-    //     draft.boolean = action.payload.boolean;
-    //   }),
-    // [DEL]: (state, action) =>
-    //   produce(state, draft => {
-    //     draft.boolean = action.payload.boolean;
-    //   }),
+    [DEL]: (state, action) =>
+      produce(state, draft => {
+        let idx = draft.list.findIndex(i => i.userPk === action.payload.userPk);
+
+        if (idx !== -1) {
+          draft.list.splice(idx, 1);
+        }
+      }),
   },
   initialState,
 );
@@ -76,6 +74,7 @@ const FavoriteCreators = {
   FavoriteLoadDB,
   FavoriteAddDB,
   FavoriteDelDB,
+  FavoriteDelHandler,
 };
 
 export { FavoriteCreators };

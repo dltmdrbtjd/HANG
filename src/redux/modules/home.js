@@ -32,16 +32,15 @@ const HomeLoadDB = () => {
       .MainLoad()
       .then(res => {
         const data = res.data;
-        console.log(data);
         dispatch(HomeLoad(data.confirmed, data.guide, data.traveler));
       })
       .catch(err => console.log(err));
   };
 };
 
-const likeUpdateHandler = (category, idx) => {
-  return dispatch => {
-    dispatch(likeUpdate(category, idx));
+const likeUpdateHandler = (category, idx, like) => {
+  return (dispatch, getState) => {
+    dispatch(likeUpdate(category, idx, like));
   };
 };
 
@@ -51,13 +50,15 @@ export default handleActions(
       produce(state, draft => {
         draft.confirmed = action.payload.confirmed;
         draft.guide = action.payload.guide;
-        draft.traveler = action.payload.traveler;
+        // draft.traveler = action.payload.traveler;
       }),
     [LIKEUPDATE]: (state, action) =>
       produce(state, draft => {
-        console.log(draft[action.payload.category]);
-        draft[action.payload.category][action.payload.idx].like =
-          action.payload.like;
+        if (action.payload.category === 'guide') {
+          draft.guide[action.payload.idx].like = action.payload.like;
+        } else if (action.payload.category === 'traveler') {
+          draft.traveler[action.payload.idx].like = action.payload.like;
+        }
       }),
   },
   initialState,
