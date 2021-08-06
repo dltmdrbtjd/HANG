@@ -1,4 +1,6 @@
 import React from 'react';
+// redux
+import { useDispatch } from 'react-redux';
 // date format
 import * as dateFns from 'date-fns';
 // icon
@@ -11,8 +13,20 @@ import ProfileImg from '../../../../components/ProfileImg';
 // style
 import { StrongAddStyle } from '../../../Noti/AlarmCard/style';
 import ArrowStyle from './style';
+// reducer
+import { MypageCreators } from '../../../../redux/modules/mypage';
 
 const PromiseCard = ({ promInfo, guide, received }) => {
+  const dispatch = useDispatch();
+  const agreePromise = () => {
+    dispatch(
+      MypageCreators.AgreePromiseDB(promInfo, {
+        requestId: promInfo.requestId,
+        tripId: promInfo.tripId,
+      }),
+    );
+  };
+
   return (
     <Grid bgColor="white" radius="16px" overflow="hidden">
       <Grid display="flex" ver="center" padding="32px 20px" position="relative">
@@ -41,7 +55,12 @@ const PromiseCard = ({ promInfo, guide, received }) => {
 
       {received ? (
         <Grid>
-          <Button width="50%" radius="0" padding="15px 0">
+          <Button
+            width="50%"
+            radius="0"
+            padding="15px 0"
+            _onClick={agreePromise}
+          >
             수락
           </Button>
 

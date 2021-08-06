@@ -28,8 +28,8 @@ const CreateTrip = () => {
     const trip = {
       region,
       city,
-      startDate: moment.utc(date[0].startDate).format('YYYY-MM-DD'),
-      endDate: moment.utc(date[0].endDate).format('YYYY-MM-DD'),
+      startDate: moment(date[0].startDate).format('YYYY-MM-DD'),
+      endDate: moment(date[0].endDate).format('YYYY-MM-DD'),
       tripInfo,
     };
 

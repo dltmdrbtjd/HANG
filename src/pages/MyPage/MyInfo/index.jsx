@@ -63,9 +63,9 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      {tripList.map(tripInfo => (
+      {tripList.map((tripInfo, idx) => (
         <EventCard
-          key={(Date.now() + Math.random()).toString(36)}
+          key={(idx * Date.now() + Math.random()).toString(36)}
           btnText="삭제하기"
           userInfo={tripInfo}
           mainText="여행 이벤트 삭제하기"
