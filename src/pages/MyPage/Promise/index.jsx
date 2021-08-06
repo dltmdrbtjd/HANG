@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 // icon
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+// history
+import { history } from '../../../redux/configureStore';
 // elements
 import { Grid, SubTitle, Button } from '../../../elements';
 // component
@@ -14,9 +16,9 @@ import { SetAlignItemsButton } from '../style';
 const MyPromise = () => {
   const { received, requested, confirmed } = useSelector(
     state => ({
-      received: state.mypage.receivedProm,
-      requested: state.mypage.requestedProm,
-      confirmed: state.mypage.confirmedProm,
+      received: state.mypage.promise.received,
+      requested: state.mypage.promise.requested,
+      confirmed: state.mypage.promise.confirmed,
     }),
     shallowEqual,
   );
@@ -39,6 +41,7 @@ const MyPromise = () => {
             bgColor="bgColor"
             color="darkG"
             addstyle={SetAlignItemsButton}
+            _onClick={() => history.push('/mypage/promise/1')}
           >
             더 보기{' '}
             <ArrowForwardIosIcon
@@ -68,6 +71,7 @@ const MyPromise = () => {
             bgColor="bgColor"
             color="darkG"
             addstyle={SetAlignItemsButton}
+            _onClick={() => history.push('/mypage/promise/2')}
           >
             더 보기{' '}
             <ArrowForwardIosIcon
@@ -97,6 +101,7 @@ const MyPromise = () => {
             bgColor="bgColor"
             color="darkG"
             addstyle={SetAlignItemsButton}
+            _onClick={() => history.push('/mypage/promise/3')}
           >
             더 보기{' '}
             <ArrowForwardIosIcon

@@ -30,6 +30,10 @@ const MyInfo = () => {
     dispatch(MypageCreators.GetMyInfoDB());
   }, []);
 
+  const deleteTripEvent = tripId => {
+    dispatch(MypageCreators.DeleteTripEventDB({ tripId }));
+  };
+
   return (
     <>
       <ProfileCard userInfo={myInfo} />
@@ -64,6 +68,11 @@ const MyInfo = () => {
           key={(Date.now() + Math.random()).toString(36)}
           btnText="삭제하기"
           userInfo={tripInfo}
+          mainText="여행 이벤트 삭제하기"
+          sub2Text="여행 이벤트를 삭제하시겠습니까?"
+          agreeText="삭제"
+          toastMessage="여행 이벤트가 삭제되었습니다."
+          callback={() => deleteTripEvent(tripInfo.tripId)}
         />
       ))}
     </>

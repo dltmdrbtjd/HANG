@@ -2,11 +2,13 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { isLogin } from './cookie';
 
-const PrivateRoute = ({ component: Component, ...props }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
-      {...props}
-      render={() => (isLogin() ? <Component /> : <Redirect to="/login" />)}
+      {...rest}
+      render={props =>
+        isLogin() ? <Component {...props} /> : <Redirect to="/login" />
+      }
     />
   );
 };
