@@ -62,6 +62,9 @@ const MyPageModify = () => {
   useEffect(() => {
     if (userInfo.profileImg)
       dispatch(ImageCreators.setProfilePre(userInfo.profileImg));
+
+    setRegion(userInfo.region);
+    setCity(userInfo.city);
   }, []);
 
   return (
