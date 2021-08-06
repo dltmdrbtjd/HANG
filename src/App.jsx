@@ -35,11 +35,11 @@ import { UserCreators } from './redux/modules/user';
 import { getCookie } from './shared/cookie';
 
 const App = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (getCookie()) dispatch(UserCreators.getUserInfoDB());
-  }, []);
+  // useEffect(() => {
+  //   if (getCookie()) dispatch(UserCreators.getUserInfoDB());
+  // }, []);
 
   return (
     <ConnectedRouter history={history}>
