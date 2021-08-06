@@ -10,12 +10,16 @@ import { setCookie, delCookie } from '../../shared/cookie';
 const PHONE_AUTH = 'user/PHONE_AUTH';
 const DUPLICATE_CHECK = 'user/DUPLICATE_CHECK';
 const SET_LOGIN_STATUS = 'user/SET_LOGIN_STATUS';
+const INIT_SIGN_UP_INFO = 'user/INIT_SIGN_UP_INFO';
+const INIT_LOG_IN_INFO = 'user/INIT_LOG_IN_INFO';
 
 const authPhone = createAction(PHONE_AUTH, status => ({ status }));
 const duplicateCheck = createAction(DUPLICATE_CHECK, status => ({ status }));
 const setLoginStatus = createAction(SET_LOGIN_STATUS, status => ({
   status,
 }));
+const initializeSignUpInfo = createAction(INIT_SIGN_UP_INFO);
+const initializeLogInInfo = createAction(INIT_LOG_IN_INFO);
 
 const initialState = {
   loginStatus: {
@@ -183,7 +187,8 @@ const signUpDB = (image, userInfo) => {
         apis
           .SignUp({ ...userInfo, profileImg })
           .then(() => {
-            ImageCreators.setProfilePre(null);
+            dispatch(ImageCreators.uploadProfileImg(null));
+            dispatch(ImageCreators.setProfilePre(null));
           })
           .then(() => {
             history.replace('/signup/welcome');
@@ -253,6 +258,41 @@ export default handleActions(
       produce(state, draft => {
         draft.loginStatus = action.payload.status;
       }),
+
+    [INIT_SIGN_UP_INFO]: state =>
+      produce(state, draft => {
+        draft.duplicateCheck = {
+          id: {
+            status: false,
+            errorMsg: '',
+          },
+
+          nickname: {
+            status: false,
+            errorMsg: '',
+          },
+        };
+
+        draft.phoneAuth = {
+          phoneVali: {
+            status: false,
+            errorMsg: '',
+          },
+
+          smsVali: {
+            status: false,
+            errorMsg: '',
+          },
+        };
+      }),
+
+    [INIT_LOG_IN_INFO]: state =>
+      produce(state, draft => {
+        draft.loginStatus = {
+          status: false,
+          errorMsg: '',
+        };
+      }),
   },
   initialState,
 );
@@ -265,6 +305,8 @@ const UserCreators = {
   signUpDB,
   logInDB,
   logOutDB,
+  initializeSignUpInfo,
+  initializeLogInInfo,
 };
 
 export { UserCreators };

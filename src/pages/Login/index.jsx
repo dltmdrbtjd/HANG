@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 // form
@@ -16,6 +16,12 @@ import { UserCreators } from '../../redux/modules/user';
 const Login = () => {
   const dispatch = useDispatch();
   const loginStatus = useSelector(state => state.user.loginStatus);
+
+  useEffect(() => {
+    return () => {
+      dispatch(UserCreators.initializeLogInInfo());
+    };
+  }, []);
 
   return (
     <>

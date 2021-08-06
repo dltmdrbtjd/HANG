@@ -24,6 +24,8 @@ const MyPromise = () => {
   );
   const dispatch = useDispatch();
 
+  console.log(requested);
+
   useEffect(() => {
     dispatch(MypageCreators.GetMyPromiseDB());
   }, []);
@@ -73,7 +75,7 @@ const MyPromise = () => {
             </Button>
           </Grid>
 
-          {received.slice(3).map(promInfo => (
+          {received.slice(0, 3).map(promInfo => (
             <PromiseCard
               key={(Date.now() + Math.random()).toString(36)}
               type="received"
@@ -109,7 +111,7 @@ const MyPromise = () => {
             </Button>
           </Grid>
 
-          {requested.slice(3).map(promInfo => (
+          {requested.slice(0, 3).map(promInfo => (
             <PromiseCard
               key={(Date.now() + Math.random()).toString(36)}
               guide
@@ -146,7 +148,7 @@ const MyPromise = () => {
             </Button>
           </Grid>
 
-          {confirmed.slice(3).map(promInfo => (
+          {confirmed.slice(0, 3).map(promInfo => (
             <PromiseCard
               key={(Date.now() + Math.random()).toString(36)}
               guide={promInfo.guide}
