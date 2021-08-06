@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+// moment
+import moment from 'moment';
+// query
+import queryString from 'query-string';
 // redux
+import { useDispatch, useSelector } from 'react-redux';
 import { history } from '../../../redux/configureStore';
+import { DetailCreators } from '../../../redux/modules/detail';
 // style
 import { Grid, MainTitle, Text, Button } from '../../../elements';
 import RadioBtn from './style';
@@ -9,26 +14,42 @@ import RadioBtn from './style';
 import Modal from '../../../components/Modal';
 
 const GuideRequest = () => {
+  const dispatch = useDispatch();
+  const myPromise = useSelector(state => state.detail.myTripInfo);
+
   const [checked, setChecked] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
   const [modal, setModal] = useState(false);
 
   const openModalHandler = () => {
     setModal(true);
+    setStartDate(moment.utc(myPromise[index].startDate).format('YYYY-MM-DD'));
+    setEndDate(moment.utc(myPromise[index].endDate).format('YYYY-MM-DD'));
   };
-  const agreeModalHandler = () => {
+
+  const agreeModalHandler = userInfo => {
+    dispatch(DetailCreators.AddTravel(userInfo));
     setModal(false);
-    history.goBack();
   };
 
   const closeModalHandler = () => {
     setModal(false);
   };
 
-  const myPromise = [
-    { city: 'seoul', promise: '서울특별시 관악구', date: '07.25 ~ 07.26' },
-    { city: 'busan', promise: '부산특별시 중구', date: '08.10 ~ 08.15' },
-    { city: '제주도', promise: '제주도 서귀포시', date: '09.11 ~ 09.12' },
-  ];
+  const query = queryString.parse(location.search);
+  const ModalMessage = `${query.nickname}님에게`;
+
+  const promiseData = {
+    pagePk: Number(query.user),
+    tripId: checked,
+    startDate,
+    endDate,
+  };
+  useEffect(() => {
+    dispatch(DetailCreators.MyTripInfoDB());
+  }, []);
   return (
     <>
       <MainTitle fs="xl">나의 약속 리스트</MainTitle>
@@ -46,16 +67,20 @@ const GuideRequest = () => {
               type="radio"
               id={item.city}
               name="city"
-              checked={checked === idx}
+              checked={checked === item.tripId}
               onChange={() => {
-                setChecked(idx);
+                setChecked(item.tripId);
+                setIndex(idx);
               }}
             />
           </Grid>
           <label id={item.city}>
-            <Text fs="sm">{item.date}</Text>
+            <Text fs="sm">
+              {moment.utc(item.startDate).format('YY.MM.DD')} ~{' '}
+              {moment.utc(item.endDate).format('YY.MM.DD')}
+            </Text>
             <Text fs="la" fw="bold">
-              {item.promise}
+              {item.region} {item.city}
             </Text>
           </label>
         </Grid>
@@ -74,8 +99,10 @@ const GuideRequest = () => {
       <Modal
         open={modal}
         close={closeModalHandler}
-        agree={agreeModalHandler}
-        subText="dltmdrbtjd님에게"
+        agree={() => {
+          agreeModalHandler(promiseData);
+        }}
+        subText={ModalMessage}
         subText2="길잡이를 부탁하시겠습니까?"
       />
     </>
