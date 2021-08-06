@@ -11,6 +11,8 @@ const SubTitleStyle = styled.h3`
   line-height: ${props => props.ls};
   text-align: ${props => props.textAlign};
   box-sizing: border-box;
+
+  ${props => props.addstyle};
 `;
 
 export default SubTitleStyle;
