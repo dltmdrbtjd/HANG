@@ -12,7 +12,7 @@ const ProfileCard = ({ userInfo }) => {
       margin="10px 0 0 0"
       radius="14px"
       bgColor="white"
-      shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
+      border="1px solid #E7E7E7"
     >
       <Grid position="relative" display="flex" hoz="center" ver="center">
         <ProfileImg imgUrl={userInfo && userInfo.profileImg} />

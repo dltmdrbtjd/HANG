@@ -4,7 +4,7 @@ import { Grid, Text, Button, BlurBox } from '../../elements/index';
 import ModalStyle from './style';
 
 const Modal = props => {
-  const { open, close, agree, subText, subText2 } = props;
+  const { open, close, agree, mainText, subText, subText2, agreeText } = props;
   return (
     <>
       {open ? (
@@ -23,14 +23,20 @@ const Modal = props => {
               z="1"
             >
               <Text margin="18px 0 0 0" fs="xl" fw="extraBold">
-                길잡이 되어주기
+                {mainText}
               </Text>
               <Text margin="37px 0 0 0">
-                {subText} <br /> {subText2}
+                {subText} {subText ? <br /> : null} {subText2}
               </Text>
-              <Grid display="flex" margin="33px 0 0 0">
+              <Grid
+                display="flex"
+                margin="33px 0 0 0"
+                position="absolute"
+                left="0"
+                bottom="0"
+              >
                 <Button radius="none" _onClick={agree} width="100%">
-                  신청
+                  {agreeText}
                 </Button>
                 <Button
                   bgColor="gray"
@@ -47,6 +53,11 @@ const Modal = props => {
       ) : null}
     </>
   );
+};
+
+Modal.defaultProps = {
+  mainText: '길잡이 되어주기',
+  agreeText: '신청',
 };
 
 export default Modal;

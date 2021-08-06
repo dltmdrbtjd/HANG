@@ -8,9 +8,8 @@ import { ImageCreators } from './image';
 const GET_MY_INFO = 'mypage/GET_MY_INFO';
 const GET_MY_TRIP_INFO = 'mypage/GET_MY_TRIP_INFO';
 const CREATE_TRIP_EVENT = 'mypage/CREATE_TRIP_EVENT';
-const GET_PROMISE_RECEIVED = 'mypage/GET_PROMISE_RECEIVED';
-const GET_PROMISE_REQUESTED = 'mypage/GET_PROMISE_REQUESTED';
-const GET_PROMISE_CONFIRMED = 'mypage/GET_PROMISE_CONFIRMED';
+const DELETE_TRIP_EVENT = 'mypage/DELETE_TRIP_EVENT';
+const GET_MY_PROMISE = 'mypage/GET_PROMISE_RECEIVED';
 
 const getMyInfo = createAction(GET_MY_INFO, myInfo => ({ myInfo }));
 const getMyTripInfo = createAction(GET_MY_TRIP_INFO, tripInfo => ({
@@ -19,36 +18,54 @@ const getMyTripInfo = createAction(GET_MY_TRIP_INFO, tripInfo => ({
 const createTripEvent = createAction(CREATE_TRIP_EVENT, tripInfo => ({
   tripInfo,
 }));
-const getRecProm = createAction(GET_PROMISE_RECEIVED, receivedProm => ({
-  receivedProm,
-}));
-const getReqProm = createAction(GET_PROMISE_REQUESTED, requestedProm => ({
-  requestedProm,
-}));
-const getConfirmedProm = createAction(GET_PROMISE_CONFIRMED, confirmedProm => ({
-  confirmedProm,
+const deleteTripEvent = createAction(DELETE_TRIP_EVENT, tripId => ({ tripId }));
+const getMyPromise = createAction(GET_MY_PROMISE, promise => ({
+  promise,
 }));
 
 const initialState = {
   myInfo: {},
   tripList: [],
-  receivedProm: [],
-  requestedProm: [],
-  confirmedProm: [],
+  promise: {
+    received: [],
+    requested: [],
+    confirmed: [],
+  },
 };
 
 const GetMyInfoDB = () => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const myPromise = getState().mypage.promise;
+
     apis
       .GetMyInfo()
       .then(({ data }) => {
         dispatch(getMyInfo(data.userInfo));
         dispatch(getMyTripInfo(data.tripInfo));
-        dispatch(getConfirmedProm(data.confirmed));
+        dispatch(getMyPromise({ ...myPromise, confirmed: data.confirmed }));
       })
       .catch(err => {
         console.log(err);
       });
+  };
+};
+
+const GetMyPromiseDB = () => {
+  return (dispatch, getState) => {
+    const myPromise = getState().mypage.promise;
+
+    apis
+      .GetMyPromise()
+      .then(({ data }) => {
+        dispatch(
+          getMyPromise({
+            ...myPromise,
+            received: data.received,
+            requested: data.requested,
+          }),
+        );
+      })
+      .catch(err => console.log(err));
   };
 };
 
@@ -66,13 +83,12 @@ const CreateTripEventDB = tripInfo => {
   };
 };
 
-const GetMyPromiseDB = () => {
+const DeleteTripEventDB = tripId => {
   return dispatch => {
     apis
-      .GetMyPromise()
-      .then(({ data }) => {
-        dispatch(getRecProm(data.received));
-        dispatch(getReqProm(data.requested));
+      .DeleteTripEvent(tripId)
+      .then(() => {
+        dispatch(deleteTripEvent(tripId.tripId));
       })
       .catch(err => console.log(err));
   };
@@ -114,6 +130,18 @@ const UpdateProfileDB = (image, profile) => {
   };
 };
 
+const AgreePromiseDB = id => {
+  return (dispatch, getState) => {
+    const promise = getState().mypage.promise;
+
+    apis.AgreePromise({ ...id }).then(() => {
+      const receivedProm = promise.received.filter(
+        prom => prom.tripId !== id.tripId,
+      );
+    });
+  };
+};
+
 const ToggleGuideDB = () => {
   apis.GuideToggle().catch(err => console.log(err));
 };
@@ -135,19 +163,17 @@ export default handleActions(
         draft.tripList.push(action.payload.tripInfo);
       }),
 
-    [GET_PROMISE_RECEIVED]: (state, action) =>
+    [DELETE_TRIP_EVENT]: (state, action) =>
       produce(state, draft => {
-        draft.receivedProm = action.payload.receivedProm;
+        draft.tripList = draft.tripList.filter(
+          trip => trip.tripId !== action.payload.tripId,
+        );
+        console.log(draft.tripList, action.payload.tripId);
       }),
 
-    [GET_PROMISE_REQUESTED]: (state, action) =>
+    [GET_MY_PROMISE]: (state, action) =>
       produce(state, draft => {
-        draft.requestedProm = action.payload.requestedProm;
-      }),
-
-    [GET_PROMISE_CONFIRMED]: (state, action) =>
-      produce(state, draft => {
-        draft.confirmedProm = action.payload.confirmedProm;
+        draft.promise = action.payload.promise;
       }),
   },
   initialState,
@@ -158,6 +184,7 @@ const MypageCreators = {
   GetMyPromiseDB,
   UpdateProfileDB,
   CreateTripEventDB,
+  DeleteTripEventDB,
   ToggleGuideDB,
 };
 

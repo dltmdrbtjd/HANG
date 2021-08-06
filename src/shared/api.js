@@ -54,15 +54,13 @@ const apis = {
   GetMyInfo: () => instance.get('/api/mypage'),
   CreateTripEvent: tripInfo =>
     instance.post('/api/mypage/create_trip', tripInfo),
+  DeleteTripEvent: tripId => instance.delete('/api/mypage', { data: tripId }),
   GetMyPromise: () => instance.get('/api/mypage/promise'),
   UpdateProfile: userInfo => instance.patch('/api/mypage', userInfo),
-  AgreePromise: promise => instance.post('/api/mypage', promise),
-  CancelPromise: type => instance.patch('/api/mypage/reject_confirm', type),
-  RejectPromise: id => instance.patch('/api/mypage', id),
-  ChangeInfo: info => instance.patch('/api/mypage', info),
+  AgreePromise: id => instance.post('/api/mypage/make_promise', id),
+  RejectPromise: reqId => instance.patch('/api/mypage/reject_request', reqId),
+  CancelPromise: tripId => instance.patch('/api/mypage/reject_confirm', tripId),
   GuideToggle: () => instance.patch('/api/mypage/update_guide'),
-  DeleteTrip: tripId => instance.delete('/api/mypage/create_trip', tripId),
-  AddTrip: info => instance.post('/api/mypage/create_trip', info),
 
   // chat 부분은 서버쪽에서 API 설계 완성이 안되서 추후에 수정해주세요!
   // CreateChat:  => instance.post('/api/chat),
