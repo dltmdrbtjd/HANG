@@ -71,6 +71,8 @@ const GetMyPromiseDB = () => {
 
 const CreateTripEventDB = tripInfo => {
   return (dispatch, getState, { history }) => {
+    console.log(tripInfo);
+
     apis
       .CreateTripEvent(tripInfo)
       .then(({ data }) => {
@@ -79,7 +81,7 @@ const CreateTripEventDB = tripInfo => {
       .then(() => {
         history.goBack();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err.config));
   };
 };
 
@@ -130,13 +132,25 @@ const UpdateProfileDB = (image, profile) => {
   };
 };
 
-const AgreePromiseDB = id => {
+const AgreePromiseDB = (tripInfo, id) => {
   return (dispatch, getState) => {
     const promise = getState().mypage.promise;
 
     apis.AgreePromise({ ...id }).then(() => {
       const receivedProm = promise.received.filter(
         prom => prom.tripId !== id.tripId,
+      );
+      const confirmedProm = [
+        ...promise.confirmed,
+        { ...tripInfo, guide: false },
+      ];
+
+      dispatch(
+        getMyPromise({
+          ...promise,
+          received: receivedProm,
+          confirmed: confirmedProm,
+        }),
       );
     });
   };
@@ -168,7 +182,6 @@ export default handleActions(
         draft.tripList = draft.tripList.filter(
           trip => trip.tripId !== action.payload.tripId,
         );
-        console.log(draft.tripList, action.payload.tripId);
       }),
 
     [GET_MY_PROMISE]: (state, action) =>
@@ -186,6 +199,7 @@ const MypageCreators = {
   CreateTripEventDB,
   DeleteTripEventDB,
   ToggleGuideDB,
+  AgreePromiseDB,
 };
 
 export { MypageCreators };
