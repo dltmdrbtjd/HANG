@@ -212,6 +212,8 @@ export default handleActions(
 
     [REJECT_PROMISE]: (state, action) =>
       produce(state, draft => {
+        console.log(action.payload.type);
+
         draft.promise[action.payload.type] = draft.promise[
           action.payload.type
         ].filter(trip => trip.requestId !== action.payload.requestId);

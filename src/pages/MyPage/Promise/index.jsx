@@ -24,8 +24,6 @@ const MyPromise = () => {
   );
   const dispatch = useDispatch();
 
-  console.log(requested);
-
   useEffect(() => {
     dispatch(MypageCreators.GetMyPromiseDB());
   }, []);
