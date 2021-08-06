@@ -1,14 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
+import apis from '../../shared/api';
 
 const LOAD = 'detail/LOAD';
 const ADDTRAVELE = 'detail/ADDTRAVELE';
 const ADDGUIDE = 'detail/ADDGUIDE';
 
-const DetailLoad = createAction(LOAD, (userInfo, tripInfo, myTripInfo) => ({
+const DetailLoad = createAction(LOAD, (userInfo, tripInfo) => ({
   userInfo,
   tripInfo,
-  myTripInfo,
 }));
 
 const initialState = {
@@ -17,9 +17,15 @@ const initialState = {
   myTripInfo: [],
 };
 
-const DetailLoadDB = () => {
+const DetailLoadDB = userPk => {
   return dispatch => {
-    dispatch(DetailLoad());
+    apis
+      .UserDetail(userPk)
+      .then(res => {
+        const data = res.data;
+        dispatch(DetailLoad(data.userInfo, data.tripInfo));
+      })
+      .catch(err => console.error(err));
   };
 };
 
@@ -29,7 +35,6 @@ export default handleActions(
       produce(state, draft => {
         draft.userInfo = action.payload.userInfo;
         draft.tripInfo = action.payload.tripInfo;
-        darft.myTripInfo = action.payload.myTripInfo;
       }),
   },
   initialState,
