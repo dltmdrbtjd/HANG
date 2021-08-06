@@ -15,6 +15,7 @@ import DropDown from '../DropDown';
 import { MypageCreators } from '../../../redux/modules/mypage';
 // style
 import { SetAlignItemsButton, TabMenuWrapper } from '../style';
+import SubTitleTextHidden from './style';
 
 const MyInfo = () => {
   const { myInfo, tripList } = useSelector(
@@ -64,8 +65,8 @@ const MyInfo = () => {
       </Grid>
 
       <Grid margin="60px 0 15px" display="flex" hoz="space-between">
-        <SubTitle fs="la" width="auto">
-          {myInfo.nickname} 님의 여행 이벤트
+        <SubTitle fs="la" width="auto" addstyle={SubTitleTextHidden}>
+          {myInfo.nickname} 님의 여행
         </SubTitle>
 
         <Button

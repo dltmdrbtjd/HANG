@@ -7,12 +7,10 @@ import { ImageCreators } from './image';
 // cookie
 import { setCookie, delCookie } from '../../shared/cookie';
 
-const GET_USER_INFO = 'user/GET_USER_INFO';
 const PHONE_AUTH = 'user/PHONE_AUTH';
 const DUPLICATE_CHECK = 'user/DUPLICATE_CHECK';
 const SET_LOGIN_STATUS = 'user/SET_LOGIN_STATUS';
 
-const getUserInfo = createAction(GET_USER_INFO, userInfo => ({ userInfo }));
 const authPhone = createAction(PHONE_AUTH, status => ({ status }));
 const duplicateCheck = createAction(DUPLICATE_CHECK, status => ({ status }));
 const setLoginStatus = createAction(SET_LOGIN_STATUS, status => ({
@@ -20,12 +18,6 @@ const setLoginStatus = createAction(SET_LOGIN_STATUS, status => ({
 }));
 
 const initialState = {
-  userInfo: {
-    userId: null,
-    nickname: null,
-    profileImg: null,
-  },
-
   loginStatus: {
     status: false,
     errorMsg: '',
@@ -54,26 +46,6 @@ const initialState = {
       errorMsg: '',
     },
   },
-};
-
-const getUserInfoDB = () => {
-  return (dispatch, getState, { history }) => {
-    apis
-      .Auth()
-      .then(({ data }) => {
-        dispatch(getUserInfo(data));
-      })
-      .catch(() => {
-        delCookie();
-        dispatch(
-          setLoginStatus({
-            status: false,
-            errorMsg: '토큰이 만료되었습니다. 다시 로그인해 주세요',
-          }),
-        );
-        history.replace('/login');
-      });
-  };
 };
 
 const smsAuthDB = phone => {
@@ -230,7 +202,6 @@ const logInDB = userInfo => {
         setCookie(res.data.accessToken);
       })
       .then(() => {
-        dispatch(getUserInfoDB());
         dispatch(
           setLoginStatus({
             status: true,
@@ -260,11 +231,6 @@ const logOutDB = () => {
         delCookie();
       })
       .then(() => {
-        dispatch(
-          getUserInfo({ userId: null, nickname: null, profileImg: null }),
-        );
-      })
-      .then(() => {
         history.replace('/login');
       })
       .catch(err => console.error(err));
@@ -273,11 +239,6 @@ const logOutDB = () => {
 
 export default handleActions(
   {
-    [GET_USER_INFO]: (state, action) =>
-      produce(state, draft => {
-        draft.userInfo = action.payload.userInfo;
-      }),
-
     [PHONE_AUTH]: (state, action) =>
       produce(state, draft => {
         draft.phoneAuth = action.payload.status;
@@ -297,7 +258,6 @@ export default handleActions(
 );
 
 const UserCreators = {
-  getUserInfoDB,
   smsAuthDB,
   phoneAuthDB,
   duplicateIdCheckDB,
