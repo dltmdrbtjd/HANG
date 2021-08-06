@@ -21,8 +21,9 @@ const ProfileCard = ({ userInfo }) => {
             {userInfo && userInfo.nickname}
           </Text>
           <Text color="darkG">
-            {userInfo && userInfo.gender} · {userInfo && userInfo.age} ·{' '}
-            {userInfo && userInfo.region} {userInfo && userInfo.city}
+            {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
+            {userInfo && userInfo.age}대 · {userInfo && userInfo.city}{' '}
+            {userInfo && userInfo.region}
           </Text>
         </Grid>
         {{}.hasOwnProperty.call(userInfo, 'like') ? (
