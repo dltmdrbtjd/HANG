@@ -13,20 +13,29 @@ import ToastMessage from '../../components/ToastMessage';
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const { eventList, userInfo } = useSelector(state => ({
+  const { eventList, userInfo, success } = useSelector(state => ({
     eventList: state.detail.tripInfo,
     userInfo: state.detail.userInfo,
+    success: state.detail.success,
   }));
-  const [toastMsg, setToastMsg] = useState(false);
+
+  const [toastMsg, setToastMsg] = useState(success);
 
   const GuideHandler = () => {
-    history.push('/detail/request');
+    history.push(
+      `/detail/request?user=${userInfo.userPk}&nickname=${userInfo.nickname}`,
+    );
   };
 
   const query = queryString.parse(location.search);
 
+  const TraveleRequestHandler = pk => {
+    dispatch(DetailCreators.AddGuide(pk));
+  };
+
   useEffect(() => {
     dispatch(DetailCreators.DetailLoadDB(query.user));
+    dispatch(DetailCreators.SuccessValue(false));
     if (toastMsg) {
       setTimeout(() => {
         setToastMsg(false);
@@ -41,7 +50,7 @@ const Detail = () => {
       <Button margin="24px 0 60px 0" width="100%" _onClick={GuideHandler}>
         길잡이 부탁하기
       </Button>
-      <MainTitle fs="sxl">dltmdrbtjd님의 여행 이벤트</MainTitle>
+      <MainTitle fs="sxl">{userInfo.nickname}님의 여행 이벤트</MainTitle>
       {eventList
         ? eventList.map((item, idx) => {
             return (
@@ -51,6 +60,9 @@ const Detail = () => {
                 sub2Text="길잡이가 되어주시겠습니까?"
                 btnText="길잡이 되어주기"
                 toastMessage="길잡이 신청이 완료되었습니다."
+                callback={() => {
+                  TraveleRequestHandler(item.tripId);
+                }}
               />
             );
           })
