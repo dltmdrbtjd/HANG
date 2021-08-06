@@ -1,11 +1,15 @@
 import React from 'react';
+// redux
+import { useDispatch } from 'react-redux';
 // Router
 import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import PublicRoute from './shared/PublicRoute';
 import PrivateRoute from './shared/PrivateRoute';
-// redux
+// history
 import { history } from './redux/configureStore';
+// axios
+import { instance } from './shared/api';
 // components
 import Section from './components/Section';
 import Header from './components/Header';
@@ -28,8 +32,34 @@ import CreateTrip from './pages/MyPage/CreateTrip';
 import Noti from './pages/Noti';
 import Chat from './pages/Chat';
 import ChatRoom from './pages/Chat/Room';
+// reducer
+import { UserCreators } from './redux/modules/user';
+// cookie
+import { delCookie } from './shared/cookie';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  instance.interceptors.response.use(
+    res => {
+      return res;
+    },
+    error => {
+      if (error.response.status === 401) {
+        delCookie();
+        dispatch(
+          UserCreators.setLoginStatus({
+            status: false,
+            errorMsg: '토큰이 만료되었습니다. 다시 로그인해 주세요.',
+          }),
+        );
+        history.replace('/login');
+      }
+
+      return error;
+    },
+  );
+
   return (
     <ConnectedRouter history={history}>
       <Header />

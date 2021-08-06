@@ -1,31 +1,21 @@
 import axios from 'axios';
 // cookie
-import { getCookie, delCookie } from './cookie';
+import { getCookie } from './cookie';
 
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
-const instance = axios.create({
+export const instance = axios.create({
   baseURL: 'https://soujinko.shop',
   withCredentials: true,
 });
 
-instance.interceptors.request.use(
-  config => {
-    config.headers['Content-Type'] = 'application/json; charset=utf-8';
-    config.headers['X-Requested-With'] = 'XMLHttpRequest';
-    config.headers.token = getCookie();
-    config.headers.Accept = 'application/json';
+instance.interceptors.request.use(config => {
+  config.headers['Content-Type'] = 'application/json; charset=utf-8';
+  config.headers['X-Requested-With'] = 'XMLHttpRequest';
+  config.headers.token = getCookie();
+  config.headers.Accept = 'application/json';
 
-    return config;
-  },
-  error => {
-    if (error.response.status === 401) {
-      delCookie();
-      window.location.replace('/login');
-    }
-
-    return error;
-  },
-);
+  return config;
+});
 
 // 사용할 api들
 const apis = {

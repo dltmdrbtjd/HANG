@@ -298,6 +298,7 @@ export default handleActions(
 );
 
 const UserCreators = {
+  setLoginStatus,
   smsAuthDB,
   phoneAuthDB,
   duplicateIdCheckDB,
