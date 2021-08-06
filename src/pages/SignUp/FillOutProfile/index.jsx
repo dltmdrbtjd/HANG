@@ -113,7 +113,7 @@ const FillOutProfile = ({
           지역 선택
         </Text>
 
-        <AreaSelectBox toggle setGu={setRegion} setCity={setCity} />
+        <AreaSelectBox toggle setGu={setCity} setCity={setRegion} />
       </Grid>
 
       <Button

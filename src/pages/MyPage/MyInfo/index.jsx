@@ -5,15 +5,16 @@ import ControlPointIcon from '@material-ui/icons/ControlPoint';
 // history
 import { history } from '../../../redux/configureStore';
 // elements
-import { Grid, SubTitle, Button } from '../../../elements';
+import { Grid, SubTitle, Button, MainTitle } from '../../../elements';
 // components
 import ProfileCard from '../../../components/ProfileCard';
 import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
+import DropDown from '../DropDown';
 // reducer
 import { MypageCreators } from '../../../redux/modules/mypage';
 // style
-import { SetAlignItemsButton } from '../style';
+import { SetAlignItemsButton, TabMenuWrapper } from '../style';
 
 const MyInfo = () => {
   const { myInfo, tripList } = useSelector(
@@ -36,6 +37,24 @@ const MyInfo = () => {
 
   return (
     <>
+      <Grid display="flex" ver="center" hoz="space-between" margin="0 0 16px">
+        <TabMenuWrapper>
+          <li onClick={() => history.push('/mypage')}>
+            <MainTitle width="auto" fs="sxl" color="black">
+              프로필
+            </MainTitle>
+          </li>
+
+          <li onClick={() => history.push('/mypage/promise')}>
+            <MainTitle fs="sxl" width="auto" margin="0 0 0 20px" color="gray">
+              나의 약속
+            </MainTitle>
+          </li>
+        </TabMenuWrapper>
+
+        <DropDown />
+      </Grid>
+
       <ProfileCard userInfo={myInfo} />
 
       <Grid display="flex" hoz="space-between" margin="60px 0 0" ver="center">

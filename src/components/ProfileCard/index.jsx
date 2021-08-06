@@ -22,8 +22,8 @@ const ProfileCard = ({ userInfo }) => {
           </Text>
           <Text color="darkG">
             {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
-            {userInfo && userInfo.age}대 · {userInfo && userInfo.city}{' '}
-            {userInfo && userInfo.region}
+            {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
+            {userInfo && userInfo.city}
           </Text>
         </Grid>
         {{}.hasOwnProperty.call(userInfo, 'like') ? (
@@ -39,7 +39,7 @@ const ProfileCard = ({ userInfo }) => {
         ) : null}
       </Grid>
       <Grid margin="10px 0 0 0" padding="0 20px">
-        {userInfo.intro ? (
+        {userInfo.intro && userInfo.intro !== 'none' ? (
           <Text fs="sm">{userInfo.intro}</Text>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>
