@@ -37,7 +37,9 @@ const Favorite = () => {
                 padding="20px 0"
                 key={idx}
               >
-                <ProfileImg imgUrl={item.profileImg} />
+                <Grid width="60px" height="60px">
+                  <ProfileImg imgUrl={item.profileImg} />
+                </Grid>
                 <Grid
                   margin="0 0 0 23px"
                   _onClick={() => {

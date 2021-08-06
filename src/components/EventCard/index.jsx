@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 // moment
 import moment from 'moment';
 // component
+import { useSelector } from 'react-redux';
 import ToastMessage from '../ToastMessage';
 import Modal from '../Modal';
 // style
@@ -12,14 +13,15 @@ const EventCard = ({ userInfo, ...props }) => {
     props;
   const [toastMsg, setToastMsg] = useState(false);
   const [modal, setModal] = useState(false);
+  const success = useSelector(state => state.detail.success);
 
-  const openModalHandler = () => {
+  const openModalHandler = tripId => {
     setModal(true);
   };
   const agreeModalHandler = () => {
     callback();
     setModal(false);
-    setToastMsg(true);
+    setToastMsg(success);
   };
 
   const closeModalHandler = () => {
@@ -67,7 +69,9 @@ const EventCard = ({ userInfo, ...props }) => {
         margin="0 0 20px 0"
         radius="0 0 14px 14px"
         width="100%"
-        _onClick={openModalHandler}
+        _onClick={() => {
+          openModalHandler(userInfo.tripId);
+        }}
       >
         {btnText}
       </Button>

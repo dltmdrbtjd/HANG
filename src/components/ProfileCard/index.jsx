@@ -1,6 +1,6 @@
 import React from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-// import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
@@ -29,12 +29,12 @@ const ProfileCard = ({ userInfo }) => {
         {{}.hasOwnProperty.call(userInfo, 'like') ? (
           <Grid
             width="auto"
-            color="darkG"
+            color={userInfo.like ? 'brandColor' : 'darkG'}
             position="absolute"
-            top="10px"
+            top="0px"
             right="10px"
           >
-            <FavoriteBorderIcon />
+            {userInfo.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </Grid>
         ) : null}
       </Grid>
