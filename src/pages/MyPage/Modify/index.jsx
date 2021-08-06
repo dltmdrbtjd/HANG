@@ -27,8 +27,8 @@ const MyPageModify = () => {
 
   const dispatch = useDispatch();
 
-  const [region, setRegion] = useState('');
-  const [city, setCity] = useState('');
+  const [region, setRegion] = useState(userInfo.region);
+  const [city, setCity] = useState(userInfo.city);
   const [profileImg, setProfileImg] = useState(userInfo.profileImg);
   const [modifyInfo, setModifyInfo] = useState({
     nickname: userInfo.nickname,
