@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 // date format
@@ -24,6 +24,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
     modalOpen: false,
     toastMsgOpen: false,
   });
+  const [promiseType, setPromiseType] = useState(type);
 
   const agreePromise = () => {
     dispatch(
@@ -53,6 +54,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
         agreePromise();
         setOpen({ ...open, toastMsgOpen: true });
       },
+      toastMsg: `${promInfo.nickname} 님의 요청을 수락했습니다.`,
     },
 
     received: {
@@ -64,6 +66,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
         rejectPromise();
         setOpen({ ...open, toastMsgOpen: true });
       },
+      toastMsg: `${promInfo.nickname} 님의 요청을 거절했습니다.`,
     },
 
     requested: {
@@ -75,6 +78,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
         rejectPromise();
         setOpen({ ...open, toastMsgOpen: true });
       },
+      toastMsg: `요청을 취소했습니다.`,
     },
 
     confirmed: {
@@ -85,6 +89,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
         cancelConfiremedPromise();
         setOpen({ ...open, toastMsgOpen: true });
       },
+      toastMsg: `요청을 취소되었습니다.`,
     },
   };
 
@@ -93,6 +98,10 @@ const PromiseCard = ({ promInfo, guide, type }) => {
       setTimeout(() => setOpen({ ...open, toastMsgOpen: false }), 1500);
     }
   }, [open.toastMsgOpen]);
+
+  useEffect(() => {
+    setPromiseType(type);
+  }, []);
 
   return (
     <Grid bgColor="white" radius="16px" overflow="hidden">
@@ -126,7 +135,10 @@ const PromiseCard = ({ promInfo, guide, type }) => {
             width="50%"
             radius="0"
             padding="15px 0"
-            _onClick={() => setOpen({ ...open, modalOpen: true })}
+            _onClick={() => {
+              setPromiseType('agreeReceived');
+              setOpen({ ...open, modalOpen: true });
+            }}
           >
             수락
           </Button>
@@ -156,9 +168,9 @@ const PromiseCard = ({ promInfo, guide, type }) => {
       <Modal
         open={open.modalOpen}
         close={() => setOpen({ ...open, modalOpen: false })}
-        {...modalMessage[type]}
+        {...modalMessage[promiseType]}
       />
-      <ToastMessage />
+      <ToastMessage msg={modalMessage[promiseType].toastMsg} />
     </Grid>
   );
 };
