@@ -17,7 +17,6 @@ const MyPromiseDetail = ({ match }) => {
     ],
     shallowEqual,
   );
-  console.log(promises);
 
   return (
     <>
