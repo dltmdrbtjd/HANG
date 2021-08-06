@@ -1,20 +1,31 @@
 import React from 'react';
-// history
+// redux
+import { useDispatch } from 'react-redux';
 // style
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { FavoriteCreators } from '../../redux/modules/favorite';
+import { HomeCreators } from '../../redux/modules/home';
 // import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
-const SearchCard = ({ userInfo }) => {
+const SearchCard = ({ userInfo, category, idx }) => {
+  const dispatch = useDispatch();
+  // console.log(category, idx);
+
+  const AddLike = () => {
+    dispatch(FavoriteCreators.FavoriteAddDB({ targetPk: userInfo.userPk }));
+    dispatch(HomeCreators.likeUpdateHandler(category[0], idx, true));
+  };
+
+  const DelLike = () => {
+    dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userInfo.userPk }));
+    dispatch(HomeCreators.likeUpdateHandler(category[0], idx, false));
+  };
   return (
-    <Grid
-      _onClick={() => {
-        history.push('/detail');
-      }}
-      padding="10px 0"
-    >
+    <Grid padding="10px 0">
       <Grid
         position="relative"
         display="flex"
@@ -25,26 +36,50 @@ const SearchCard = ({ userInfo }) => {
         radius="14px"
         bgColor="white"
         shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
+        z="1"
       >
         <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
-        <Grid width="75%" margin="0 0 0 10px">
+        <Grid
+          width="75%"
+          margin="0 0 0 10px"
+          _onClick={() => {
+            history.push(`/detail?user=${userInfo.userPk}`);
+          }}
+        >
           <Text fs="la" fw="bold">
-            {userInfo && userInfo.username}
+            {userInfo && userInfo.nickname}
           </Text>
           <Text color="darkG">
-            {userInfo && userInfo.gender} · {userInfo && userInfo.age} ·
-            {userInfo && userInfo.region} {userInfo && userInfo.city}
+            {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
+            {userInfo && userInfo.age}대 ·{userInfo && userInfo.region}{' '}
+            {userInfo && userInfo.city}
           </Text>
         </Grid>
-        <Grid
-          width="auto"
-          color="darkG"
-          position="absolute"
-          top="10px"
-          right="10px"
-        >
-          <FavoriteBorderIcon />
-        </Grid>
+        {userInfo && userInfo.like ? (
+          <Grid
+            width="auto"
+            color="brandColor"
+            position="absolute"
+            top="10px"
+            right="10px"
+            _onClick={DelLike}
+            z="2"
+          >
+            <FavoriteIcon />
+          </Grid>
+        ) : (
+          <Grid
+            width="auto"
+            color="darkG"
+            position="absolute"
+            top="10px"
+            right="10px"
+            _onClick={AddLike}
+            z="2"
+          >
+            <FavoriteBorderIcon />
+          </Grid>
+        )}
       </Grid>
     </Grid>
   );
