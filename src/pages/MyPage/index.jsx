@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-// icon
-import EditIcon from '@material-ui/icons/Edit';
-// history
-import { history } from '../../redux/configureStore';
 // elements
-import { Grid, MainTitle, Button } from '../../elements';
+import { Grid, MainTitle } from '../../elements';
+// component
+import DropDown from './DropDown';
 // page
 import MyInfo from './MyInfo';
 import MyPromise from './Promise';
 // style
-import { TabMenuWrapper, SetAlignItemsButton } from './style';
+import { TabMenuWrapper } from './style';
 
 const MyPage = () => {
   const [page, setPage] = useState(0);
@@ -48,19 +46,7 @@ const MyPage = () => {
           </li>
         </TabMenuWrapper>
 
-        {page === 0 ? (
-          <Button
-            padding="0"
-            bgColor="bgColor"
-            color="darkG"
-            addstyle={SetAlignItemsButton}
-            _onClick={() => {
-              history.push('/mypage/modify');
-            }}
-          >
-            수정하기 <EditIcon style={{ marginLeft: '4px' }} />
-          </Button>
-        ) : null}
+        {page === 0 ? <DropDown /> : null}
       </Grid>{' '}
       {page === 0 ? <MyInfo /> : <MyPromise />}
     </>

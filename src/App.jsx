@@ -23,6 +23,7 @@ import Detail from './pages/Detail';
 import GuideRequest from './pages/Detail/GuideRequest';
 import Favorite from './pages/Favorite';
 import MyPage from './pages/MyPage';
+import MyPromiseDetail from './pages/MyPage/Promise/MyPromise';
 import MyPageModify from './pages/MyPage/Modify';
 import CreateTrip from './pages/MyPage/CreateTrip';
 import Noti from './pages/Noti';
@@ -49,13 +50,18 @@ const App = () => {
           <PublicRoute path="/login" component={Login} exact />
           <PublicRoute path="/signup" component={SignUp} exact />
           <PublicRoute path="/signup/welcome" component={Welcome} exact />
-          <PublicRoute path="/onboarding/:page" component={Onboarding} exact />
+          <PublicRoute path="/onboarding" component={Onboarding} exact />
           <PrivateRoute path="/" component={Home} exact />
           <PrivateRoute path="/search" component={Search} exact />
           <PrivateRoute path="/detail" component={Detail} exact />
           <PrivateRoute path="/detail/request" component={GuideRequest} exact />
           <PrivateRoute path="/favorite" component={Favorite} exact />
           <PrivateRoute path="/mypage" component={MyPage} exact />
+          <PrivateRoute
+            path="/mypage/promise/:page"
+            component={MyPromiseDetail}
+            exact
+          />
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
           <PrivateRoute
             path="/mypage/create_trip"

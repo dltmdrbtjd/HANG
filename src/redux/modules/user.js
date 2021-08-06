@@ -64,6 +64,7 @@ const getUserInfoDB = () => {
         dispatch(getUserInfo(data));
       })
       .catch(() => {
+        delCookie();
         dispatch(
           setLoginStatus({
             status: false,

@@ -11,7 +11,6 @@ import ProfileCard from '../../../components/ProfileCard';
 import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
 // reducer
-import { UserCreators } from '../../../redux/modules/user';
 import { MypageCreators } from '../../../redux/modules/mypage';
 // style
 import { SetAlignItemsButton } from '../style';
@@ -27,13 +26,13 @@ const MyInfo = () => {
 
   const dispatch = useDispatch();
 
-  const logOut = () => {
-    dispatch(UserCreators.logOutDB());
-  };
-
   useEffect(() => {
     dispatch(MypageCreators.GetMyInfoDB());
   }, []);
+
+  const deleteTripEvent = tripId => {
+    dispatch(MypageCreators.DeleteTripEventDB({ tripId }));
+  };
 
   return (
     <>
@@ -42,7 +41,7 @@ const MyInfo = () => {
       <Grid display="flex" hoz="space-between" margin="60px 0 0" ver="center">
         <SubTitle fs="la">길잡이 설정</SubTitle>
 
-        <GuideToggle active={myInfo.guide} />
+        <GuideToggle active={Boolean(myInfo.guide)} />
       </Grid>
 
       <Grid margin="60px 0 15px" display="flex" hoz="space-between">
@@ -64,13 +63,16 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      <Button _onClick={logOut}>로그아웃</Button>
-
       {tripList.map(tripInfo => (
         <EventCard
           key={(Date.now() + Math.random()).toString(36)}
           btnText="삭제하기"
           userInfo={tripInfo}
+          mainText="여행 이벤트 삭제하기"
+          sub2Text="여행 이벤트를 삭제하시겠습니까?"
+          agreeText="삭제"
+          toastMessage="여행 이벤트가 삭제되었습니다."
+          callback={() => deleteTripEvent(tripInfo.tripId)}
         />
       ))}
     </>

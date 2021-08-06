@@ -12,7 +12,7 @@ const ProfileCard = ({ userInfo }) => {
       margin="10px 0 0 0"
       radius="14px"
       bgColor="white"
-      shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
+      border="1px solid #E7E7E7"
     >
       <Grid position="relative" display="flex" hoz="center" ver="center">
         <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
@@ -39,7 +39,7 @@ const ProfileCard = ({ userInfo }) => {
         ) : null}
       </Grid>
       <Grid margin="10px 0 0 0" padding="0 20px">
-        {userInfo.contents ? (
+        {userInfo.intro ? (
           <Text fs="sm">{userInfo.intro}</Text>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>
