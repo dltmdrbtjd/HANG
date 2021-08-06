@@ -5,13 +5,16 @@ import produce from 'immer';
 import apis from '../../shared/api';
 
 const LOAD = 'favorite/load';
-const TOGGLE = 'favorite/toggle';
+const ADD = 'favorite/add';
+const DEL = 'favorite/delete';
 
 const FavoriteLoad = createAction(LOAD, list => ({ list }));
-const FavoriteToggle = createAction(TOGGLE, like => ({ like }));
+const AddLike = createAction(ADD, boolean => ({ boolean }));
+const DelLike = createAction(DEL, boolean => ({ boolean }));
 
 const initialState = {
   list: [],
+  boolean: 0,
 };
 
 // 즐겨찾기 페이지 load시 사용
@@ -20,17 +23,34 @@ const FavoriteLoadDB = () => {
     apis
       .LikeLoad()
       .then(res => {
-        console.log(res);
-        dispatch(FavoriteLoad(res.data));
+        dispatch(FavoriteLoad(res.data.likeusers));
       })
       .catch(err => console.log(err));
   };
 };
 
 // 즐겨찾기 버튼 toggle시 사용
-const FavoriteToggleDB = () => {
-  return dispatch => {
-    dispatch(FavoriteToggle(like));
+const FavoriteAddDB = targetPk => {
+  return (dispatch, getState) => {
+    let number = getState().favorite.boolean;
+    apis
+      .Like(targetPk)
+      .then(() => {
+        // dispatch(AddLike(number + 1));
+      })
+      .catch(err => console.error(err));
+  };
+};
+
+const FavoriteDelDB = targetPk => {
+  return (dispatch, getState) => {
+    let number = getState().favorite.boolean;
+    apis
+      .UnLike({ data: targetPk })
+      .then(() => {
+        // dispatch(DelLike(number - 1));
+      })
+      .catch(err => console.error(err));
   };
 };
 
@@ -40,14 +60,22 @@ export default handleActions(
       produce(state, draft => {
         draft.list = action.payload.list;
       }),
-    [TOGGLE]: (state, action) => produce(state, draft => {}),
+    // [ADD]: (state, action) =>
+    //   produce(state, draft => {
+    //     draft.boolean = action.payload.boolean;
+    //   }),
+    // [DEL]: (state, action) =>
+    //   produce(state, draft => {
+    //     draft.boolean = action.payload.boolean;
+    //   }),
   },
   initialState,
 );
 
 const FavoriteCreators = {
   FavoriteLoadDB,
-  FavoriteToggleDB,
+  FavoriteAddDB,
+  FavoriteDelDB,
 };
 
 export { FavoriteCreators };
