@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 // form
@@ -48,6 +48,12 @@ const SignUp = () => {
     '행에서\u00A0사용할 아이디와\u00A0비밀번호를\u00A0입력해주세요',
     '행에서\u00A0사용할 프로필을\u00A0설정해주세요',
   ];
+
+  useEffect(() => {
+    return () => {
+      dispatch(UserCreators.initializeSignUpInfo());
+    };
+  }, []);
 
   return (
     <>

@@ -14,6 +14,7 @@ instance.interceptors.request.use(
     config.headers['X-Requested-With'] = 'XMLHttpRequest';
     config.headers.token = getCookie();
     config.headers.Accept = 'application/json';
+
     return config;
   },
   error => {
@@ -21,6 +22,7 @@ instance.interceptors.request.use(
       delCookie();
       window.location.replace('/login');
     }
+
     return error;
   },
 );
@@ -28,7 +30,6 @@ instance.interceptors.request.use(
 // 사용할 api들
 const apis = {
   // user
-  Auth: () => instance.get('/api/users'),
   SMSAuth: phone => instance.post('/api/users/sms_auth', phone),
   SignUp: user => instance.post('/api/users', user),
   Pauth: authInfo => instance.post('/api/users/p_auth', authInfo),

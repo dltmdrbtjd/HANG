@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // date format
 import moment from 'moment';
 // redux
@@ -14,8 +14,8 @@ import { MypageCreators } from '../../../redux/modules/mypage';
 const CreateTrip = () => {
   const dispatch = useDispatch();
 
-  const [region, setRegion] = useState('서울특별시');
-  const [city, setCity] = useState('종로구');
+  const [region, setRegion] = useState('');
+  const [city, setCity] = useState('');
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -35,6 +35,11 @@ const CreateTrip = () => {
 
     dispatch(MypageCreators.CreateTripEventDB(trip));
   };
+
+  useEffect(() => {
+    setRegion('서울특별시');
+    setCity('종로구');
+  }, []);
 
   return (
     <>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 // date format
-import * as dateFns from 'date-fns';
+import moment from 'moment';
 // icon
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
@@ -95,7 +95,9 @@ const PromiseCard = ({ promInfo, guide, type }) => {
 
   useEffect(() => {
     if (open.toastMsgOpen) {
-      setTimeout(() => setOpen({ ...open, toastMsgOpen: false }), 1500);
+      setTimeout(() => {
+        setOpen({ ...open, toastMsgOpen: false });
+      }, 1500);
     }
   }, [open.toastMsgOpen]);
 
@@ -115,8 +117,8 @@ const PromiseCard = ({ promInfo, guide, type }) => {
           </Text>
 
           <Text>
-            {dateFns.format(promInfo.startDate, 'MM.dd')} -{' '}
-            {dateFns.format(promInfo.endDate, 'MM.dd')}
+            {moment.utc(promInfo.startDate).format('MM.DD')} -{' '}
+            {moment.utc(promInfo.endDate).format('MM.DD')}
           </Text>
 
           <Text fs="la" fw="bold">
@@ -125,7 +127,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
         </Grid>
 
         <Strong color="darkG" addstyle={ArrowStyle}>
-          {guide ? <CallReceivedIcon /> : <CallMadeIcon />}
+          {guide ? <CallMadeIcon /> : <CallReceivedIcon />}
         </Strong>
       </Grid>
 
@@ -170,7 +172,9 @@ const PromiseCard = ({ promInfo, guide, type }) => {
         close={() => setOpen({ ...open, modalOpen: false })}
         {...modalMessage[promiseType]}
       />
-      <ToastMessage msg={modalMessage[promiseType].toastMsg} />
+      {open.toastMsgOpen ? (
+        <ToastMessage msg={modalMessage[promiseType].toastMsg} />
+      ) : null}
     </Grid>
   );
 };
