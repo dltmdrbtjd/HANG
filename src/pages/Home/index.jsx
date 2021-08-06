@@ -23,6 +23,9 @@ const Home = () => {
     traveler: state.home.traveler,
     like: state.favorite.boolean,
   }));
+
+  const mainlist = Object.keys(lists);
+
   useEffect(() => {
     dispatch(HomeCreators.HomeLoadDB());
   }, [like]);
@@ -60,7 +63,14 @@ const Home = () => {
         <MainTitle fs="la">내 지역을 여행하고 싶은 여행자에요</MainTitle>
         {traveler
           ? traveler.map((item, idx) => {
-              return <SearchCard key={idx} userInfo={item} />;
+              return (
+                <SearchCard
+                  key={idx}
+                  userInfo={item}
+                  category={mainlist[2]}
+                  idx={idx}
+                />
+              );
             })
           : ''}
       </Grid>
@@ -72,7 +82,7 @@ const Home = () => {
                 <SearchCard
                   key={idx}
                   userInfo={item}
-                  category={Object.keys(indexOf('guide'))}
+                  category={mainlist[1]}
                   idx={idx}
                 />
               );

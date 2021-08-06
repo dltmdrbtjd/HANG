@@ -16,6 +16,7 @@ const Favorite = () => {
 
   const DelLike = userPk => {
     dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userPk }));
+    dispatch(FavoriteCreators.FavoriteDelHandler(userPk));
   };
 
   useEffect(() => {

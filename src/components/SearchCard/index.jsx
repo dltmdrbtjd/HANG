@@ -13,16 +13,15 @@ import ProfileImg from '../ProfileImg/index';
 
 const SearchCard = ({ userInfo, category, idx }) => {
   const dispatch = useDispatch();
-  // console.log(category, idx);
 
   const AddLike = () => {
     dispatch(FavoriteCreators.FavoriteAddDB({ targetPk: userInfo.userPk }));
-    dispatch(HomeCreators.likeUpdateHandler(category[0], idx, true));
+    dispatch(HomeCreators.likeUpdateHandler(category, idx, true));
   };
 
   const DelLike = () => {
     dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userInfo.userPk }));
-    dispatch(HomeCreators.likeUpdateHandler(category[0], idx, false));
+    dispatch(HomeCreators.likeUpdateHandler(category, idx, false));
   };
   return (
     <Grid padding="10px 0">
