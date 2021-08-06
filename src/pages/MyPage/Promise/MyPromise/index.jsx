@@ -8,6 +8,7 @@ import PromiseCard from '../PromiseCard';
 const MyPromiseDetail = ({ match }) => {
   const page = parseInt(match.params.page, 10);
   const pageTitles = ['받은 요청', '보낸 요청', '확정한 약속'];
+  const typeArr = ['received', 'requested', 'confirmed'];
   const promises = useSelector(
     state => [
       state.mypage.promise.received,
@@ -16,6 +17,7 @@ const MyPromiseDetail = ({ match }) => {
     ],
     shallowEqual,
   );
+  console.log(promises);
 
   return (
     <>
@@ -26,7 +28,7 @@ const MyPromiseDetail = ({ match }) => {
       {promises[page - 1].map((promInfo, idx) => (
         <PromiseCard
           key={(Date.now() + Math.random() * idx).toString(36)}
-          received={page === 1}
+          type={typeArr[page - 1]}
           guide={promInfo.guide}
           promInfo={promInfo}
         />

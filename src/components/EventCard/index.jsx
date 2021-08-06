@@ -75,4 +75,8 @@ const EventCard = ({ userInfo, ...props }) => {
   );
 };
 
+EventCard.defaultProps = {
+  callback: () => {},
+};
+
 export default EventCard;

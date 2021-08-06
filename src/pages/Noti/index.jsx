@@ -8,18 +8,6 @@ const Noti = () => {
   return (
     <Grid margin="-24px 0 80px">
       <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
-      <AlaremCard />
 
       <Grid
         width="90%"
