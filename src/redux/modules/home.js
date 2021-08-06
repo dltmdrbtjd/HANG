@@ -32,6 +32,7 @@ const HomeLoadDB = () => {
       .MainLoad()
       .then(res => {
         const data = res.data;
+        console.log(data);
         dispatch(HomeLoad(data.confirmed, data.guide, data.traveler));
       })
       .catch(err => console.log(err));
@@ -50,7 +51,7 @@ export default handleActions(
       produce(state, draft => {
         draft.confirmed = action.payload.confirmed;
         draft.guide = action.payload.guide;
-        // draft.traveler = action.payload.traveler;
+        draft.traveler = action.payload.traveler;
       }),
     [LIKEUPDATE]: (state, action) =>
       produce(state, draft => {
