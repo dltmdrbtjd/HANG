@@ -57,7 +57,7 @@ const apis = {
   MainLoad: () => instance.get('/api/main'),
 
   // search
-  Search: content => instance.post('/api/search', content),
+  Search: content => instance.post('/api/main/search', content),
 
   // user detail
   UserDetail: userPk => instance.get(`/api/user/${userPk}`),
