@@ -6,7 +6,7 @@ const PromiseCard = styled.div`
   border-radius: 14px;
   box-shadow: 0 4px 4px rgba(134, 134, 134, 0.3);
   background-color: ${({ theme }) => theme.color.white};
-  padding: 14px 23px 40px 23px;
+  padding: 20px;
 `;
 
 export default PromiseCard;
