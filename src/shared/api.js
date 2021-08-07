@@ -18,9 +18,9 @@ instance.interceptors.request.use(config => {
   return config;
 });
 
-const AuthorizationCheck = instance.interceptors.response.use(
+instance.interceptors.response.use(
   response => {
-    return response;
+    return Promise.resolve(response);
   },
   error => {
     const path = window.location.pathname;
@@ -29,6 +29,7 @@ const AuthorizationCheck = instance.interceptors.response.use(
       error.response.status === 401 &&
       !['/signup', '/login'].includes(path)
     ) {
+      window.alert('토큰이 만료되었습니다.');
       delCookie();
       window.location.replace('/login');
     }
@@ -36,7 +37,6 @@ const AuthorizationCheck = instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-instance.interceptors.response.eject(AuthorizationCheck);
 
 // 사용할 api들
 const apis = {
