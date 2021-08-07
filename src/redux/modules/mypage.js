@@ -10,7 +10,9 @@ const GET_MY_TRIP_INFO = 'mypage/GET_MY_TRIP_INFO';
 const CREATE_TRIP_EVENT = 'mypage/CREATE_TRIP_EVENT';
 const DELETE_TRIP_EVENT = 'mypage/DELETE_TRIP_EVENT';
 const GET_MY_PROMISE = 'mypage/GET_PROMISE_RECEIVED';
+const AGREE_PROMISE = 'mypage/AGREE_PROMISE';
 const REJECT_PROMISE = 'mypage/REJECT_PROMISE';
+const CANCEL_CONFIRMED_PROM = 'mypage/CANCEL_CONFIRMED_PROM';
 
 const getMyInfo = createAction(GET_MY_INFO, myInfo => ({ myInfo }));
 const getMyTripInfo = createAction(GET_MY_TRIP_INFO, tripInfo => ({
@@ -23,9 +25,16 @@ const deleteTripEvent = createAction(DELETE_TRIP_EVENT, tripId => ({ tripId }));
 const getMyPromise = createAction(GET_MY_PROMISE, promise => ({
   promise,
 }));
+const agreeReceivedProm = createAction(AGREE_PROMISE, (tripInfo, tripId) => ({
+  tripInfo,
+  tripId,
+}));
 const rejectPromise = createAction(REJECT_PROMISE, (type, requestId) => ({
   type,
   requestId,
+}));
+const cancelConfiremdProm = createAction(CANCEL_CONFIRMED_PROM, tripId => ({
+  tripId,
 }));
 
 const initialState = {
@@ -125,53 +134,33 @@ const UpdateProfileDB = (image, profile) => {
 };
 
 const AgreePromiseDB = (tripInfo, id) => {
-  return (dispatch, getState) => {
+  return dispatch => {
     apis
       .AgreePromise({ ...id })
       .then(() => {
-        const promise = getState().mypage.promise;
-        const receivedProm = promise.received.filter(
-          prom => prom.tripId !== id.tripId,
-        );
-        const confirmedProm = [
-          ...promise.confirmed,
-          { ...tripInfo, guide: false },
-        ];
-
-        dispatch(
-          getMyPromise({
-            ...promise,
-            received: receivedProm,
-            confirmed: confirmedProm,
-          }),
-        );
+        dispatch(agreeReceivedProm(tripInfo, id.tripId));
       })
       .catch(err => console.log(err));
   };
 };
 
-const RejectPromiseDB = (type, reqId) => {
+const RejectPromiseDB = (type, requestId) => {
   return dispatch => {
     apis
-      .RejectPromise(reqId)
+      .RejectPromise({ requestId })
       .then(() => {
-        dispatch(rejectPromise(type, reqId));
+        dispatch(rejectPromise(type, requestId));
       })
       .catch(err => console.log(err));
   };
 };
 
 const CancelConfirmedPromDB = tripId => {
-  return (dispatch, getState) => {
+  return dispatch => {
     apis
-      .CancelPromise(tripId)
+      .CancelPromise({ tripId })
       .then(() => {
-        const promise = getState().mypage.promise;
-        const confirmedProm = promise.confirmed.filter(
-          trip => trip.tripId !== tripId.tripId,
-        );
-
-        dispatch(getMyPromise({ ...promise, confirmed: confirmedProm }));
+        dispatch(cancelConfiremdProm(tripId));
       })
       .catch(err => console.log(err));
   };
@@ -210,13 +199,26 @@ export default handleActions(
         draft.promise = action.payload.promise;
       }),
 
+    [AGREE_PROMISE]: (state, action) =>
+      produce(state, draft => {
+        draft.promise.received = draft.promise.received.filter(
+          prom => prom.tripId !== action.payload.tripId,
+        );
+        draft.promise.confirmed.push(action.payload.tripInfo);
+      }),
+
     [REJECT_PROMISE]: (state, action) =>
       produce(state, draft => {
-        console.log(action.payload.type);
-
         draft.promise[action.payload.type] = draft.promise[
           action.payload.type
         ].filter(trip => trip.requestId !== action.payload.requestId);
+      }),
+
+    [CANCEL_CONFIRMED_PROM]: (state, action) =>
+      produce(state, draft => {
+        draft.promise.confirmed = draft.promise.confirmed.filter(
+          prom => prom.tripId !== action.payload.tripId,
+        );
       }),
   },
   initialState,
