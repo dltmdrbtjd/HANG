@@ -33,14 +33,14 @@ const HomeLoadDB = () => {
       .then(res => {
         const data = res.data;
         console.log(data);
-        dispatch(HomeLoad(data.confirmed, data.guide, data.traveler));
+        dispatch(HomeLoad(data.promise, data.guide, data.traveler));
       })
       .catch(err => console.log(err));
   };
 };
 
 const likeUpdateHandler = (category, idx, like) => {
-  return (dispatch, getState) => {
+  return dispatch => {
     dispatch(likeUpdate(category, idx, like));
   };
 };
@@ -55,10 +55,24 @@ export default handleActions(
       }),
     [LIKEUPDATE]: (state, action) =>
       produce(state, draft => {
+        let TraveleDoubleCheck = draft.traveler.findIndex(
+          i => i.userPk === draft.guide[action.payload.idx].userPk,
+        );
+
+        let GuideDoubleCheck = draft.guide.findIndex(
+          i => i.userPk === draft.traveler[action.payload.idx].userPk,
+        );
+
         if (action.payload.category === 'guide') {
           draft.guide[action.payload.idx].like = action.payload.like;
+          if (TraveleDoubleCheck !== -1) {
+            draft.traveler[TraveleDoubleCheck].like = action.payload.like;
+          }
         } else if (action.payload.category === 'traveler') {
           draft.traveler[action.payload.idx].like = action.payload.like;
+          if (GuideDoubleCheck !== -1) {
+            draft.guide[GuideDoubleCheck].like = action.payload.like;
+          }
         }
       }),
   },

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router';
 // redux
 import { useDispatch } from 'react-redux';
 // style
@@ -6,22 +7,31 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { FavoriteCreators } from '../../redux/modules/favorite';
 import { HomeCreators } from '../../redux/modules/home';
-// import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { SearchCreators } from '../../redux/modules/search';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
 const SearchCard = ({ userInfo, category, idx }) => {
   const dispatch = useDispatch();
+  const path = useLocation().pathname;
 
   const AddLike = () => {
     dispatch(FavoriteCreators.FavoriteAddDB({ targetPk: userInfo.userPk }));
-    dispatch(HomeCreators.likeUpdateHandler(category, idx, true));
+    if (path.includes('/search')) {
+      dispatch(SearchCreators.likeUpdateHandler(idx, true));
+    } else if (path.includes('/')) {
+      dispatch(HomeCreators.likeUpdateHandler(category, idx, true));
+    }
   };
 
   const DelLike = () => {
     dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userInfo.userPk }));
-    dispatch(HomeCreators.likeUpdateHandler(category, idx, false));
+    if (path.includes('/search')) {
+      dispatch(SearchCreators.likeUpdateHandler(idx, false));
+    } else if (path.includes('/')) {
+      dispatch(HomeCreators.likeUpdateHandler(category, idx, false));
+    }
   };
   return (
     <Grid padding="10px 0">
@@ -54,31 +64,20 @@ const SearchCard = ({ userInfo, category, idx }) => {
             {userInfo && userInfo.city}
           </Text>
         </Grid>
-        {userInfo && userInfo.like ? (
-          <Grid
-            width="auto"
-            color="brandColor"
-            position="absolute"
-            top="10px"
-            right="10px"
-            _onClick={DelLike}
-            z="2"
-          >
-            <FavoriteIcon />
-          </Grid>
-        ) : (
-          <Grid
-            width="auto"
-            color="darkG"
-            position="absolute"
-            top="10px"
-            right="10px"
-            _onClick={AddLike}
-            z="2"
-          >
-            <FavoriteBorderIcon />
-          </Grid>
-        )}
+
+        <Grid
+          width="auto"
+          color={userInfo.like ? 'brandColor' : 'darkG'}
+          position="absolute"
+          top="10px"
+          right="10px"
+          _onClick={() => {
+            userInfo.like ? DelLike() : AddLike();
+          }}
+          z="2"
+        >
+          {userInfo.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        </Grid>
       </Grid>
     </Grid>
   );

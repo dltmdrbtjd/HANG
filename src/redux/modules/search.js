@@ -6,9 +6,11 @@ import apis from '../../shared/api';
 
 const LOAD = 'search/LOAD';
 const SEARCH = 'search/SEND';
+const LIKEUPDATE = 'search/LIKEUPDATE';
 
 const SearchLoad = createAction(LOAD, list => ({ list }));
 const SearchSend = createAction(SEARCH, content => ({ content }));
+const LikeUpdate = createAction(LIKEUPDATE, (idx, like) => ({ idx, like }));
 
 const initialState = {
   list: [],
@@ -38,6 +40,12 @@ const SearchSendDB = content => {
   };
 };
 
+const likeUpdateHandler = (idx, like) => {
+  return dispatch => {
+    dispatch(LikeUpdate(idx, like));
+  };
+};
+
 export default handleActions(
   {
     [LOAD]: (state, action) =>
@@ -48,13 +56,18 @@ export default handleActions(
       produce(state, draft => {
         draft.list = action.payload.content;
       }),
+    [LIKEUPDATE]: (state, action) =>
+      produce(state, draft => {
+        draft.list.result[action.payload.idx].like = action.payload.like;
+      }),
   },
   initialState,
 );
 
-const SearchActions = {
+const SearchCreators = {
   SearchLoadDB,
   SearchSendDB,
+  likeUpdateHandler,
 };
 
-export { SearchActions };
+export { SearchCreators };

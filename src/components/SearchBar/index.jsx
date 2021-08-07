@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useLocation } from 'react-router';
 // style
@@ -14,10 +14,6 @@ const SearchBar = props => {
     SetKeyword(e.target.value);
   };
 
-  if (path.includes('/search')) {
-    props.setFindUser(keyword);
-  }
-
   const KeyPressHandler = e => {
     if (path.includes('/search')) {
       return undefined;
@@ -26,6 +22,12 @@ const SearchBar = props => {
       history.push(`/search?keyword=${keyword}`);
     }
   };
+
+  useEffect(() => {
+    if (path.includes('/search')) {
+      props.setFindUser(keyword);
+    }
+  }, [keyword]);
 
   return (
     <Grid margin="28px 0 0 0" position="relative">
