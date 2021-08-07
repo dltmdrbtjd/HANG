@@ -24,7 +24,10 @@ instance.interceptors.response.use(
   error => {
     const path = window.location.pathname;
 
-    if (error.response.status === 401 && path !== '/signup') {
+    if (
+      error.response.status === 401 &&
+      !['/signup', '/login'].includes(path)
+    ) {
       delCookie();
       window.location.replace('/login');
     }

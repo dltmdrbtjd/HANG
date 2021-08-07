@@ -36,13 +36,11 @@ const PromiseCard = ({ promInfo, guide, type }) => {
   };
 
   const rejectPromise = () => {
-    dispatch(
-      MypageCreators.RejectPromiseDB(type, { requestId: promInfo.requestId }),
-    );
+    dispatch(MypageCreators.RejectPromiseDB(type, promInfo.requestId));
   };
 
   const cancelConfiremedPromise = () => {
-    dispatch(MypageCreators.CancelConfirmedPromDB({ tripId: promInfo.tripId }));
+    dispatch(MypageCreators.CancelConfirmedPromDB(promInfo.tripId));
   };
 
   const modalMessage = {
@@ -106,7 +104,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
   }, []);
 
   return (
-    <Grid bgColor="white" radius="16px" overflow="hidden">
+    <Grid bgColor="white" radius="16px" overflow="hidden" margin="0 0 15px">
       <Grid display="flex" ver="center" padding="32px 20px" position="relative">
         <ProfileImg size="large" />
 
