@@ -5,14 +5,15 @@ import apis from '../../shared/api';
 const LOAD = 'detail/LOAD';
 const MYTRAVELE_LOAD = 'detail/MYTRAVEL_LOAD';
 const SUCCESS = 'detail/SUCCESS';
+const LIKEUPDATE = 'detail/LIKEUPDATE';
 
 const DetailLoad = createAction(LOAD, (userInfo, tripInfo) => ({
   userInfo,
   tripInfo,
 }));
-
 const MyTravelLoad = createAction(MYTRAVELE_LOAD, myTrip => ({ myTrip }));
 const SuccessValue = createAction(SUCCESS, success => ({ success }));
+const LikeUpdate = createAction(LIKEUPDATE, like => ({ like }));
 
 const initialState = {
   userInfo: {},
@@ -74,6 +75,12 @@ const AddGuide = TripInfo => {
   };
 };
 
+const LikeUpdateHandler = like => {
+  return dispatch => {
+    dispatch(LikeUpdate(like));
+  };
+};
+
 export default handleActions(
   {
     [LOAD]: (state, action) =>
@@ -89,6 +96,10 @@ export default handleActions(
       produce(state, draft => {
         draft.success = action.payload.success;
       }),
+    [LIKEUPDATE]: (state, action) =>
+      produce(state, draft => {
+        draft.userInfo.like = action.payload.like;
+      }),
   },
   initialState,
 );
@@ -99,6 +110,7 @@ const DetailCreators = {
   AddTravel,
   AddGuide,
   SuccessValue,
+  LikeUpdateHandler,
 };
 
 export { DetailCreators };
