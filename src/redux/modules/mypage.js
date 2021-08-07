@@ -136,7 +136,7 @@ const UpdateProfileDB = (image, profile) => {
 const AgreePromiseDB = (tripInfo, id) => {
   return dispatch => {
     apis
-      .AgreePromise({ ...id })
+      .AgreePromise(id)
       .then(() => {
         dispatch(agreeReceivedProm(tripInfo, id.tripId));
       })

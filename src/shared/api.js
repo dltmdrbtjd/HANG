@@ -6,6 +6,7 @@ import { getCookie, delCookie } from './cookie';
 const instance = axios.create({
   baseURL: 'https://soujinko.shop',
   withCredentials: true,
+  timeout: 3000,
 });
 
 instance.interceptors.request.use(config => {
@@ -17,9 +18,9 @@ instance.interceptors.request.use(config => {
   return config;
 });
 
-instance.interceptors.response.use(
-  res => {
-    return res;
+const AuthorizationCheck = instance.interceptors.response.use(
+  response => {
+    return response;
   },
   error => {
     const path = window.location.pathname;
@@ -32,9 +33,10 @@ instance.interceptors.response.use(
       window.location.replace('/login');
     }
 
-    return error;
+    return Promise.reject(error);
   },
 );
+instance.interceptors.response.eject(AuthorizationCheck);
 
 // 사용할 api들
 const apis = {
