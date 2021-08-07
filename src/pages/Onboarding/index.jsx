@@ -124,6 +124,4 @@ const Onboarding = () => {
   );
 };
 
-Onboarding.defaultProps = {};
-
 export default Onboarding;
