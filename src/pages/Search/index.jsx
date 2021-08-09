@@ -192,7 +192,7 @@ const Search = props => {
             return <SearchCard userInfo={item} key={idx} idx={idx} />;
           })
         : ''}
-      <div ref={ref} />
+      <div ref={ref} style={{ marginBottom: '30px' }} />
     </>
   );
 };
