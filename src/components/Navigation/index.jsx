@@ -33,12 +33,6 @@ const Navigation = () => {
   )
     return null;
 
-  useEffect(() => {
-    if (path.includes('/search')) {
-      setMypageIcon(false);
-    }
-  }, [path]);
-
   return (
     <NavigationStyle>
       <Navigationicons
@@ -70,7 +64,7 @@ const Navigation = () => {
         <Text margin="10px 0 0 0">관심목록</Text>
       </Navigationicons>
       <Navigationicons
-        className={path === '/' ? 'Click' : ''}
+        className={mypageIcon ? 'Click' : ''}
         onClick={() => {
           history.push('/');
           setMypageIcon(true);
