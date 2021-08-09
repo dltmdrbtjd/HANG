@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 // material
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // icon
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import SettingsIcon from '@material-ui/icons/Settings';
 // history
 import { history } from '../../../redux/configureStore';
 // elements
@@ -49,7 +49,7 @@ const DropDown = () => {
         _onClick={handleToggle}
         ref={anchorRef}
       >
-        <MoreVertIcon />
+        <SettingsIcon />
       </Button>
 
       {open ? (
