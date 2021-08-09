@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // router
 import { useLocation } from 'react-router';
 // serach
@@ -32,6 +32,12 @@ const Navigation = () => {
     path.includes('/onboarding')
   )
     return null;
+
+  useEffect(() => {
+    if (path.includes('/search')) {
+      setMypageIcon(false);
+    }
+  }, [path]);
 
   return (
     <NavigationStyle>
