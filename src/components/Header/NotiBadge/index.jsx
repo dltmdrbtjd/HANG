@@ -9,7 +9,7 @@ const NotiBadge = () => {
   return (
     <Link href="/noti">
       <Badge badgeContent={4} color="secondary">
-        <NotificationsNoneIcon fontSize="large" />
+        <NotificationsNoneIcon />
       </Badge>
     </Link>
   );

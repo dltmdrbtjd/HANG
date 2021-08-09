@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+// router
+import { useLocation } from 'react-router-dom';
 // style
 import SectionStyle from './style';
 // components
@@ -7,6 +9,7 @@ import LogoSplash from '../LogoSplash';
 
 const Section = ({ children }) => {
   const [visible, setVisible] = useState(true);
+  const path = useLocation().pathname;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -17,6 +20,8 @@ const Section = ({ children }) => {
       clearTimeout(timer);
     };
   }, []);
+
+  if (path === '/onboarding') return null;
 
   return (
     <SectionStyle>
