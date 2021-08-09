@@ -4,14 +4,15 @@ const NavigationStyle = styled.ul`
   display: flex;
   position: fixed;
   width: 100%;
+  max-width: 768px;
+  left: 50%;
   bottom: 0;
   height: 90px;
   justify-content: space-around;
   align-items: center;
   font-size: ${({ theme }) => theme.fontSize.xs};
-  box-shadow: 0 -4px 4px rgba(134, 134, 134, 0.3);
-  background-color: ${({ theme }) => theme.color.lightG};
   cursor: pointer;
+  transform: translateX(-50%);
   z-index: 3;
 `;
 
