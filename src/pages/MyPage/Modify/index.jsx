@@ -32,7 +32,10 @@ const MyPageModify = () => {
   const [profileImg, setProfileImg] = useState(userInfo.profileImg);
   const [modifyInfo, setModifyInfo] = useState({
     nickname: userInfo.nickname,
-    intro: userInfo.intro,
+    intro:
+      userInfo.intro === 'none'
+        ? `안녕하세요 ${userInfo.nickname}입니다`
+        : userInfo.intro,
   });
 
   const nickRegExp = () => modifyInfo.nickname.length <= 16;

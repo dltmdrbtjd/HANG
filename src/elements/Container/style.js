@@ -9,6 +9,8 @@ const ContainerStyle = styled.div`
   min-height: ${props => props.height || '100vh'};
   margin: 0 auto;
 
+  ${props => props.addstyle};
+
   @media only screen and (max-width: 768px) {
     max-width: none;
     width: 90%;

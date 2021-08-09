@@ -13,6 +13,8 @@ const MainTitleStyle = styled.h2`
   text-align: ${props => props.textAlign};
   word-break: keep-all;
   box-sizing: border-box;
+
+  ${props => props.addstyle};
 `;
 
 export default MainTitleStyle;

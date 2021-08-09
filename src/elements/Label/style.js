@@ -16,6 +16,8 @@ const LabelStyle = styled.label`
   left: ${props => props.left};
   box-sizing: border-box;
   z-index: ${props => props.z};
+
+  ${props => props.addstyle};
 `;
 
 export default LabelStyle;

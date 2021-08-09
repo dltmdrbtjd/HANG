@@ -10,7 +10,6 @@ import Text from './Text';
 import MainTitle from './MainTitle';
 import SubTitle from './SubTitle';
 import Strong from './Strong';
-import Link from './Link';
 import Image from './Image';
 import Logo from './Logo';
 
@@ -27,7 +26,6 @@ export {
   MainTitle,
   SubTitle,
   Strong,
-  Link,
   Image,
   Logo,
 };

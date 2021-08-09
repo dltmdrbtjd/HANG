@@ -2,16 +2,18 @@ import React from 'react';
 // material
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+// history
+import { history } from '../../../redux/configureStore';
 // elements
-import { Link } from '../../../elements';
+import { Button } from '../../../elements';
 
 const NotiBadge = () => {
   return (
-    <Link href="/noti">
+    <Button _onClick={() => history.push('/noti')} shape="text">
       <Badge badgeContent={4} color="secondary">
         <NotificationsNoneIcon />
       </Badge>
-    </Link>
+    </Button>
   );
 };
 

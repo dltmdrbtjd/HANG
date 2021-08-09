@@ -28,6 +28,8 @@ const InputStyle = styled.input`
   &:-ms-input-placeholder {
     color: ${props => props.theme.color.gray};
   }
+
+  ${props => props.addstyle};
 `;
 
 export default InputStyle;

@@ -1,12 +1,31 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+const buttonShapeSetting = shape => {
+  switch (shape) {
+    case 'text':
+      return css`
+        background: none;
+        padding: 0;
+        color: ${props =>
+          props.color ? props.theme.color[props.color] : 'inherit'};
+      `;
+
+    default:
+      return css`
+        background-color: ${props => props.theme.color[props.bgColor]};
+        color: ${props =>
+          props.color
+            ? props.theme.color[props.color]
+            : props.theme.color.white};
+        padding: ${props => props.padding};
+      `;
+  }
+};
 
 const ButtonStyle = styled.button`
-  background-color: ${props => props.theme.color[props.bgColor]};
   width: ${props => props.width};
   height: ${props => props.height};
-  padding: ${props => props.padding};
   margin: ${props => props.margin};
-  color: ${props => props.theme.color[props.color]};
   font-size: ${props => props.theme.fontSize[props.fs]};
   font-weight: ${props => props.theme.fontWeight[props.fw]};
   box-shadow: ${props => props.shadow};
@@ -14,6 +33,7 @@ const ButtonStyle = styled.button`
   border-radius: ${props => props.radius};
   box-sizing: border-box;
   cursor: pointer;
+  ${props => buttonShapeSetting(props.shape)};
 
   ${props => props.addstyle};
 

@@ -8,12 +8,7 @@ import NotiBadge from './NotiBadge';
 const Header = () => {
   const path = useLocation().pathname;
 
-  if (
-    path.includes('/signup') ||
-    path.includes('/login') ||
-    path.includes('/onboarding') ||
-    path.includes('/chat/room')
-  )
+  if (['/signup', '/login', '/onboarding', '/chat/room'].includes(path))
     return null;
 
   return (

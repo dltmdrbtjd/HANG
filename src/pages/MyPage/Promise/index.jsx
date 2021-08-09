@@ -61,7 +61,7 @@ const MyPromise = () => {
                 display="flex"
                 ver="center"
                 hoz="space-between"
-                margin="0 0 20px"
+                margin="0 0 15px"
               >
                 <SubTitle fs="la" width="auto">
                   받은 요청

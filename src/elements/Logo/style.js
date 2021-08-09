@@ -14,7 +14,7 @@ const LogoStyle = styled.h1`
   left: 0;
   margin: auto;
 
-  a {
+  button {
     text-indent: -9999px;
     overflow: hidden;
   }

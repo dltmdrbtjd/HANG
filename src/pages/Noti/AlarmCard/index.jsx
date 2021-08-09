@@ -1,6 +1,8 @@
 import React from 'react';
+// history
+import { history } from '../../../redux/configureStore';
 // elements
-import { Grid, Link, Text, Strong } from '../../../elements';
+import { Grid, Button, Text, Strong } from '../../../elements';
 // components
 import ProfileImage from '../../../components/ProfileImg';
 // style
@@ -8,7 +10,7 @@ import { AlarmWrapperStyle, StrongAddStyle } from './style';
 
 const AlarmCard = () => {
   return (
-    <Link href="/mypage" width="100%">
+    <Button width="100%" shape="text" _onClick={() => history.push('/mypage')}>
       <Grid
         padding="20px 0"
         display="flex"
@@ -22,7 +24,7 @@ const AlarmCard = () => {
           <Strong addstyle={StrongAddStyle}>길잡이</Strong>를 부탁합니다
         </Text>
       </Grid>
-    </Link>
+    </Button>
   );
 };
 
