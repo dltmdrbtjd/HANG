@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
-// query
+import { useSelector, useDispatch } from 'react-redux';
 import queryString from 'query-string';
+import { SearchCreators } from '../../redux/modules/search';
+// query
 // components
 import SearchBar from '../../components/SearchBar';
 import AreaSelectBox from '../../components/AreaSelectBox';
@@ -12,7 +13,9 @@ import { Button, Grid, Text, Strong } from '../../elements';
 import CategoryBtn from './style';
 
 const Search = props => {
+  const dispatch = useDispatch();
   const userlist = useSelector(state => state.search.list);
+  const SearchList = userlist.result;
   // 지역,여행자,길잡이 state
   const [cityOpen, setCityOpen] = useState(false);
   const [traveler, setTraveler] = useState(false);
@@ -32,26 +35,21 @@ const Search = props => {
   // 서버에 보낼 검색 데이터
   const content = {
     keyword: finduser,
-    area: {
-      region: city,
-      city: gu,
-    },
-    traveler,
-    guide,
+    region: city,
+    city: gu,
+    traveler: Number(traveler),
+    guide: Number(guide),
   };
-  console.log(`Component => src/pages/Search.jsx :`, content);
 
   const query = queryString.parse(location.search);
+  // 페이지 첫 진입시 or 메인에서 검색후 페이지 진입시 사용할 데이터
   const MainSearch = {
     keyword: query.keyword,
-    area: {
-      region: city,
-      city: gu,
-    },
-    traveler,
-    guide,
+    region: city,
+    city: gu,
+    traveler: Number(traveler),
+    guide: Number(guide),
   };
-  console.log(`Component => src/pages/Search.jsx :`, MainSearch);
 
   const CityOpenhandler = () => {
     if (!cityOpen) {
@@ -67,6 +65,7 @@ const Search = props => {
   const Travelerhandler = () => {
     if (!traveler) {
       setTraveler(true);
+      setGuide(false);
     } else {
       setTraveler(false);
     }
@@ -74,6 +73,7 @@ const Search = props => {
   const Guidehandler = () => {
     if (!guide) {
       setGuide(true);
+      setTraveler(false);
     } else {
       setGuide(false);
     }
@@ -82,15 +82,12 @@ const Search = props => {
   const SearchHandler = () => {
     setCityName(city);
     setGuName(gu);
-    console.log(
-      `Component => src/pages/Search.jsx :`,
-      city,
-      gu,
-      traveler,
-      guide,
-      finduser,
-    );
+    dispatch(SearchCreators.SearchSendDB(content));
   };
+
+  useEffect(() => {
+    dispatch(SearchCreators.SearchLoadDB(MainSearch));
+  }, []);
 
   return (
     <>
@@ -160,7 +157,11 @@ const Search = props => {
         <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
         {guName ? ` ${guName}의 검색 목록입니다.` : ''}
       </Text>
-      <SearchCard userInfo={userlist} />
+      {SearchList
+        ? SearchList.map((item, idx) => {
+            return <SearchCard userInfo={item} key={idx} idx={idx} />;
+          })
+        : ''}
     </>
   );
 };

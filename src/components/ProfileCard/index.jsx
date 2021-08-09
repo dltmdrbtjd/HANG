@@ -2,10 +2,27 @@ import React from 'react';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+// redux
+import { useDispatch } from 'react-redux';
+import { FavoriteCreators } from '../../redux/modules/favorite';
+import { DetailCreators } from '../../redux/modules/detail.js';
+
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
 const ProfileCard = ({ userInfo }) => {
+  const dispatch = useDispatch();
+
+  const AddLike = () => {
+    dispatch(FavoriteCreators.FavoriteAddDB({ targetPk: userInfo.userPk }));
+    dispatch(DetailCreators.LikeUpdateHandler(true));
+  };
+
+  const DelLike = () => {
+    dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userInfo.userPk }));
+    dispatch(DetailCreators.LikeUpdateHandler(false));
+  };
+
   return (
     <Grid
       padding="20px 0"
@@ -33,6 +50,9 @@ const ProfileCard = ({ userInfo }) => {
             position="absolute"
             top="0px"
             right="10px"
+            _onClick={() => {
+              userInfo.like ? DelLike() : AddLike();
+            }}
           >
             {userInfo.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </Grid>
