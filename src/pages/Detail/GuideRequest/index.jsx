@@ -53,38 +53,40 @@ const GuideRequest = () => {
   return (
     <>
       <MainTitle fs="xl">나의 약속 리스트</MainTitle>
-      {myPromise.map((item, idx) => (
-        <Grid
-          display="flex"
-          hoz="flex-start"
-          ver="center"
-          key={idx}
-          padding="20px 0"
-          borderbot="1px solid #c4c4c4"
-        >
-          <Grid width="auto">
-            <RadioBtn
-              type="radio"
-              id={item.city}
-              name="city"
-              checked={checked === item.tripId}
-              onChange={() => {
-                setChecked(item.tripId);
-                setIndex(idx);
-              }}
-            />
-          </Grid>
-          <label id={item.city}>
-            <Text fs="sm">
-              {moment.utc(item.startDate).format('YY.MM.DD')} ~{' '}
-              {moment.utc(item.endDate).format('YY.MM.DD')}
-            </Text>
-            <Text fs="la" fw="bold">
-              {item.region} {item.city}
-            </Text>
-          </label>
-        </Grid>
-      ))}
+      {myPromise.length > 0
+        ? myPromise.map((item, idx) => (
+            <Grid
+              display="flex"
+              hoz="flex-start"
+              ver="center"
+              key={idx}
+              padding="20px 0"
+              borderbot="1px solid #c4c4c4"
+            >
+              <Grid width="auto">
+                <RadioBtn
+                  type="radio"
+                  id={item.city}
+                  name="city"
+                  checked={checked === item.tripId}
+                  onChange={() => {
+                    setChecked(item.tripId);
+                    setIndex(idx);
+                  }}
+                />
+              </Grid>
+              <label id={item.city}>
+                <Text fs="sm">
+                  {moment.utc(item.startDate).format('YY.MM.DD')} ~{' '}
+                  {moment.utc(item.endDate).format('YY.MM.DD')}
+                </Text>
+                <Text fs="la" fw="bold">
+                  {item.region} {item.city}
+                </Text>
+              </label>
+            </Grid>
+          ))
+        : '등록하신 약속이 없어요!'}
       <Grid
         width="90%"
         position="fixed"
@@ -92,7 +94,12 @@ const GuideRequest = () => {
         left="50%"
         translate="-50%,0"
       >
-        <Button padding="16px 0" width="100%" _onClick={openModalHandler}>
+        <Button
+          padding="16px 0"
+          width="100%"
+          disabled={myPromise.length > 0 ? '' : 'disabled'}
+          _onClick={openModalHandler}
+        >
           선택 완료
         </Button>
       </Grid>

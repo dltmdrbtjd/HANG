@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // router
 import { useLocation } from 'react-router';
 // serach
@@ -17,7 +17,7 @@ import onchat from '../../Images/NavigationIcons/onchat.svg';
 import mypage from '../../Images/NavigationIcons/mypage.svg';
 import onmypage from '../../Images/NavigationIcons/onmypage.svg';
 // style
-import { Text } from '../../elements';
+import { Text, Grid } from '../../elements';
 import { Navigationicons, NavigationStyle } from './style';
 // history
 import { history } from '../../redux/configureStore';
@@ -34,74 +34,84 @@ const Navigation = () => {
     return null;
 
   return (
-    <NavigationStyle>
-      <Navigationicons
-        className={path.includes('/search') ? 'Click' : ''}
-        onClick={() => {
-          history.push('/search');
-          setMypageIcon(false);
-        }}
-      >
-        <img
-          alt="search"
-          src={path.includes('/search') ? onsearch : search}
-          style={{ width: '26.5px', height: '26.5px' }}
-        />
-        <Text margin="10px 0 0 0">검색</Text>
-      </Navigationicons>
-      <Navigationicons
-        className={path.includes('/favorite') ? 'Click' : ''}
-        onClick={() => {
-          history.push('/favorite');
-          setMypageIcon(false);
-        }}
-      >
-        <img
-          alt="favorite"
-          src={path.includes('/favorite') ? onheart : heart}
-          style={{ width: '29px', height: '26px' }}
-        />
-        <Text margin="10px 0 0 0">관심목록</Text>
-      </Navigationicons>
-      <Navigationicons
-        className={mypageIcon ? 'Click' : ''}
-        onClick={() => {
-          history.push('/');
-          setMypageIcon(true);
-        }}
-      >
-        <img alt="home" src={mypageIcon ? onhome : home} />
-        <Text margin="10px 0 0 0">홈</Text>
-      </Navigationicons>
-      <Navigationicons
-        className={path.includes('/chat') ? 'Click' : ''}
-        onClick={() => {
-          history.push('/chat');
-          setMypageIcon(false);
-        }}
-      >
-        <img
-          alt="chat"
-          src={path.includes('/chat') ? onchat : chat}
-          style={{ width: '27px', height: '26px', marginLeft: '4px' }}
-        />
-        <Text margin="10px 0 0 4px">채팅</Text>
-      </Navigationicons>
-      <Navigationicons
-        className={path.includes('/mypage') ? 'Click' : ''}
-        onClick={() => {
-          history.push('/mypage');
-          setMypageIcon(false);
-        }}
-      >
-        <img
-          alt="mypage"
-          src={path.includes('/mypage') ? onmypage : mypage}
-          style={{ width: '25px', height: '26px' }}
-        />
-        <Text margin="10px 0 0 0">마이페이지</Text>
-      </Navigationicons>
-    </NavigationStyle>
+    <Grid
+      width="100%"
+      bgColor="lightG"
+      position="fixed"
+      bottom="0"
+      height="90px"
+      z="3"
+      shadow="0 -4px 4px rgba(134, 134, 134, 0.3);"
+    >
+      <NavigationStyle>
+        <Navigationicons
+          className={path.includes('/search') ? 'Click' : ''}
+          onClick={() => {
+            history.push('/search');
+            setMypageIcon(false);
+          }}
+        >
+          <img
+            alt="search"
+            src={path.includes('/search') ? onsearch : search}
+            style={{ width: '26.5px', height: '26.5px' }}
+          />
+          <Text margin="10px 0 0 0">검색</Text>
+        </Navigationicons>
+        <Navigationicons
+          className={path.includes('/favorite') ? 'Click' : ''}
+          onClick={() => {
+            history.push('/favorite');
+            setMypageIcon(false);
+          }}
+        >
+          <img
+            alt="favorite"
+            src={path.includes('/favorite') ? onheart : heart}
+            style={{ width: '29px', height: '26px' }}
+          />
+          <Text margin="10px 0 0 0">관심목록</Text>
+        </Navigationicons>
+        <Navigationicons
+          className={mypageIcon ? 'Click' : ''}
+          onClick={() => {
+            history.push('/');
+            setMypageIcon(true);
+          }}
+        >
+          <img alt="home" src={mypageIcon ? onhome : home} />
+          <Text margin="10px 0 0 0">홈</Text>
+        </Navigationicons>
+        <Navigationicons
+          className={path.includes('/chat') ? 'Click' : ''}
+          onClick={() => {
+            history.push('/chat');
+            setMypageIcon(false);
+          }}
+        >
+          <img
+            alt="chat"
+            src={path.includes('/chat') ? onchat : chat}
+            style={{ width: '27px', height: '26px', marginLeft: '4px' }}
+          />
+          <Text margin="10px 0 0 4px">채팅</Text>
+        </Navigationicons>
+        <Navigationicons
+          className={path.includes('/mypage') ? 'Click' : ''}
+          onClick={() => {
+            history.push('/mypage');
+            setMypageIcon(false);
+          }}
+        >
+          <img
+            alt="mypage"
+            src={path.includes('/mypage') ? onmypage : mypage}
+            style={{ width: '25px', height: '26px' }}
+          />
+          <Text margin="10px 0 0 0">마이페이지</Text>
+        </Navigationicons>
+      </NavigationStyle>
+    </Grid>
   );
 };
 
