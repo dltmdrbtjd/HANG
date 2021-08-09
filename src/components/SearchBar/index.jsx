@@ -35,6 +35,7 @@ const SearchBar = props => {
         placeholder="여행자/길잡이를 검색하세요."
         _onChange={InputValue}
         _onKeyPress={KeyPressHandler}
+        radius="40px"
       />
       <Grid
         width="30px"

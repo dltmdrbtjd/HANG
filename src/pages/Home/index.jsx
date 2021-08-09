@@ -6,7 +6,6 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { HomeCreators } from '../../redux/modules/home';
 // components
 import SearchBar from '../../components/SearchBar';
-import TopBtn from '../../components/TopBtn';
 import SearchCard from '../../components/SearchCard';
 // style
 import { Grid, Text, MainTitle } from '../../elements/index';
@@ -88,7 +87,7 @@ const Home = () => {
             })
           : ''}
       </Grid>
-      <Grid margin="60px 0 0 0">
+      <Grid margin="60px 0 60px 0">
         <MainTitle fs="la">내 지역에 함께있는 길잡이에요</MainTitle>
         {guide
           ? guide.map((item, idx) => {
@@ -103,7 +102,6 @@ const Home = () => {
             })
           : ''}
       </Grid>
-      <TopBtn />
     </Grid>
   );
 };

@@ -33,7 +33,7 @@ const Favorite = () => {
                 display="flex"
                 hoz="center"
                 ver="center"
-                borderbot="1px solid #c4c4c4"
+                borderbot="1px solid #e7e7e7"
                 padding="20px 0"
                 key={idx}
               >

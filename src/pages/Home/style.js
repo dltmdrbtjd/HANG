@@ -4,7 +4,7 @@ const PromiseCard = styled.div`
   width: 100%;
   box-sizing: border-box;
   border-radius: 14px;
-  box-shadow: 0 4px 4px rgba(134, 134, 134, 0.3);
+  box-shadow: 0 2px 3px rgba(196, 196, 196, 0.3);
   background-color: ${({ theme }) => theme.color.white};
   padding: 20px;
 `;
