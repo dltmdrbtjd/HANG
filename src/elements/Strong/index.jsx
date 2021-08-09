@@ -7,7 +7,6 @@ const Strong = ({ children, ...props }) => {
 
 Strong.defaultProps = {
   fw: 'semiBold',
-  fs: 'md',
 };
 
 export default Strong;

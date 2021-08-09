@@ -28,6 +28,7 @@ import CreateTrip from './pages/MyPage/CreateTrip';
 import Noti from './pages/Noti';
 import Chat from './pages/Chat';
 import ChatRoom from './pages/Chat/Room';
+import NotFound from './pages/NotFound';
 
 const App = () => {
   return (
@@ -38,9 +39,14 @@ const App = () => {
 
       <Section>
         <Switch>
-          <PublicRoute path="/login" component={Login} exact />
-          <PublicRoute path="/signup" component={SignUp} exact />
-          <PublicRoute path="/signup/welcome" component={Welcome} exact />
+          <PublicRoute path="/login" restricted component={Login} exact />
+          <PublicRoute path="/signup" restricted component={SignUp} exact />
+          <PublicRoute
+            path="/signup/welcome"
+            restricted
+            component={Welcome}
+            exact
+          />
           <PrivateRoute path="/" component={Home} exact />
           <PrivateRoute path="/search" component={Search} exact />
           <PrivateRoute path="/detail" component={Detail} exact />
@@ -62,6 +68,7 @@ const App = () => {
           <PrivateRoute path="/noti" component={Noti} exact />
           <PrivateRoute path="/chat" component={Chat} exact />
           <PrivateRoute path="/chat/room" component={ChatRoom} exact />
+          <PublicRoute component={NotFound} exact />
         </Switch>
       </Section>
 
