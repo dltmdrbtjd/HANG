@@ -34,17 +34,16 @@ const SearchCard = ({ userInfo, category, idx }) => {
     }
   };
   return (
-    <Grid padding="10px 0">
+    <Grid padding="6px 0">
       <Grid
         position="relative"
         display="flex"
         hoz="center"
         ver="center"
         padding="10px 0"
-        margin="10px 0 0 0"
         radius="14px"
         bgColor="white"
-        shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
+        border="0.5px solid #e7e7e7"
         z="1"
       >
         <ProfileImg imgUrl={userInfo && userInfo.profileImg} />

@@ -17,6 +17,7 @@ const GridStyle = styled.div`
   font-weight: ${props => props.theme.fontWeight[props.fw]};
   border: ${props => props.border};
   border-bottom: ${props => props.borderbot};
+  border-top: ${props => props.bordertop};
   border-radius: ${props => props.radius};
   overflow: ${props => props.overflow};
   position: ${props => props.position};

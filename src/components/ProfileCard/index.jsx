@@ -24,16 +24,10 @@ const ProfileCard = ({ userInfo }) => {
   };
 
   return (
-    <Grid
-      padding="20px 0"
-      margin="10px 0 0 0"
-      radius="14px"
-      bgColor="white"
-      border="1px solid #E7E7E7"
-    >
+    <Grid padding="20px 0" margin="10px 0 0 0" radius="14px" bgColor="white">
       <Grid position="relative" display="flex" hoz="center" ver="center">
         <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
-        <Grid width="75%" margin="0 0 0 10px">
+        <Grid width="75%" margin="0 0 0 13px">
           <Text fs="la" fw="bold">
             {userInfo && userInfo.nickname}
           </Text>
@@ -49,7 +43,7 @@ const ProfileCard = ({ userInfo }) => {
             color={userInfo.like ? 'brandColor' : 'darkG'}
             position="absolute"
             top="0px"
-            right="10px"
+            right="15px"
             _onClick={() => {
               userInfo.like ? DelLike() : AddLike();
             }}
@@ -58,6 +52,15 @@ const ProfileCard = ({ userInfo }) => {
           </Grid>
         ) : null}
       </Grid>
+      <span
+        style={{
+          width: '90%',
+          height: '1px',
+          borderBottom: '1px solid #e7e7e7',
+          display: 'block',
+          margin: '15px auto',
+        }}
+      />
       <Grid margin="10px 0 0 0" padding="0 20px">
         {userInfo.intro && userInfo.intro !== 'none' ? (
           <Text fs="sm">{userInfo.intro}</Text>
