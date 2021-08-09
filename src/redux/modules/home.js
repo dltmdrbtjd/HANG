@@ -32,7 +32,6 @@ const HomeLoadDB = () => {
       .MainLoad()
       .then(res => {
         const data = res.data;
-        console.log(data);
         dispatch(HomeLoad(data.promise, data.guide, data.traveler));
       })
       .catch(err => console.log(err));
