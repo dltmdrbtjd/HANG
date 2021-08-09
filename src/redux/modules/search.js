@@ -7,13 +7,22 @@ import apis from '../../shared/api';
 const LOAD = 'search/LOAD';
 const SEARCH = 'search/SEND';
 const LIKEUPDATE = 'search/LIKEUPDATE';
+const GETMORESEARCH = 'search/GETMORESEARCH';
 
-const SearchLoad = createAction(LOAD, list => ({ list }));
-const SearchSend = createAction(SEARCH, content => ({ content }));
+const SearchLoad = createAction(LOAD, (list, nextItem) => ({ list, nextItem }));
+const SearchSend = createAction(SEARCH, (content, nextItem) => ({
+  content,
+  nextItem,
+}));
+const GetMoreSearch = createAction(GETMORESEARCH, (list, nextItem) => ({
+  list,
+  nextItem,
+}));
 const LikeUpdate = createAction(LIKEUPDATE, (idx, like) => ({ idx, like }));
 
 const initialState = {
   list: [],
+  nextItem: true,
 };
 // search page useEffect시 사용
 const SearchLoadDB = MainSearch => {
@@ -21,8 +30,8 @@ const SearchLoadDB = MainSearch => {
     apis
       .Search(MainSearch)
       .then(res => {
-        const data = res.data;
-        dispatch(SearchLoad(data));
+        const data = res.data.result;
+        dispatch(SearchLoad(data, true));
       })
       .catch(err => console.log(err));
   };
@@ -33,8 +42,26 @@ const SearchSendDB = content => {
     apis
       .Search(content)
       .then(res => {
-        const data = res.data;
-        dispatch(SearchSend(data));
+        const data = res.data.result;
+        dispatch(SearchSend(data, true));
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+const MoreSearchSendDB = content => {
+  return dispatch => {
+    apis
+      .Search(content)
+      .then(res => {
+        const data = res.data.result;
+
+        if (data.length < 1) {
+          dispatch(GetMoreSearch(data, false));
+          return;
+        }
+
+        dispatch(GetMoreSearch(data, true));
       })
       .catch(err => console.log(err));
   };
@@ -51,14 +78,21 @@ export default handleActions(
     [LOAD]: (state, action) =>
       produce(state, draft => {
         draft.list = action.payload.list;
+        draft.nextItem = action.payload.nextItem;
       }),
     [SEARCH]: (state, action) =>
       produce(state, draft => {
         draft.list = action.payload.content;
+        draft.nextItem = action.payload.nextItem;
       }),
     [LIKEUPDATE]: (state, action) =>
       produce(state, draft => {
-        draft.list.result[action.payload.idx].like = action.payload.like;
+        draft.list[action.payload.idx].like = action.payload.like;
+      }),
+    [GETMORESEARCH]: (state, action) =>
+      produce(state, draft => {
+        draft.list.push(...action.payload.list);
+        draft.nextItem = action.payload.nextItem;
       }),
   },
   initialState,
@@ -67,6 +101,7 @@ export default handleActions(
 const SearchCreators = {
   SearchLoadDB,
   SearchSendDB,
+  MoreSearchSendDB,
   likeUpdateHandler,
 };
 

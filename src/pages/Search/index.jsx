@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import queryString from 'query-string';
+import { useInView } from 'react-intersection-observer';
 import { SearchCreators } from '../../redux/modules/search';
-// query
+import Spinner from '../../components/Spinner';
 // components
 import SearchBar from '../../components/SearchBar';
 import AreaSelectBox from '../../components/AreaSelectBox';
@@ -15,7 +16,11 @@ import CategoryBtn from './style';
 const Search = props => {
   const dispatch = useDispatch();
   const userlist = useSelector(state => state.search.list);
-  const SearchList = userlist.result;
+  const nextItem = useSelector(state => state.search.nextItem);
+  // pageNum
+  const [page, setPage] = useState(1);
+  const [ref, inView] = useInView();
+
   // 지역,여행자,길잡이 state
   const [cityOpen, setCityOpen] = useState(false);
   const [traveler, setTraveler] = useState(false);
@@ -32,23 +37,30 @@ const Search = props => {
   const [cityName, setCityName] = useState('');
   const [guName, setGuName] = useState('');
 
-  // 서버에 보낼 검색 데이터
-  const content = {
+  const query = queryString.parse(location.search);
+  // 페이지 첫 진입시 or 메인에서 검색후 페이지 진입시 사용할 데이터
+  const SendSearch = {
     keyword: finduser,
     region: city,
     city: gu,
     traveler: Number(traveler),
     guide: Number(guide),
   };
-
-  const query = queryString.parse(location.search);
-  // 페이지 첫 진입시 or 메인에서 검색후 페이지 진입시 사용할 데이터
   const MainSearch = {
     keyword: query.keyword,
     region: city,
     city: gu,
     traveler: Number(traveler),
     guide: Number(guide),
+  };
+
+  const MoreSearch = {
+    keyword: finduser,
+    region: city,
+    city: gu,
+    traveler: Number(traveler),
+    guide: Number(guide),
+    pageNum: page,
   };
 
   const CityOpenhandler = () => {
@@ -78,16 +90,34 @@ const Search = props => {
       setGuide(false);
     }
   };
-
   const SearchHandler = () => {
     setCityName(city);
     setGuName(gu);
-    dispatch(SearchCreators.SearchSendDB(content));
+    dispatch(SearchCreators.SearchSendDB(SendSearch));
+    setPage(1);
   };
+
+  // 무한스크롤 함수
+  const NextItems = useCallback(async () => {
+    if (page > 1) {
+      await dispatch(SearchCreators.MoreSearchSendDB(MoreSearch));
+    }
+  }, [page]);
+
+  useEffect(() => {
+    NextItems();
+  }, [NextItems]);
+
+  useEffect(() => {
+    if (inView && nextItem) {
+      setPage(state => state + 1);
+    }
+  }, [inView, nextItem]);
 
   useEffect(() => {
     dispatch(SearchCreators.SearchLoadDB(MainSearch));
-  }, []);
+    setPage(1);
+  }, [query.keyword]);
 
   return (
     <>
@@ -106,7 +136,7 @@ const Search = props => {
             bgColor={
               !cityOpen ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
             }
-            border={!cityOpen ? '2px solid #c4c4c4' : '2px solid #ff9900'}
+            border={!cityOpen ? '1px solid #c4c4c4' : '1px solid #ff9900'}
             padding="8px 30px"
             onClick={CityOpenhandler}
             fw="bold"
@@ -122,7 +152,7 @@ const Search = props => {
             bgColor={
               !traveler ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
             }
-            border={!traveler ? '2px solid #c4c4c4' : '2px solid #ff9900'}
+            border={!traveler ? '1px solid #c4c4c4' : '1px solid #ff9900'}
             padding="8px 15px"
             onClick={Travelerhandler}
             fw="bold"
@@ -130,11 +160,11 @@ const Search = props => {
             여행자
           </CategoryBtn>
           <CategoryBtn
-            shadow="0 4px 4px rgba(134,134,134,0.3)"
+            shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
             radius="14px"
             color={!guide ? 'gray' : 'brandColor'}
             bgColor={!guide ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'}
-            border={!guide ? '2px solid #c4c4c4' : '2px solid #ff9900'}
+            border={!guide ? '1px solid #c4c4c4' : '1px solid #ff9900'}
             padding="8px 15px"
             onClick={Guidehandler}
             margin="0 0 0 10px"
@@ -157,11 +187,12 @@ const Search = props => {
         <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
         {guName ? ` ${guName}의 검색 목록입니다.` : ''}
       </Text>
-      {SearchList
-        ? SearchList.map((item, idx) => {
+      {userlist
+        ? userlist.map((item, idx) => {
             return <SearchCard userInfo={item} key={idx} idx={idx} />;
           })
         : ''}
+      <div ref={ref} />
     </>
   );
 };
