@@ -100,7 +100,7 @@ const phoneAuthDB = authInfo => {
           }),
         );
       })
-      .catch(err => {
+      .catch(() => {
         dispatch(
           authPhone({
             ...phoneAuth,

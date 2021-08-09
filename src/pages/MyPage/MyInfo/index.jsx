@@ -11,6 +11,7 @@ import ProfileCard from '../../../components/ProfileCard';
 import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
 import DropDown from '../DropDown';
+import NoPosts from '../../../components/NoPosts';
 // reducer
 import { MypageCreators } from '../../../redux/modules/mypage';
 // style
@@ -66,7 +67,7 @@ const MyInfo = () => {
 
       <Grid margin="60px 0 15px" display="flex" hoz="space-between">
         <SubTitle fs="la" width="auto" addstyle={SubTitleTextHidden}>
-          {myInfo.nickname} 님의 여행
+          {myInfo.nickname} 님의 여행 이벤트
         </SubTitle>
 
         <Button
@@ -83,18 +84,25 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      {tripList.map((tripInfo, idx) => (
-        <EventCard
-          key={(idx * Date.now() + Math.random()).toString(36)}
-          btnText="삭제하기"
-          userInfo={tripInfo}
-          mainText="여행 이벤트 삭제하기"
-          sub2Text="여행 이벤트를 삭제하시겠습니까?"
-          agreeText="삭제"
-          toastMessage="여행 이벤트가 삭제되었습니다."
-          callback={() => deleteTripEvent(tripInfo.tripId)}
-        />
-      ))}
+      <NoPosts
+        list={tripList}
+        coment="등록된 여행 이벤트가 없어요"
+        link="/mypage/create_trip"
+        btnComent="여행 추가하기"
+      >
+        {tripList.map((tripInfo, idx) => (
+          <EventCard
+            key={(idx * Date.now() + Math.random()).toString(36)}
+            btnText="삭제하기"
+            userInfo={tripInfo}
+            mainText="여행 이벤트 삭제하기"
+            sub2Text="여행 이벤트를 삭제하시겠습니까?"
+            agreeText="삭제"
+            toastMessage="여행 이벤트가 삭제되었습니다."
+            callback={() => deleteTripEvent(tripInfo.tripId)}
+          />
+        ))}
+      </NoPosts>
     </>
   );
 };
