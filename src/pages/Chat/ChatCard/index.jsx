@@ -1,6 +1,8 @@
 import React from 'react';
+// history
+import { history } from '../../../redux/configureStore';
 // elements
-import { Grid, Link, Strong, Text } from '../../../elements';
+import { Grid, Strong, Text } from '../../../elements';
 // components
 import ProfileImg from '../../../components/ProfileImg';
 // style
@@ -9,7 +11,12 @@ import { BorderBottom, LimitWidth, ShowTimeSpan } from './style';
 const ChatCard = () => {
   return (
     <Grid addstyle={BorderBottom} padding="24px 0">
-      <Link href="/chat/room" width="100%" hoz="space-between" ver="center">
+      <Grid
+        display="flex"
+        hoz="space-between"
+        ver="center"
+        _onClick={() => history.push('/chat/room')}
+      >
         <Grid display="flex" width="80%">
           <ProfileImg />
 
@@ -25,7 +32,7 @@ const ChatCard = () => {
         </Grid>
 
         <ShowTimeSpan>00:00</ShowTimeSpan>
-      </Link>
+      </Grid>
     </Grid>
   );
 };

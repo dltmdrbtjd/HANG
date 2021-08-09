@@ -15,6 +15,8 @@ const TextAreaStyle = styled.textarea`
   &:focus {
     outline: none;
   }
+
+  ${props => props.addstyle};
 `;
 
 export default TextAreaStyle;

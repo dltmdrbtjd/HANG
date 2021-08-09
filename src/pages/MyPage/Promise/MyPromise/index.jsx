@@ -51,7 +51,7 @@ const MyPromiseDetail = ({ match }) => {
       </Grid>
 
       <Grid margin="60px 0 0">
-        <SubTitle fs="la" width="auto" margin="0 0 20px">
+        <SubTitle fs="la" width="auto" margin="0 0 15px">
           {pageBreak.title[page - 1]}
         </SubTitle>
 

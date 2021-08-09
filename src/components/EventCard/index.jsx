@@ -42,7 +42,6 @@ const EventCard = ({ userInfo, ...props }) => {
         margin="10px 0 0 0"
         radius="14px 14px 0 0"
         bgColor="white"
-        shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
       >
         <Text>
           {userInfo && moment.utc(userInfo.startDate).format('MM.DD')} ~{' '}
