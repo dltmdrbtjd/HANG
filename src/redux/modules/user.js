@@ -233,6 +233,14 @@ const logOutDB = () => {
     apis
       .LogOut()
       .then(() => {
+<<<<<<< Updated upstream
+=======
+        dispatch(
+          getUserInfo({ userId: null, nickname: null, profileImg: null }),
+        );
+      })
+      .then(() => {
+>>>>>>> Stashed changes
         delCookie();
       })
       .then(() => {
