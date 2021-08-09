@@ -1,8 +1,8 @@
 import React from 'react';
 // elements
-import { Grid, Link } from '../../../elements/index';
+import { Grid, Button } from '../../../elements/index';
 
-const StatusBar = ({ curPage }) => {
+const StatusBar = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
 
   return (
@@ -14,14 +14,14 @@ const StatusBar = ({ curPage }) => {
       margin="0 auto 30px"
     >
       {pageNav.map((page, idx) => (
-        <Link
-          href={`/onboarding/${page}`}
+        <Button
           key={(page * idx + Date.now() + Math.random()).toString(36)}
           padding="0"
-          bgcolor={curPage === page ? 'brandColor' : 'semiLightG'}
+          bgColor={curPage === page ? 'brandColor' : 'semiLightG'}
           width="10px"
           height="10px"
           radius="50%"
+          _onClick={() => setPage(page)}
         />
       ))}
     </Grid>

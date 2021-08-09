@@ -23,7 +23,7 @@ const fontWeight = {
 const color = {
   brandColor: '#FF9900',
   skyblue: '#D4F0FF',
-  bgColor: '#F5F5F5',
+  bgColor: '#F8F8F8',
   lightG: '#FDFDFD',
   semiLightG: '#E7E7E7',
   gray: '#C4C4C4',

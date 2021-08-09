@@ -106,7 +106,7 @@ const PromiseCard = ({ promInfo, guide, type }) => {
   return (
     <Grid bgColor="white" radius="16px" overflow="hidden" margin="0 0 15px">
       <Grid display="flex" ver="center" padding="32px 20px" position="relative">
-        <ProfileImg size="large" />
+        <ProfileImg size="large" imgUrl={promInfo.profileImg} />
 
         <Grid width="auto" margin="0 0 0 14px">
           <Text margin="0 0 20px" overflow="visible">

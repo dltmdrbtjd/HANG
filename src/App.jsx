@@ -34,12 +34,13 @@ const App = () => {
     <ConnectedRouter history={history}>
       <Header />
 
+      <PublicRoute path="/onboarding" component={Onboarding} exact />
+
       <Section>
         <Switch>
           <PublicRoute path="/login" component={Login} exact />
           <PublicRoute path="/signup" component={SignUp} exact />
           <PublicRoute path="/signup/welcome" component={Welcome} exact />
-          <PublicRoute path="/onboarding" component={Onboarding} exact />
           <PrivateRoute path="/" component={Home} exact />
           <PrivateRoute path="/search" component={Search} exact />
           <PrivateRoute path="/detail" component={Detail} exact />
