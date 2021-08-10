@@ -54,13 +54,20 @@ export default handleActions(
       }),
     [LIKEUPDATE]: (state, action) =>
       produce(state, draft => {
-        let TraveleDoubleCheck = draft.traveler.findIndex(
-          i => i.userPk === draft.guide[action.payload.idx].userPk,
-        );
+        let TraveleDoubleCheck;
+        let GuideDoubleCheck;
 
-        let GuideDoubleCheck = draft.guide.findIndex(
-          i => i.userPk === draft.traveler[action.payload.idx].userPk,
-        );
+        if (draft.guide.length > 0) {
+          TraveleDoubleCheck = draft.traveler.findIndex(
+            i => i.userPk === draft.guide[action.payload.idx].userPk,
+          );
+        }
+
+        if (draft.traveler.length > 0) {
+          GuideDoubleCheck = draft.guide.findIndex(
+            i => i.userPk === draft.traveler[action.payload.idx].userPk,
+          );
+        }
 
         if (action.payload.category === 'guide') {
           draft.guide[action.payload.idx].like = action.payload.like;
