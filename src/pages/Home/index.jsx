@@ -36,10 +36,12 @@ const Home = () => {
     <Grid overflow="auto">
       {Object.keys(promise).length > 0 ? (
         <>
-          <MainTitle fs="la">확정된 약속</MainTitle>
+          <MainTitle fs="la" margin="0 0 10px">
+            확정된 약속
+          </MainTitle>
           <PromiseCard>
             <Grid
-              display="flex"
+              isFlex
               hoz="center"
               ver="center"
               _onClick={() => {

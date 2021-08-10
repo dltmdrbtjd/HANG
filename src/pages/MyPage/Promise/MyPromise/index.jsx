@@ -23,7 +23,7 @@ const MyPromiseDetail = ({ match }) => {
 
   const pageBreak = {
     type: ['received', 'requested', 'confirmed'],
-    title: ['받은 요청', '보낸 요청', '확정한 약속'],
+    title: ['받은 요청', '보낸 요청', '확정된 약속'],
     postComent: [
       '받은 요청이 없습니다',
       '보낸 요청이 없습니다',
@@ -34,7 +34,7 @@ const MyPromiseDetail = ({ match }) => {
 
   return (
     <>
-      <Grid display="flex" ver="center" hoz="space-between" margin="0 0 16px">
+      <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
         <TabMenuWrapper>
           <li onClick={() => history.push('/mypage')}>
             <MainTitle width="auto" fs="sxl" color="gray">

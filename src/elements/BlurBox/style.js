@@ -1,9 +1,13 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+// mixin
+import { flexBox } from '../../styles/Mixin';
+
+const makeItFlexBox = css`
+  ${props => props.isFlex && flexBox(props.hoz, props.ver)};
+`;
 
 const BlurBoxStyle = styled.div`
-  display: ${props => props.display};
-  justify-content: ${props => props.hoz};
-  align-items: ${props => props.ver};
+  ${makeItFlexBox};
   position: fixed;
   top: 0;
   left: 0;

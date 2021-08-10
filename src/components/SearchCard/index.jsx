@@ -37,10 +37,8 @@ const SearchCard = ({ userInfo, category, idx }) => {
     <Grid padding="6px 0">
       <Grid
         position="relative"
-        display="flex"
-        hoz="center"
-        ver="center"
-        padding="10px 0"
+        isFlex
+        padding="12px 20px"
         radius="14px"
         bgColor="white"
         border="0.5px solid #e7e7e7"

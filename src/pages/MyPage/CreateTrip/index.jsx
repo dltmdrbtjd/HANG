@@ -10,6 +10,8 @@ import Calendar from '../../../components/Calendar';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 // reducer
 import { MypageCreators } from '../../../redux/modules/mypage';
+// style
+import TabHeight from './style';
 
 const CreateTrip = () => {
   const dispatch = useDispatch();
@@ -65,6 +67,7 @@ const CreateTrip = () => {
         <TextArea
           value={tripInfo}
           _onChange={e => setTripInfo(e.target.value)}
+          tab={TabHeight('170px')}
         />
       </Grid>
 

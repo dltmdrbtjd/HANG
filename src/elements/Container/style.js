@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+// mixin
+import { borderBox } from '../../styles/Mixin';
 
 const ContainerStyle = styled.div`
   position: relative;
-  padding: ${props => (props.isPadding || props.height ? 0 : '90px 0')};
-  box-sizing: border-box;
+  ${props => !(props.noPadding || props.height) && borderBox(props.padding)};
   max-width: 768px;
   height: ${props => props.height};
   min-height: ${props => props.height || '100vh'};
@@ -11,7 +12,7 @@ const ContainerStyle = styled.div`
 
   ${props => props.addstyle};
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 800px) {
     max-width: none;
     width: 90%;
   }

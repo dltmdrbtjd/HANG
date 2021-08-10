@@ -17,7 +17,7 @@ export default function CircularIndeterminate() {
 
   return (
     <Grid
-      display="flex"
+      isFlex
       hoz="center"
       ver="center"
       position="fixed"

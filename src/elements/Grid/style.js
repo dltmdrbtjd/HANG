@@ -1,37 +1,54 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+// mixin
+import {
+  flexBox,
+  floatBox,
+  borderBox,
+  textProps,
+  outlineBox,
+} from '../../styles/Mixin';
+
+const makeItFlexBox = css`
+  ${props =>
+    props.isFlex &&
+    css`
+      ${flexBox(props.hoz, props.ver)};
+      flex-direction: ${props.column ? 'column' : 'row'};
+    `}
+`;
 
 const GridStyle = styled.div`
-  display: ${props => props.display};
-  justify-content: ${props => props.hoz};
-  align-items: ${props => props.ver};
-  flex-direction: ${props => (props.column ? 'column' : 'row')};
+  ${makeItFlexBox};
   width: ${props => props.width};
   max-width: ${props => props.maxWidth};
   height: ${props => props.height};
   max-height: ${props => props.maxHeight};
   margin: ${props => props.margin};
-  padding: ${props => props.padding};
   background-color: ${props => props.theme.color[props.bgColor]};
-  color: ${props => props.theme.color[props.color]};
-  font-size: ${props => props.theme.fontSize[props.fs]};
-  font-weight: ${props => props.theme.fontWeight[props.fw]};
-  border: ${props => props.border};
-  border-bottom: ${props => props.borderbot};
-  border-top: ${props => props.bordertop};
   border-radius: ${props => props.radius};
   overflow: ${props => props.overflow};
-  position: ${props => props.position};
-  top: ${props => props.top};
-  left: ${props => props.left};
-  right: ${props => props.right};
-  bottom: ${props => props.bottom};
-  z-index: ${props => props.z};
   box-shadow: ${props => props.shadow};
-  box-sizing: border-box;
   transform: translate(${props => props.translate});
   cursor: pointer;
+  ${props => borderBox(props.padding)};
+  ${props =>
+    textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};
+  ${props => outlineBox(props.border, props.borDirection)};
+  ${props =>
+    floatBox(
+      props.position,
+      props.top,
+      props.right,
+      props.bottom,
+      props.left,
+      props.z,
+    )};
 
   ${props => props.addstyle};
+
+  @media ${({ theme }) => theme.deviceSize.tab} {
+    ${props => props.tab};
+  }
 `;
 
 export default GridStyle;

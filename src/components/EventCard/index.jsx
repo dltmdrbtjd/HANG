@@ -5,8 +5,11 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import ToastMessage from '../ToastMessage';
 import Modal from '../Modal';
-// style
+
 import { Grid, Text, MainTitle, Button } from '../../elements';
+// style
+import TabSize from './style';
+import { textOverflowWrap } from '../../styles/Mixin';
 
 const EventCard = ({ userInfo, ...props }) => {
   const { sub2Text, btnText, toastMessage, mainText, agreeText, callback } =
@@ -15,7 +18,7 @@ const EventCard = ({ userInfo, ...props }) => {
   const [modal, setModal] = useState(false);
   const success = useSelector(state => state.detail.success);
 
-  const openModalHandler = tripId => {
+  const openModalHandler = () => {
     setModal(true);
   };
   const agreeModalHandler = () => {
@@ -36,13 +39,15 @@ const EventCard = ({ userInfo, ...props }) => {
     }
   }, [toastMsg]);
   return (
-    <>
-      <Grid
-        padding="20px 20px"
-        margin="10px 0 0 0"
-        radius="14px 14px 0 0"
-        bgColor="white"
-      >
+    <Grid
+      tab={TabSize}
+      margin="10px 0 20px"
+      bgColor="white"
+      radius="14px"
+      position="relative"
+      overflow="hidden"
+    >
+      <Grid padding="20px">
         <Text>
           {userInfo && moment.utc(userInfo.startDate).format('MM.DD')} ~{' '}
           {userInfo && moment.utc(userInfo.endDate).format('MM.DD')}
@@ -50,7 +55,7 @@ const EventCard = ({ userInfo, ...props }) => {
         <MainTitle fs="la">
           {userInfo && userInfo.region} {userInfo && userInfo.city}
         </MainTitle>
-        <Text margin="10px 0 0 0" fs="sm">
+        <Text margin="10px 0 0 0" fs="sm" addstyle={textOverflowWrap(3)}>
           {userInfo && userInfo.tripInfo}
         </Text>
         <Modal
@@ -65,16 +70,15 @@ const EventCard = ({ userInfo, ...props }) => {
         {toastMsg && <ToastMessage msg={toastMessage} />}
       </Grid>
       <Button
-        margin="0 0 20px 0"
-        radius="0 0 14px 14px"
         width="100%"
+        radius="0"
         _onClick={() => {
           openModalHandler(userInfo.tripId);
         }}
       >
         {btnText}
       </Button>
-    </>
+    </Grid>
   );
 };
 

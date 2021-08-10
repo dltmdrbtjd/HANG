@@ -15,7 +15,7 @@ const Logo = ({ href, ...props }) => {
         <Button
           width="100%"
           height="100%"
-          shape="text"
+          form="text"
           _onClick={() => history.push(href)}
         >
           Hang

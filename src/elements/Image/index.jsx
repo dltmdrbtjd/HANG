@@ -1,14 +1,14 @@
 import React from 'react';
 import ImageStyle from './style';
 
-const SubTitle = ({ src, alt, ...props }) => {
+const Image = ({ src, alt, ...props }) => {
   if (!src) return null;
 
   return <ImageStyle src={src} alt={alt} {...props} />;
 };
 
-SubTitle.defaultProps = {
+Image.defaultProps = {
   width: '100%',
 };
 
-export default SubTitle;
+export default Image;

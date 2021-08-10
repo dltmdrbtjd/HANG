@@ -1,23 +1,29 @@
 import styled from 'styled-components';
+// minxin
+import { borderBox, textProps, floatBox } from '../../styles/Mixin';
 
 const LabelStyle = styled.label`
-  font-size: ${props => props.theme.fontSize[props.fs]};
-  font-weight: ${props => props.theme.fontWeight[props.fw]};
-  color: ${props => props.theme.color[props.color]};
+  ${props =>
+    textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};
   margin: ${props => props.margin};
-  padding: ${props => props.padding};
-  line-height: ${props => props.lh};
   width: ${props => props.width};
   height: ${props => props.height};
-  position: ${props => props.position};
-  top: ${props => props.top};
-  right: ${props => props.right};
-  bottom: ${props => props.bottom};
-  left: ${props => props.left};
-  box-sizing: border-box;
-  z-index: ${props => props.z};
+  ${props => borderBox(props.padding)};
+  ${props =>
+    floatBox(
+      props.position,
+      props.top,
+      props.right,
+      props.bottom,
+      props.left,
+      props.z,
+    )};
 
   ${props => props.addstyle};
+
+  @media ${({ theme }) => theme.deviceSize.tab} {
+    ${props => props.tab};
+  }
 `;
 
 export default LabelStyle;

@@ -15,6 +15,8 @@ const Noti = () => {
         bottom="110px"
         left="50%"
         translate="-50%, 0"
+        maxWidth="600px"
+        tab="max-width: 768px"
       >
         <Button width="100%" fs="la">
           전체삭제

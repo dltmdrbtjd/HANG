@@ -85,7 +85,7 @@ const MyPageModify = () => {
           닉네임
         </SubTitle>
 
-        <Grid display="flex" hoz="space-between">
+        <Grid isFlex hoz="space-between">
           <ValidateInput
             id="nickname"
             placeholder="닉네임 입력"

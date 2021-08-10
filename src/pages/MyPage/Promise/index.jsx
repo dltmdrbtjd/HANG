@@ -31,7 +31,7 @@ const MyPromise = () => {
 
   return (
     <>
-      <Grid display="flex" ver="center" hoz="space-between" margin="0 0 16px">
+      <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
         <TabMenuWrapper>
           <li onClick={() => history.push('/mypage')}>
             <MainTitle width="auto" fs="sxl" color="gray">
@@ -50,26 +50,20 @@ const MyPromise = () => {
       <Grid margin="0 0 60px">
         <NoPosts
           list={received.concat(requested).concat(confirmed)}
-          coment="아직 아무런 약속이 없어요"
+          title="약속 잡으러 가기"
+          coment="다른 사람들과 여행 약속을 잡아보세요"
           link="/"
-          btnComent="약속 잡으러 가기"
           margin="60px 0 0"
         >
           {received.length ? (
             <Grid margin="60px 0 0">
-              <Grid
-                display="flex"
-                ver="center"
-                hoz="space-between"
-                margin="0 0 15px"
-              >
+              <Grid isFlex ver="center" hoz="space-between" margin="0 0 15px">
                 <SubTitle fs="la" width="auto">
                   받은 요청
                 </SubTitle>
 
                 <Button
-                  padding="0"
-                  bgColor="bgColor"
+                  form="text"
                   color="darkG"
                   addstyle={SetAlignItemsButton}
                   _onClick={() => history.push('/mypage/promise/1')}
@@ -94,19 +88,13 @@ const MyPromise = () => {
 
           {requested.length ? (
             <Grid margin="60px 0 0">
-              <Grid
-                display="flex"
-                ver="center"
-                hoz="space-between"
-                margin="0 0 15px"
-              >
+              <Grid isFlex ver="center" hoz="space-between" margin="0 0 15px">
                 <SubTitle fs="la" width="auto">
                   보낸 요청
                 </SubTitle>
 
                 <Button
-                  padding="0"
-                  bgColor="bgColor"
+                  form="text"
                   color="darkG"
                   addstyle={SetAlignItemsButton}
                   _onClick={() => history.push('/mypage/promise/2')}
@@ -133,19 +121,13 @@ const MyPromise = () => {
 
           {confirmed.length ? (
             <Grid margin="60px 0 0">
-              <Grid
-                display="flex"
-                ver="center"
-                hoz="space-between"
-                margin="0 0 15px"
-              >
+              <Grid isFlex ver="center" hoz="space-between" margin="0 0 15px">
                 <SubTitle fs="la" width="auto">
-                  확정한 약속
+                  확정된 약속
                 </SubTitle>
 
                 <Button
-                  padding="0"
-                  bgColor="bgColor"
+                  form="text"
                   color="darkG"
                   addstyle={SetAlignItemsButton}
                   _onClick={() => history.push('/mypage/promise/3')}

@@ -13,7 +13,7 @@ const InputRadio = ({ name, list, setState }) => {
       {list.map((elem, idx) => (
         <Grid
           key={(idx + Date.now() + Math.random()).toString(36)}
-          display="flex"
+          isFlex
           ver="center"
         >
           <RadioStyle
@@ -33,7 +33,5 @@ const InputRadio = ({ name, list, setState }) => {
     </>
   );
 };
-
-InputRadio.defaultProps = {};
 
 export default InputRadio;

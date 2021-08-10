@@ -7,7 +7,6 @@ const MainTitle = ({ children, ...porps }) => {
 
 MainTitle.defaultProps = {
   width: '100%',
-  color: 'black',
   fw: 'bold',
 };
 

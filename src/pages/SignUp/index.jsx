@@ -17,6 +17,8 @@ import FillOutProfile from './FillOutProfile';
 import Welcome from './Welcome';
 // validation
 import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
+// style
+import { TabTitle } from './style';
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -59,7 +61,13 @@ const SignUp = () => {
     <>
       <StatusBar curPage={page} setPage={setPage} />
 
-      <MainTitle fs="xl" fw="extraBold" ls="-1px" margin="0 0 30px">
+      <MainTitle
+        fs="xl"
+        fw="extraBold"
+        ls="-1px"
+        margin="0 0 30px"
+        tab={TabTitle}
+      >
         {title[page - 1]}
       </MainTitle>
 

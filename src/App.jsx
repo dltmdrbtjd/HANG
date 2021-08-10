@@ -2,8 +2,8 @@ import React from 'react';
 // Router
 import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
-import PublicRoute from './shared/PublicRoute';
-import PrivateRoute from './shared/PrivateRoute';
+import PublicRoute from './Route/PublicRoute';
+import PrivateRoute from './Route/PrivateRoute';
 // history
 import { history } from './redux/configureStore';
 // components

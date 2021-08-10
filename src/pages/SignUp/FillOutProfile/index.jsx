@@ -10,6 +10,8 @@ import InputImage from '../../../components/SelectImage';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 // reducer
 import { UserCreators } from '../../../redux/modules/user';
+// style
+import { TabMargin } from '../style';
 
 const FillOutProfile = ({
   nickname,
@@ -35,16 +37,16 @@ const FillOutProfile = ({
     <>
       <InputImage setProfile={setProfile} />
 
-      <Grid margin="0 0 15px">
+      <Grid margin="0 0 15px" tab={TabMargin('20px')}>
         <Label fs="lg" id="nickname" lh="2" fw="semiBold">
           닉네임
         </Label>
 
-        <Grid display="flex" hoz="space-between">
+        <Grid isFlex hoz="space-between">
           <ValidateInput
             id="nickname"
             placeholder="닉네임 입력"
-            width="55%"
+            width="58%"
             name="nickname"
             value={nickname}
             _onChange={setNickname}
@@ -54,7 +56,7 @@ const FillOutProfile = ({
           />
 
           <Button
-            width="42%"
+            width="40%"
             disabled={!nickname || nickErrorMsg}
             _onClick={() => {
               duplicateNickCheck();
@@ -77,7 +79,7 @@ const FillOutProfile = ({
         ) : null}
       </Grid>
 
-      <Grid display="flex" hoz="space-between">
+      <Grid isFlex hoz="space-between" tab={TabMargin('20px')}>
         <Grid>
           <Text lh="2" fw="semiBold" fs="lg">
             연령대
@@ -95,7 +97,7 @@ const FillOutProfile = ({
             성별
           </Text>
 
-          <Grid display="flex" hoz="space-between" ver="center" height="48px">
+          <Grid isFlex hoz="space-between" ver="center" height="48px">
             <InputRadio
               name="gender"
               list={[
@@ -108,7 +110,7 @@ const FillOutProfile = ({
         </Grid>
       </Grid>
 
-      <Grid margin="0 0 15px">
+      <Grid margin="0 0 15px" tab={TabMargin('40px')}>
         <Text lh="2" fw="semiBold" fs="lg">
           지역 선택
         </Text>

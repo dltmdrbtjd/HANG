@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isLogin } from './cookie';
+import { isLogin } from '../shared/cookie';
 
 const PublicRoute = ({ component: Component, restricted, ...rest }) => {
   return (

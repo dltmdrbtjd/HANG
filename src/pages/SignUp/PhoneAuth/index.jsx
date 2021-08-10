@@ -7,6 +7,8 @@ import { Grid, Button, Text } from '../../../elements';
 import ValidateInput from '../ValidateInput';
 // reducer
 import { UserCreators } from '../../../redux/modules/user';
+// style
+import { TabMargin } from '../style';
 
 const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
   const phoneAuth = useSelector(state => state.user.phoneAuth);
@@ -25,11 +27,16 @@ const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
   return (
     <>
       <Grid position="absolute" top="50%" left="0" translate="0, -50%">
-        <Grid display="flex" hoz="space-between" margin="0 0 15px">
+        <Grid
+          isFlex
+          hoz="space-between"
+          margin="0 0 15px"
+          tab={TabMargin('20px')}
+        >
           <ValidateInput
             placeholder="전화번호 입력"
             type="tel"
-            width="55%"
+            width="58%"
             name="pNum"
             value={pNum}
             _onChange={setPnum}
@@ -39,7 +46,7 @@ const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
           />
 
           <Button
-            width="42%"
+            width="40%"
             disabled={!pNum || errorMsg}
             _onClick={() => {
               userPhoneAuth();
@@ -50,11 +57,11 @@ const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
         </Grid>
 
         {phoneAuth.phoneVali.status ? (
-          <Grid display="flex" hoz="space-between" margin="0 0 15px">
+          <Grid isFlex hoz="space-between" margin="0 0 24px">
             <ValidateInput
               placeholder="인증번호 입력"
               type="number"
-              width="55%"
+              width="58%"
               value={authNum}
               _onChange={e => {
                 setAuthNum(e.target.value);
@@ -63,7 +70,7 @@ const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
             />
 
             <Button
-              width="42%"
+              width="40%"
               disabled={!authNum}
               _onClick={() => {
                 smsAuth({ pNum, aNum: authNum });
@@ -75,7 +82,7 @@ const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
         ) : null}
 
         {errorMsg ? (
-          <Text fs="sm" color="danger" margin="8px 0 0">
+          <Text fs="sm" color="danger">
             {errorMsg}
           </Text>
         ) : null}
@@ -98,7 +105,7 @@ const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
           fs="la"
           fw="bold"
           width="100%"
-          disabled={!phoneAuth.phoneVali.status}
+          disabled={!phoneAuth.smsVali.status}
           _onClick={() => {
             setPage(2);
           }}

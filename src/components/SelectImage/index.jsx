@@ -1,7 +1,6 @@
 import React from 'react';
 // icon
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // image upload
 import imageCompression from 'browser-image-compression';
 // redux
@@ -11,6 +10,8 @@ import { ImageCreators } from '../../redux/modules/image';
 import { Grid, Label, Image } from '../../elements';
 // style
 import InputImageStyle from './style';
+// image
+import defaultProfile from '../../Images/profile.png';
 
 const InputImage = ({ setProfile }) => {
   const dispatch = useDispatch();
@@ -63,29 +64,25 @@ const InputImage = ({ setProfile }) => {
 
       <Grid
         height="100%"
-        display="flex"
+        isFlex
         hoz="center"
         ver="center"
         radius="50%"
         overflow="hidden"
         color="gray"
       >
-        {profilePre ? (
-          <Image src={profilePre} />
-        ) : (
-          <AccountCircleIcon style={{ fontSize: '100px' }} />
-        )}
+        <Image src={profilePre || defaultProfile} />
       </Grid>
 
       <Grid
         width="34px"
         height="34px"
-        display="flex"
+        isFlex
         hoz="center"
         ver="center"
         position="absolute"
-        bottom="3px"
-        right="3px"
+        bottom="0"
+        right="0"
         color="gray"
         bgColor="semiLightG"
         radius="50%"

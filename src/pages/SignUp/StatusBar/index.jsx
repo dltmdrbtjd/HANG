@@ -8,8 +8,8 @@ const StatusBar = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
 
   return (
-    <Grid display="flex" hoz="center" padding="50px 0 0" margin="0 0 50px">
-      <Grid display="flex" ver="center" width="auto">
+    <Grid isFlex hoz="center" padding="50px 0 0" margin="0 0 50px">
+      <Grid isFlex ver="center" width="auto">
         {pageNav.map((page, idx) => {
           let color = 'gray';
 
@@ -22,11 +22,11 @@ const StatusBar = ({ curPage, setPage }) => {
                 <Button
                   padding="0"
                   radius="50%"
-                  width="25px"
-                  height="25px"
+                  width="16px"
+                  height="16px"
                   color={color}
                   bgColor={page < curPage ? 'brandColor' : 'bgColor'}
-                  fs="sm"
+                  fs="status"
                   fw="bold"
                   border={`1px solid ${
                     page <= curPage ? '#FF9900' : '#C4C4C4'
@@ -43,14 +43,14 @@ const StatusBar = ({ curPage, setPage }) => {
                 </Button>
               ) : (
                 <Grid
-                  display="flex"
+                  isFlex
                   hoz="center"
                   ver="center"
                   radius="50%"
-                  width="25px"
-                  height="25px"
+                  width="16px"
+                  height="16px"
                   color="gray"
-                  fs="sm"
+                  fs="status"
                   fw="bold"
                   border="1px solid #C4C4C4"
                 >

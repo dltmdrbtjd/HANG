@@ -1,7 +1,9 @@
 import styled, { css } from 'styled-components';
+// mixin
+import { borderBox, textProps, outlineBox } from '../../styles/Mixin';
 
-const buttonShapeSetting = shape => {
-  switch (shape) {
+const buttonShapeSetting = form => {
+  switch (form) {
     case 'text':
       return css`
         background: none;
@@ -17,7 +19,7 @@ const buttonShapeSetting = shape => {
           props.color
             ? props.theme.color[props.color]
             : props.theme.color.white};
-        padding: ${props => props.padding};
+        ${props => borderBox(props.padding)};
       `;
   }
 };
@@ -26,19 +28,22 @@ const ButtonStyle = styled.button`
   width: ${props => props.width};
   height: ${props => props.height};
   margin: ${props => props.margin};
-  font-size: ${props => props.theme.fontSize[props.fs]};
-  font-weight: ${props => props.theme.fontWeight[props.fw]};
   box-shadow: ${props => props.shadow};
-  border: ${props => props.border};
   border-radius: ${props => props.radius};
-  box-sizing: border-box;
   cursor: pointer;
-  ${props => buttonShapeSetting(props.shape)};
+  ${props =>
+    textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};
+  ${props => outlineBox(props.border, props.borDirection)};
+  ${props => buttonShapeSetting(props.form)};
 
   ${props => props.addstyle};
 
   &:disabled {
     background-color: ${props => props.theme.color[props.disColor]};
+  }
+
+  @media ${({ theme }) => theme.deviceSize.tab} {
+    ${props => props.tab};
   }
 `;
 

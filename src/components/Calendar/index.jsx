@@ -67,7 +67,7 @@ const Calendar = ({ setSelectDate }) => {
 
   return (
     <Grid position="relative">
-      <Grid display="flex" hoz="space-between">
+      <Grid isFlex hoz="space-between">
         {dateInterval.map((dateInfo, idx) => (
           <Grid
             key={(idx / Date.now() + Math.random()).toString(36)}
