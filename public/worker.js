@@ -1,7 +1,19 @@
 const CACHE_NAME = 'pwa-task-manager';
-const urlsToCache = ['/', '/completed'];
+// 캐시할 파일
+const urlsToCache = [
+  '/favicon.ico',
+  'Logo2.png',
+  'Logo.png',
+  'logo32.png',
+  'logo64.png',
+  'logo96.png',
+  'logo128.png',
+  'logo144.png',
+  'logo152.png',
+  'logo256.png',
+];
 
-// Install a service worker
+// 만든 파일 캐싱
 self.addEventListener('install', event => {
   // Perform install steps
   event.waitUntil(
@@ -12,10 +24,10 @@ self.addEventListener('install', event => {
   );
 });
 
-// Cache and return requests
+// 요청에 실패하면 오프라인 페이지 표시 ( 아직 offline.html은 제작안함 )
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(function (response) {
+    caches.match(event.request).then(response => {
       // Cache hit - return response
       if (response) {
         return response;
@@ -25,7 +37,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// Update a service worker
+// CACHE_NAME이 변경되면 오래된 캐시 삭제
 self.addEventListener('activate', event => {
   const cacheWhitelist = ['pwa-task-manager'];
   event.waitUntil(
