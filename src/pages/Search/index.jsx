@@ -122,16 +122,10 @@ const Search = props => {
   return (
     <>
       <SearchBar setFindUser={setFindUser} />
-      <Grid
-        width="100%"
-        margin="10px 0 10px 0"
-        display="flex"
-        hoz="space-between"
-      >
-        <Grid>
+      <Grid width="100%" margin="10px 0" isFlex hoz="space-between">
+        <Grid width="auto">
           <CategoryBtn
-            shadow="0 4px 4px rgba(134,134,134,0.3)"
-            radius="14px"
+            radius="20px"
             color={!cityOpen ? 'gray' : 'brandColor'}
             bgColor={
               !cityOpen ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
@@ -144,10 +138,9 @@ const Search = props => {
             지역
           </CategoryBtn>
         </Grid>
-        <Grid display="flex" hoz="flex-end">
+        <Grid width="auto">
           <CategoryBtn
-            shadow="0 4px 4px rgba(134,134,134,0.3)"
-            radius="14px"
+            radius="20px"
             color={!traveler ? 'gray' : 'brandColor'}
             bgColor={
               !traveler ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
@@ -160,8 +153,7 @@ const Search = props => {
             여행자
           </CategoryBtn>
           <CategoryBtn
-            shadow="0 4px 4px rgba(134, 134, 134, 0.3)"
-            radius="14px"
+            radius="20px"
             color={!guide ? 'gray' : 'brandColor'}
             bgColor={!guide ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'}
             border={!guide ? '1px solid #c4c4c4' : '1px solid #ff9900'}
@@ -175,15 +167,10 @@ const Search = props => {
         </Grid>
       </Grid>
       <AreaSelectBox toggle={cityOpen} setGu={setGu} setCity={setCity} />
-      <Button
-        _onClick={SearchHandler}
-        fw="bold"
-        width="100%"
-        margin="10px 0 0 0"
-      >
+      <Button _onClick={SearchHandler} fw="bold" width="100%" margin="10px 0 0">
         검색
       </Button>
-      <Text margin="40px 0 0 0">
+      <Text margin="40px 0 0">
         <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
         {guName ? ` ${guName}의 검색 목록입니다.` : ''}
       </Text>

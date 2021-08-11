@@ -10,6 +10,8 @@ import { DetailCreators } from '../../redux/modules/detail';
 import ProfileCard from '../../components/ProfileCard';
 import EventCard from '../../components/EventCard';
 import ToastMessage from '../../components/ToastMessage';
+// style
+import { TabEventWrapper } from '../MyPage/MyInfo/style';
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -54,8 +56,9 @@ const Detail = () => {
         길잡이 부탁하기
       </Button>
       <MainTitle fs="sxl">{userInfo.nickname}님의 여행 이벤트</MainTitle>
-      {eventList
-        ? eventList.map((item, idx) => {
+      {eventList ? (
+        <Grid tab={TabEventWrapper}>
+          {eventList.map((item, idx) => {
             return (
               <EventCard
                 key={idx}
@@ -68,8 +71,9 @@ const Detail = () => {
                 }}
               />
             );
-          })
-        : ''}
+          })}
+        </Grid>
+      ) : null}
       {toastMsg && <ToastMessage msg="길잡이 부탁이 완료되었습니다!" />}
     </Grid>
   );

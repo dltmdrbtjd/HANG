@@ -16,7 +16,23 @@ const Onboarding = () => {
   useEffect(() => {
     let moveX;
 
-    const pageMove = event => {
+    const pageMoveDesktop = event => {
+      const movement = moveX - event.offsetX;
+
+      if (movement > 30) {
+        if (page >= 3) return;
+
+        setPage(curPage => curPage + 1);
+      }
+
+      if (movement < -30) {
+        if (page <= 1) return;
+
+        setPage(curPage => curPage - 1);
+      }
+    };
+
+    const pageMoveMobile = event => {
       const movement = moveX - event.changedTouches[0].clientX;
 
       if (movement > 70) {
@@ -35,15 +51,23 @@ const Onboarding = () => {
     window.addEventListener('touchstart', event => {
       moveX = event.touches[0].clientX;
     });
+    window.addEventListener('mousedown', event => {
+      moveX = event.offsetX;
+    });
 
-    window.addEventListener('touchend', pageMove);
+    window.addEventListener('touchend', pageMoveMobile);
+    window.addEventListener('mouseup', pageMoveDesktop);
 
     return () => {
       window.removeEventListener('touchstart', event => {
         moveX = event.touches[0].clientX;
       });
+      window.removeEventListener('mousedown', event => {
+        moveX = event.offsetX;
+      });
 
-      window.removeEventListener('touchend', pageMove);
+      window.removeEventListener('touchend', pageMoveMobile);
+      window.removeEventListener('mouseup', pageMoveDesktop);
     };
   }, [page]);
 
@@ -55,7 +79,7 @@ const Onboarding = () => {
         position="relative"
         left={`${-(page - 1) * 100}vw`}
         width="300vw"
-        display="flex"
+        isFlex
         addstyle={Transition}
       >
         <Page1 />

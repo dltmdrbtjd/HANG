@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 // material
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+// history
+import { history } from '../../../redux/configureStore';
 // elements
 // import socketIOClient from 'socket.io-client';
-import { Link } from '../../../elements';
+import { Button, Link } from '../../../elements';
 
 // const ENDPOINT = 'http://127.0.0.1:4001';
 
@@ -20,11 +22,11 @@ const NotiBadge = () => {
   // }, []);
 
   return (
-    <Link href="/noti">
+    <Button _onClick={() => history.push('/noti')} form="text">
       <Badge badgeContent={4} color="secondary">
         <NotificationsNoneIcon />
       </Badge>
-    </Link>
+    </Button>
   );
 };
 

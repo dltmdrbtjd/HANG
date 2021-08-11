@@ -1,18 +1,26 @@
 import styled from 'styled-components';
+// mixin
+import { borderBox, textProps } from '../../styles/Mixin';
 
 const MainTitleStyle = styled.h2`
   width: ${props => props.width};
   height: ${props => props.height};
-  padding: ${props => props.padding};
   margin: ${props => props.margin};
-  color: ${props => props.theme.color[props.color]};
-  font-size: ${props => props.theme.fontSize[props.fs]};
-  font-weight: ${props => props.theme.fontWeight[props.fw]};
-  letter-spacing: ${props => props.ls};
-  line-height: ${props => props.ls};
-  text-align: ${props => props.textAlign};
   word-break: keep-all;
-  box-sizing: border-box;
+  letter-spacing: ${props => props.ls};
+  ${props => borderBox(props.padding)};
+  ${props =>
+    textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};
+
+  ${props => props.addstyle};
+
+  @media ${({ theme }) => theme.deviceSize.tab} {
+    ${props => props.tab};
+  }
+
+  @media ${({ theme }) => theme.deviceSize.smallMobile} {
+    ${props => props.mobile};
+  }
 `;
 
 export default MainTitleStyle;

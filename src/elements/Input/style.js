@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+// mixin
+import { borderBox } from '../../styles/Mixin';
 
 const InputStyle = styled.input`
   border: ${props => props.border};
@@ -6,12 +8,12 @@ const InputStyle = styled.input`
   border-radius: ${props => props.radius};
   width: ${props => props.width};
   height: ${props => props.height};
-  padding: ${props => props.padding};
   background-color: ${props => props.theme.color[props.bgColor]};
   color: ${props => props.theme.color[props.color]};
-  font-size: ${props => props.theme.fontSize[props.fs]};
+  font-size: ${props =>
+    props.fs ? props.theme.fontSize[props.fs] : 'inherit'};
   box-shadow: ${props => props.shadow};
-  box-sizing: border-box;
+  ${props => borderBox(props.padding)};
 
   &:focus {
     outline: none;
@@ -27,6 +29,12 @@ const InputStyle = styled.input`
 
   &:-ms-input-placeholder {
     color: ${props => props.theme.color.gray};
+  }
+
+  ${props => props.addstyle};
+
+  @media ${({ theme }) => theme.deviceSize.tab} {
+    ${props => props.tab};
   }
 `;
 

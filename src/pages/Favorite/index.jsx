@@ -30,10 +30,11 @@ const Favorite = () => {
               <Grid
                 position="relative"
                 z="1"
-                display="flex"
+                isFlex
                 hoz="center"
                 ver="center"
-                borderbot="1px solid #e7e7e7"
+                border="0.5px solid #E7E7E7"
+                borDirection="bottom"
                 padding="20px 0"
                 key={idx}
               >

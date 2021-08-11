@@ -44,7 +44,7 @@ const AreaSelectBox = ({ toggle, ...props }) => {
           radius="14px"
           padding="12px"
           bgColor="semiLightG"
-          display="flex"
+          isFlex
           hoz="space-between"
         >
           <CityTab>

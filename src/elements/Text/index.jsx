@@ -7,10 +7,6 @@ const Text = ({ children, ...props }) => {
 
 Text.defaultProps = {
   width: '100%',
-  color: 'black',
-  overflow: 'hidden',
-  wb: 'break-all',
-  ws: 'pre-line',
 };
 
 export default Text;

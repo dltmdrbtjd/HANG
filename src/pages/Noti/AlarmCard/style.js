@@ -8,13 +8,11 @@ const StrongAddStyle = css`
   ${({ theme }) => {
     const style = {
       color: theme.color.brandColor,
-      weight: theme.fontWeight.semiBold,
     };
 
     return css`
       color: ${style.color};
       border: 1.5px solid ${style.color};
-      font-weight: ${style.weight};
     `;
   }}
 

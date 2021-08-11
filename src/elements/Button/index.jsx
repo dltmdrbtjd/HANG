@@ -24,8 +24,8 @@ Button.defaultProps = {
   padding: '12px 0',
   bgColor: 'brandColor',
   disColor: 'semiLightG',
-  color: 'white',
   border: 'none',
+  _onClick: () => {},
 };
 
 export default Button;

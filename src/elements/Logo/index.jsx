@@ -1,17 +1,25 @@
 import React from 'react';
-import LogoStyle from './style';
+// history
+import { history } from '../../redux/configureStore';
 // components
-import Link from '../Link/index';
+import Button from '../Button';
 // images
 import LogoImg from '../../Images/Symbol.png';
+// style
+import LogoStyle from './style';
 
 const Logo = ({ href, ...props }) => {
   return (
     <LogoStyle {...props}>
       {href && (
-        <Link href={href} width="100%" height="100%">
+        <Button
+          width="100%"
+          height="100%"
+          form="text"
+          _onClick={() => history.push(href)}
+        >
           Hang
-        </Link>
+        </Button>
       )}
     </LogoStyle>
   );

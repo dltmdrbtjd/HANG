@@ -1,6 +1,7 @@
 const calRem = size => `${size / 16}rem`;
 
 const fontSize = {
+  status: calRem(8),
   xs: calRem(12),
   sm: calRem(14),
   md: calRem(16),
@@ -9,6 +10,7 @@ const fontSize = {
   sxl: calRem(24),
   xl: calRem(26),
   xxl: calRem(28),
+  tab: calRem(36),
 };
 
 const fontWeight = {
@@ -34,10 +36,16 @@ const color = {
   safe: '#00C314',
 };
 
+const deviceSize = {
+  smallMobile: '(max-width: 395px)',
+  tab: '(min-width: 600px)',
+};
+
 const theme = {
   fontSize,
   fontWeight,
   color,
+  deviceSize,
 };
 
 export default theme;

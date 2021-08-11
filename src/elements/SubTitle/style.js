@@ -1,18 +1,20 @@
 import styled from 'styled-components';
+// mixin
+import { borderBox, textProps } from '../../styles/Mixin';
 
 const SubTitleStyle = styled.h3`
   width: ${props => props.width};
   height: ${props => props.height};
-  padding: ${props => props.padding};
   margin: ${props => props.margin};
-  color: ${props => props.theme.color[props.color]};
-  font-size: ${props => props.theme.fontSize[props.fs]};
-  font-weight: ${props => props.theme.fontWeight[props.fw]};
-  line-height: ${props => props.ls};
-  text-align: ${props => props.textAlign};
-  box-sizing: border-box;
+  ${props => borderBox(props.padding)};
+  ${props =>
+    textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};
 
   ${props => props.addstyle};
+
+  @media ${({ theme }) => theme.deviceSize.tab} {
+    ${props => props.tab};
+  }
 `;
 
 export default SubTitleStyle;

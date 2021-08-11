@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+// mixin
+import { floatBox } from '../../styles/Mixin';
 
 const LogoStyle = styled.h1`
   width: ${props => props.width};
@@ -7,16 +9,16 @@ const LogoStyle = styled.h1`
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  ${floatBox('absolute', 0, 0, 0, 0)};
   margin: auto;
 
-  a {
+  button {
     text-indent: -9999px;
     overflow: hidden;
+  }
+
+  @media ${({ theme }) => theme.deviceSize.tab} {
+    ${props => props.tab};
   }
 `;
 

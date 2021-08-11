@@ -8,7 +8,7 @@ const StatusBar = ({ curPage, setPage }) => {
   return (
     <Grid
       width="70px"
-      display="flex"
+      isFlex
       hoz="space-between"
       padding="30px 0 0"
       margin="0 auto 30px"

@@ -31,7 +31,7 @@ TextArea.defaultProps = {
   radius: '14px',
   rows: '20',
   label: false,
-  placeholder: '',
+  border: '1px solid #E7E7E7',
   _onChange: () => {},
 };
 

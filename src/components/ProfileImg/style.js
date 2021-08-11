@@ -1,21 +1,38 @@
-const setProfileImageSize = {
-  large: {
-    width: '100px',
-    height: '100px',
-    fontSize: '100px',
-  },
+import { css } from 'styled-components';
 
-  medium: {
-    width: '60px',
-    height: '60px',
-    fontSize: '60px',
-  },
+const setProfileImageSize = size => {
+  switch (size) {
+    case 'large':
+      return css`
+        width: 100px;
+        padding-bottom: 100px;
+      `;
 
-  small: {
-    width: '42px',
-    height: '42px',
-    fontSize: '42px',
-  },
+    case 'medium':
+      return css`
+        width: 60px;
+        padding-bottom: 60px;
+      `;
+
+    case 'small':
+      return css`
+        width: 40px;
+        padding-bottom: 40px;
+      `;
+
+    default:
+      return css`
+        width: 60px;
+        padding-bottom: 60px;
+      `;
+  }
 };
 
-export default setProfileImageSize;
+const ImagePosition = css`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export { setProfileImageSize, ImagePosition };

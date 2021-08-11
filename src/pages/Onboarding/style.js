@@ -9,4 +9,19 @@ const CalcHeight = css`
   height: calc(100vh - 70px);
 `;
 
-export { Transition, CalcHeight };
+const TabImage = css`
+  width: 52%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%);
+`;
+
+const TabTitle = css`
+  font-size: ${({ theme }) => theme.fontSize.tab};
+`;
+
+const TabText = css`
+  font-size: ${({ theme }) => theme.fontSize.sxl};
+`;
+
+export { Transition, CalcHeight, TabImage, TabTitle, TabText };

@@ -9,6 +9,9 @@ import { DetailCreators } from '../../redux/modules/detail.js';
 
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
+// style
+import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
+import { textOverflow } from '../../styles/Mixin';
 
 const ProfileCard = ({ userInfo }) => {
   const dispatch = useDispatch();
@@ -24,14 +27,25 @@ const ProfileCard = ({ userInfo }) => {
   };
 
   return (
-    <Grid padding="20px 0" margin="10px 0 0 0" radius="14px" bgColor="white">
-      <Grid position="relative" display="flex" hoz="center" ver="center">
+    <Grid
+      padding="14px 21px"
+      margin="10px 0 0 0"
+      radius="14px"
+      bgColor="white"
+      border="0.5px solid #E7E7E7"
+      position="relative"
+    >
+      <Grid isFlex ver="center">
         <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
         <Grid width="75%" margin="0 0 0 13px">
           <Text fs="la" fw="bold">
             {userInfo && userInfo.nickname}
           </Text>
-          <Text color="darkG">
+          <Text
+            color="darkG"
+            addstyle={textOverflow()}
+            mobile={SetTabFontSize('sm')}
+          >
             {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
             {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
             {userInfo && userInfo.city}
@@ -42,8 +56,8 @@ const ProfileCard = ({ userInfo }) => {
             width="auto"
             color={userInfo.like ? 'brandColor' : 'darkG'}
             position="absolute"
-            top="0px"
-            right="15px"
+            top="12px"
+            right="12px"
             _onClick={() => {
               userInfo.like ? DelLike() : AddLike();
             }}
@@ -54,15 +68,15 @@ const ProfileCard = ({ userInfo }) => {
       </Grid>
       <span
         style={{
-          width: '90%',
+          width: '100%',
           height: '1px',
           borderBottom: '1px solid #e7e7e7',
           display: 'block',
           margin: '15px auto',
         }}
       />
-      <Grid margin="10px 0 0 0" padding="0 20px">
-        {userInfo.intro && userInfo.intro !== 'none' ? (
+      <Grid margin="10px 0 0 0">
+        {userInfo.intro !== 'none' ? (
           <Text fs="sm">{userInfo.intro}</Text>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>

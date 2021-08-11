@@ -22,7 +22,7 @@ const ValidateInput = ({
       width={width}
       radius="14px"
       bgColor="white"
-      display="flex"
+      isFlex
       hoz="space-between"
       ver="center"
       addstyle={setGridWithStatus(status)}

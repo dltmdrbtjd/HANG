@@ -34,12 +34,10 @@ const RoomHeader = () => {
   return (
     <HeaderStyle>
       <Container height="66px">
-        <Grid height="100%" display="flex" hoz="space-between" ver="center">
-          <Grid display="flex" ver="center">
+        <Grid height="100%" isFlex hoz="space-between" ver="center">
+          <Grid isFlex ver="center">
             <Button
-              padding="0"
-              color="black"
-              bgColor="white"
+              form="text"
               margin="0 18px 0 0"
               _onClick={() => {
                 history.goBack();
