@@ -15,7 +15,7 @@ import HeaderStyle from './style';
 const Header = () => {
   const path = useLocation().pathname;
 
-  if (withoutHeader.includes(path) && !pathURI[path]) return null;
+  if (withoutHeader.includes(path)) return null;
 
   return (
     <HeaderStyle>
