@@ -7,6 +7,8 @@ import { Grid, Button, Text, Label } from '../../../elements';
 import ValidateInput from '../ValidateInput';
 // reducer
 import { UserCreators } from '../../../redux/modules/user';
+// style
+import { TabMargin } from '../style';
 
 const EnterIdPwd = ({
   userId,
@@ -29,16 +31,16 @@ const EnterIdPwd = ({
   return (
     <>
       <Grid position="absolute" top="50%" left="0" translate="0, -50%">
-        <Grid margin="0 0 15px">
+        <Grid margin="0 0 15px" tab={TabMargin('36px')}>
           <Label fs="lg" id="id" lh="2" fw="semiBold">
             아이디
           </Label>
 
-          <Grid display="flex" hoz="space-between">
+          <Grid isFlex hoz="space-between">
             <ValidateInput
               id="id"
               placeholder="아이디 입력"
-              width="55%"
+              width="58%"
               name="userId"
               value={userId}
               _onChange={setUserId}
@@ -46,7 +48,7 @@ const EnterIdPwd = ({
             />
 
             <Button
-              width="42%"
+              width="40%"
               disabled={!userId || idErrorMsg}
               _onClick={() => {
                 duplicateIdCheck();

@@ -14,28 +14,23 @@ import {
 // images
 import OnboardingImg3 from '../../../Images/onboarding3.svg';
 // style
-import { CalcHeight } from '../style';
+import { CalcHeight, TabImage, TabTitle, TabText } from '../style';
 
 const Page3 = () => {
   return (
     <Grid position="relative" addstyle={CalcHeight}>
       <Container height="100%">
-        <MainTitle fs="xxl" fw="black" margin="0 0 30px">
-          <Strong fs="xxl" fw="black" color="brandColor">
-            행
-          </Strong>
-          복하게, 여
-          <Strong fs="xxl" fw="black" color="brandColor">
-            행
-          </Strong>
+        <MainTitle fs="xxl" fw="black" margin="0 0 30px" tab={TabTitle}>
+          <Strong color="brandColor">행</Strong>
+          복하게, 여<Strong color="brandColor">행</Strong>
           하라
         </MainTitle>
 
-        <Text fs="lg" wb="keep-all">
+        <Text fs="lg" wb="keep-all" tab={TabText}>
           당신만의 행복한 여행을 만들러 갈까요?
         </Text>
 
-        <Grid position="absolute" top="28%" left="0">
+        <Grid position="absolute" top="28%" left="0" tab={TabImage}>
           <Image src={OnboardingImg3} />
         </Grid>
 
@@ -44,7 +39,6 @@ const Page3 = () => {
             fs="la"
             fw="bold"
             width="100%"
-            margin="0 0 15px"
             _onClick={() => history.push('/signup')}
           >
             회원가입

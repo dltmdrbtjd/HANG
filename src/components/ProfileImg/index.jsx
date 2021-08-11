@@ -1,30 +1,26 @@
 import React from 'react';
-// icon
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // elements
 import { Grid, Image } from '../../elements/index';
 // style
-import setProfileImageSize from './style';
+import { setProfileImageSize, ImagePosition } from './style';
+// image
+import defaultProfile from '../../Images/profile.png';
 
-const ProfileImg = ({ size = 'medium', imgUrl }) => {
+const ProfileImg = ({ size, imgUrl, mobile }) => {
   return (
     <Grid
-      display="flex"
-      hoz="center"
-      ver="center"
-      width={setProfileImageSize[size].width}
-      height={setProfileImageSize[size].height}
       overflow="hidden"
       radius="50%"
       color="gray"
+      addstyle={setProfileImageSize(size)}
+      position="relative"
+      mobile={mobile}
     >
-      {imgUrl ? (
-        <Image src={imgUrl} alt="profile image" />
-      ) : (
-        <AccountCircleIcon
-          style={{ fontSize: `${setProfileImageSize[size].fontSize}` }}
-        />
-      )}
+      <Image
+        src={imgUrl && imgUrl !== 'null' ? imgUrl : defaultProfile}
+        alt="profile image"
+        addstyle={ImagePosition}
+      />
     </Grid>
   );
 };

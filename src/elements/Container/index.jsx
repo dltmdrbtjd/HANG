@@ -8,15 +8,20 @@ const Container = ({ children, ...props }) => {
   return (
     <ContainerStyle
       {...props}
-      isPadding={
-        path.includes('/signup') ||
-        path.includes('/login') ||
-        path.includes('/onboarding')
-      }
+      noPadding={[
+        '/signup',
+        '/signup/welcome',
+        '/login',
+        '/onboarding',
+      ].includes(path)}
     >
       {children}
     </ContainerStyle>
   );
+};
+
+Container.defaultProps = {
+  padding: '90px 0',
 };
 
 export default Container;

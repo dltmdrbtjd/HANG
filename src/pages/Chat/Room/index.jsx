@@ -38,12 +38,14 @@ const ChatRoom = () => {
         left="50%"
         translate="-50%, 0"
         width="90%"
+        maxWidth="600px"
         radius="12px"
         bgColor="white"
         border="1px solid #E7E7E7"
-        display="flex"
+        isFlex
         hoz="space-between"
         ver="center"
+        tab="max-width: 768px"
       >
         <Input width="80%" placeholder="채팅 내용 입력" border="none" />
 

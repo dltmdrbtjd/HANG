@@ -1,10 +1,15 @@
 import { css } from 'styled-components';
+// mixin
+import { textOverflow, flexBox } from '../../../styles/Mixin';
 
 const SubTitleTextHidden = css`
-  white-space: nowrap;
-  overflow: hidden;
   max-width: 70%;
-  text-overflow: ellipsis;
+  ${textOverflow()};
 `;
 
-export default SubTitleTextHidden;
+const TabEventWrapper = css`
+  ${flexBox('space-between')};
+  flex-wrap: wrap;
+`;
+
+export { SubTitleTextHidden, TabEventWrapper };

@@ -25,6 +25,7 @@ Button.defaultProps = {
   bgColor: 'brandColor',
   disColor: 'semiLightG',
   border: 'none',
+  _onClick: () => {},
 };
 
 export default Button;

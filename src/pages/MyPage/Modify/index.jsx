@@ -63,7 +63,7 @@ const MyPageModify = () => {
   };
 
   useEffect(() => {
-    if (userInfo.profileImg)
+    if (userInfo.profileImg && userInfo.profileImg !== 'null')
       dispatch(ImageCreators.setProfilePre(userInfo.profileImg));
 
     setRegion(userInfo.region);
@@ -85,7 +85,7 @@ const MyPageModify = () => {
           닉네임
         </SubTitle>
 
-        <Grid display="flex" hoz="space-between">
+        <Grid isFlex hoz="space-between">
           <ValidateInput
             id="nickname"
             placeholder="닉네임 입력"

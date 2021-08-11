@@ -56,12 +56,12 @@ const GuideRequest = () => {
       {myPromise.length > 0
         ? myPromise.map((item, idx) => (
             <Grid
-              display="flex"
-              hoz="flex-start"
+              isFlex
               ver="center"
               key={idx}
               padding="20px 0"
-              borderbot="1px solid #c4c4c4"
+              border="0.5px solid #E7E7E7"
+              borDirection="bottom"
             >
               <Grid width="auto">
                 <RadioBtn
@@ -93,6 +93,8 @@ const GuideRequest = () => {
         bottom="120px"
         left="50%"
         translate="-50%,0"
+        maxWidth="600px"
+        tab="max-width: 768px"
       >
         <Button
           padding="16px 0"

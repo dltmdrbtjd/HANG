@@ -1,9 +1,4 @@
-import styled, { css } from 'styled-components';
-
-const commonStyle = css`
-  box-shadow: 0px 2px 3px rgba(136, 136, 136, 0.25);
-  background-color: ${({ theme }) => theme.color.white};
-`;
+import styled from 'styled-components';
 
 export const SpanStyle = styled.span`
   width: 100%;
@@ -13,7 +8,9 @@ export const SpanStyle = styled.span`
   justify-content: space-between;
   align-items: center;
   border-radius: 10px;
-  ${commonStyle};
+  border: ${props => props.border};
+  background-color: ${({ theme }) => theme.color.white};
+  box-shadow: ${props => props.shadow};
 
   img {
     transition-duration: 0.5s;
@@ -29,7 +26,7 @@ const ListWrapper = styled.ul`
   border-bottom-right-radius: 10px;
   overflow: auto;
   background-color: ${({ theme }) => theme.color.white};
-  ${commonStyle};
+  box-shadow: ${props => props.shadow};
 `;
 
 export const ListStyle = styled.li`

@@ -11,6 +11,9 @@ import { SearchCreators } from '../../redux/modules/search';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
+import SmallMobileProfileSize from './style';
+import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
+import { textOverflow } from '../../styles/Mixin';
 
 const SearchCard = ({ userInfo, category, idx }) => {
   const dispatch = useDispatch();
@@ -37,18 +40,19 @@ const SearchCard = ({ userInfo, category, idx }) => {
     <Grid padding="6px 0">
       <Grid
         position="relative"
-        display="flex"
-        hoz="center"
-        ver="center"
-        padding="10px 0"
+        isFlex
+        padding="12px 20px"
         radius="14px"
         bgColor="white"
         border="0.5px solid #e7e7e7"
         z="1"
       >
-        <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
+        <ProfileImg
+          imgUrl={userInfo && userInfo.profileImg}
+          mobile={SmallMobileProfileSize}
+        />
         <Grid
-          width="75%"
+          width="70%"
           margin="0 0 0 10px"
           _onClick={() => {
             history.push(`/detail?user=${userInfo.userPk}`);
@@ -57,7 +61,11 @@ const SearchCard = ({ userInfo, category, idx }) => {
           <Text fs="la" fw="bold">
             {userInfo && userInfo.nickname}
           </Text>
-          <Text color="darkG">
+          <Text
+            color="darkG"
+            addstyle={textOverflow()}
+            mobile={SetTabFontSize('sm')}
+          >
             {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
             {userInfo && userInfo.age}대 ·{userInfo && userInfo.region}{' '}
             {userInfo && userInfo.city}

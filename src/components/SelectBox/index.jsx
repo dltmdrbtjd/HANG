@@ -40,9 +40,12 @@ const SelectBox = ({ initailOption, contents, setState, ...props }) => {
           ref={anchorRef}
           _onClick={handleToggle}
           color="black"
-          shadow="none"
         >
-          <SpanStyle angle={angle}>
+          <SpanStyle
+            angle={angle}
+            shadow={open && '0px 2px 3px rgba(136, 136, 136, 0.25)'}
+            border={open || '0.5px solid #E7E7E7'}
+          >
             <Strong fw="regular">{option}</Strong>
             <Image width="10px" src={Arrow} alt="arrow" />
           </SpanStyle>
@@ -50,7 +53,10 @@ const SelectBox = ({ initailOption, contents, setState, ...props }) => {
 
         {open && (
           <ClickAwayListener onClickAway={handleClose}>
-            <ListWrapper {...props}>
+            <ListWrapper
+              {...props}
+              shadow={open && '0px 2px 3px rgba(136, 136, 136, 0.25)'}
+            >
               {contents.map(content => (
                 <ListStyle
                   bgColor={option === content ? 'skyblue' : null}

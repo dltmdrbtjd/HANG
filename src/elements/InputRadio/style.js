@@ -6,7 +6,7 @@ const RadioStyle = styled.input`
     appearance: none;
     width: 20px;
     height: 20px;
-    border-radius: 100%;
+    border-radius: 50%;
     margin-right: 10px;
     cursor: pointer;
   }

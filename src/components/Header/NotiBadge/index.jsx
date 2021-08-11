@@ -9,7 +9,7 @@ import { Button } from '../../../elements';
 
 const NotiBadge = () => {
   return (
-    <Button _onClick={() => history.push('/noti')} shape="text">
+    <Button _onClick={() => history.push('/noti')} form="text">
       <Badge badgeContent={4} color="secondary">
         <NotificationsNoneIcon />
       </Badge>

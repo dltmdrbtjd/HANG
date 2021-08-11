@@ -7,7 +7,6 @@ const SubTitle = ({ children, ...props }) => {
 
 SubTitle.defaultProps = {
   width: '100%',
-  color: 'black',
   fw: 'semiBold',
 };
 

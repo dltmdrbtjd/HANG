@@ -7,6 +7,8 @@ import { Grid, Button, Image, MainTitle } from '../../../elements';
 import StatusBar from '../StatusBar';
 // images
 import WelcomeImg from '../../../Images/welcome.gif';
+// style
+import { TabWelcome } from '../style';
 
 const Welcome = () => {
   return (
@@ -21,11 +23,12 @@ const Welcome = () => {
         position="absolute"
         top="50%"
         left="0"
-        translate="0, -50%"
+        translate="0, -40%"
         overflow="hidden"
-        display="flex"
+        isFlex
         hoz="center"
         ver="center"
+        tab={TabWelcome}
       >
         <Image width="140%" src={WelcomeImg} />
       </Grid>

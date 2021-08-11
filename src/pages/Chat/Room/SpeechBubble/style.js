@@ -14,4 +14,8 @@ const SpeechBubbleStyle = css`
   border-radius: 8px;
 `;
 
-export default SpeechBubbleStyle;
+const TabSpeechBubble = css`
+  max-width: 238px;
+`;
+
+export { SpeechBubbleStyle, TabSpeechBubble };

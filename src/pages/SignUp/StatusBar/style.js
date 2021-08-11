@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const HrStyle = styled.hr`
   width: 84px;
@@ -7,4 +7,9 @@ const HrStyle = styled.hr`
   background-color: ${props => props.hrColor};
 `;
 
-export default HrStyle;
+const SetSmallMobile = css`
+  padding-top: 30px;
+  margin-bottom: 30px;
+`;
+
+export { HrStyle, SetSmallMobile };

@@ -1,55 +1,49 @@
 import React from 'react';
 
 import { Grid, Text, Button, BlurBox } from '../../elements/index';
-import ModalStyle from './style';
 
 const Modal = props => {
   const { open, close, agree, mainText, subText, subText2, agreeText } = props;
   return (
     <>
       {open ? (
-        <ModalStyle>
-          <BlurBox>
+        <BlurBox isFlex hoz="center" ver="center">
+          <Grid
+            bgColor="white"
+            width="296px"
+            height="216px"
+            position="relative"
+            radius="14px"
+            overflow="hidden"
+            textAlign="center"
+          >
+            <Text margin="18px 0 0 0" fs="xl" fw="extraBold">
+              {mainText}
+            </Text>
+            <Text margin="37px 0 0 0">
+              {subText} {subText ? <br /> : null} {subText2}
+            </Text>
             <Grid
-              bgColor="white"
-              width="296px"
-              height="216px"
-              position="fixed"
-              top="50%"
-              left="50%"
-              translate="-50%,-50%"
-              radius="14px"
-              overflow="hidden"
-              z="1"
+              isFlex
+              margin="33px 0 0 0"
+              position="absolute"
+              left="0"
+              bottom="0"
             >
-              <Text margin="18px 0 0 0" fs="xl" fw="extraBold">
-                {mainText}
-              </Text>
-              <Text margin="37px 0 0 0">
-                {subText} {subText ? <br /> : null} {subText2}
-              </Text>
-              <Grid
-                display="flex"
-                margin="33px 0 0 0"
-                position="absolute"
-                left="0"
-                bottom="0"
+              <Button radius="none" _onClick={agree} width="100%">
+                {agreeText}
+              </Button>
+              <Button
+                bgColor="gray"
+                radius="none"
+                _onClick={close}
+                width="100%"
               >
-                <Button radius="none" _onClick={agree} width="100%">
-                  {agreeText}
-                </Button>
-                <Button
-                  bgColor="gray"
-                  radius="none"
-                  _onClick={close}
-                  width="100%"
-                >
-                  취소
-                </Button>
-              </Grid>
+                취소
+              </Button>
             </Grid>
-          </BlurBox>
-        </ModalStyle>
+          </Grid>
+        </BlurBox>
       ) : null}
     </>
   );
