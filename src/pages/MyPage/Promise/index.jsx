@@ -13,6 +13,7 @@ import NoPosts from '../../../components/NoPosts';
 import { MypageCreators } from '../../../redux/modules/mypage';
 // style
 import { SetAlignItemsButton, TabMenuWrapper } from '../style';
+import { TabWrapper, TabLayout, TabSize } from './style';
 
 const MyPromise = () => {
   const { received, requested, confirmed } = useSelector(
@@ -76,13 +77,18 @@ const MyPromise = () => {
                 </Button>
               </Grid>
 
-              {received.slice(0, 3).map(promInfo => (
-                <PromiseCard
-                  key={(Date.now() + Math.random()).toString(36)}
-                  type="received"
-                  promInfo={promInfo}
-                />
-              ))}
+              <Grid tab={TabWrapper}>
+                <Grid tab={TabLayout} length={received.length}>
+                  {received.slice(0, 3).map(promInfo => (
+                    <PromiseCard
+                      key={(Date.now() + Math.random()).toString(36)}
+                      type="received"
+                      promInfo={promInfo}
+                      tab={TabSize}
+                    />
+                  ))}
+                </Grid>
+              </Grid>
             </Grid>
           ) : null}
 
@@ -108,14 +114,19 @@ const MyPromise = () => {
                 </Button>
               </Grid>
 
-              {requested.slice(0, 3).map(promInfo => (
-                <PromiseCard
-                  key={(Date.now() + Math.random()).toString(36)}
-                  guide
-                  type="requested"
-                  promInfo={promInfo}
-                />
-              ))}
+              <Grid tab={TabWrapper}>
+                <Grid tab={TabLayout} length={requested.length}>
+                  {requested.slice(0, 3).map(promInfo => (
+                    <PromiseCard
+                      key={(Date.now() + Math.random()).toString(36)}
+                      guide
+                      type="requested"
+                      promInfo={promInfo}
+                      tab={TabSize}
+                    />
+                  ))}
+                </Grid>
+              </Grid>
             </Grid>
           ) : null}
 
@@ -141,14 +152,19 @@ const MyPromise = () => {
                 </Button>
               </Grid>
 
-              {confirmed.slice(0, 3).map(promInfo => (
-                <PromiseCard
-                  key={(Date.now() + Math.random()).toString(36)}
-                  guide={promInfo.guide}
-                  promInfo={promInfo}
-                  type="confirmed"
-                />
-              ))}
+              <Grid tab={TabWrapper}>
+                <Grid tab={TabLayout} length={confirmed.length}>
+                  {confirmed.slice(0, 3).map(promInfo => (
+                    <PromiseCard
+                      key={(Date.now() + Math.random()).toString(36)}
+                      guide={promInfo.guide}
+                      promInfo={promInfo}
+                      type="confirmed"
+                      tab={TabSize}
+                    />
+                  ))}
+                </Grid>
+              </Grid>
             </Grid>
           ) : null}
         </NoPosts>

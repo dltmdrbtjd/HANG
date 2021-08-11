@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 
 const TabSize = css`
-  width: 48%;
+  width: 49%;
 `;
 
 export default TabSize;

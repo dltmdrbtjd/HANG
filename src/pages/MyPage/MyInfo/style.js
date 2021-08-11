@@ -9,6 +9,7 @@ const SubTitleTextHidden = css`
 
 const TabEventWrapper = css`
   ${flexBox('space-between')};
+  flex-wrap: wrap;
 `;
 
 export { SubTitleTextHidden, TabEventWrapper };

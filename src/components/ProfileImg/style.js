@@ -5,27 +5,34 @@ const setProfileImageSize = size => {
     case 'large':
       return css`
         width: 100px;
-        height: 100px;
+        padding-bottom: 100px;
       `;
 
     case 'medium':
       return css`
         width: 60px;
-        height: 60px;
+        padding-bottom: 60px;
       `;
 
     case 'small':
       return css`
         width: 40px;
-        height: 40px;
+        padding-bottom: 40px;
       `;
 
     default:
       return css`
         width: 60px;
-        height: 60px;
+        padding-bottom: 60px;
       `;
   }
 };
 
-export default setProfileImageSize;
+const ImagePosition = css`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
+export { setProfileImageSize, ImagePosition };

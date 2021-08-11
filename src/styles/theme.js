@@ -37,6 +37,7 @@ const color = {
 };
 
 const deviceSize = {
+  smallMobile: '(max-width: 395px)',
   tab: '(min-width: 600px)',
 };
 

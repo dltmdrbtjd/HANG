@@ -11,10 +11,10 @@ import Section from './components/Section';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 // pages
-import Onboarding from './pages/Onboarding';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Onboarding from './pages/Onboarding';
 import Welcome from './pages/SignUp/Welcome';
 import Search from './pages/Search';
 import Detail from './pages/Detail';
@@ -29,31 +29,43 @@ import Noti from './pages/Noti';
 import Chat from './pages/Chat';
 import ChatRoom from './pages/Chat/Room';
 import NotFound from './pages/NotFound';
+// pathname
+import { pathURI } from './Route/Path';
 
 const App = () => {
   return (
     <ConnectedRouter history={history}>
       <Header />
 
-      <PublicRoute path="/onboarding" component={Onboarding} exact />
+      <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
 
       <Section>
         <Switch>
-          <PublicRoute path="/login" restricted component={Login} exact />
-          <PublicRoute path="/signup" restricted component={SignUp} exact />
           <PublicRoute
-            path="/signup/welcome"
+            path={pathURI.logIn}
+            restricted
+            component={Login}
+            exact
+          />
+          <PublicRoute
+            path={pathURI.signUp}
+            restricted
+            component={SignUp}
+            exact
+          />
+          <PublicRoute
+            path={pathURI.welcome}
             restricted
             component={Welcome}
             exact
           />
-          <PrivateRoute path="/" component={Home} exact />
-          <PrivateRoute path="/search" component={Search} exact />
-          <PrivateRoute path="/detail" component={Detail} exact />
-          <PrivateRoute path="/detail/request" component={GuideRequest} exact />
-          <PrivateRoute path="/favorite" component={Favorite} exact />
-          <PrivateRoute path="/mypage" component={MyInfo} exact />
-          <PrivateRoute path="/mypage/promise" component={MyPromise} exact />
+          <PrivateRoute path={pathURI.home} component={Home} exact />
+          <PrivateRoute path={pathURI.search} component={Search} exact />
+          <PrivateRoute path={pathURI.detail} component={Detail} exact />
+          <PrivateRoute path={pathURI.request} component={GuideRequest} exact />
+          <PrivateRoute path={pathURI.favorite} component={Favorite} exact />
+          <PrivateRoute path={pathURI.mypage} component={MyInfo} exact />
+          <PrivateRoute path={pathURI.promise} component={MyPromise} exact />
           <PrivateRoute
             path="/mypage/promise/:page"
             component={MyPromiseDetail}
@@ -65,9 +77,9 @@ const App = () => {
             component={CreateTrip}
             exact
           />
-          <PrivateRoute path="/noti" component={Noti} exact />
-          <PrivateRoute path="/chat" component={Chat} exact />
-          <PrivateRoute path="/chat/room" component={ChatRoom} exact />
+          <PrivateRoute path={pathURI.noti} component={Noti} exact />
+          <PrivateRoute path={pathURI.chat} component={Chat} exact />
+          <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
           <PublicRoute component={NotFound} exact />
         </Switch>
       </Section>

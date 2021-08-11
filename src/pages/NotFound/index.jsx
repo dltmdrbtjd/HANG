@@ -19,7 +19,9 @@ const NotFound = () => {
         행과 함께라면 다시 찾을 수 있어요
       </Text>
 
-      <Image src={NotFoundImg} alt="404 Not Found" />
+      <Grid maxWidth="680px" margin="0 auto">
+        <Image src={NotFoundImg} alt="404 Not Found" />
+      </Grid>
 
       <Grid position="absolute" bottom="110px" left="0">
         <Button

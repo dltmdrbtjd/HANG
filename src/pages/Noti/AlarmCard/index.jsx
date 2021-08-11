@@ -7,6 +7,7 @@ import { Grid, Text, Strong } from '../../../elements';
 import ProfileImage from '../../../components/ProfileImg';
 // style
 import { AlarmWrapperStyle, StrongAddStyle } from './style';
+import { textOverflow } from '../../../styles/Mixin';
 
 const AlarmCard = () => {
   return (

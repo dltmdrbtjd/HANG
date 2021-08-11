@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { shallowEqual, useSelector } from 'react-redux';
 // history
 import { history } from '../../../../redux/configureStore';
@@ -9,6 +9,8 @@ import PromiseCard from '../PromiseCard';
 import NoInfo from '../../../../components/NoInfo';
 // style
 import { TabMenuWrapper } from '../../style';
+import { TabEventWrapper } from '../../MyInfo/style';
+import TabSize from '../../../../components/EventCard/style';
 
 const MyPromiseDetail = ({ match }) => {
   const page = parseInt(match.params.page, 10);
@@ -50,7 +52,7 @@ const MyPromiseDetail = ({ match }) => {
         </TabMenuWrapper>
       </Grid>
 
-      <Grid margin="60px 0 0">
+      <Grid margin="60px 0">
         <SubTitle fs="la" width="auto" margin="0 0 15px">
           {pageBreak.title[page - 1]}
         </SubTitle>
@@ -59,18 +61,21 @@ const MyPromiseDetail = ({ match }) => {
           list={promises[page - 1]}
           contents={pageBreak.postComent[page - 1]}
         >
-          {promises[page - 1].map((promInfo, idx) => (
-            <PromiseCard
-              key={(Date.now() + Math.random() * idx).toString(36)}
-              type={pageBreak.type[page - 1]}
-              guide={
-                {}.hasOwnProperty.call(pageBreak.guide, page - 1)
-                  ? pageBreak.guide[page - 1]
-                  : promInfo.guide
-              }
-              promInfo={promInfo}
-            />
-          ))}
+          <Grid tab={TabEventWrapper}>
+            {promises[page - 1].map((promInfo, idx) => (
+              <PromiseCard
+                key={(Date.now() + Math.random() * idx).toString(36)}
+                type={pageBreak.type[page - 1]}
+                guide={
+                  {}.hasOwnProperty.call(pageBreak.guide, page - 1)
+                    ? pageBreak.guide[page - 1]
+                    : promInfo.guide
+                }
+                promInfo={promInfo}
+                tab={TabSize}
+              />
+            ))}
+          </Grid>
         </NoInfo>
       </Grid>
     </>

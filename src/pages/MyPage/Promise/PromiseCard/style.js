@@ -6,4 +6,15 @@ const ArrowStyle = css`
   right: 8px;
 `;
 
-export default ArrowStyle;
+const SetTabFontSize = fontSize => {
+  return css`
+    font-size: ${({ theme }) => theme.fontSize[fontSize]};
+  `;
+};
+
+const SmallMobileProfileSize = css`
+  width: 70px;
+  padding-bottom: 70px;
+`;
+
+export { ArrowStyle, SetTabFontSize, SmallMobileProfileSize };

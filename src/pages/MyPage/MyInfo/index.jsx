@@ -83,7 +83,7 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      <Grid tab={TabEventWrapper}>
+      <Grid tab={TabEventWrapper} margin="0 0 60px">
         <NoPosts
           list={tripList}
           title="여행 이벤트 등록하기"

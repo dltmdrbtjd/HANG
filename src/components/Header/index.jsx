@@ -3,6 +3,7 @@ import React from 'react';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 // router
 import { useLocation } from 'react-router-dom';
+import { pathURI, withoutHeader } from '../../Route/Path';
 // history
 import { history } from '../../redux/configureStore';
 // components
@@ -14,16 +15,7 @@ import HeaderStyle from './style';
 const Header = () => {
   const path = useLocation().pathname;
 
-  if (
-    [
-      '/signup',
-      '/signup/welcome',
-      '/login',
-      '/onboarding',
-      '/chat/room',
-    ].includes(path)
-  )
-    return null;
+  if (withoutHeader.includes(path) && !pathURI[path]) return null;
 
   return (
     <HeaderStyle>

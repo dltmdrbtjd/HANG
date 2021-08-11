@@ -19,6 +19,7 @@ import Welcome from './Welcome';
 import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
 // style
 import { TabTitle } from './style';
+import { SetTabFontSize } from '../MyPage/Promise/PromiseCard/style';
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -67,6 +68,7 @@ const SignUp = () => {
         ls="-1px"
         margin="0 0 30px"
         tab={TabTitle}
+        mobile={SetTabFontSize('la')}
       >
         {title[page - 1]}
       </MainTitle>

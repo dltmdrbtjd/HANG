@@ -7,6 +7,7 @@ import { Grid, Strong, Text } from '../../../elements';
 import ProfileImg from '../../../components/ProfileImg';
 // style
 import { LimitWidth, ShowTimeSpan } from './style';
+import { textOverflow } from '../../../styles/Mixin';
 
 const ChatCard = () => {
   return (
@@ -25,7 +26,7 @@ const ChatCard = () => {
               닉네임
             </Strong>
 
-            <Text margin="6px 0 0" ws="nowrap">
+            <Text margin="6px 0 0" addstyle={textOverflow()}>
               마지막 채팅 내용11111111111111111111111111111
             </Text>
           </Grid>

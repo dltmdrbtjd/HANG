@@ -123,7 +123,7 @@ const Search = props => {
     <>
       <SearchBar setFindUser={setFindUser} />
       <Grid width="100%" margin="10px 0" isFlex hoz="space-between">
-        <Grid>
+        <Grid width="auto">
           <CategoryBtn
             radius="20px"
             color={!cityOpen ? 'gray' : 'brandColor'}
@@ -138,7 +138,7 @@ const Search = props => {
             지역
           </CategoryBtn>
         </Grid>
-        <Grid isFlex hoz="flex-end">
+        <Grid width="auto">
           <CategoryBtn
             radius="20px"
             color={!traveler ? 'gray' : 'brandColor'}

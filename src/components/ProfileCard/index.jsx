@@ -9,6 +9,9 @@ import { DetailCreators } from '../../redux/modules/detail.js';
 
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
+// style
+import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
+import { textOverflow } from '../../styles/Mixin';
 
 const ProfileCard = ({ userInfo }) => {
   const dispatch = useDispatch();
@@ -38,7 +41,11 @@ const ProfileCard = ({ userInfo }) => {
           <Text fs="la" fw="bold">
             {userInfo && userInfo.nickname}
           </Text>
-          <Text color="darkG">
+          <Text
+            color="darkG"
+            addstyle={textOverflow()}
+            mobile={SetTabFontSize('sm')}
+          >
             {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
             {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
             {userInfo && userInfo.city}

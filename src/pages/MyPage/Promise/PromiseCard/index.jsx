@@ -12,13 +12,14 @@ import { Button, Grid, Text, Strong } from '../../../../elements';
 import ProfileImg from '../../../../components/ProfileImg';
 import Modal from '../../../../components/Modal';
 import ToastMessage from '../../../../components/ToastMessage';
-// style
-import { StrongAddStyle } from '../../../Noti/AlarmCard/style';
-import ArrowStyle from './style';
 // reducer
 import { MypageCreators } from '../../../../redux/modules/mypage';
+// style
+import { StrongAddStyle } from '../../../Noti/AlarmCard/style';
+import { ArrowStyle, SetTabFontSize, SmallMobileProfileSize } from './style';
+import { textOverflow } from '../../../../styles/Mixin';
 
-const PromiseCard = ({ promInfo, guide, type }) => {
+const PromiseCard = ({ promInfo, guide, type, tab }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState({
     modalOpen: false,
@@ -104,22 +105,45 @@ const PromiseCard = ({ promInfo, guide, type }) => {
   }, []);
 
   return (
-    <Grid bgColor="white" radius="16px" overflow="hidden" margin="0 0 15px">
-      <Grid isFlex ver="center" padding="32px 20px" position="relative">
-        <ProfileImg size="large" imgUrl={promInfo.profileImg} />
+    <Grid
+      bgColor="white"
+      radius="16px"
+      overflow="hidden"
+      margin="0 0 15px"
+      tab={tab}
+    >
+      <Grid
+        isFlex
+        ver="center"
+        padding="32px 20px"
+        position="relative"
+        overflow="hidden"
+      >
+        <ProfileImg
+          size="large"
+          imgUrl={promInfo.profileImg}
+          mobile={SmallMobileProfileSize}
+        />
 
-        <Grid width="auto" margin="0 0 0 14px">
-          <Text margin="0 0 20px">
+        <Grid width="60%" margin="0 0 0 14px">
+          <Text
+            margin="0 0 20px"
+            tab={SetTabFontSize('md')}
+            mobile={SetTabFontSize('sm')}
+            addstyle={textOverflow()}
+            height="30px"
+            lh="30px"
+          >
             <Strong>{promInfo.nickname}</Strong> 님에게{' '}
             <Strong addstyle={StrongAddStyle}>길잡이</Strong> 요청
           </Text>
 
-          <Text>
+          <Text tab={SetTabFontSize('md')} mobile={SetTabFontSize('sm')}>
             {moment.utc(promInfo.startDate).format('MM.DD')} -{' '}
             {moment.utc(promInfo.endDate).format('MM.DD')}
           </Text>
 
-          <Text fs="la" fw="bold">
+          <Text fs="la" fw="bold" tab={SetTabFontSize('md')}>
             {promInfo.region} {promInfo.city}
           </Text>
         </Grid>
@@ -134,7 +158,6 @@ const PromiseCard = ({ promInfo, guide, type }) => {
           <Button
             width="50%"
             radius="0"
-            padding="15px 0"
             _onClick={() => {
               setPromiseType('agreeReceived');
               setOpen({ ...open, modalOpen: true });
@@ -146,7 +169,6 @@ const PromiseCard = ({ promInfo, guide, type }) => {
           <Button
             width="50%"
             radius="0"
-            padding="15px 0"
             bgColor="semiLightG"
             color="darkG"
             _onClick={() => setOpen({ ...open, modalOpen: true })}
@@ -158,7 +180,6 @@ const PromiseCard = ({ promInfo, guide, type }) => {
         <Button
           width="100%"
           radius="0"
-          padding="15px 0"
           _onClick={() => setOpen({ ...open, modalOpen: true })}
         >
           취소

@@ -2,13 +2,19 @@ import React, { Fragment } from 'react';
 // elements
 import { Grid, Button } from '../../../elements/index';
 // style
-import HrStyle from './style';
+import { HrStyle, SetSmallMobile } from './style';
 
 const StatusBar = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
 
   return (
-    <Grid isFlex hoz="center" padding="50px 0 0" margin="0 0 50px">
+    <Grid
+      isFlex
+      hoz="center"
+      padding="50px 0 0"
+      margin="0 0 50px"
+      mobile={SetSmallMobile}
+    >
       <Grid isFlex ver="center" width="auto">
         {pageNav.map((page, idx) => {
           let color = 'gray';

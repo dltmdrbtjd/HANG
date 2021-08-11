@@ -16,6 +16,10 @@ const TextStyle = styled.p`
   @media ${({ theme }) => theme.deviceSize.tab} {
     ${props => props.tab};
   }
+
+  @media ${({ theme }) => theme.deviceSize.smallMobile} {
+    ${props => props.mobile};
+  }
 `;
 
 export default TextStyle;

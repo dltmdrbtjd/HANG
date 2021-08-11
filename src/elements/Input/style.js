@@ -10,7 +10,8 @@ const InputStyle = styled.input`
   height: ${props => props.height};
   background-color: ${props => props.theme.color[props.bgColor]};
   color: ${props => props.theme.color[props.color]};
-  font-size: ${props => props.theme.fontSize[props.fs]};
+  font-size: ${props =>
+    props.fs ? props.theme.fontSize[props.fs] : 'inherit'};
   box-shadow: ${props => props.shadow};
   ${props => borderBox(props.padding)};
 

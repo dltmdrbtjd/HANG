@@ -40,7 +40,7 @@ const NoPosts = ({ list, title, coment, link, children, ...props }) => {
           {title}
         </MainTitle>
 
-        <Text fs="md" tab={TabFontSize('lg')}>
+        <Text wb="keep-all" fs="sm" tab={TabFontSize('lg')}>
           {coment}
         </Text>
       </Grid>

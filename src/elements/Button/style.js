@@ -32,7 +32,13 @@ const ButtonStyle = styled.button`
   border-radius: ${props => props.radius};
   cursor: pointer;
   ${props =>
-    textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};
+    textProps(
+      props.fs ? props.fs : 'inherit',
+      props.fw,
+      props.color,
+      props.lh,
+      props.textAlign,
+    )};
   ${props => outlineBox(props.border, props.borDirection)};
   ${props => buttonShapeSetting(props.form)};
 
