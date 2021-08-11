@@ -43,6 +43,7 @@ const SearchSendDB = content => {
       .Search(content)
       .then(res => {
         const data = res.data.result;
+        console.log(res);
         dispatch(SearchSend(data, true));
       })
       .catch(err => console.log(err));
@@ -56,8 +57,8 @@ const MoreSearchSendDB = content => {
       .then(res => {
         const data = res.data.result;
 
-        if (data.length < 1) {
-          dispatch(GetMoreSearch(data, false));
+        if (!data) {
+          dispatch(GetMoreSearch({}, false));
           return;
         }
 
@@ -91,7 +92,9 @@ export default handleActions(
       }),
     [GETMORESEARCH]: (state, action) =>
       produce(state, draft => {
-        draft.list.push(...action.payload.list);
+        if (draft.list) {
+          draft.list.push(...action.payload.list);
+        }
         draft.nextItem = action.payload.nextItem;
       }),
   },
