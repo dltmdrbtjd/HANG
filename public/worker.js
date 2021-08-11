@@ -2,8 +2,8 @@ const CACHE_NAME = 'pwa-task-manager';
 // 캐시할 파일
 const urlsToCache = [
   '/favicon.ico',
-  'Logo2.png',
-  'Logo.png',
+  'logo2.png',
+  'logo.png',
   'logo32.png',
   'logo64.png',
   'logo96.png',
