@@ -224,12 +224,7 @@ const logInDB = userInfo => {
         setCookie(res.data.accessToken);
       })
       .then(() => {
-        dispatch(
-          setLoginStatus({
-            status: true,
-            errorMsg: '',
-          }),
-        );
+        dispatch(SaveUserInformation());
       })
       .then(() => {
         history.replace('/');
