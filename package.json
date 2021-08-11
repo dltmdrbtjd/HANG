@@ -17,6 +17,7 @@
     "formik": "^2.2.9",
     "history": "4.10.1",
     "immer": "^9.0.5",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "prettier": "^2.3.2",
     "query-string": "^7.0.1",
