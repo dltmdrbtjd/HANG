@@ -1,18 +1,22 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
+// jwt decode
+import jwtDecode from 'jwt-decode';
 // api
 import apis from '../../shared/api';
 // reducer
 import { ImageCreators } from './image';
 // cookie
-import { setCookie, delCookie } from '../../shared/cookie';
+import { getCookie, setCookie, delCookie } from '../../shared/cookie';
 
+const SAVE_USER_INFO = 'user/SAVE_USER_INFO';
 const PHONE_AUTH = 'user/PHONE_AUTH';
 const DUPLICATE_CHECK = 'user/DUPLICATE_CHECK';
 const SET_LOGIN_STATUS = 'user/SET_LOGIN_STATUS';
 const INIT_SIGN_UP_INFO = 'user/INIT_SIGN_UP_INFO';
 const INIT_LOG_IN_INFO = 'user/INIT_LOG_IN_INFO';
 
+const saveUserInfo = createAction(SAVE_USER_INFO, userInfo => ({ userInfo }));
 const authPhone = createAction(PHONE_AUTH, status => ({ status }));
 const duplicateCheck = createAction(DUPLICATE_CHECK, status => ({ status }));
 const setLoginStatus = createAction(SET_LOGIN_STATUS, status => ({
@@ -22,6 +26,11 @@ const initializeSignUpInfo = createAction(INIT_SIGN_UP_INFO);
 const initializeLogInInfo = createAction(INIT_LOG_IN_INFO);
 
 const initialState = {
+  userInfo: {
+    userPk: null,
+    nickname: null,
+  },
+
   loginStatus: {
     status: false,
     errorMsg: '',
@@ -50,6 +59,14 @@ const initialState = {
       errorMsg: '',
     },
   },
+};
+
+const SaveUserInformation = () => {
+  return dispatch => {
+    const { userPk, nickname } = jwtDecode(getCookie());
+
+    dispatch(saveUserInfo({ userPk, nickname }));
+  };
 };
 
 const smsAuthDB = phone => {
@@ -234,6 +251,7 @@ const logOutDB = () => {
       .LogOut()
       .then(() => {
         delCookie();
+        dispatch(saveUserInfo({ userPk: null, nickname: null }));
       })
       .then(() => {
         history.replace('/login');
@@ -244,6 +262,11 @@ const logOutDB = () => {
 
 export default handleActions(
   {
+    [SAVE_USER_INFO]: (state, action) =>
+      produce(state, draft => {
+        draft.userInfo = action.payload.userInfo;
+      }),
+
     [PHONE_AUTH]: (state, action) =>
       produce(state, draft => {
         draft.phoneAuth = action.payload.status;
@@ -298,6 +321,7 @@ export default handleActions(
 );
 
 const UserCreators = {
+  SaveUserInformation,
   setLoginStatus,
   smsAuthDB,
   phoneAuthDB,

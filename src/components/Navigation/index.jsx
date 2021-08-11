@@ -41,7 +41,7 @@ const Navigation = () => {
       bottom="0"
       height="90px"
       z="3"
-      shadow="0 -4px 4px rgba(134, 134, 134, 0.3);"
+      shadow="0px -2px 3px rgba(196, 196, 196, 0.25)"
     >
       <NavigationStyle>
         <Navigationicons
