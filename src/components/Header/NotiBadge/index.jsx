@@ -6,7 +6,7 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { history } from '../../../redux/configureStore';
 // elements
 // import socketIOClient from 'socket.io-client';
-import { Button, Link } from '../../../elements';
+import { Button } from '../../../elements';
 
 // const ENDPOINT = 'http://127.0.0.1:4001';
 
