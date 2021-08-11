@@ -5,7 +5,7 @@ import { Grid, Button, BlurBox } from '../../elements';
 const SlideMenu = props => {
   return (
     <BlurBox>
-      <Grid></Grid>
+      <Grid />
     </BlurBox>
   );
 };
