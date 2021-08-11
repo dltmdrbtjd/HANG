@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // style
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import queryString from 'query-string';
 import { Grid, MainTitle, Button } from '../../elements';
 import { history } from '../../redux/configureStore';
@@ -15,11 +15,14 @@ import { TabEventWrapper } from '../MyPage/MyInfo/style';
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const { eventList, userInfo, success } = useSelector(state => ({
-    eventList: state.detail.tripInfo,
-    userInfo: state.detail.userInfo,
-    success: state.detail.success,
-  }));
+  const { eventList, userInfo, success } = useSelector(
+    state => ({
+      eventList: state.detail.tripInfo,
+      userInfo: state.detail.userInfo,
+      success: state.detail.success,
+    }),
+    shallowEqual,
+  );
 
   const [toastMsg, setToastMsg] = useState(success);
 

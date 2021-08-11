@@ -22,6 +22,9 @@
 # ssl-key
 *.pem
 
+# assetlinks
+/public/.well-known
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
