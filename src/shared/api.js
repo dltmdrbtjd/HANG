@@ -84,7 +84,7 @@ const apis = {
 
   // chat 부분은 서버쪽에서 API 설계 완성이 안되서 추후에 수정해주세요!
   // CreateChat:  => instance.post('/api/chat),
-  // ChatList: () => instance.get('/api/chat'),
+  GetChatRoom: () => instance.get('/api/chat'),
   // OutChat:  => instance.post('/api/chat'),
   // ChatReport: => instance.post('/api/chat'),
 };

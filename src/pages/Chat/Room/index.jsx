@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+// redux
+import { useSelector } from 'react-redux';
+// socket
+import io from 'socket.io-client';
 // elements
 import { Grid, Text, Input, Button } from '../../../elements';
 // components
@@ -8,6 +12,22 @@ import RoomHeader from './RoomHeader';
 import WarningText from './style';
 
 const ChatRoom = () => {
+  const { userPk, nickname } = useSelector(state => ({
+    userPk: state.user.userInfo.userPk,
+    nickname: state.user.userInfo.nickname,
+  }));
+
+  useEffect(() => {
+    const socket = io('https://soujinko.shop/mypage', { secure: true });
+    const room = (userPk < 1 && `${userPk}:${1}`) || `${1}:${userPk}`;
+
+    socket.emit('join', { joiningUserPk: userPk, targetUserPk: 1, nickname });
+
+    return () => {
+      socket.emit('leave', { room });
+    };
+  }, []);
+
   return (
     <Grid margin="0 0 80px">
       <RoomHeader />

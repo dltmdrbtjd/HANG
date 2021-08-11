@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // style
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import queryString from 'query-string';
-import { Grid, MainTitle, Button } from '../../elements';
+import { Grid, MainTitle, Button, Image } from '../../elements';
 import { history } from '../../redux/configureStore';
 import { DetailCreators } from '../../redux/modules/detail';
 // redux
@@ -12,6 +12,8 @@ import EventCard from '../../components/EventCard';
 import ToastMessage from '../../components/ToastMessage';
 // style
 import { TabEventWrapper } from '../MyPage/MyInfo/style';
+// image
+import chat from '../../Images/NavigationIcons/onchat.svg';
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -52,9 +54,23 @@ const Detail = () => {
     <Grid>
       <MainTitle fs="xl">프로필</MainTitle>
       <ProfileCard userInfo={userInfo} />
-      <Button margin="24px 0 60px 0" width="100%" _onClick={GuideHandler}>
-        길잡이 부탁하기
-      </Button>
+      <Grid isFlex hoz="flex-end" margin="17px 0 60px 0">
+        <Button
+          width="48px"
+          height="48px"
+          radius="50%"
+          bgColor="white"
+          border="0.5px solid #E7E7E7"
+          padding="10px 9px"
+          margin="0 7px 0 0"
+        >
+          <Image src={chat} alt="chat icon" />
+        </Button>
+
+        <Button padding="14px 18px" _onClick={GuideHandler}>
+          길잡이 부탁하기
+        </Button>
+      </Grid>
       <MainTitle fs="sxl">{userInfo.nickname}님의 여행 이벤트</MainTitle>
       {eventList ? (
         <Grid tab={TabEventWrapper}>
