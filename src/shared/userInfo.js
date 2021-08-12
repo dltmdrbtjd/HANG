@@ -3,8 +3,8 @@ import jwtDecode from 'jwt-decode';
 
 import { getCookie } from './cookie';
 
-const setUserInfo = () => {
-  const userInfo = jwtDecode(getCookie());
+const setUserInfo = (infoObj = jwtDecode(getCookie())) => {
+  const userInfo = infoObj;
 
   localStorage.setItem('userInfo', JSON.stringify(userInfo));
 };

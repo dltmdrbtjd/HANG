@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
-// redux
-import { useSelector } from 'react-redux';
 // socket
 import io from 'socket.io-client';
 // query string
 import queryString from 'query-string';
+// user info
+import { getUserInfo } from '../../../shared/userInfo';
 // elements
 import { Grid, Text, Input, Button } from '../../../elements';
 // components
@@ -18,10 +18,7 @@ const ChatRoom = () => {
   const ENDPOINT = 'https://soujinko.shop';
   const socket = io(ENDPOINT);
 
-  const { userPk, nickname } = useSelector(state => ({
-    userPk: state.user.userInfo.userPk,
-    nickname: state.user.userInfo.nickname,
-  }));
+  const { userPk, nickname } = getUserInfo();
 
   const targetUserPk = queryString.parse(location.search).number;
 
@@ -40,9 +37,11 @@ const ChatRoom = () => {
     return () => {
       socket.emit('leave', { room });
     };
-  }, [userPk]);
+  }, [ENDPOINT, location.search]);
 
   useEffect(() => {
+    console.log(111);
+
     socket.on('updateMessage', data => {
       setChatLog([
         ...chatLog,
@@ -54,8 +53,13 @@ const ChatRoom = () => {
     });
   }, [chatLog]);
 
-  const sendMessage = () => {
-    if (message) socket.emit('sendMessage', { message });
+  const sendMessage = async () => {
+    if (message) {
+      console.log('start');
+      await socket.emit('sendMessage', { message });
+      console.log('end');
+      setMessage('');
+    }
   };
 
   return (
@@ -100,6 +104,7 @@ const ChatRoom = () => {
             width="80%"
             placeholder="채팅 내용 입력"
             border="none"
+            value={message}
             _onChange={e => setMessage(e.target.value)}
             _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
           />

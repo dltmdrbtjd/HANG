@@ -19,6 +19,7 @@ const Button = forwardRef(
 
 Button.defaultProps = {
   disabled: false,
+  fw: 'bold',
   type: 'button',
   radius: '14px',
   padding: '12px 0',

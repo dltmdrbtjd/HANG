@@ -8,18 +8,6 @@ const Chat = () => {
   return (
     <Grid margin="-24px 0 0">
       <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
-      <ChatCard />
     </Grid>
   );
 };
