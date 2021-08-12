@@ -25,6 +25,10 @@ const HeaderIncluded = [
   '/mypage/promise',
   '/noti',
   '/chat',
+  '/chat/room',
+  '/mypage/promise/:page',
+  '/mypage/modify',
+  '/mypage/create_trip',
 ];
 
 export { pathURI, HeaderIncluded };

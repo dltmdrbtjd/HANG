@@ -15,7 +15,7 @@ import HeaderStyle from '../../../../components/Header/style';
 const RoomHeader = () => {
   return (
     <HeaderStyle>
-      <Container height="66px">
+      <Container height="66px" padding="0">
         <Grid height="100%" isFlex hoz="space-between" ver="center">
           <Grid isFlex ver="center">
             <Button

@@ -22,14 +22,12 @@ import { Navigationicons, NavigationStyle } from './style';
 // history
 import { history } from '../../redux/configureStore';
 // path
-import { HeaderIncluded } from '../../Route/Path';
+import { HeaderIncluded } from '../../route/Path';
 
 const Navigation = () => {
   const path = useLocation().pathname;
 
-  if (!HeaderIncluded.includes(path)) return null;
-
-  return (
+  return HeaderIncluded.includes(path) ? (
     <Grid
       width="100%"
       bgColor="bgColor"
@@ -93,7 +91,7 @@ const Navigation = () => {
         </Navigationicons>
       </NavigationStyle>
     </Grid>
-  );
+  ) : null;
 };
 
 export default Navigation;

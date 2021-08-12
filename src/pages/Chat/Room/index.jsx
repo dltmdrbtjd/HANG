@@ -15,7 +15,8 @@ import RoomHeader from './RoomHeader';
 import WarningText from './style';
 
 const ChatRoom = () => {
-  let socket;
+  const ENDPOINT = 'https://soujinko.shop';
+  const socket = io(ENDPOINT);
 
   const { userPk, nickname } = useSelector(state => ({
     userPk: state.user.userInfo.userPk,
@@ -31,8 +32,6 @@ const ChatRoom = () => {
     const room =
       (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
       `${targetUserPk}:${userPk}`;
-
-    socket = io('https://soujinko.shop');
 
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 

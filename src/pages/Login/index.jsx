@@ -85,7 +85,7 @@ const Login = () => {
               </Text>
             ) : null}
 
-            <Grid margin="150px 0 0">
+            <Grid margin="150px 0 20px">
               <Button fs="la" fw="bold" type="submit" width="100%">
                 로그인
               </Button>

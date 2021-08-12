@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // icon
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 // router
 import { useLocation } from 'react-router-dom';
-import { HeaderIncluded } from '../../Route/Path';
+import { HeaderIncluded } from '../../route/Path';
 // history
 import { history } from '../../redux/configureStore';
 // components
@@ -14,14 +14,45 @@ import HeaderStyle from './style';
 // images
 import LogoImg from '../../Images/Symbol.png';
 
-const Header = ({ children }) => {
+const Header = () => {
   const path = useLocation().pathname;
+  const isHome = path === '/';
+  const [title, setTitle] = useState('');
 
-  if (!HeaderIncluded.includes(path)) return null;
+  useEffect(() => {
+    switch (true) {
+      case /search/.test(path):
+        setTitle('검색');
+        break;
 
-  return (
+      case /detail/.test(path):
+        setTitle('프로필');
+        break;
+
+      case /mypage/.test(path):
+        setTitle('마이페이지');
+        break;
+
+      case /chat/.test(path):
+        setTitle('채팅');
+        break;
+
+      case /noti/.test(path):
+        setTitle('알림');
+        break;
+
+      case /favorite/.test(path):
+        setTitle('관심목록');
+        break;
+
+      default:
+        setTitle('Hang');
+    }
+  }, [path]);
+
+  return HeaderIncluded.includes(path) ? (
     <HeaderStyle>
-      <Container height="66px">
+      <Container height="66px" padding="0">
         <Grid
           height="100%"
           isFlex
@@ -41,18 +72,18 @@ const Header = ({ children }) => {
           ) : null}
 
           <Logo
-            imgUrl={path === '/' && LogoImg}
-            width={path === '/' && '36px'}
-            height={path === '/' && '36px'}
+            imgUrl={isHome ? LogoImg : null}
+            height={isHome ? '36px' : null}
+            width={isHome ? '36px' : null}
           >
-            {children}
+            {title}
           </Logo>
 
           <NotiBadge />
         </Grid>
       </Container>
     </HeaderStyle>
-  );
+  ) : null;
 };
 
 export default Header;

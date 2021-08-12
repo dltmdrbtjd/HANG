@@ -7,6 +7,7 @@ import PrivateRoute from './PrivateRoute';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
+import Onboarding from '../pages/Onboarding';
 import Welcome from '../pages/SignUp/Welcome';
 import Search from '../pages/Search';
 import Detail from '../pages/Detail';
@@ -28,6 +29,7 @@ const Route = () => {
   return (
     <Switch>
       <PublicRoute path={pathURI.logIn} restricted component={Login} exact />
+      <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
       <PublicRoute path={pathURI.signUp} restricted component={SignUp} exact />
       <PublicRoute
         path={pathURI.welcome}
