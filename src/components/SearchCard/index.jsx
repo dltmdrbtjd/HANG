@@ -67,7 +67,7 @@ const SearchCard = ({ userInfo, category, idx }) => {
             mobile={SetTabFontSize('sm')}
           >
             {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
-            {userInfo && userInfo.age}대 ·{userInfo && userInfo.region}{' '}
+            {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
             {userInfo && userInfo.city}
           </Text>
         </Grid>
@@ -76,8 +76,8 @@ const SearchCard = ({ userInfo, category, idx }) => {
           width="auto"
           color={userInfo.like ? 'brandColor' : 'darkG'}
           position="absolute"
-          top="10px"
-          right="10px"
+          top="12px"
+          right="12px"
           _onClick={() => {
             userInfo.like ? DelLike() : AddLike();
           }}

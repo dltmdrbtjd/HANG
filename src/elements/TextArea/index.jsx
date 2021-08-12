@@ -1,23 +1,14 @@
 import React from 'react';
 import TextAreaStyle from './style';
-import Text from '../Text/index';
 
-const TextArea = ({ _onChange, value, placeholder, rows, label, ...props }) => {
+const TextArea = ({ _onChange, value, placeholder, ...props }) => {
   return (
-    <>
-      {label && (
-        <Text margin="0 0 12px 0" fs="md">
-          {label}
-        </Text>
-      )}
-      <TextAreaStyle
-        onChange={_onChange}
-        value={value}
-        placeholder={placeholder}
-        rows={rows}
-        {...props}
-      />
-    </>
+    <TextAreaStyle
+      onChange={_onChange}
+      value={value}
+      placeholder={placeholder}
+      {...props}
+    />
   );
 };
 
@@ -30,7 +21,6 @@ TextArea.defaultProps = {
   padding: '12px',
   radius: '14px',
   rows: '20',
-  label: false,
   border: '1px solid #E7E7E7',
   _onChange: () => {},
 };

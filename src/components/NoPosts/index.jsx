@@ -1,12 +1,12 @@
 import React from 'react';
-// icon
-import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 // history
 import { history } from '../../redux/configureStore';
 // elements
-import { Grid, Button, Text, MainTitle } from '../../elements';
+import { Grid, Button, Text, MainTitle, Image } from '../../elements';
 // style
 import TabFontSize from './style';
+// image
+import cloudIcon from '../../Images/cloud_icon.svg';
 
 const NoPosts = ({ list, title, coment, link, children, ...props }) => {
   if (list.length) return <>{children}</>;
@@ -23,20 +23,23 @@ const NoPosts = ({ list, title, coment, link, children, ...props }) => {
       _onClick={() => history.push(link)}
     >
       <Button
-        fs="la"
-        fw="bold"
+        form="text"
         width="50px"
         height="50px"
         radius="50%"
-        padding="0"
         _onClick={() => history.push(link)}
-        margin="0 30px 0 0"
+        margin="0 12px 0 0"
       >
-        <FlightTakeoffIcon />
+        <Image src={cloudIcon} alt="cloud" />
       </Button>
 
       <Grid addstyle="flex: 1">
-        <MainTitle fs="lg" margin="0 0 15px" tab={TabFontSize('la')}>
+        <MainTitle
+          fs="lg"
+          color="black"
+          margin="0 0 6px"
+          tab={TabFontSize('la')}
+        >
           {title}
         </MainTitle>
 

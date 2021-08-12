@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 // elements
-import { Logo } from '../../elements';
+import { Logo, Grid } from '../../elements';
 // images
 import LogoImg from '../../Images/Logo.png';
-// style
-import SplashStyle from './style';
 
 const LogoSplash = () => {
   useEffect(() => {
@@ -16,9 +14,17 @@ const LogoSplash = () => {
   }, []);
 
   return (
-    <SplashStyle>
+    <Grid
+      width="100vw"
+      height="100vh"
+      position="flxed"
+      top="0"
+      left="0"
+      z="99"
+      bgColor="bgColor"
+    >
       <Logo width="169px" height="162px" imgUrl={LogoImg} />
-    </SplashStyle>
+    </Grid>
   );
 };
 

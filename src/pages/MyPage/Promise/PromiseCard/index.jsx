@@ -7,7 +7,7 @@ import moment from 'moment';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
 // elements
-import { Button, Grid, Text, Strong } from '../../../../elements';
+import { Button, Grid, Text, Strong, Span } from '../../../../elements';
 // components
 import ProfileImg from '../../../../components/ProfileImg';
 import Modal from '../../../../components/Modal';
@@ -15,7 +15,7 @@ import ToastMessage from '../../../../components/ToastMessage';
 // reducer
 import { MypageCreators } from '../../../../redux/modules/mypage';
 // style
-import { StrongAddStyle } from '../../../Noti/AlarmCard/style';
+import StrongAddStyle from '../../../Noti/AlarmCard/style';
 import { ArrowStyle, SetTabFontSize, SmallMobileProfileSize } from './style';
 import { textOverflow } from '../../../../styles/Mixin';
 
@@ -148,9 +148,9 @@ const PromiseCard = ({ promInfo, guide, type, tab }) => {
           </Text>
         </Grid>
 
-        <Strong color="darkG" addstyle={ArrowStyle}>
+        <Span color="darkG" addstyle={ArrowStyle}>
           {guide ? <CallMadeIcon /> : <CallReceivedIcon />}
-        </Strong>
+        </Span>
       </Grid>
 
       {type === 'received' ? (

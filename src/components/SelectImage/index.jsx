@@ -7,9 +7,9 @@ import imageCompression from 'browser-image-compression';
 import { useSelector, useDispatch } from 'react-redux';
 import { ImageCreators } from '../../redux/modules/image';
 // elements
-import { Grid, Label, Image } from '../../elements';
+import { Grid, Label, Image, Input } from '../../elements';
 // style
-import InputImageStyle from './style';
+import HideElem from './style';
 // image
 import defaultProfile from '../../Images/profile.png';
 
@@ -55,11 +55,12 @@ const InputImage = ({ setProfile }) => {
         z="9"
       />
 
-      <InputImageStyle
+      <Input
         id="input--image"
         type="file"
         accept="image/png, image/jpeg"
-        onChange={selectFile}
+        _onChange={selectFile}
+        addstyle={HideElem}
       />
 
       <Grid

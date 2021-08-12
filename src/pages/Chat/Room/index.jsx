@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import ScrollToBottom from 'react-scroll-to-bottom';
 // redux
 import { useSelector } from 'react-redux';
 // socket
@@ -18,7 +19,7 @@ const ChatRoom = () => {
   }));
 
   useEffect(() => {
-    const socket = io('https://soujinko.shop/mypage', { secure: true });
+    const socket = io('https://soujinko.shop');
     const room = (userPk < 1 && `${userPk}:${1}`) || `${1}:${userPk}`;
 
     socket.emit('join', { joiningUserPk: userPk, targetUserPk: 1, nickname });
