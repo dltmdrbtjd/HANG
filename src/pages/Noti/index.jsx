@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // elements
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid, Button } from '../../elements';
 // components
 import AlaremCard from './AlarmCard';
+// redux
+import { AlarmCreators } from '../../redux/modules/alarm';
 
 const Noti = () => {
+  const dispatch = useDispatch();
+  const list = useSelector(state => state.alarm.list);
+
+  const AlarmDeleteBtn = () => {
+    dispatch(AlarmCreators.AlarmDeleteDB());
+  };
+
+  useEffect(() => {
+    dispatch(AlarmCreators.AlarmLoadDB());
+  }, []);
   return (
     <Grid margin="-24px 0 80px">
-      <AlaremCard />
+      {list
+        ? list.map((item, idx) => {
+            return <AlaremCard userInfo={item} key={idx} />;
+          })
+        : ''}
 
       <Grid
         width="90%"
@@ -18,7 +35,7 @@ const Noti = () => {
         maxWidth="600px"
         tab="max-width: 768px"
       >
-        <Button width="100%" fs="la">
+        <Button width="100%" fs="la" _onClick={AlarmDeleteBtn}>
           전체삭제
         </Button>
       </Grid>
