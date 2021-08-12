@@ -24,7 +24,7 @@ const UlStyle = styled.ul`
   margin: ${({ margin }) => margin};
   border-radius: ${({ radius }) => radius};
   box-shadow: ${({ shadow }) => shadow};
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${props => props.theme.color[props.bgColor]};
   ${({ padding }) => borderBox(padding)};
   ${props =>
     textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};

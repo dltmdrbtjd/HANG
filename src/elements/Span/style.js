@@ -1,6 +1,12 @@
 import styled, { css } from 'styled-components';
 // mixin
-import { flexBox, floatBox, textProps, borderBox } from '../../styles/Mixin';
+import {
+  flexBox,
+  floatBox,
+  textProps,
+  borderBox,
+  outlineBox,
+} from '../../styles/Mixin';
 
 const makeItFlexBox = css`
   ${props =>
@@ -21,6 +27,7 @@ const SpanStyle = styled.span`
   ${({ padding }) => borderBox(padding)};
   ${props =>
     textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};
+  ${props => outlineBox(props.border, props.borDirection)};
   ${props =>
     floatBox(
       props.position,

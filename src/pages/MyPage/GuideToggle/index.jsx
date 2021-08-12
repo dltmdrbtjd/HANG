@@ -42,7 +42,7 @@ const GuideToggle = ({ active }) => {
       />
       <Strong
         fw="semibold"
-        size="xs"
+        fs="sm"
         color="white"
         checked={checked}
         addstyle={ToggleNameStyle}

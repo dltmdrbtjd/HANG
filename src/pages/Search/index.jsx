@@ -122,7 +122,7 @@ const Search = props => {
   return (
     <>
       <SearchBar setFindUser={setFindUser} />
-      <Grid width="100%" margin="10px 0" isFlex hoz="space-between">
+      <Grid width="100%" margin="16px 0" isFlex hoz="space-between">
         <Grid width="auto">
           <CategoryBtn
             radius="20px"
@@ -167,12 +167,18 @@ const Search = props => {
         </Grid>
       </Grid>
       <AreaSelectBox toggle={cityOpen} setGu={setGu} setCity={setCity} />
-      <Button _onClick={SearchHandler} fw="bold" width="100%" margin="10px 0 0">
+      <Button
+        _onClick={SearchHandler}
+        fw="bold"
+        width="100%"
+        padding="14px 0"
+        margin="26px 0 0"
+      >
         검색
       </Button>
       <Text margin="40px 0 0">
         <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
-        {guName ? ` ${guName}의 검색 목록입니다.` : ''}
+        {guName ? ` ${guName}의 ${traveler ? '여행자' : '길잡이'}입니다.` : ''}
       </Text>
       {userlist
         ? userlist.map((item, idx) => {

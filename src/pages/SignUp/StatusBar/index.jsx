@@ -65,7 +65,10 @@ const StatusBar = ({ curPage, setPage }) => {
               )}
 
               {idx < pageNav.length - 1 ? (
-                <Hr bgColor={page < curPage ? '#FF9900' : '#C4C4C4'} />
+                <Hr
+                  width="85px"
+                  bgColor={page < curPage ? 'brandColor' : 'semiLightG'}
+                />
               ) : null}
             </Fragment>
           );

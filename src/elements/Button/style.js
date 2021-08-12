@@ -27,6 +27,10 @@ const buttonShapeSetting = form => {
           props.color
             ? props.theme.color[props.color]
             : props.theme.color.white};
+        font-weight: ${props =>
+          props.fw
+            ? props.theme.fontWeight[props.fw]
+            : props.theme.fontWeight.bold};
         ${props => borderBox(props.padding)};
       `;
   }

@@ -30,7 +30,7 @@ const SearchBar = props => {
   }, [keyword]);
 
   return (
-    <Grid margin="28px 0 0 0" position="relative" isFlex ver="center">
+    <Grid margin={props.margin} position="relative" isFlex ver="center">
       <Input
         placeholder="여행자/길잡이를 검색하세요."
         _onChange={InputValue}
@@ -43,10 +43,9 @@ const SearchBar = props => {
         height="27px"
         position="absolute"
         right="13px"
-        top="14px"
-        color="gray"
+        top="10px"
       >
-        <SearchIcon />
+        <SearchIcon style={{ fontSize: '27px' }} />
       </Grid>
     </Grid>
   );

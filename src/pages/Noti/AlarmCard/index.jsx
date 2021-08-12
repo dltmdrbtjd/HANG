@@ -21,7 +21,7 @@ const AlarmCard = () => {
       <ProfileImage />
 
       <Text margin="0 0 0 15px" overflow="visible">
-        <Strong>닉네임</Strong> 님이{' '}
+        <Strong fw="bold">닉네임</Strong>님이{' '}
         <Strong addstyle={StrongAddStyle}>길잡이</Strong>를 부탁합니다
       </Text>
     </Grid>

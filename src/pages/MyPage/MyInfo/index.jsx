@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 // icon
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
+import SettingsIcon from '@material-ui/icons/Settings';
 // history
 import { history } from '../../../redux/configureStore';
 // elements
@@ -10,10 +11,11 @@ import { Grid, SubTitle, Button, MainTitle, Ul, List } from '../../../elements';
 import ProfileCard from '../../../components/ProfileCard';
 import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
-import DropDown from '../DropDown';
+import DropDown from '../../../components/DropDown';
 import NoPosts from '../../../components/NoPosts';
 // reducer
 import { MypageCreators } from '../../../redux/modules/mypage';
+import { UserCreators } from '../../../redux/modules/user';
 // style
 import { SubTitleTextHidden, TabEventWrapper } from './style';
 
@@ -36,6 +38,10 @@ const MyInfo = () => {
     dispatch(MypageCreators.DeleteTripEventDB({ tripId }));
   };
 
+  const logOut = () => {
+    dispatch(UserCreators.logOutDB());
+  };
+
   return (
     <>
       <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
@@ -53,19 +59,26 @@ const MyInfo = () => {
           </List>
         </Ul>
 
-        <DropDown />
+        <DropDown
+          icon={<SettingsIcon />}
+          contents={['프로필 수정', '로그아웃']}
+          methods={[() => history.push('/mypage/modify'), logOut]}
+          top="130px"
+        />
       </Grid>
 
       <ProfileCard userInfo={myInfo} />
 
       <Grid isFlex hoz="space-between" margin="60px 0 0" ver="center">
-        <SubTitle fs="la">길잡이 설정</SubTitle>
+        <SubTitle fs="la" fw="bold">
+          길잡이 설정
+        </SubTitle>
 
         <GuideToggle active={myInfo.guide} />
       </Grid>
 
       <Grid margin="60px 0 15px" isFlex hoz="space-between">
-        <SubTitle fs="la" width="auto" addstyle={SubTitleTextHidden}>
+        <SubTitle fs="la" fw="bold" width="auto" addstyle={SubTitleTextHidden}>
           {myInfo.nickname} 님의 여행 이벤트
         </SubTitle>
 
@@ -73,7 +86,7 @@ const MyInfo = () => {
           isFlex
           ver="center"
           form="text"
-          fs="sm"
+          fs="xs"
           color="darkG"
           _onClick={() => {
             history.push('/mypage/create_trip');

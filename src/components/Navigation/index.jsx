@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // router
 import { useLocation } from 'react-router';
 // serach
@@ -23,7 +23,6 @@ import { Navigationicons, NavigationStyle } from './style';
 import { history } from '../../redux/configureStore';
 
 const Navigation = () => {
-  const [mypageIcon, setMypageIcon] = useState(false);
   const path = useLocation().pathname;
 
   if (
@@ -36,7 +35,7 @@ const Navigation = () => {
   return (
     <Grid
       width="100%"
-      bgColor="lightG"
+      bgColor="bgColor"
       position="fixed"
       bottom="0"
       height="80px"
@@ -46,10 +45,7 @@ const Navigation = () => {
       <NavigationStyle>
         <Navigationicons
           className={path.includes('/search') ? 'Click' : ''}
-          onClick={() => {
-            history.push('/search');
-            setMypageIcon(false);
-          }}
+          onClick={() => history.push('/search')}
         >
           <img
             alt="search"
@@ -60,10 +56,7 @@ const Navigation = () => {
         </Navigationicons>
         <Navigationicons
           className={path.includes('/favorite') ? 'Click' : ''}
-          onClick={() => {
-            history.push('/favorite');
-            setMypageIcon(false);
-          }}
+          onClick={() => history.push('/favorite')}
         >
           <img
             alt="favorite"
@@ -73,21 +66,15 @@ const Navigation = () => {
           <Text margin="10px 0 0 0">관심목록</Text>
         </Navigationicons>
         <Navigationicons
-          className={mypageIcon ? 'Click' : ''}
-          onClick={() => {
-            history.push('/');
-            setMypageIcon(true);
-          }}
+          className={path === '/' ? 'Click' : ''}
+          onClick={() => history.push('/')}
         >
-          <img alt="home" src={mypageIcon ? onhome : home} />
+          <img alt="home" src={path === '/' ? onhome : home} />
           <Text margin="10px 0 0 0">홈</Text>
         </Navigationicons>
         <Navigationicons
           className={path.includes('/chat') ? 'Click' : ''}
-          onClick={() => {
-            history.push('/chat');
-            setMypageIcon(false);
-          }}
+          onClick={() => history.push('/chat')}
         >
           <img
             alt="chat"
@@ -98,10 +85,7 @@ const Navigation = () => {
         </Navigationicons>
         <Navigationicons
           className={path.includes('/mypage') ? 'Click' : ''}
-          onClick={() => {
-            history.push('/mypage');
-            setMypageIcon(false);
-          }}
+          onClick={() => history.push('/mypage')}
         >
           <img
             alt="mypage"

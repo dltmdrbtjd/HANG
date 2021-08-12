@@ -10,7 +10,6 @@ const SpeechBubble = ({ person }) => {
       <Text
         width="auto"
         padding="16px"
-        radius="8px"
         color={person === 'me' ? 'white' : 'black'}
         person={person}
         addstyle={SpeechBubbleStyle}

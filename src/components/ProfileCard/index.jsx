@@ -43,6 +43,7 @@ const ProfileCard = ({ userInfo }) => {
           </Text>
           <Text
             color="darkG"
+            fs="sm"
             addstyle={textOverflow()}
             mobile={SetTabFontSize('sm')}
           >
