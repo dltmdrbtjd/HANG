@@ -1,6 +1,14 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
+import socketIOClient from 'socket.io-client';
 import apis from '../../shared/api';
+
+// redux
+import { ToastCreators } from './toastMessage';
+
+// socket
+const ENDPOINT = 'https://soujinko.shop/';
+const socket = socketIOClient(ENDPOINT);
 
 const LOAD = 'detail/LOAD';
 const MYTRAVELE_LOAD = 'detail/MYTRAVEL_LOAD';
@@ -12,14 +20,12 @@ const DetailLoad = createAction(LOAD, (userInfo, tripInfo) => ({
   tripInfo,
 }));
 const MyTravelLoad = createAction(MYTRAVELE_LOAD, myTrip => ({ myTrip }));
-const SuccessValue = createAction(SUCCESS, success => ({ success }));
 const LikeUpdate = createAction(LIKEUPDATE, like => ({ like }));
 
 const initialState = {
   userInfo: {},
   tripInfo: [],
   myTripInfo: [],
-  success: false,
 };
 
 const DetailLoadDB = userPk => {
@@ -47,12 +53,13 @@ const MyTripInfoDB = () => {
   };
 };
 
-const AddTravel = TripInfo => {
+const AddTravel = (TripInfo, userPk) => {
   return (dispatch, getState, { history }) => {
     apis
       .GuideRequest(TripInfo)
       .then(res => {
-        dispatch(SuccessValue(true));
+        socket.emit('request', { uid: userPk });
+        dispatch(ToastCreators.Message(true));
         history.goBack();
       })
       .catch(err =>
@@ -61,16 +68,16 @@ const AddTravel = TripInfo => {
   };
 };
 
-const AddGuide = TripInfo => {
+const AddGuide = (TripInfo, userPk) => {
   return dispatch => {
     apis
       .DoGuide({ tripId: TripInfo })
       .then(res => {
-        dispatch(SuccessValue(true));
+        socket.emit('request', { uid: userPk });
+        dispatch(ToastCreators.Message(true));
       })
       .catch(err => {
         window.alert(err.response.data.errorMessage);
-        dispatch(SuccessValue(false));
       });
   };
 };
@@ -109,7 +116,6 @@ const DetailCreators = {
   MyTripInfoDB,
   AddTravel,
   AddGuide,
-  SuccessValue,
   LikeUpdateHandler,
 };
 
