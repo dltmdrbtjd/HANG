@@ -19,9 +19,20 @@ const Chat = () => {
 
   return (
     <Grid margin="-24px 0 0">
-      {roomList.map(room => (
-        <ChatCard key={(Date.now() + Math.random() + idx).toString(36)} />
-      ))}
+      {roomList.map((room, idx) => {
+        const [lastChat] = room.lastChat;
+
+        return (
+          <ChatCard
+            targetUserPk={room.targetPk}
+            profileImg={room.profileImg}
+            nickname={room.nickname}
+            message={lastChat ? JSON.parse(lastChat).message : null}
+            time={lastChat ? JSON.parse(lastChat).curTime : null}
+            key={(Date.now() + Math.random() + idx).toString(36)}
+          />
+        );
+      })}
     </Grid>
   );
 };
