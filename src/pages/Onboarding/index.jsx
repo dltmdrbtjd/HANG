@@ -83,9 +83,7 @@ const Onboarding = () => {
         addstyle={Transition}
       >
         <Page1 />
-
         <Page2 />
-
         <Page3 />
       </Grid>
     </Grid>

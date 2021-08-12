@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 const flexBox = (hoz, ver, display = 'flex') => {
   return css`
-    display: flex;
+    display: ${display};
     ${hoz && `justify-content: ${hoz}`};
     ${ver && `align-items: ${ver}`};
   `;

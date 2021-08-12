@@ -2,6 +2,8 @@ import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 // api
 import apis from '../../shared/api';
+// user info
+import { getUserInfo, setUserInfo } from '../../shared/userInfo';
 // reducer
 import { ImageCreators } from './image';
 
@@ -106,6 +108,14 @@ const UpdateProfileDB = (image, profile) => {
         .UpdateProfile(profile)
         .then(() => {
           dispatch(getMyInfo(myInfo));
+        })
+        .then(() => {
+          const newNickname = profile.nickname;
+          const userInfo = getUserInfo();
+
+          if (newNickname !== userInfo.nickname) {
+            setUserInfo({ ...userInfo, nickname: newNickname });
+          }
         })
         .then(() => {
           history.replace('/mypage');

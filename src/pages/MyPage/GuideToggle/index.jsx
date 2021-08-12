@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // elements
 import { Button, Span, Strong } from '../../../elements';
 // style
-import { ButtonStyle, ToggleLabelStyle, ToggleNameStyle } from './style';
+import { FloatButton, ToggleLabelStyle, ToggleNameStyle } from './style';
 // reducer
 import { MypageCreators } from '../../../redux/modules/mypage';
 
@@ -28,7 +28,7 @@ const GuideToggle = ({ active }) => {
       shadow="inset 2px 2px 3px rgba(136, 82, 0, 0.25)"
       bgColor={checked ? 'brandColor' : 'gray'}
       _onClick={handleToggle}
-      addstyle={ButtonStyle}
+      addstyle={FloatButton}
     >
       <Span
         display="inline-block"

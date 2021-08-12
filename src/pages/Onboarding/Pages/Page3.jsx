@@ -19,7 +19,7 @@ import { CalcHeight, TabImage, TabTitle, TabText } from '../style';
 const Page3 = () => {
   return (
     <Grid position="relative" addstyle={CalcHeight}>
-      <Container height="100%">
+      <Container padding="0" height="100%">
         <MainTitle fs="xxl" fw="black" margin="0 0 30px" tab={TabTitle}>
           <Strong color="brandColor">행</Strong>
           복하게, 여<Strong color="brandColor">행</Strong>
@@ -37,15 +37,16 @@ const Page3 = () => {
         <Grid position="absolute" bottom="20px" left="0">
           <Button
             fs="la"
-            fw="bold"
             width="100%"
             _onClick={() => history.push('/signup')}
+            margin="0 0 8px"
           >
             회원가입
           </Button>
 
           <Button
             fs="sm"
+            fw="regular"
             color="darkG"
             bgColor="bgColor"
             width="100%"

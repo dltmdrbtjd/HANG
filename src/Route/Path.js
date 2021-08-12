@@ -15,12 +15,19 @@ const pathURI = {
   chatRoom: '/chat/room',
 };
 
-const withoutHeader = [
-  '/signup',
-  '/signup/welcome',
-  '/login',
-  '/onboarding',
+const HeaderIncluded = [
+  '/',
+  '/search',
+  '/detail',
+  '/detail/request',
+  '/favorite',
+  '/mypage',
+  '/mypage/promise',
+  '/noti',
+  '/chat',
   '/chat/room',
+  '/mypage/modify',
+  '/mypage/create_trip',
 ];
 
-export { pathURI, withoutHeader };
+export { pathURI, HeaderIncluded };

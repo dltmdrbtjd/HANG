@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
+// redux
+import { useSelector } from 'react-redux';
 // icon
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
@@ -12,10 +14,12 @@ import DropDown from '../../../../components/DropDown';
 // style
 import HeaderStyle from '../../../../components/Header/style';
 
-const RoomHeader = () => {
+const RoomHeader = ({ quit }) => {
+  const targetUserInfo = useSelector(state => state.chat.targetUserInfo);
+
   return (
     <HeaderStyle>
-      <Container height="66px">
+      <Container height="66px" padding="0">
         <Grid height="100%" isFlex hoz="space-between" ver="center">
           <Grid isFlex ver="center">
             <Button
@@ -28,14 +32,15 @@ const RoomHeader = () => {
               <ArrowBackIosIcon />
             </Button>
 
-            <ProfileImg size="small" />
+            <ProfileImg imgUrl={targetUserInfo.profileImg} size="small" />
 
-            <Strong margin="0 0 0 12px">닉네임</Strong>
+            <Strong margin="0 0 0 12px">{targetUserInfo.nickname}</Strong>
           </Grid>
 
           <DropDown
             icon={<MoreVertIcon />}
             contents={['채팅방 나가기', '신고하기']}
+            methods={[quit, () => {}]}
             top="70px"
           />
         </Grid>

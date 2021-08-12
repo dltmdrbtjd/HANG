@@ -4,7 +4,7 @@ import { borderBox } from '../../styles/Mixin';
 
 const ContainerStyle = styled.div`
   position: relative;
-  ${props => !(props.noPadding || props.height) && borderBox(props.padding)};
+  ${props => !props.noPadding && borderBox(props.padding)};
   max-width: 768px;
   height: ${props => props.height};
   min-height: ${props => props.height || '100vh'};

@@ -12,13 +12,13 @@ import {
   Span,
 } from '../../elements/index';
 // image
-import Arrow from '../../Images/arrow.png';
+import Arrow from '../../Images/arrow.svg';
 // style
 import ArrowRotate from './style';
 
 const SelectBox = ({ initailOption, contents, setState }) => {
   const [option, setOption] = useState(initailOption);
-  const [angle, setAngle] = useState(180);
+  const [angle, setAngle] = useState(0);
   const [open, setOpen] = useState(false);
 
   const anchorRef = useRef(null);
@@ -34,41 +34,38 @@ const SelectBox = ({ initailOption, contents, setState }) => {
     }
 
     setOpen(false);
-    setAngle(180);
+    setAngle(0);
   };
 
   return (
     <Grid position="relative" height="48px" margin="0 0 15px" z="9">
       <Grid width="132px" position="absolute" top="0" left="0">
         <Button
-          form="text"
+          isFlex
+          hoz="space-between"
+          ver="center"
           width="100%"
-          radius="0"
+          radius="10px"
           ref={anchorRef}
           _onClick={handleToggle}
           color="black"
+          bgColor="white"
+          padding="12px"
+          angle={angle}
+          shadow={open && '0px 2px 3px rgba(136, 136, 136, 0.25)'}
+          border={open ? 'none' : '0.5px solid #E7E7E7'}
+          addstyle={ArrowRotate}
         >
-          <Span
-            width="100%"
-            isFlex
-            bgColor="white"
-            hoz="space-between"
-            ver="center"
-            radius="10px"
-            padding="14px 12px"
-            angle={angle}
-            shadow={open && '0px 2px 3px rgba(136, 136, 136, 0.25)'}
-            border={open || '0.5px solid #E7E7E7'}
-            addstyle={ArrowRotate}
-          >
-            <Strong fw="regular">{option}</Strong>
-            <Image width="10px" src={Arrow} alt="arrow" />
-          </Span>
+          {/* <Span width="100%" padding="0 12px"> */}
+          <Strong fw="regular">{option}</Strong>
+          <Image width="10px" src={Arrow} alt="arrow" />
+          {/* </Span> */}
         </Button>
 
         {open && (
           <ClickAwayListener onClickAway={handleClose}>
             <Ul
+              overflow="hidden"
               padding="24px 0 0"
               margin="-24px 0 0"
               bgColor="white"

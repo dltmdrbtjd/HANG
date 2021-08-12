@@ -18,6 +18,7 @@ import mypage from './modules/mypage';
 import detail from './modules/detail';
 import alarm from './modules/alarm';
 import toastMessage from './modules/toastMessage';
+import chat from './modules/chat';
 
 const history = createBrowserHistory();
 const rootReducer = combineReducers({
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   search,
   mypage,
   alarm,
+  chat,
   router: connectRouter(history),
 });
 

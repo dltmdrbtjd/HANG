@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-// style
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import queryString from 'query-string';
-import { Grid, MainTitle, Button, Image } from '../../elements';
 import { history } from '../../redux/configureStore';
+// style
+import { Grid, MainTitle, Button, Image } from '../../elements';
 import { DetailCreators } from '../../redux/modules/detail';
 import { ToastCreators } from '../../redux/modules/toastMessage';
 // redux
+import { ChatCreators } from '../../redux/modules/chat';
 // component
 import ProfileCard from '../../components/ProfileCard';
 import EventCard from '../../components/EventCard';
@@ -40,6 +41,17 @@ const Detail = () => {
     dispatch(DetailCreators.AddGuide(pk, userPk));
   };
 
+  const chooseChatRoom = () => {
+    dispatch(
+      ChatCreators.ChooseChatRoom({
+        nickname: userInfo.nickname,
+        profileImg: userInfo.profileImg,
+      }),
+    );
+
+    history.push(`/chat/room?number=${query.user}`);
+  };
+
   useEffect(() => {
     dispatch(DetailCreators.DetailLoadDB(query.user));
     if (message) {
@@ -62,7 +74,7 @@ const Detail = () => {
           border="0.5px solid #E7E7E7"
           padding="10px 9px"
           margin="0 7px 0 0"
-          _onClick={() => history.push(`/chat/room?number=${query.user}`)}
+          _onClick={chooseChatRoom}
         >
           <Image src={chat} alt="chat icon" />
         </Button>
