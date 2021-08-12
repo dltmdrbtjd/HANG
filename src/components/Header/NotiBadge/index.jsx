@@ -7,26 +7,50 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import socketIOClient from 'socket.io-client';
 import { history } from '../../../redux/configureStore';
 // elements
-import { Button } from '../../../elements';
+import { Button, Grid } from '../../../elements';
+import './style.css';
+// api
+import apis from '../../../shared/api';
 
 const NotiBadge = () => {
-  const userPk = useSelector(state => state.user.userInfo.userPk);
+  const [newAlarm, setNewAlarm] = useState(false);
   const ENDPOINT = 'https://soujinko.shop/';
-  localStorage.setItem('userPk', userPk);
-  const user = localStorage.getItem('userPk');
-  console.log(user);
   const socket = socketIOClient(ENDPOINT);
-  console.log(userPk);
+  const userPk = JSON.parse(localStorage.getItem('userInfo')).userPk;
+
+  const NotiOff = () => {
+    setNewAlarm(false);
+    history.push('/noti');
+  };
+
+  apis
+    .AlarmCheck()
+    .then(res => {
+      console.log(newAlarm);
+      setNewAlarm(res.data);
+    })
+    .catch(err => console.log(err));
 
   useEffect(() => {
-    socket.emit('login', { uid: user });
+    socket.emit('login', { uid: userPk });
+    socket.on('requested', data => {
+      setNewAlarm(data);
+      console.log(data);
+    });
   }, []);
 
   return (
-    <Button _onClick={() => history.push('/noti')} form="text">
-      <Badge badgeContent={5} color="secondary">
-        <NotificationsNoneIcon />
-      </Badge>
+    <Button _onClick={NotiOff} form="text">
+      <Grid>
+        <Badge
+          invisible={newAlarm ? '' : 'invisible'}
+          variant="dot"
+          overlap="circular"
+          color="secondary"
+        >
+          <NotificationsNoneIcon />
+        </Badge>
+      </Grid>
     </Button>
   );
 };

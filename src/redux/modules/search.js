@@ -43,7 +43,6 @@ const SearchSendDB = content => {
       .Search(content)
       .then(res => {
         const data = res.data.result;
-        console.log(res);
         dispatch(SearchSend(data, true));
       })
       .catch(err => console.log(err));

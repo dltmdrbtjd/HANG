@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
+// lodash
+import _ from 'lodash';
+// router
 import { useLocation } from 'react-router';
 // style
 import SearchIcon from '@material-ui/icons/Search';
@@ -32,7 +34,7 @@ const SearchBar = props => {
   return (
     <Grid margin={props.margin} position="relative" isFlex ver="center">
       <Input
-        placeholder="여행자/길잡이를 검색하세요."
+        placeholder="여행자/길잡이를 검색하세요"
         _onChange={InputValue}
         _onKeyPress={KeyPressHandler}
         radius="40px"

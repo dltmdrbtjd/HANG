@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import ContainerStyle from './style';
 
-import { HeaderIncluded } from '../../route/Path';
+import { HeaderIncluded } from '../../Route/Path';
 
 const Container = ({ children, ...props }) => {
   const path = useLocation().pathname;

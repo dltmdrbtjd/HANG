@@ -49,9 +49,9 @@ const apis = {
   LogOut: () => instance.delete('/api/users/signout'),
 
   // alarm
-  AlarmPatch: alarm => instance.patch('/api/alarm', alarm),
-  AlarmLoad: () => instance.get('/api/alarm'),
-  AlarmDelete: alarm => instance.delete('/api/alarm', alarm),
+  AlarmCheck: () => instance.get('/api/alarm'),
+  AlarmLoad: () => instance.get('/api/alarm/detail'),
+  AlarmDelete: () => instance.delete('/api/alarm'),
 
   // main
   MainLoad: () => instance.get('/api/main'),

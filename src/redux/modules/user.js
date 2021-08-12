@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
 // api
+import socketIOClient from 'socket.io-client';
 import apis from '../../shared/api';
 // reducer
 import { ImageCreators } from './image';
@@ -8,6 +9,10 @@ import { ImageCreators } from './image';
 import { setCookie, delCookie } from '../../shared/cookie';
 // user info
 import { setUserInfo, delUserInfo } from '../../shared/userInfo';
+// socket
+
+const ENDPOINT = 'https://soujinko.shop';
+const socket = socketIOClient(ENDPOINT);
 
 const PHONE_AUTH = 'user/PHONE_AUTH';
 const DUPLICATE_CHECK = 'user/DUPLICATE_CHECK';
@@ -230,9 +235,12 @@ const logOutDB = () => {
   return (dispatch, getState, { history }) => {
     apis
       .LogOut()
-      .then(() => {
+      .then(async () => {
+        const userPk = JSON.parse(localStorage.getItem('userInfo')).userPk;
         delCookie();
         delUserInfo();
+        await socket.emit('logout', { uid: userPk });
+        socket.disconnect();
       })
       .then(() => {
         history.replace('/login');

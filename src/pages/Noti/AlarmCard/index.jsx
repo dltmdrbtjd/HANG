@@ -7,7 +7,7 @@ import { Grid, Text, Strong } from '../../../elements';
 import ProfileImage from '../../../components/ProfileImg';
 import GuideNameplate from '../../../components/GuideNameplate';
 
-const AlarmCard = () => {
+const AlarmCard = ({ userInfo }) => {
   return (
     <Grid
       padding="20px 0"
@@ -17,10 +17,12 @@ const AlarmCard = () => {
       borDirection="bottom"
       _onClick={() => history.push('/mypage')}
     >
-      <ProfileImage />
+      <ProfileImage imgUrl={userInfo.profileImg} />
 
       <Text margin="0 0 0 15px" overflow="visible">
-        <Strong fw="bold">닉네임</Strong>님이 <GuideNameplate />를 부탁합니다
+        <Strong fw="bold">{userInfo.nickname}</Strong>님이{' '}
+        <GuideNameplate>{userInfo.guide ? '길잡이' : '길잡이'}</GuideNameplate>
+        {userInfo.guide ? '를 해준대요 !' : '를 해줄래요 ?'}
       </Text>
     </Grid>
   );

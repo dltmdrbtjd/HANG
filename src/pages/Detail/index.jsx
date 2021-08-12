@@ -5,6 +5,8 @@ import { history } from '../../redux/configureStore';
 // style
 import { Grid, MainTitle, Button, Image } from '../../elements';
 import { DetailCreators } from '../../redux/modules/detail';
+import { ToastCreators } from '../../redux/modules/toastMessage';
+// redux
 import { ChatCreators } from '../../redux/modules/chat';
 // component
 import ProfileCard from '../../components/ProfileCard';
@@ -17,16 +19,15 @@ import chat from '../../Images/NavigationIcons/onchat.svg';
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const { eventList, userInfo, success } = useSelector(
+
+  const { eventList, userInfo, message } = useSelector(
     state => ({
       eventList: state.detail.tripInfo,
       userInfo: state.detail.userInfo,
-      success: state.detail.success,
+      message: state.toastMessage.Message,
     }),
     shallowEqual,
   );
-
-  const [toastMsg, setToastMsg] = useState(success);
 
   const GuideHandler = () => {
     history.push(
@@ -36,8 +37,8 @@ const Detail = () => {
 
   const query = queryString.parse(location.search);
 
-  const TraveleRequestHandler = pk => {
-    dispatch(DetailCreators.AddGuide(pk));
+  const TraveleRequestHandler = (pk, userPk) => {
+    dispatch(DetailCreators.AddGuide(pk, userPk));
   };
 
   const chooseChatRoom = () => {
@@ -53,13 +54,12 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(DetailCreators.DetailLoadDB(query.user));
-    dispatch(DetailCreators.SuccessValue(false));
-    if (toastMsg) {
+    if (message) {
       setTimeout(() => {
-        setToastMsg(false);
+        dispatch(ToastCreators.Message(false));
       }, 1500);
     }
-  }, [toastMsg]);
+  }, [message]);
 
   return (
     <Grid>
@@ -93,16 +93,15 @@ const Detail = () => {
                 userInfo={item}
                 sub2Text="길잡이가 되어주시겠습니까?"
                 btnText="길잡이 되어주기"
-                toastMessage="길잡이 신청이 완료되었습니다."
                 callback={() => {
-                  TraveleRequestHandler(item.tripId);
+                  TraveleRequestHandler(item.tripId, item.userPk);
                 }}
               />
             );
           })}
         </Grid>
       ) : null}
-      {toastMsg && <ToastMessage msg="길잡이 부탁이 완료되었습니다!" />}
+      {message && <ToastMessage msg="신청이 완료되었습니다." />}
     </Grid>
   );
 };

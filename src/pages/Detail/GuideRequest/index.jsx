@@ -16,6 +16,7 @@ import Modal from '../../../components/Modal';
 const GuideRequest = () => {
   const dispatch = useDispatch();
   const myPromise = useSelector(state => state.detail.myTripInfo);
+  const userPk = useSelector(state => state.detail.userInfo.userPk);
 
   const [checked, setChecked] = useState(0);
   const [index, setIndex] = useState(0);
@@ -30,7 +31,7 @@ const GuideRequest = () => {
   };
 
   const agreeModalHandler = userInfo => {
-    dispatch(DetailCreators.AddTravel(userInfo));
+    dispatch(DetailCreators.AddTravel(userInfo, userPk));
     setModal(false);
   };
 
