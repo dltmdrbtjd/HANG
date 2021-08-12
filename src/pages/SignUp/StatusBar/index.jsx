@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 // elements
-import { Grid, Button } from '../../../elements/index';
+import { Grid, Button, Hr } from '../../../elements/index';
 // style
-import { HrStyle, SetSmallMobile } from './style';
+import SetSmallMobile from './style';
 
 const StatusBar = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
@@ -65,7 +65,7 @@ const StatusBar = ({ curPage, setPage }) => {
               )}
 
               {idx < pageNav.length - 1 ? (
-                <HrStyle hrColor={page < curPage ? '#FF9900' : '#C4C4C4'} />
+                <Hr bgColor={page < curPage ? '#FF9900' : '#C4C4C4'} />
               ) : null}
             </Fragment>
           );

@@ -7,12 +7,18 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 // history
 import { history } from '../../../../redux/configureStore';
 // elements
-import { Container, Grid, Button, Strong } from '../../../../elements';
+import {
+  Container,
+  Grid,
+  Button,
+  Strong,
+  Ul,
+  List,
+} from '../../../../elements';
 // components
 import ProfileImg from '../../../../components/ProfileImg';
 // style
 import HeaderStyle from '../../../../components/Header/style';
-import { RoomToggleWrapper, RoomToggleList } from './style';
 
 const RoomHeader = () => {
   const [open, setOpen] = useState(false);
@@ -63,10 +69,24 @@ const RoomHeader = () => {
 
           {open ? (
             <ClickAwayListener onClickAway={handleClose}>
-              <RoomToggleWrapper top="70px">
-                <RoomToggleList>채팅방 나가기</RoomToggleList>
-                <RoomToggleList>신고하기</RoomToggleList>
-              </RoomToggleWrapper>
+              <Ul
+                bgColor="white"
+                border="1px solid #E7E7E7"
+                position="absolute"
+                top="70px"
+                right="0"
+                z="9"
+                shadow="0px 2px 3px rgba(196, 196, 196, 0.25)"
+              >
+                <List
+                  padding="16px 30px"
+                  border="1px solid #E7E7E7"
+                  borDirection="bottom"
+                >
+                  채팅방 나가기
+                </List>
+                <List padding="16px 30px">신고하기</List>
+              </Ul>
             </ClickAwayListener>
           ) : null}
         </Grid>

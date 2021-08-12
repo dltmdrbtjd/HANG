@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { css } from 'styled-components';
 
-const InputImageStyle = styled.input`
+const HideElem = css`
   display: none;
 `;
 
-export default InputImageStyle;
+export default HideElem;

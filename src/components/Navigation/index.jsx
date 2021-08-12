@@ -39,7 +39,7 @@ const Navigation = () => {
       bgColor="lightG"
       position="fixed"
       bottom="0"
-      height="90px"
+      height="80px"
       z="3"
       shadow="0px -2px 3px rgba(196, 196, 196, 0.25)"
     >

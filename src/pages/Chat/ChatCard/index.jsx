@@ -2,11 +2,11 @@ import React from 'react';
 // history
 import { history } from '../../../redux/configureStore';
 // elements
-import { Grid, Strong, Text } from '../../../elements';
+import { Grid, Strong, Text, Span } from '../../../elements';
 // components
 import ProfileImg from '../../../components/ProfileImg';
 // style
-import { LimitWidth, ShowTimeSpan } from './style';
+import LimitWidth from './style';
 import { textOverflow } from '../../../styles/Mixin';
 
 const ChatCard = () => {
@@ -32,7 +32,7 @@ const ChatCard = () => {
           </Grid>
         </Grid>
 
-        <ShowTimeSpan>00:00</ShowTimeSpan>
+        <Span fs="xs">00:00</Span>
       </Grid>
     </Grid>
   );

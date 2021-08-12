@@ -12,6 +12,10 @@ import SubTitle from './SubTitle';
 import Strong from './Strong';
 import Image from './Image';
 import Logo from './Logo';
+import Hr from './Hr';
+import Ul from './Ul';
+import List from './List';
+import Span from './Span';
 
 export {
   Grid,
@@ -28,4 +32,8 @@ export {
   Strong,
   Image,
   Logo,
+  Hr,
+  Ul,
+  List,
+  Span,
 };

@@ -7,7 +7,7 @@ const NavigationStyle = styled.ul`
   max-width: 768px;
   left: 50%;
   bottom: 0;
-  height: 90px;
+  height: 80px;
   justify-content: space-around;
   align-items: center;
   font-size: ${({ theme }) => theme.fontSize.xs};

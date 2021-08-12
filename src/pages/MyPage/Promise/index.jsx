@@ -5,14 +5,14 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 // history
 import { history } from '../../../redux/configureStore';
 // elements
-import { Grid, SubTitle, Button, MainTitle } from '../../../elements';
+import { Grid, SubTitle, Button, MainTitle, Ul, List } from '../../../elements';
 // component
 import PromiseCard from './PromiseCard';
 import NoPosts from '../../../components/NoPosts';
 // reducer
 import { MypageCreators } from '../../../redux/modules/mypage';
 // style
-import { SetAlignItemsButton, TabMenuWrapper } from '../style';
+// import { SetAlignItemsButton, TabMenuWrapper } from '../style';
 import { TabWrapper, TabLayout, TabSize } from './style';
 
 const MyPromise = () => {
@@ -33,19 +33,19 @@ const MyPromise = () => {
   return (
     <>
       <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
-        <TabMenuWrapper>
-          <li onClick={() => history.push('/mypage')}>
+        <Ul isFlex>
+          <List _onClick={() => history.push('/mypage')}>
             <MainTitle width="auto" fs="sxl" color="gray">
               프로필
             </MainTitle>
-          </li>
+          </List>
 
-          <li onClick={() => history.push('/mypage/promise')}>
+          <List _onClick={() => history.push('/mypage/promise')}>
             <MainTitle fs="sxl" width="auto" margin="0 0 0 20px" color="black">
               나의 약속
             </MainTitle>
-          </li>
-        </TabMenuWrapper>
+          </List>
+        </Ul>
       </Grid>
 
       <Grid margin="0 0 60px">
@@ -64,9 +64,10 @@ const MyPromise = () => {
                 </SubTitle>
 
                 <Button
+                  isFlex
+                  ver="center"
                   form="text"
                   color="darkG"
-                  addstyle={SetAlignItemsButton}
                   _onClick={() => history.push('/mypage/promise/1')}
                 >
                   더 보기{' '}
@@ -100,9 +101,10 @@ const MyPromise = () => {
                 </SubTitle>
 
                 <Button
+                  isFlex
+                  ver="center"
                   form="text"
                   color="darkG"
-                  addstyle={SetAlignItemsButton}
                   _onClick={() => history.push('/mypage/promise/2')}
                 >
                   더 보기{' '}
@@ -138,9 +140,10 @@ const MyPromise = () => {
                 </SubTitle>
 
                 <Button
+                  isFlex
+                  ver="center"
                   form="text"
                   color="darkG"
-                  addstyle={SetAlignItemsButton}
                   _onClick={() => history.push('/mypage/promise/3')}
                 >
                   더 보기{' '}

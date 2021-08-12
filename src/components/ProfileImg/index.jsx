@@ -11,7 +11,6 @@ const ProfileImg = ({ size, imgUrl, mobile }) => {
     <Grid
       overflow="hidden"
       radius="50%"
-      color="gray"
       addstyle={setProfileImageSize(size)}
       position="relative"
       mobile={mobile}

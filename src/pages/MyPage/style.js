@@ -13,4 +13,4 @@ const SetAlignItemsButton = css`
   align-items: center;
 `;
 
-export { TabMenuWrapper, SetAlignItemsButton };
+// export { TabMenuWrapper, SetAlignItemsButton };

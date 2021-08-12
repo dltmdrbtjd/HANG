@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 // elements
-import { Button } from '../../../elements';
+import { Button, Span, Strong } from '../../../elements';
 // style
 import { ButtonStyle, ToggleLabelStyle, ToggleNameStyle } from './style';
 // reducer
@@ -20,6 +20,8 @@ const GuideToggle = ({ active }) => {
 
   return (
     <Button
+      isFlex
+      ver="center"
       padding="3px"
       width="76px"
       radius="30px"
@@ -28,10 +30,25 @@ const GuideToggle = ({ active }) => {
       _onClick={handleToggle}
       addstyle={ButtonStyle}
     >
-      <ToggleLabelStyle checked={checked} />
-      <ToggleNameStyle checked={checked}>
+      <Span
+        display="inline-block"
+        width="30px"
+        height="30px"
+        radius="50%"
+        bgColor="white"
+        shadow="2px 0px 3px rgba(136, 82, 0, 0.25)"
+        checked={checked}
+        addstyle={ToggleLabelStyle}
+      />
+      <Strong
+        fw="semibold"
+        size="xs"
+        color="white"
+        checked={checked}
+        addstyle={ToggleNameStyle}
+      >
         {checked ? 'ON' : 'OFF'}
-      </ToggleNameStyle>
+      </Strong>
     </Button>
   );
 };

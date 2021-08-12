@@ -6,8 +6,7 @@ import { Grid, Text, Strong } from '../../../elements';
 // components
 import ProfileImage from '../../../components/ProfileImg';
 // style
-import { AlarmWrapperStyle, StrongAddStyle } from './style';
-import { textOverflow } from '../../../styles/Mixin';
+import StrongAddStyle from './style';
 
 const AlarmCard = () => {
   return (
@@ -15,7 +14,8 @@ const AlarmCard = () => {
       padding="20px 0"
       isFlex
       ver="center"
-      addstyle={AlarmWrapperStyle}
+      border="1px solid #E7E7E7"
+      borDirection="bottom"
       _onClick={() => history.push('/mypage')}
     >
       <ProfileImage />

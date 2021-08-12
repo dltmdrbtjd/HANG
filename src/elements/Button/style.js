@@ -1,6 +1,14 @@
 import styled, { css } from 'styled-components';
 // mixin
-import { borderBox, textProps, outlineBox } from '../../styles/Mixin';
+import { borderBox, textProps, outlineBox, flexBox } from '../../styles/Mixin';
+
+const makeItFlexBox = css`
+  ${props =>
+    props.isFlex &&
+    css`
+      ${flexBox(props.hoz, props.ver, 'inline-flex')};
+    `}
+`;
 
 const buttonShapeSetting = form => {
   switch (form) {
@@ -25,6 +33,7 @@ const buttonShapeSetting = form => {
 };
 
 const ButtonStyle = styled.button`
+  ${makeItFlexBox};
   width: ${props => props.width};
   height: ${props => props.height};
   margin: ${props => props.margin};
@@ -34,7 +43,7 @@ const ButtonStyle = styled.button`
   ${props =>
     textProps(
       props.fs ? props.fs : 'inherit',
-      props.fw,
+      props.fw ? props.fw : 'inherit',
       props.color,
       props.lh,
       props.textAlign,

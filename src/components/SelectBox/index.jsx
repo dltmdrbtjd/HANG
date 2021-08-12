@@ -1,10 +1,16 @@
 import React, { useState, useRef } from 'react';
 // material
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-// style
-import ListWrapper, { SpanStyle, ListStyle } from './style';
 // elements
-import { Button, Strong, Image, Grid } from '../../elements/index';
+import {
+  Button,
+  Strong,
+  Image,
+  Grid,
+  Ul,
+  List,
+  Span,
+} from '../../elements/index';
 // image
 import Arrow from '../../Images/arrow.png';
 
@@ -41,24 +47,38 @@ const SelectBox = ({ initailOption, contents, setState, ...props }) => {
           _onClick={handleToggle}
           color="black"
         >
-          <SpanStyle
+          <Span
+            width="100%"
+            isFlex
+            hoz="space-between"
+            ver="center"
+            radius="10px"
+            padding="14px 12px"
             angle={angle}
             shadow={open && '0px 2px 3px rgba(136, 136, 136, 0.25)'}
             border={open || '0.5px solid #E7E7E7'}
           >
             <Strong fw="regular">{option}</Strong>
             <Image width="10px" src={Arrow} alt="arrow" />
-          </SpanStyle>
+          </Span>
         </Button>
 
         {open && (
           <ClickAwayListener onClickAway={handleClose}>
-            <ListWrapper
-              {...props}
+            <Ul
+              padding="24px 0 0"
+              margin="-24px 0 0"
+              bgColor="white"
+              radius="0 0 10px 10px"
               shadow={open && '0px 2px 3px rgba(136, 136, 136, 0.25)'}
             >
               {contents.map(content => (
-                <ListStyle
+                <List
+                  isFlex
+                  ver="center"
+                  height="32px"
+                  padding=" 0 12px"
+                  fs="sm"
                   bgColor={option === content ? 'skyblue' : null}
                   key={(Date.now() + Math.random()).toString(36)}
                   onClick={event => {
@@ -68,9 +88,9 @@ const SelectBox = ({ initailOption, contents, setState, ...props }) => {
                   }}
                 >
                   {content}
-                </ListStyle>
+                </List>
               ))}
-            </ListWrapper>
+            </Ul>
           </ClickAwayListener>
         )}
       </Grid>

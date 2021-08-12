@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 
 const setSpanWithStatus = status => {
   switch (status) {
@@ -6,10 +6,12 @@ const setSpanWithStatus = status => {
       return css`
         color: ${({ theme }) => theme.color.danger};
       `;
+
     case 'safe':
       return css`
         color: ${({ theme }) => theme.color.safe};
       `;
+
     default:
       return null;
   }
@@ -45,11 +47,4 @@ const setInputWithStatus = status => {
   }
 };
 
-const SpanStyle = styled.span`
-  width: 24px;
-  height: 24px;
-  box-sizing: border-box;
-  ${props => setSpanWithStatus(props.status)};
-`;
-
-export { setGridWithStatus, setInputWithStatus, SpanStyle };
+export { setGridWithStatus, setInputWithStatus, setSpanWithStatus };
