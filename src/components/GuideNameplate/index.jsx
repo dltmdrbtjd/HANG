@@ -4,8 +4,8 @@ import { Strong } from '../../elements';
 // style
 import NameplateStyle from './style';
 
-const GuideNameplate = () => {
-  return <Strong addstyle={NameplateStyle}>길잡이</Strong>;
+const GuideNameplate = ({ children }) => {
+  return <Strong addstyle={NameplateStyle}>{children}</Strong>;
 };
 
 export default GuideNameplate;
