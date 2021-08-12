@@ -86,9 +86,9 @@ const ChatRoom = () => {
           경우 제재 대상이 될 수 있습니다.
         </Text>
 
-        <Text fs="xs" textAlign="center" margin="0 0 20px">
+        {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
           채팅 시작 시간
-        </Text>
+        </Text> */}
 
         {chatLog.map((chat, idx) => (
           <SpeechBubble
