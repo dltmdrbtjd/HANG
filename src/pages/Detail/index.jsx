@@ -63,6 +63,7 @@ const Detail = () => {
           border="0.5px solid #E7E7E7"
           padding="10px 9px"
           margin="0 7px 0 0"
+          _onClick={() => history.push(`/chat/room?number=${query.user}`)}
         >
           <Image src={chat} alt="chat icon" />
         </Button>

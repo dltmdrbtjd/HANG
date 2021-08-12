@@ -56,8 +56,8 @@ const Home = () => {
                   </Text>
                 </Grid>
                 <Text>
-                  {moment.utc(promise.startDate).format('MM.DD')} ~{' '}
-                  {moment.utc(promise.EndDate).format('MM.DD')}
+                  {moment.utc(promise.startDate).format('MM. DD')} -{' '}
+                  {moment.utc(promise.endDate).format('MM. DD')}
                 </Text>
               </Grid>
             </Grid>

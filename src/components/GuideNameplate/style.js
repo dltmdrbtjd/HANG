@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const StrongAddStyle = css`
+const NameplateStyle = css`
   ${({ theme }) => {
     const style = {
       color: theme.color.brandColor,
@@ -18,4 +18,4 @@ const StrongAddStyle = css`
   box-sizing: border-box;
 `;
 
-export default StrongAddStyle;
+export default NameplateStyle;

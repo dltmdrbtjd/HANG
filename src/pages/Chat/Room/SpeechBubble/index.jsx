@@ -4,7 +4,7 @@ import { Text, Grid } from '../../../../elements';
 // style
 import { SpeechBubbleStyle, TabSpeechBubble } from './style';
 
-const SpeechBubble = ({ person }) => {
+const SpeechBubble = ({ person, children }) => {
   return (
     <Grid isFlex hoz={person === 'me' && 'flex-end'} margin="0 0 16px">
       <Text
@@ -15,7 +15,7 @@ const SpeechBubble = ({ person }) => {
         addstyle={SpeechBubbleStyle}
         tab={TabSpeechBubble}
       >
-        안녕하세요
+        {children}
       </Text>
     </Grid>
   );
