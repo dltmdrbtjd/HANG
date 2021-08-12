@@ -178,7 +178,7 @@ const Search = props => {
       </Button>
       <Text margin="40px 0 0">
         <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
-        {guName ? ` ${guName}의 ${traveler ? '여행자' : '길잡이'}입니다.` : ''}
+        {guName ? ` ${guName}의 회원목록입니다.` : ''}
       </Text>
       {userlist
         ? userlist.map((item, idx) => {
