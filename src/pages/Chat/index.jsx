@@ -19,7 +19,7 @@ const Chat = () => {
 
   return (
     <Grid margin="-24px 0 0">
-      {roomList.map(room => (
+      {roomList.map((room, idx) => (
         <ChatCard key={(Date.now() + Math.random() + idx).toString(36)} />
       ))}
     </Grid>
