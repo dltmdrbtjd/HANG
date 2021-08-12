@@ -3,9 +3,13 @@ import React from 'react';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 // elements
-import { Grid, Input } from '../../../elements';
+import { Grid, Input, Span } from '../../../elements';
 // style
-import { setGridWithStatus, setInputWithStatus, SpanStyle } from './style';
+import {
+  setGridWithStatus,
+  setInputWithStatus,
+  setSpanWithStatus,
+} from './style';
 
 const ValidateInput = ({
   id,
@@ -40,18 +44,16 @@ const ValidateInput = ({
       />
 
       {status ? (
-        <SpanStyle status={status}>
+        <Span width="24px" height="24px" addstyle={setSpanWithStatus(status)}>
           {status === 'danger' ? (
             <HighlightOffIcon />
           ) : (
             <CheckCircleOutlineIcon />
           )}
-        </SpanStyle>
+        </Span>
       ) : null}
     </Grid>
   );
 };
-
-ValidateInput.defaultProps = {};
 
 export default ValidateInput;

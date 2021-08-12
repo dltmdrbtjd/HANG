@@ -6,8 +6,7 @@ import { Grid, Text, Strong } from '../../../elements';
 // components
 import ProfileImage from '../../../components/ProfileImg';
 // style
-import { AlarmWrapperStyle, StrongAddStyle } from './style';
-import { textOverflow } from '../../../styles/Mixin';
+import StrongAddStyle from './style';
 
 const AlarmCard = () => {
   return (
@@ -15,13 +14,14 @@ const AlarmCard = () => {
       padding="20px 0"
       isFlex
       ver="center"
-      addstyle={AlarmWrapperStyle}
+      border="1px solid #E7E7E7"
+      borDirection="bottom"
       _onClick={() => history.push('/mypage')}
     >
       <ProfileImage />
 
       <Text margin="0 0 0 15px" overflow="visible">
-        <Strong>닉네임</Strong> 님이{' '}
+        <Strong fw="bold">닉네임</Strong>님이{' '}
         <Strong addstyle={StrongAddStyle}>길잡이</Strong>를 부탁합니다
       </Text>
     </Grid>

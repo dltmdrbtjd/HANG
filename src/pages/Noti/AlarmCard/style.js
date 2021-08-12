@@ -1,9 +1,5 @@
 import { css } from 'styled-components';
 
-const AlarmWrapperStyle = css`
-  border-bottom: 0.5px solid ${({ theme }) => theme.color.semiLightG};
-`;
-
 const StrongAddStyle = css`
   ${({ theme }) => {
     const style = {
@@ -22,4 +18,4 @@ const StrongAddStyle = css`
   box-sizing: border-box;
 `;
 
-export { AlarmWrapperStyle, StrongAddStyle };
+export default StrongAddStyle;

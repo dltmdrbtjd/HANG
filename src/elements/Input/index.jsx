@@ -6,6 +6,7 @@ const Input = ({
   type,
   name,
   value,
+  accept,
   placeholder,
   _onChange,
   _onKeyPress,
@@ -17,6 +18,7 @@ const Input = ({
       value={value}
       placeholder={placeholder}
       type={type}
+      accept={accept}
       onChange={_onChange}
       onKeyPress={_onKeyPress}
       name={name}

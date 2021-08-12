@@ -3,12 +3,12 @@ import { shallowEqual, useSelector } from 'react-redux';
 // history
 import { history } from '../../../../redux/configureStore';
 // elements
-import { SubTitle, Grid, MainTitle } from '../../../../elements';
+import { SubTitle, Grid, MainTitle, Ul } from '../../../../elements';
 // components
 import PromiseCard from '../PromiseCard';
 import NoInfo from '../../../../components/NoInfo';
 // style
-import { TabMenuWrapper } from '../../style';
+// import { TabMenuWrapper } from '../../style';
 import { TabEventWrapper } from '../../MyInfo/style';
 import TabSize from '../../../../components/EventCard/style';
 
@@ -37,19 +37,19 @@ const MyPromiseDetail = ({ match }) => {
   return (
     <>
       <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
-        <TabMenuWrapper>
-          <li onClick={() => history.push('/mypage')}>
+        <Ul isFlex>
+          <li _onClick={() => history.push('/mypage')}>
             <MainTitle width="auto" fs="sxl" color="gray">
               프로필
             </MainTitle>
           </li>
 
-          <li onClick={() => history.push('/mypage/promise')}>
+          <li _onClick={() => history.push('/mypage/promise')}>
             <MainTitle fs="sxl" width="auto" margin="0 0 0 20px" color="black">
               나의 약속
             </MainTitle>
           </li>
-        </TabMenuWrapper>
+        </Ul>
       </Grid>
 
       <Grid margin="60px 0">

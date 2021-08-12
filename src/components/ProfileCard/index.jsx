@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 import { FavoriteCreators } from '../../redux/modules/favorite';
 import { DetailCreators } from '../../redux/modules/detail.js';
 
-import { Grid, Text } from '../../elements';
+import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 // style
 import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
@@ -43,6 +43,7 @@ const ProfileCard = ({ userInfo }) => {
           </Text>
           <Text
             color="darkG"
+            fs="sm"
             addstyle={textOverflow()}
             mobile={SetTabFontSize('sm')}
           >
@@ -66,15 +67,7 @@ const ProfileCard = ({ userInfo }) => {
           </Grid>
         ) : null}
       </Grid>
-      <span
-        style={{
-          width: '100%',
-          height: '1px',
-          borderBottom: '1px solid #e7e7e7',
-          display: 'block',
-          margin: '15px auto',
-        }}
-      />
+      <Hr width="100%" margin="15px 0" />
       <Grid margin="10px 0 0 0">
         {userInfo.intro !== 'none' ? (
           <Text fs="sm">{userInfo.intro}</Text>

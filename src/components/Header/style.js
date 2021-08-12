@@ -7,7 +7,7 @@ const HeaderStyle = styled.header`
   left: 0;
   z-index: 9;
   box-shadow: 0px 2px 3px rgba(196, 196, 196, 0.25);
-  background-color: ${({ theme }) => theme.color.lightG};
+  background-color: ${({ theme }) => theme.color.bgColor};
 `;
 
 export default HeaderStyle;
