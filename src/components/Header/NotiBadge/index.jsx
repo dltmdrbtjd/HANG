@@ -9,17 +9,17 @@ import { history } from '../../../redux/configureStore';
 // elements
 import { Button } from '../../../elements';
 
-const ENDPOINT = 'https://soujinko.shop/';
-
 const NotiBadge = () => {
-  const userPk = Number(localStorage.getItem('userPk'));
-
-  const [connected, setConnected] = useState(false);
-  const [response, setResponse] = useState('');
+  const userPk = useSelector(state => state.user.userInfo.userPk);
+  const ENDPOINT = 'https://soujinko.shop/';
+  localStorage.setItem('userPk', userPk);
+  const user = localStorage.getItem('userPk');
+  console.log(user);
+  const socket = socketIOClient(ENDPOINT);
+  console.log(userPk);
 
   useEffect(() => {
-    const socket = socketIOClient(ENDPOINT);
-    socket.emit('login', { uid: userPk });
+    socket.emit('login', { uid: user });
   }, []);
 
   return (
