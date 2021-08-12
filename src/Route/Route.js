@@ -30,8 +30,6 @@ import { pathURI } from './Path';
 const Route = () => {
   return (
     <>
-      <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
-
       <Section>
         <Switch>
           <PublicRoute
@@ -52,6 +50,7 @@ const Route = () => {
             component={Welcome}
             exact
           />
+          <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
           <PrivateRoute path={pathURI.home} component={Home} exact />
           <PrivateRoute path={pathURI.search} component={Search} exact />
           <PrivateRoute path={pathURI.detail} component={Detail} exact />

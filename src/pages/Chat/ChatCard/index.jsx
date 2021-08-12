@@ -44,13 +44,15 @@ const ChatCard = ({ targetUserPk, profileImg, nickname, message, time }) => {
               {nickname}
             </Strong>
 
-            <Text margin="6px 0 0" addstyle={textOverflow()}>
-              {message}
-            </Text>
+            {message ? (
+              <Text margin="6px 0 0" addstyle={textOverflow()}>
+                {message}
+              </Text>
+            ) : null}
           </Grid>
         </Grid>
 
-        <Span fs="xs">{moment(time).format('HH:mm')}</Span>
+        {time ? <Span fs="xs">{time.slice(-7, time.length - 3)}</Span> : null}
       </Grid>
     </Grid>
   );
