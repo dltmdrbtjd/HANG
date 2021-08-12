@@ -66,7 +66,6 @@ const SignUp = () => {
         fs="xl"
         fw="extraBold"
         ls="-1px"
-        margin="0 0 30px"
         tab={TabTitle}
         mobile={SetTabFontSize('la')}
       >

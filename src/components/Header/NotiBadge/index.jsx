@@ -24,7 +24,7 @@ const NotiBadge = () => {
 
   return (
     <Button _onClick={() => history.push('/noti')} form="text">
-      <Badge badgeContent={4} color="secondary">
+      <Badge badgeContent={5} color="secondary">
         <NotificationsNoneIcon />
       </Badge>
     </Button>

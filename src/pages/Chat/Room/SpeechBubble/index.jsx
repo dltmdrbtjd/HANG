@@ -6,11 +6,11 @@ import { SpeechBubbleStyle, TabSpeechBubble } from './style';
 
 const SpeechBubble = ({ person, children }) => {
   return (
-    <Grid isFlex hoz={person === 'me' && 'flex-end'} margin="0 0 16px">
+    <Grid isFlex hoz={person && 'flex-end'} margin="0 0 16px">
       <Text
         width="auto"
         padding="16px"
-        color={person === 'me' ? 'white' : 'black'}
+        color={person ? 'white' : 'black'}
         person={person}
         addstyle={SpeechBubbleStyle}
         tab={TabSpeechBubble}

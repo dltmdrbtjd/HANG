@@ -2,7 +2,7 @@ import { css } from 'styled-components';
 
 const SpeechBubbleStyle = css`
   ${props => {
-    const bgColor = props.person === 'me' ? 'brandColor' : 'semiLightG';
+    const bgColor = props.person ? 'brandColor' : 'semiLightG';
 
     return css`
       background-color: ${props.theme.color[bgColor]};

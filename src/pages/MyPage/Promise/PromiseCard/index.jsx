@@ -12,10 +12,10 @@ import { Button, Grid, Text, Strong, Span } from '../../../../elements';
 import ProfileImg from '../../../../components/ProfileImg';
 import Modal from '../../../../components/Modal';
 import ToastMessage from '../../../../components/ToastMessage';
+import GuideNameplate from '../../../../components/GuideNameplate';
 // reducer
 import { MypageCreators } from '../../../../redux/modules/mypage';
 // style
-// import StrongAddStyle from '../../../Noti/AlarmCard/style';
 import { ArrowStyle, SetTabFontSize, SmallMobileProfileSize } from './style';
 import { textOverflow } from '../../../../styles/Mixin';
 
@@ -127,15 +127,13 @@ const PromiseCard = ({ promInfo, guide, type, tab }) => {
 
         <Grid width="60%" margin="0 0 0 14px">
           <Text
-            margin="0 0 20px"
+            margin="0 0 15px"
             tab={SetTabFontSize('md')}
             mobile={SetTabFontSize('sm')}
             addstyle={textOverflow()}
-            height="30px"
-            lh="30px"
+            lh="32px"
           >
-            <Strong>{promInfo.nickname}</Strong> 님에게{' '}
-            {/* <Strong addstyle={StrongAddStyle}>길잡이</Strong> 요청 */}
+            <Strong>{promInfo.nickname}</Strong> 님에게 <GuideNameplate /> 요청
           </Text>
 
           <Text tab={SetTabFontSize('md')} mobile={SetTabFontSize('sm')}>
@@ -143,7 +141,7 @@ const PromiseCard = ({ promInfo, guide, type, tab }) => {
             {moment.utc(promInfo.endDate).format('MM.DD')}
           </Text>
 
-          <Text fs="la" fw="bold" tab={SetTabFontSize('md')}>
+          <Text fs="la" fw="bold" addstyle={textOverflow()}>
             {promInfo.region} {promInfo.city}
           </Text>
         </Grid>

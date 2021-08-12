@@ -1,21 +1,24 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 // mixin
-import { floatBox } from '../../styles/Mixin';
+import { floatBox, flexBox, textProps } from '../../styles/Mixin';
 
 const LogoStyle = styled.h1`
   width: ${props => props.width};
   height: ${props => props.height};
-  background-image: url(${props => props.imgUrl});
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  ${floatBox('absolute', 0, 0, 0, 0)};
+  ${floatBox('absolute', 0, 0, 0, 0, -1)};
+  ${flexBox('center', 'center')};
+  ${textProps('lg', 'bold')};
   margin: auto;
 
-  button {
-    text-indent: -9999px;
-    overflow: hidden;
-  }
+  ${props =>
+    props.imgUrl &&
+    css`
+      background-image: url(${props.imgUrl});
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      text-indent: -9999px;
+    `}
 
   @media ${({ theme }) => theme.deviceSize.tab} {
     ${props => props.tab};

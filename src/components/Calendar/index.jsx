@@ -8,9 +8,12 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import * as locales from 'react-date-range/dist/locale';
 import moment from 'moment';
 // elements
-import { Button, Grid, SubTitle } from '../../elements';
+import { Button, Grid, SubTitle, Span, Image } from '../../elements';
 // style
 import './calendar.css';
+import ArrowRotate from '../SelectBox/style';
+// image
+import Arrow from '../../Images/arrow.svg';
 
 const Calendar = ({ setSelectDate }) => {
   const tripList = useSelector(state => state.mypage.tripList);
@@ -21,6 +24,7 @@ const Calendar = ({ setSelectDate }) => {
       startDate: moment.utc(cur.startDate).format(format),
       endDate: moment.utc(cur.endDate).format(format),
     });
+
     return acc;
   }, []);
 
@@ -33,6 +37,7 @@ const Calendar = ({ setSelectDate }) => {
   ]);
 
   const [open, setOpen] = useState(false);
+  const [angle, setAngle] = useState(0);
 
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -52,6 +57,7 @@ const Calendar = ({ setSelectDate }) => {
 
   const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
+    setAngle(angle ? 0 : 180);
   };
 
   const handleClose = event => {
@@ -63,6 +69,7 @@ const Calendar = ({ setSelectDate }) => {
     }
 
     setOpen(false);
+    setAngle(0);
   };
 
   return (
@@ -84,9 +91,17 @@ const Calendar = ({ setSelectDate }) => {
               color="black"
               shadow="none"
               border="0.5px solid #E7E7E7"
+              fw="lg"
               ref={dateInfo.ref}
+              isFlex
+              hoz="space-between"
+              ver="center"
+              padding="14px 20px"
+              angle={angle}
+              addstyle={ArrowRotate}
             >
-              {dateInfo.dateInfo}
+              <Span fw="regular">{dateInfo.dateInfo}</Span>
+              <Image width="10px" src={Arrow} alt="arrow" />
             </Button>
           </Grid>
         ))}

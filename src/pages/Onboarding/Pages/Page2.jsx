@@ -16,7 +16,7 @@ import { CalcHeight, TabImage, TabTitle, TabText } from '../style';
 const Page2 = () => {
   return (
     <Grid position="relative" addstyle={CalcHeight}>
-      <Container height="100%">
+      <Container padding="0" height="100%">
         <MainTitle fs="xxl" fw="black" margin="0 0 30px" tab={TabTitle}>
           또, 너만 아는 여<Strong color="brandColor">행</Strong>
         </MainTitle>

@@ -21,18 +21,13 @@ import { Text, Grid } from '../../elements';
 import { Navigationicons, NavigationStyle } from './style';
 // history
 import { history } from '../../redux/configureStore';
+// path
+import { HeaderIncluded } from '../../route/Path';
 
 const Navigation = () => {
   const path = useLocation().pathname;
 
-  if (
-    path.includes('/signup') ||
-    path.includes('/login') ||
-    path.includes('/onboarding')
-  )
-    return null;
-
-  return (
+  return HeaderIncluded.includes(path) || /mypage\/promise/.test(path) ? (
     <Grid
       width="100%"
       bgColor="bgColor"
@@ -96,7 +91,7 @@ const Navigation = () => {
         </Navigationicons>
       </NavigationStyle>
     </Grid>
-  );
+  ) : null;
 };
 
 export default Navigation;

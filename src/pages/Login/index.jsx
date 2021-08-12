@@ -85,13 +85,13 @@ const Login = () => {
               </Text>
             ) : null}
 
-            <Grid margin="120px 0 0">
+            <Grid margin="150px 0 20px">
               <Button fs="la" fw="bold" type="submit" width="100%">
                 로그인
               </Button>
 
               <Grid>
-                <Button
+                {/* <Button
                   width="50%"
                   padding="17px 0"
                   bgColor="bgColor"
@@ -102,13 +102,14 @@ const Login = () => {
                   }}
                 >
                   아이디 / 비밀번호 찾기
-                </Button>
+                </Button> */}
 
                 <Button
-                  width="50%"
+                  width="100%"
                   padding="17px 0"
                   bgColor="bgColor"
                   fs="sm"
+                  fw="lg"
                   color="darkG"
                   _onClick={() => {
                     history.push('/signup');

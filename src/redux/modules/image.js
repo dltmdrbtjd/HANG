@@ -40,8 +40,12 @@ const uploadProfileImgDB = (image, callBack) => {
     const promise = upload.promise();
 
     promise
-      .then(data => {
-        dispatch(uploadProfileImg(data.Location));
+      .then(() => {
+        dispatch(
+          uploadProfileImg(
+            `https://dpcgepgmqx2vj.cloudfront.net/profile/${image.name}?w=100&h=100`,
+          ),
+        );
         // dispatch(uploading(false));
       })
       .then(() => {

@@ -70,7 +70,7 @@ const MyInfo = () => {
       <ProfileCard userInfo={myInfo} />
 
       <Grid isFlex hoz="space-between" margin="60px 0 0" ver="center">
-        <SubTitle fs="la" fw="bold">
+        <SubTitle fs="la" fw="bold" width="auto">
           길잡이 설정
         </SubTitle>
 

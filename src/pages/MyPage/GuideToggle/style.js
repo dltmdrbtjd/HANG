@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 
-const ButtonStyle = css`
+const FloatButton = css`
   position: relative;
 `;
 
@@ -13,8 +13,8 @@ const ToggleLabelStyle = css`
 
 const ToggleNameStyle = css`
   position: absolute;
-  left: ${props => (props.checked ? '9px' : '100%')};
-  transform: translateX(${props => (props.checked ? 0 : '-30px')});
+  ${({ checked }) => checked && 'left: 10px'};
+  ${({ checked }) => checked || 'right: 10px'};
 `;
 
-export { ButtonStyle, ToggleLabelStyle, ToggleNameStyle };
+export { FloatButton, ToggleLabelStyle, ToggleNameStyle };

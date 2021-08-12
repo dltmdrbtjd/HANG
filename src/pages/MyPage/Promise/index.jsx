@@ -68,6 +68,7 @@ const MyPromise = () => {
                   ver="center"
                   form="text"
                   color="darkG"
+                  fw="regular"
                   _onClick={() => history.push('/mypage/promise/1')}
                 >
                   더 보기{' '}
@@ -105,6 +106,7 @@ const MyPromise = () => {
                   ver="center"
                   form="text"
                   color="darkG"
+                  fw="regular"
                   _onClick={() => history.push('/mypage/promise/2')}
                 >
                   더 보기{' '}
@@ -144,6 +146,7 @@ const MyPromise = () => {
                   ver="center"
                   form="text"
                   color="darkG"
+                  fw="regular"
                   _onClick={() => history.push('/mypage/promise/3')}
                 >
                   더 보기{' '}
