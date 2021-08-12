@@ -1,6 +1,6 @@
 const CityArr = [
   {
-    city: '서울특별시',
+    city: '서울',
     gu: [
       '종로구',
       '중구',
@@ -30,7 +30,7 @@ const CityArr = [
     ],
   },
   {
-    city: '부산광역시',
+    city: '부산',
     gu: [
       '중구',
       '서구',
@@ -51,7 +51,7 @@ const CityArr = [
     ],
   },
   {
-    city: '제주도',
+    city: '제주',
     gu: [
       '제주시',
       '서귀포시',
