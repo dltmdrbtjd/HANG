@@ -77,8 +77,8 @@ const GuideRequest = () => {
               </Grid>
               <label id={item.city}>
                 <Text fs="sm">
-                  {moment.utc(item.startDate).format('YY.MM.DD')} ~{' '}
-                  {moment.utc(item.endDate).format('YY.MM.DD')}
+                  {moment.utc(item.startDate).format('MM. DD')} -{' '}
+                  {moment.utc(item.endDate).format('MM. DD')}
                 </Text>
                 <Text fs="la" fw="bold">
                   {item.region} {item.city}

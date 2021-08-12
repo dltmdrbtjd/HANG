@@ -3,7 +3,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 // history
 import { history } from '../../../../redux/configureStore';
 // elements
-import { SubTitle, Grid, MainTitle, Ul } from '../../../../elements';
+import { SubTitle, Grid, MainTitle, Ul, List } from '../../../../elements';
 // components
 import PromiseCard from '../PromiseCard';
 import NoInfo from '../../../../components/NoInfo';
@@ -38,17 +38,17 @@ const MyPromiseDetail = ({ match }) => {
     <>
       <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
         <Ul isFlex>
-          <li _onClick={() => history.push('/mypage')}>
+          <List _onClick={() => history.push('/mypage')}>
             <MainTitle width="auto" fs="sxl" color="gray">
               프로필
             </MainTitle>
-          </li>
+          </List>
 
-          <li _onClick={() => history.push('/mypage/promise')}>
+          <List _onClick={() => history.push('/mypage/promise')}>
             <MainTitle fs="sxl" width="auto" margin="0 0 0 20px" color="black">
               나의 약속
             </MainTitle>
-          </li>
+          </List>
         </Ul>
       </Grid>
 

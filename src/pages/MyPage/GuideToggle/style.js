@@ -14,7 +14,7 @@ const ToggleLabelStyle = css`
 const ToggleNameStyle = css`
   position: absolute;
   left: ${props => (props.checked ? '9px' : '100%')};
-  transform: translateX(${props => (props.checked ? 0 : '-29.5px')});
+  transform: translateX(${props => (props.checked ? 0 : '-30px')});
 `;
 
 export { ButtonStyle, ToggleLabelStyle, ToggleNameStyle };

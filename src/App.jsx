@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react';
-// redux
-import { useDispatch } from 'react-redux';
+import React from 'react';
 // Router
 import { Switch } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
@@ -33,18 +31,9 @@ import ChatRoom from './pages/Chat/Room';
 import NotFound from './pages/NotFound';
 // pathname
 import { pathURI } from './Route/Path';
-// reducer
-import { UserCreators } from './redux/modules/user';
-// cookie
-import { getCookie } from './shared/cookie';
+import { getUserInfo } from './shared/userInfo';
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (getCookie()) dispatch(UserCreators.SaveUserInformation());
-  }, []);
-
   return (
     <ConnectedRouter history={history}>
       <Header />

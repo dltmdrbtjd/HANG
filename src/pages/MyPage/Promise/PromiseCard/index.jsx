@@ -15,7 +15,7 @@ import ToastMessage from '../../../../components/ToastMessage';
 // reducer
 import { MypageCreators } from '../../../../redux/modules/mypage';
 // style
-import StrongAddStyle from '../../../Noti/AlarmCard/style';
+// import StrongAddStyle from '../../../Noti/AlarmCard/style';
 import { ArrowStyle, SetTabFontSize, SmallMobileProfileSize } from './style';
 import { textOverflow } from '../../../../styles/Mixin';
 
@@ -135,7 +135,7 @@ const PromiseCard = ({ promInfo, guide, type, tab }) => {
             lh="30px"
           >
             <Strong>{promInfo.nickname}</Strong> 님에게{' '}
-            <Strong addstyle={StrongAddStyle}>길잡이</Strong> 요청
+            {/* <Strong addstyle={StrongAddStyle}>길잡이</Strong> 요청 */}
           </Text>
 
           <Text tab={SetTabFontSize('md')} mobile={SetTabFontSize('sm')}>
