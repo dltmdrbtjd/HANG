@@ -3,7 +3,7 @@ import React from 'react';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 // router
 import { useLocation } from 'react-router-dom';
-import { pathURI, withoutHeader } from '../../Route/Path';
+import { HeaderIncluded } from '../../Route/Path';
 // history
 import { history } from '../../redux/configureStore';
 // components
@@ -11,11 +11,13 @@ import { Container, Logo, Grid, Button } from '../../elements';
 import NotiBadge from './NotiBadge';
 // style
 import HeaderStyle from './style';
+// images
+import LogoImg from '../../Images/Symbol.png';
 
-const Header = () => {
+const Header = ({ children }) => {
   const path = useLocation().pathname;
 
-  if (withoutHeader.includes(path)) return null;
+  if (!HeaderIncluded.includes(path)) return null;
 
   return (
     <HeaderStyle>
@@ -38,7 +40,13 @@ const Header = () => {
             </Button>
           ) : null}
 
-          <Logo width="36px" height="36px" href="/" />
+          <Logo
+            imgUrl={path === '/' && LogoImg}
+            width={path === '/' && '36px'}
+            height={path === '/' && '36px'}
+          >
+            {children}
+          </Logo>
 
           <NotiBadge />
         </Grid>

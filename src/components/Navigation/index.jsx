@@ -21,16 +21,13 @@ import { Text, Grid } from '../../elements';
 import { Navigationicons, NavigationStyle } from './style';
 // history
 import { history } from '../../redux/configureStore';
+// path
+import { HeaderIncluded } from '../../Route/Path';
 
 const Navigation = () => {
   const path = useLocation().pathname;
 
-  if (
-    path.includes('/signup') ||
-    path.includes('/login') ||
-    path.includes('/onboarding')
-  )
-    return null;
+  if (!HeaderIncluded.includes(path)) return null;
 
   return (
     <Grid
