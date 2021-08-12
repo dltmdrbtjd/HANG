@@ -133,7 +133,8 @@ const PromiseCard = ({ promInfo, guide, type, tab }) => {
             addstyle={textOverflow()}
             lh="32px"
           >
-            <Strong>{promInfo.nickname}</Strong> 님에게 <GuideNameplate /> 요청
+            <Strong>{promInfo.nickname}</Strong> 님에게{' '}
+            <GuideNameplate>길잡이</GuideNameplate> 요청
           </Text>
 
           <Text tab={SetTabFontSize('md')} mobile={SetTabFontSize('sm')}>
