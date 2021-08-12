@@ -8,6 +8,8 @@ import socketIOClient from 'socket.io-client';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
+// userInfo
+import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
 import apis from '../../../shared/api';
@@ -16,7 +18,7 @@ const NotiBadge = () => {
   const [newAlarm, setNewAlarm] = useState(false);
   const ENDPOINT = 'https://soujinko.shop/';
   const socket = socketIOClient(ENDPOINT);
-  const userPk = JSON.parse(localStorage.getItem('userInfo')).userPk;
+  const userPk = getUserInfo() && getUserInfo().userPk;
 
   const NotiOff = () => {
     setNewAlarm(false);
@@ -26,7 +28,6 @@ const NotiBadge = () => {
   apis
     .AlarmCheck()
     .then(res => {
-      console.log(newAlarm);
       setNewAlarm(res.data);
     })
     .catch(err => console.log(err));
@@ -43,7 +44,7 @@ const NotiBadge = () => {
     <Button _onClick={NotiOff} form="text">
       <Grid>
         <Badge
-          invisible={newAlarm ? '' : 'invisible'}
+          invisible={newAlarm ? false : 'invisible'}
           variant="dot"
           overlap="circular"
           color="secondary"
