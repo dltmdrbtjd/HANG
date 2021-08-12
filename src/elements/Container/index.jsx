@@ -8,7 +8,12 @@ const Container = ({ children, ...props }) => {
   const path = useLocation().pathname;
 
   return (
-    <ContainerStyle {...props} noPadding={!HeaderIncluded.includes(path)}>
+    <ContainerStyle
+      {...props}
+      noPadding={
+        !HeaderIncluded.includes(path) && !/mypage\/promise/.test(path)
+      }
+    >
       {children}
     </ContainerStyle>
   );

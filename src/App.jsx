@@ -14,9 +14,7 @@ const App = () => {
     <ConnectedRouter history={history}>
       <Header />
 
-      <Section>
-        <Route />
-      </Section>
+      <Route />
 
       <Navigation />
     </ConnectedRouter>

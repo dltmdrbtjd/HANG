@@ -3,6 +3,8 @@ import React from 'react';
 import { Switch } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+// components
+import Section from '../components/Section';
 // pages
 import Home from '../pages/Home';
 import Login from '../pages/Login';
@@ -27,35 +29,54 @@ import { pathURI } from './Path';
 
 const Route = () => {
   return (
-    <Switch>
-      <PublicRoute path={pathURI.logIn} restricted component={Login} exact />
+    <>
       <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
-      <PublicRoute path={pathURI.signUp} restricted component={SignUp} exact />
-      <PublicRoute
-        path={pathURI.welcome}
-        restricted
-        component={Welcome}
-        exact
-      />
-      <PrivateRoute path={pathURI.home} component={Home} exact />
-      <PrivateRoute path={pathURI.search} component={Search} exact />
-      <PrivateRoute path={pathURI.detail} component={Detail} exact />
-      <PrivateRoute path={pathURI.request} component={GuideRequest} exact />
-      <PrivateRoute path={pathURI.favorite} component={Favorite} exact />
-      <PrivateRoute path={pathURI.mypage} component={MyInfo} exact />
-      <PrivateRoute path={pathURI.promise} component={MyPromise} exact />
-      <PrivateRoute
-        path="/mypage/promise/:page"
-        component={MyPromiseDetail}
-        exact
-      />
-      <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
-      <PrivateRoute path="/mypage/create_trip" component={CreateTrip} exact />
-      <PrivateRoute path={pathURI.noti} component={Noti} exact />
-      <PrivateRoute path={pathURI.chat} component={Chat} exact />
-      <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
-      <PublicRoute component={NotFound} exact />
-    </Switch>
+
+      <Section>
+        <Switch>
+          <PublicRoute
+            path={pathURI.logIn}
+            restricted
+            component={Login}
+            exact
+          />
+          <PublicRoute
+            path={pathURI.signUp}
+            restricted
+            component={SignUp}
+            exact
+          />
+          <PublicRoute
+            path={pathURI.welcome}
+            restricted
+            component={Welcome}
+            exact
+          />
+          <PrivateRoute path={pathURI.home} component={Home} exact />
+          <PrivateRoute path={pathURI.search} component={Search} exact />
+          <PrivateRoute path={pathURI.detail} component={Detail} exact />
+          <PrivateRoute path={pathURI.request} component={GuideRequest} exact />
+          <PrivateRoute path={pathURI.favorite} component={Favorite} exact />
+          <PrivateRoute path={pathURI.mypage} component={MyInfo} exact />
+          <PrivateRoute path={pathURI.promise} component={MyPromise} exact />
+          <PrivateRoute
+            path="/mypage/promise/:page"
+            component={MyPromiseDetail}
+            exact
+          />
+          <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
+          <PrivateRoute
+            path="/mypage/create_trip"
+            component={CreateTrip}
+            exact
+          />
+          <PrivateRoute path={pathURI.noti} component={Noti} exact />
+          <PrivateRoute path={pathURI.chat} component={Chat} exact />
+          <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
+          <PublicRoute component={NotFound} exact />
+        </Switch>
+      </Section>
+    </>
   );
 };
 

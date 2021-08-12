@@ -5,7 +5,7 @@ import { floatBox, flexBox, textProps } from '../../styles/Mixin';
 const LogoStyle = styled.h1`
   width: ${props => props.width};
   height: ${props => props.height};
-  ${floatBox('absolute', 0, 0, 0, 0)};
+  ${floatBox('absolute', 0, 0, 0, 0, -1)};
   ${flexBox('center', 'center')};
   ${textProps('lg', 'bold')};
   margin: auto;

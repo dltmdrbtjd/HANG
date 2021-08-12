@@ -27,7 +27,7 @@ import { HeaderIncluded } from '../../route/Path';
 const Navigation = () => {
   const path = useLocation().pathname;
 
-  return HeaderIncluded.includes(path) ? (
+  return HeaderIncluded.includes(path) || /mypage\/promise/.test(path) ? (
     <Grid
       width="100%"
       bgColor="bgColor"

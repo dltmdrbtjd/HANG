@@ -50,7 +50,7 @@ const Header = () => {
     }
   }, [path]);
 
-  return HeaderIncluded.includes(path) ? (
+  return HeaderIncluded.includes(path) || /mypage\/promise/.test(path) ? (
     <HeaderStyle>
       <Container height="66px" padding="0">
         <Grid

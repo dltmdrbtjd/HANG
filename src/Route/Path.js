@@ -26,7 +26,6 @@ const HeaderIncluded = [
   '/noti',
   '/chat',
   '/chat/room',
-  '/mypage/promise/:page',
   '/mypage/modify',
   '/mypage/create_trip',
 ];

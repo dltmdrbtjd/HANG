@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+// redux
+import { useDispatch } from 'react-redux';
 import ScrollToBottom from 'react-scroll-to-bottom';
 // socket
 import io from 'socket.io-client';
 // query string
 import queryString from 'query-string';
+// history
+import { history } from '../../../redux/configureStore';
 // user info
 import { getUserInfo } from '../../../shared/userInfo';
 // elements
@@ -11,12 +15,16 @@ import { Grid, Text, Input, Button } from '../../../elements';
 // components
 import SpeechBubble from './SpeechBubble';
 import RoomHeader from './RoomHeader';
+// reducer
+import { ChatCreators } from '../../../redux/modules/chat';
 // style
 import WarningText from './style';
 
 const ChatRoom = () => {
   const ENDPOINT = 'https://soujinko.shop';
   const socket = io(ENDPOINT);
+
+  const dispatch = useDispatch();
 
   const { userPk, nickname } = getUserInfo();
 
@@ -25,39 +33,45 @@ const ChatRoom = () => {
   const [chatLog, setChatLog] = useState([]);
   const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    const room =
-      (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
-      `${targetUserPk}:${userPk}`;
+  const room =
+    (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
+    `${targetUserPk}:${userPk}`;
 
+  const quitRoom = async () => {
+    await socket.emit('quit', { roomName: room, userPk });
+    history.replace('/chat');
+  };
+
+  useEffect(() => {
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
-    socket.on('chatLogs', messages => setChatLog(messages));
+    socket.on('chatLogs', logs => {
+      const addedChatLog = logs.chatLogs.map(log => JSON.parse(log));
+
+      setChatLog(addedChatLog);
+    });
 
     return () => {
-      socket.emit('leave', { room });
+      socket.emit('leave', { roomName: room, userPk });
+      dispatch(ChatCreators.ChooseChatRoom({}));
     };
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
-    console.log(111);
-
     socket.on('updateMessage', data => {
-      setChatLog([
-        ...chatLog,
-        {
-          name: data.name,
-          message: data.message,
-        },
-      ]);
+      setChatLog(logs => [...logs, data]);
     });
   }, [chatLog]);
 
   const sendMessage = async () => {
     if (message) {
-      console.log('start');
-      await socket.emit('sendMessage', { message });
-      console.log('end');
+      await socket.emit('sendMessage', {
+        roomName: room,
+        targetPk: targetUserPk,
+        message,
+        userPk,
+      });
+
       setMessage('');
     }
   };
@@ -65,7 +79,7 @@ const ChatRoom = () => {
   return (
     <Grid margin="0 0 80px">
       <ScrollToBottom>
-        <RoomHeader />
+        <RoomHeader quit={quitRoom} />
 
         <Text fs="xs" wb="keep-all" padding="10px 12px" addstyle={WarningText}>
           매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
@@ -78,7 +92,7 @@ const ChatRoom = () => {
 
         {chatLog.map((chat, idx) => (
           <SpeechBubble
-            person={nickname === chat.name}
+            person={userPk === chat.userPk}
             key={(Date.now() + Math.random() + idx).toString(36)}
           >
             {chat.message}
