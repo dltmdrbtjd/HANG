@@ -69,7 +69,7 @@ const Home = () => {
             다른 지역으로 떠나보는 건 어떠세요?
           </Text>
           <Text fs="sm" fw="regular">
-            여행 일정을 공유하고 약속을 잡아 보세요!
+            여행 일정을 공유하고 약속을 잡아 볼까요?
           </Text>
         </PromiseCard>
       )}
