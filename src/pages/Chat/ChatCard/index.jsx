@@ -52,7 +52,7 @@ const ChatCard = ({ targetUserPk, profileImg, nickname, message, time }) => {
           </Grid>
         </Grid>
 
-        {time ? <Span fs="xs">{time.slice(-7, time.length - 3)}</Span> : null}
+        {time ? <Span fs="xs">{time.slice(13, time.length - 3)}</Span> : null}
       </Grid>
     </Grid>
   );
