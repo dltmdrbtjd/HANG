@@ -22,7 +22,7 @@ import { Navigationicons, NavigationStyle } from './style';
 // history
 import { history } from '../../redux/configureStore';
 // path
-import { HeaderIncluded } from '../../Route/Path';
+import { HeaderIncluded } from '../../route/Path';
 
 const Navigation = () => {
   const path = useLocation().pathname;

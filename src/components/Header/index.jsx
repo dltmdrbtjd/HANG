@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 // router
 import { useLocation } from 'react-router-dom';
-import { HeaderIncluded } from '../../Route/Path';
+import { HeaderIncluded } from '../../route/Path';
 // history
 import { history } from '../../redux/configureStore';
 // components
@@ -18,7 +18,6 @@ const Header = () => {
   const path = useLocation().pathname;
   const isHome = path === '/';
   const [title, setTitle] = useState('');
-
   useEffect(() => {
     switch (true) {
       case /search/.test(path):
