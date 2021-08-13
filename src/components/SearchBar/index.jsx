@@ -35,7 +35,7 @@ const SearchBar = props => {
     <Grid margin={props.margin} position="relative" isFlex ver="center">
       <Input
         placeholder="여행자/길잡이를 검색하세요"
-        _onChange={InputValue}
+        _onChange={_.debounce(InputValue, 100)}
         _onKeyPress={KeyPressHandler}
         radius="40px"
         padding="11px 45px 11px 23px"
