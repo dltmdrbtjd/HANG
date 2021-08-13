@@ -1,4 +1,8 @@
 import React from 'react';
+// material
+import Badge from '@material-ui/core/Badge';
+// redux
+import { useSelector } from 'react-redux';
 // router
 import { useLocation } from 'react-router';
 // serach
@@ -22,10 +26,13 @@ import { Navigationicons, NavigationStyle } from './style';
 // history
 import { history } from '../../redux/configureStore';
 // path
-import { HeaderIncluded } from '../../Route/Path';
+import { HeaderIncluded } from '../../route/Path';
+// style
+import '../Header/NotiBadge/style.css';
 
 const Navigation = () => {
   const path = useLocation().pathname;
+  const chatAlarmChecked = useSelector(state => state.chat.alarmCount);
 
   return HeaderIncluded.includes(path) || /mypage\/promise/.test(path) ? (
     <Grid
@@ -71,11 +78,18 @@ const Navigation = () => {
           className={path.includes('/chat') ? 'Click' : ''}
           onClick={() => history.push('/chat')}
         >
-          <img
-            alt="chat"
-            src={path.includes('/chat') ? onchat : chat}
-            style={{ width: '27px', height: '26px', marginLeft: '4px' }}
-          />
+          <Badge
+            invisible={chatAlarmChecked}
+            variant="dot"
+            overlap="circular"
+            color="secondary"
+          >
+            <img
+              alt="chat"
+              src={path.includes('/chat') ? onchat : chat}
+              style={{ width: '27px', height: '26px', marginLeft: '4px' }}
+            />
+          </Badge>
           <Text margin="10px 0 0 4px">채팅</Text>
         </Navigationicons>
         <Navigationicons

@@ -75,7 +75,9 @@ const Home = () => {
       )}
       <SearchBar margin="28px 0 0" />
       <Grid margin="60px 0 0 0">
-        <MainTitle fs="la">내 지역을 여행하고 싶은 여행자예요</MainTitle>
+        <MainTitle fs="la" margin="0 0 6px">
+          내 지역을 여행하고 싶은 여행자예요
+        </MainTitle>
         {traveler
           ? traveler.map((item, idx) => {
               return (
@@ -90,7 +92,9 @@ const Home = () => {
           : ''}
       </Grid>
       <Grid margin="60px 0 60px 0">
-        <MainTitle fs="la">내 지역에 함께 있는 길잡이예요</MainTitle>
+        <MainTitle fs="la" margin="0 0 6px">
+          내 지역에 함께 있는 길잡이예요
+        </MainTitle>
         {guide
           ? guide.map((item, idx) => {
               return (

@@ -20,15 +20,20 @@ const Chat = () => {
   return (
     <Grid margin="-24px 0 0">
       {roomList.map((room, idx) => {
-        const [lastChat] = room.lastChat;
+        let [lastChat] = room.lastChat;
+
+        if (lastChat)
+          lastChat =
+            typeof lastChat === 'object' ? lastChat : JSON.parse(lastChat);
 
         return (
           <ChatCard
             targetUserPk={room.targetPk}
             profileImg={room.profileImg}
             nickname={room.nickname}
-            message={lastChat ? JSON.parse(lastChat).message : null}
-            time={lastChat ? JSON.parse(lastChat).curTime : null}
+            unchecked={parseInt(room.unchecked, 10)}
+            message={lastChat ? lastChat.message : null}
+            time={lastChat ? lastChat.curTime : null}
             key={(Date.now() + Math.random() + idx).toString(36)}
           />
         );

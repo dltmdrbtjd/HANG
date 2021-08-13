@@ -22,8 +22,9 @@ const SpanStyle = styled.span`
   height: ${({ height }) => height};
   box-shadow: ${({ shadow }) => shadow};
   border-radius: ${({ radius }) => radius};
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${props => props.theme.color[props.bgColor]};
   display: ${({ display }) => display};
+  margin: ${({ margin }) => margin};
   ${({ padding }) => borderBox(padding)};
   ${props =>
     textProps(props.fs, props.fw, props.color, props.lh, props.textAlign)};

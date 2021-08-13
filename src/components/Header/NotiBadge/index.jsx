@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+// redux
+import { useDispatch, useSelector } from 'react-redux';
 // material
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
@@ -11,12 +12,22 @@ import { Button, Grid } from '../../../elements';
 import './style.css';
 // api
 import apis from '../../../shared/api';
+import { getUserInfo } from '../../../shared/userInfo';
+// reducer
+import { ChatCreators } from '../../../redux/modules/chat';
 
 const NotiBadge = () => {
+  const dispatch = useDispatch();
+
+  const pkList = useSelector(state => state.chat.list).map(
+    room => room.targetPk,
+  );
+
   const [newAlarm, setNewAlarm] = useState(false);
+  const [chatLog, setChatLog] = useState({});
   const ENDPOINT = 'https://soujinko.shop/';
   const socket = socketIOClient(ENDPOINT);
-  const userPk = JSON.parse(localStorage.getItem('userInfo')).userPk;
+  const userPk = getUserInfo() && getUserInfo().userPk;
 
   const NotiOff = () => {
     setNewAlarm(false);
@@ -37,7 +48,35 @@ const NotiBadge = () => {
       setNewAlarm(data);
       console.log(data);
     });
+
+    socket.on('unchecked', () => {
+      dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
+    });
   }, []);
+
+  useEffect(() => {
+    socket.on('newMessage', data => {
+      setChatLog(data);
+
+      dispatch(ChatCreators.ChatHistoryUpdate(data));
+    });
+  }, [pkList]);
+
+  useEffect(() => {
+    if (chatLog.userPk && !pkList.includes(chatLog.userPk)) {
+      socket.emit('newRoom', { targetPk: chatLog.userPk });
+      socket.on('newRoom', data => {
+        dispatch(
+          ChatCreators.CreateChatRoom({
+            lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
+            unchecked: 1,
+            targetPk: chatLog.userPk,
+            ...data,
+          }),
+        );
+      });
+    }
+  }, [chatLog]);
 
   return (
     <Button _onClick={NotiOff} form="text">

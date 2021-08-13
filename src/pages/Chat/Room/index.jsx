@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 // redux
-import { useDispatch } from 'react-redux';
-import ScrollToBottom from 'react-scroll-to-bottom';
+import { useDispatch, useSelector } from 'react-redux';
 // socket
 import io from 'socket.io-client';
 // query string
@@ -25,29 +24,61 @@ const ChatRoom = () => {
   const socket = io(ENDPOINT);
 
   const dispatch = useDispatch();
+  const { roomList, alarmCount } = useSelector(state => ({
+    roomList: state.chat.list,
+    alarmCount: state.chat.alarmCount,
+  }));
+
+  const messagesEndRef = useRef(null);
 
   const { userPk, nickname } = getUserInfo();
 
-  const targetUserPk = queryString.parse(location.search).number;
+  const targetUserPk = parseInt(queryString.parse(location.search).number, 10);
 
   const [chatLog, setChatLog] = useState([]);
   const [message, setMessage] = useState('');
+
+  const unchecked = roomList.filter(
+    room => room.targetPk === targetUserPk,
+  ).unchecked;
 
   const roomName =
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
     `${targetUserPk}:${userPk}`;
 
   const quitRoom = async () => {
-    await socket.emit('quit', { roomName, userPk });
-    dispatch(ChatCreators.DeleteChatRoom(parseInt(targetUserPk, 10)));
+    await socket.emit('sendMessage', {
+      roomName,
+      targetPk: targetUserPk,
+      message: `${nickname} 님이 방을 나갔습니다.`,
+      userPk,
+    });
+
+    await socket.emit('ByeBye', { roomName, userPk });
+    dispatch(ChatCreators.DeleteChatRoom(targetUserPk));
 
     history.replace('/chat');
   };
 
+  const scrollToBottom = () => {
+    messagesEndRef.current &&
+      messagesEndRef.current.scrollIntoView({
+        block: 'end',
+      });
+  };
+
   useEffect(() => {
+    scrollToBottom();
+  }, [chatLog]);
+
+  useEffect(() => {
+    if (alarmCount > 0)
+      dispatch(ChatCreators.ChatAlarmCheck(alarmCount - unchecked));
+
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
     socket.on('chatLogs', logs => {
+      console.log(logs);
       const addedChatLog = logs.chatLogs.map(log => JSON.parse(log));
 
       setChatLog(addedChatLog);
@@ -57,7 +88,7 @@ const ChatRoom = () => {
       socket.emit('leave', { roomName, userPk });
       dispatch(ChatCreators.ChooseChatRoom({}));
     };
-  }, [ENDPOINT, location.search]);
+  }, []);
 
   useEffect(() => {
     socket.on('updateMessage', data => {
@@ -80,18 +111,18 @@ const ChatRoom = () => {
 
   return (
     <Grid margin="0 0 80px">
-      <ScrollToBottom>
-        <RoomHeader quit={quitRoom} />
+      <RoomHeader quit={quitRoom} />
 
-        <Text fs="xs" wb="keep-all" padding="10px 12px" addstyle={WarningText}>
-          매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
-          경우 제재 대상이 될 수 있습니다.
-        </Text>
+      <Text fs="xs" wb="keep-all" padding="10px 12px" addstyle={WarningText}>
+        매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
+        경우 제재 대상이 될 수 있습니다.
+      </Text>
 
-        {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
+      {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
           채팅 시작 시간
         </Text> */}
 
+      <div ref={messagesEndRef}>
         {chatLog.map((chat, idx) => (
           <SpeechBubble
             person={userPk === chat.userPk}
@@ -100,40 +131,40 @@ const ChatRoom = () => {
             {chat.message}
           </SpeechBubble>
         ))}
+      </div>
 
-        <Grid
-          position="fixed"
-          bottom="110px"
-          left="50%"
-          translate="-50%, 0"
-          width="90%"
-          maxWidth="600px"
-          radius="12px"
-          bgColor="white"
-          border="1px solid #E7E7E7"
-          isFlex
-          hoz="space-between"
-          ver="center"
-          tab="max-width: 768px"
+      <Grid
+        position="fixed"
+        bottom="110px"
+        left="50%"
+        translate="-50%, 0"
+        width="90%"
+        maxWidth="600px"
+        radius="12px"
+        bgColor="white"
+        border="1px solid #E7E7E7"
+        isFlex
+        hoz="space-between"
+        ver="center"
+        tab="max-width: 768px"
+      >
+        <Input
+          width="80%"
+          placeholder="채팅 내용 입력"
+          border="none"
+          value={message}
+          _onChange={e => setMessage(e.target.value)}
+          _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
+        />
+
+        <Button
+          padding="6px 15px"
+          margin="0 9px 0 0"
+          _onClick={() => sendMessage()}
         >
-          <Input
-            width="80%"
-            placeholder="채팅 내용 입력"
-            border="none"
-            value={message}
-            _onChange={e => setMessage(e.target.value)}
-            _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
-          />
-
-          <Button
-            padding="6px 15px"
-            margin="0 9px 0 0"
-            _onClick={() => sendMessage()}
-          >
-            전송
-          </Button>
-        </Grid>
-      </ScrollToBottom>
+          전송
+        </Button>
+      </Grid>
     </Grid>
   );
 };
