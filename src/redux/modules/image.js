@@ -27,8 +27,6 @@ const initialState = {
 
 const uploadProfileImgDB = (image, callBack) => {
   return dispatch => {
-    // dispatch(uploaded(true));
-
     const upload = new AWS.S3.ManagedUpload({
       params: {
         Bucket: 'hang-image-upload/profile',
@@ -46,14 +44,12 @@ const uploadProfileImgDB = (image, callBack) => {
             `https://dpcgepgmqx2vj.cloudfront.net/profile/${image.name}?w=100&h=100`,
           ),
         );
-        // dispatch(uploading(false));
       })
       .then(() => {
         callBack();
       })
       .catch(error => {
         console.error(error);
-        // dispatch(uploading(false));
         return alert('오류가 발생했습니다: ', error.message);
       });
   };

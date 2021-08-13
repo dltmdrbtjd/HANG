@@ -1,3 +1,11 @@
+.MuiBadge-anchorOriginTopRightCircular {
+  top: 6% !important;
+  right: 6% !important;
+}
+
 .MuiBadge-dot {
-  background-color: #FF9900 !important;
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background-color: #ff9900 !important;
 }

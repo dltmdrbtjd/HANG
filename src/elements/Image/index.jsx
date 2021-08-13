@@ -9,6 +9,7 @@ const Image = ({ src, alt, ...props }) => {
 
 Image.defaultProps = {
   width: '100%',
+  height: '100%',
 };
 
 export default Image;

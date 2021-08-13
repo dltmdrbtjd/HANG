@@ -1,11 +1,10 @@
 import React from 'react';
 // route
 import { ConnectedRouter } from 'connected-react-router';
-import Route from './Route/Route';
+import Route from './route/Route';
 // history
 import { history } from './redux/configureStore';
 // components
-import Section from './components/Section';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 
