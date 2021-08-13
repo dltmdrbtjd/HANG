@@ -36,7 +36,6 @@ const NotiBadge = () => {
     socket.emit('login', { uid: userPk });
     socket.on('requested', data => {
       setNewAlarm(data);
-      console.log(data);
     });
   }, []);
 
@@ -44,7 +43,7 @@ const NotiBadge = () => {
     <Button _onClick={NotiOff} form="text">
       <Grid>
         <Badge
-          invisible={newAlarm ? false : 'invisible'}
+          invisible={!newAlarm}
           variant="dot"
           overlap="circular"
           color="secondary"
