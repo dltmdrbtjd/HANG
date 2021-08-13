@@ -15,7 +15,7 @@ const AlarmCard = ({ userInfo }) => {
       ver="center"
       border="1px solid #E7E7E7"
       borDirection="bottom"
-      _onClick={() => history.push('/mypage')}
+      _onClick={() => history.push('/mypage/promise')}
     >
       <ProfileImage imgUrl={userInfo.profileImg} />
 
