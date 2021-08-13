@@ -33,12 +33,14 @@ const ChatRoom = () => {
   const [chatLog, setChatLog] = useState([]);
   const [message, setMessage] = useState('');
 
-  const room =
+  const roomName =
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
     `${targetUserPk}:${userPk}`;
 
   const quitRoom = async () => {
-    await socket.emit('quit', { roomName: room, userPk });
+    await socket.emit('quit', { roomName, userPk });
+    dispatch(ChatCreators.DeleteChatRoom(parseInt(targetUserPk, 10)));
+
     history.replace('/chat');
   };
 
@@ -52,7 +54,7 @@ const ChatRoom = () => {
     });
 
     return () => {
-      socket.emit('leave', { roomName: room, userPk });
+      socket.emit('leave', { roomName, userPk });
       dispatch(ChatCreators.ChooseChatRoom({}));
     };
   }, [ENDPOINT, location.search]);
@@ -66,7 +68,7 @@ const ChatRoom = () => {
   const sendMessage = async () => {
     if (message) {
       await socket.emit('sendMessage', {
-        roomName: room,
+        roomName,
         targetPk: targetUserPk,
         message,
         userPk,

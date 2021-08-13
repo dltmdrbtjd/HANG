@@ -39,8 +39,8 @@ const RoomHeader = ({ quit }) => {
 
           <DropDown
             icon={<MoreVertIcon />}
-            contents={['채팅방 나가기', '신고하기']}
-            methods={[quit, () => {}]}
+            contents={['채팅방 나가기']}
+            methods={[quit]}
             top="70px"
           />
         </Grid>
