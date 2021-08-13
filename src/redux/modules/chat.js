@@ -5,10 +5,14 @@ import apis from '../../shared/api';
 
 const GET_CHAT_ROOM = 'chat/GET_CHAT_ROOM';
 const CHOOSE_CHAT_ROOM = 'chat/CHOOSE_CHAT_ROOM';
+const DELETE_CHAT_ROOM = 'chat/DELETE_CHAT_ROOM';
 
 const ChatRoomLoad = createAction(GET_CHAT_ROOM, list => ({ list }));
 const ChooseChatRoom = createAction(CHOOSE_CHAT_ROOM, targetUserInfo => ({
   targetUserInfo,
+}));
+const DeleteChatRoom = createAction(DELETE_CHAT_ROOM, targetUserPk => ({
+  targetUserPk,
 }));
 
 const initialState = {
@@ -38,6 +42,13 @@ export default handleActions(
       produce(state, draft => {
         draft.targetUserInfo = action.payload.targetUserInfo;
       }),
+
+    [DELETE_CHAT_ROOM]: (state, action) =>
+      produce(state, draft => {
+        draft.list = draft.list.filter(
+          room => room.targetPk !== action.payload.targetUserPk,
+        );
+      }),
   },
   initialState,
 );
@@ -45,6 +56,7 @@ export default handleActions(
 const ChatCreators = {
   ChatRoomLoadDB,
   ChooseChatRoom,
+  DeleteChatRoom,
 };
 
 export { ChatCreators };

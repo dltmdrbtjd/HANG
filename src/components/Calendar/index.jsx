@@ -17,6 +17,7 @@ import Arrow from '../../Images/arrow.svg';
 
 const Calendar = ({ setSelectDate }) => {
   const tripList = useSelector(state => state.mypage.tripList);
+  const today = new Date();
   const format = 'YYYY-MM-DD';
 
   const disabledDates = tripList.reduce((acc, cur) => {
@@ -31,7 +32,7 @@ const Calendar = ({ setSelectDate }) => {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(today.setDate(today.getDate() + 1)),
       key: 'selection',
     },
   ]);
