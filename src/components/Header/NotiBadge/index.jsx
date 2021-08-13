@@ -9,6 +9,8 @@ import socketIOClient from 'socket.io-client';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
+// userInfo
+import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
 import apis from '../../../shared/api';
@@ -37,7 +39,6 @@ const NotiBadge = () => {
   apis
     .AlarmCheck()
     .then(res => {
-      console.log(newAlarm);
       setNewAlarm(res.data);
     })
     .catch(err => console.log(err));
@@ -46,7 +47,6 @@ const NotiBadge = () => {
     socket.emit('login', { uid: userPk });
     socket.on('requested', data => {
       setNewAlarm(data);
-      console.log(data);
     });
 
     socket.on('unchecked', () => {
@@ -82,7 +82,7 @@ const NotiBadge = () => {
     <Button _onClick={NotiOff} form="text">
       <Grid>
         <Badge
-          invisible={newAlarm ? '' : 'invisible'}
+          invisible={!newAlarm}
           variant="dot"
           overlap="circular"
           color="secondary"

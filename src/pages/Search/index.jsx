@@ -99,7 +99,7 @@ const Search = props => {
 
   // 무한스크롤 함수
   const NextItems = useCallback(async () => {
-    if (page > 1) {
+    if (page > 1 && userlist.length > 9) {
       await dispatch(SearchCreators.MoreSearchSendDB(MoreSearch));
     }
   }, [page]);
@@ -116,7 +116,7 @@ const Search = props => {
 
   useEffect(() => {
     dispatch(SearchCreators.SearchLoadDB(MainSearch));
-    setPage(1);
+    // setPage(1);
   }, [query.keyword]);
 
   return (

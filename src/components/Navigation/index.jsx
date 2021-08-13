@@ -71,7 +71,11 @@ const Navigation = () => {
           className={path === '/' ? 'Click' : ''}
           onClick={() => history.push('/')}
         >
-          <img alt="home" src={path === '/' ? onhome : home} />
+          <img
+            alt="home"
+            src={path === '/' ? onhome : home}
+            style={{ width: '26px', height: '25px' }}
+          />
           <Text margin="10px 0 0 0">홈</Text>
         </Navigationicons>
         <Navigationicons

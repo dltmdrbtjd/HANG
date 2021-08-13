@@ -47,7 +47,6 @@ const MyTripInfoDB = () => {
       .then(res => {
         const data = res.data;
         dispatch(MyTravelLoad(data));
-        dispatch(SuccessValue(false));
       })
       .catch(err => console.error(err));
   };
