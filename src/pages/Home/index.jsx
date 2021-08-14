@@ -12,6 +12,7 @@ import { Grid, Text, MainTitle } from '../../elements/index';
 import PromiseCard from './style';
 import ProfileImg from '../../components/ProfileImg';
 import { history } from '../../redux/configureStore';
+import { textOverflow } from '../../styles/Mixin';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -49,9 +50,9 @@ const Home = () => {
               }}
             >
               <ProfileImg imgUrl={promise.profileImg} />
-              <Grid margin="0 0 0 10px">
+              <Grid margin="0 0 0 10px" addstyle="flex: 1">
                 <Grid>
-                  <Text fs="la" fw="bold">
+                  <Text fs="la" fw="bold" addstyle={textOverflow()}>
                     {promise.nickname} 님과의 약속
                   </Text>
                 </Grid>

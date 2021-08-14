@@ -14,7 +14,6 @@ import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
 import apis from '../../../shared/api';
-import { getUserInfo } from '../../../shared/userInfo';
 // reducer
 import { ChatCreators } from '../../../redux/modules/chat';
 
