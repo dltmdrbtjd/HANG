@@ -48,9 +48,9 @@ const NotiBadge = () => {
       })
       .catch(err => console.log(err));
 
-    socket.on('unchecked', () =>
-      dispatch(ChatCreators.ChatAlarmCheck(Number(true))),
-    );
+    socket.on('unchecked', () => {
+      dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
+    });
   }, []);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const NotiBadge = () => {
   }, [chatLog]);
 
   return (
-    <Button _onClick={NotiOff} form="text">
+    <Button _onClick={NotiOff} form="text" name="alarm">
       <Grid>
         <Badge
           invisible={!newAlarm}

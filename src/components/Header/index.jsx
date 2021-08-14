@@ -18,7 +18,6 @@ const Header = () => {
   const path = useLocation().pathname;
   const isHome = path === '/';
   const [title, setTitle] = useState('');
-
   useEffect(() => {
     switch (true) {
       case /search/.test(path):
