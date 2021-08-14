@@ -35,22 +35,22 @@ const NotiBadge = () => {
     history.push('/noti');
   };
 
-  apis
-    .AlarmCheck()
-    .then(res => {
-      setNewAlarm(res.data);
-    })
-    .catch(err => console.log(err));
-
   useEffect(() => {
     socket.emit('login', { uid: userPk });
     socket.on('requested', data => {
       setNewAlarm(data);
     });
 
-    socket.on('unchecked', () => {
-      dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
-    });
+    apis
+      .AlarmCheck()
+      .then(res => {
+        setNewAlarm(res.data);
+      })
+      .catch(err => console.log(err));
+
+    socket.on('unchecked', () =>
+      dispatch(ChatCreators.ChatAlarmCheck(Number(true))),
+    );
   }, []);
 
   useEffect(() => {
