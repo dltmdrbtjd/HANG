@@ -12,6 +12,7 @@ const SpeechBubbleStyle = css`
   display: inline-block;
   max-width: 232px;
   border-radius: 8px;
+  white-space: pre-line;
 `;
 
 const TabSpeechBubble = css`

@@ -82,11 +82,7 @@ const apis = {
   CancelPromise: tripId => instance.patch('/api/mypage/reject_confirm', tripId),
   GuideToggle: () => instance.patch('/api/mypage/update_guide'),
 
-  // chat 부분은 서버쪽에서 API 설계 완성이 안되서 추후에 수정해주세요!
-  // CreateChat:  => instance.post('/api/chat),
   GetChatRoom: () => instance.get('/api/users/chat'),
-  // OutChat:  => instance.post('/api/chat'),
-  // ChatReport: => instance.post('/api/chat'),
 };
 
 export default apis;
