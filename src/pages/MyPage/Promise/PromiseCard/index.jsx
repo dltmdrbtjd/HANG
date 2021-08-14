@@ -6,6 +6,8 @@ import moment from 'moment';
 // icon
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
+// history
+import { history } from '../../../../redux/configureStore';
 // elements
 import { Button, Grid, Text, Strong, Span } from '../../../../elements';
 // components
@@ -118,6 +120,7 @@ const PromiseCard = ({ promInfo, guide, type, tab }) => {
         padding="32px 20px"
         position="relative"
         overflow="hidden"
+        _onClick={() => history.push(`/detail?user=${promInfo.userPk}`)}
       >
         <ProfileImg
           size="large"

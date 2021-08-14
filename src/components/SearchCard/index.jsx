@@ -58,13 +58,13 @@ const SearchCard = ({ userInfo, category, idx }) => {
             history.push(`/detail?user=${userInfo.userPk}`);
           }}
         >
-          <Text fs="la" fw="bold">
+          <Text fs="la" fw="bold" addstyle={textOverflow()}>
             {userInfo && userInfo.nickname}
           </Text>
           <Text
             color="darkG"
-            addstyle={textOverflow()}
             mobile={SetTabFontSize('sm')}
+            addstyle={textOverflow()}
           >
             {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
             {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
