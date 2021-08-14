@@ -14,7 +14,6 @@ import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
 import apis from '../../../shared/api';
-import { getUserInfo } from '../../../shared/userInfo';
 // reducer
 import { ChatCreators } from '../../../redux/modules/chat';
 
@@ -36,18 +35,18 @@ const NotiBadge = () => {
     history.push('/noti');
   };
 
-  apis
-    .AlarmCheck()
-    .then(res => {
-      setNewAlarm(res.data);
-    })
-    .catch(err => console.log(err));
-
   useEffect(() => {
     socket.emit('login', { uid: userPk });
     socket.on('requested', data => {
       setNewAlarm(data);
     });
+
+    apis
+      .AlarmCheck()
+      .then(res => {
+        setNewAlarm(res.data);
+      })
+      .catch(err => console.log(err));
 
     socket.on('unchecked', () => {
       dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
@@ -79,7 +78,7 @@ const NotiBadge = () => {
   }, [chatLog]);
 
   return (
-    <Button _onClick={NotiOff} form="text">
+    <Button _onClick={NotiOff} form="text" name="alarm">
       <Grid>
         <Badge
           invisible={!newAlarm}
