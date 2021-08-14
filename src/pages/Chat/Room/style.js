@@ -7,4 +7,8 @@ const WarningText = css`
   border: 0.5px solid ${({ theme }) => theme.color.semiLightG};
 `;
 
-export default WarningText;
+const ChatInputAreaSize = css`
+  width: calc(100% - 75px);
+`;
+
+export { WarningText, ChatInputAreaSize };

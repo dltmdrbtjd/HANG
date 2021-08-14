@@ -17,7 +17,7 @@ import RoomHeader from './RoomHeader';
 // reducer
 import { ChatCreators } from '../../../redux/modules/chat';
 // style
-import WarningText from './style';
+import { WarningText, ChatInputAreaSize } from './style';
 
 const ChatRoom = () => {
   const ENDPOINT = 'https://soujinko.shop';
@@ -138,10 +138,10 @@ const ChatRoom = () => {
           tab="max-width: 768px"
         >
           <Input
-            width="80%"
             placeholder="채팅 내용 입력"
             border="none"
             value={message}
+            addstyle={ChatInputAreaSize}
             _onChange={e => setMessage(e.target.value)}
             _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
           />
