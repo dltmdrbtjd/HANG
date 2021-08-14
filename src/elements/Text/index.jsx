@@ -5,8 +5,4 @@ const Text = ({ children, ...props }) => {
   return <TextStyle {...props}>{children}</TextStyle>;
 };
 
-Text.defaultProps = {
-  width: '100%',
-};
-
 export default Text;

@@ -47,13 +47,6 @@ const ChatRoom = () => {
     `${targetUserPk}:${userPk}`;
 
   const quitRoom = async () => {
-    await socket.emit('sendMessage', {
-      roomName,
-      targetPk: targetUserPk,
-      message: `${nickname} 님이 방을 나갔습니다.`,
-      userPk,
-    });
-
     await socket.emit('ByeBye', { roomName, userPk });
     dispatch(ChatCreators.DeleteChatRoom(targetUserPk));
 
@@ -61,10 +54,7 @@ const ChatRoom = () => {
   };
 
   const scrollToBottom = () => {
-    messagesEndRef.current &&
-      messagesEndRef.current.scrollIntoView({
-        block: 'end',
-      });
+    messagesEndRef.current && messagesEndRef.current.scrollIntoView(false);
   };
 
   useEffect(() => {
@@ -110,19 +100,19 @@ const ChatRoom = () => {
   };
 
   return (
-    <Grid margin="0 0 80px">
-      <RoomHeader quit={quitRoom} />
+    <Grid margin="0 0 95px">
+      <div ref={messagesEndRef}>
+        <RoomHeader quit={quitRoom} />
 
-      <Text fs="xs" wb="keep-all" padding="10px 12px" addstyle={WarningText}>
-        매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
-        경우 제재 대상이 될 수 있습니다.
-      </Text>
+        <Text fs="xs" wb="keep-all" padding="10px 12px" addstyle={WarningText}>
+          매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
+          경우 제재 대상이 될 수 있습니다.
+        </Text>
 
-      {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
+        {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
           채팅 시작 시간
         </Text> */}
 
-      <div ref={messagesEndRef}>
         {chatLog.map((chat, idx) => (
           <SpeechBubble
             person={userPk === chat.userPk}
@@ -131,40 +121,40 @@ const ChatRoom = () => {
             {chat.message}
           </SpeechBubble>
         ))}
-      </div>
 
-      <Grid
-        position="fixed"
-        bottom="110px"
-        left="50%"
-        translate="-50%, 0"
-        width="90%"
-        maxWidth="600px"
-        radius="12px"
-        bgColor="white"
-        border="1px solid #E7E7E7"
-        isFlex
-        hoz="space-between"
-        ver="center"
-        tab="max-width: 768px"
-      >
-        <Input
-          width="80%"
-          placeholder="채팅 내용 입력"
-          border="none"
-          value={message}
-          _onChange={e => setMessage(e.target.value)}
-          _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
-        />
-
-        <Button
-          padding="6px 15px"
-          margin="0 9px 0 0"
-          _onClick={() => sendMessage()}
+        <Grid
+          position="fixed"
+          bottom="110px"
+          left="50%"
+          translate="-50%, 0"
+          width="90%"
+          maxWidth="600px"
+          radius="12px"
+          bgColor="white"
+          border="1px solid #E7E7E7"
+          isFlex
+          hoz="space-between"
+          ver="center"
+          tab="max-width: 768px"
         >
-          전송
-        </Button>
-      </Grid>
+          <Input
+            width="80%"
+            placeholder="채팅 내용 입력"
+            border="none"
+            value={message}
+            _onChange={e => setMessage(e.target.value)}
+            _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
+          />
+
+          <Button
+            padding="6px 15px"
+            margin="0 9px 0 0"
+            _onClick={() => sendMessage()}
+          >
+            전송
+          </Button>
+        </Grid>
+      </div>
     </Grid>
   );
 };
