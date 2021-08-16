@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import io from 'socket.io-client';
 // query string
 import queryString from 'query-string';
+// moment
+import moment from 'moment';
 // history
 import { history } from '../../../redux/configureStore';
 // user info
@@ -66,7 +68,6 @@ const ChatRoom = () => {
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
     socket.on('chatLogs', logs => {
-      console.log(`logs: ${logs}`);
       const addedChatLog = logs.chatLogs.map(log => JSON.parse(log));
 
       setChatLog(addedChatLog);
@@ -97,6 +98,20 @@ const ChatRoom = () => {
     }
   };
 
+  const DATEFORMAT = 'YYYY년 M월 D일 dddd';
+
+  moment.lang('ko', {
+    weekdays: [
+      '일요일',
+      '월요일',
+      '화요일',
+      '수요일',
+      '목요일',
+      '금요일',
+      '토요일',
+    ],
+  });
+
   return (
     <Grid margin="0 0 95px">
       <RoomHeader quit={quitRoom} />
@@ -106,19 +121,29 @@ const ChatRoom = () => {
         wb="keep-all"
         color="darkG"
         padding="10px 12px"
+        ls="-0.5px"
         addstyle={WarningText}
       >
-        매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
-        경우 제재 대상이 될 수 있습니다.
+        매너있는 채팅 부탁드립니다.
+        <br />
+        약속을 일방적으로 파기하거나 지키지 않을 경우 제재 대상이 될 수
+        있습니다.
       </Text>
 
-      {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
-          채팅 시작 시간
-        </Text> */}
+      <Text fs="xs" textAlign="center" margin="0 0 20px">
+        {chatLog[0]
+          ? moment(chatLog[0].curTime).format(DATEFORMAT)
+          : moment().format(DATEFORMAT)}
+      </Text>
 
       {chatLog.map((chat, idx) => (
         <SpeechBubble
           person={userPk === chat.userPk}
+          next={
+            idx < chatLog.length - 1
+              ? chat.userPk === chatLog[idx + 1].userPk
+              : false
+          }
           key={(Date.now() + Math.random() + idx).toString(36)}
         >
           {chat.message}
