@@ -91,21 +91,22 @@ const Login = () => {
               </Button>
 
               <Grid>
-                {/* <Button
+                <Button
                   width="50%"
                   padding="17px 0"
                   bgColor="bgColor"
                   fs="sm"
+                  fw="lg"
                   color="darkG"
                   _onClick={() => {
                     history.push('/signup');
                   }}
                 >
-                  아이디 / 비밀번호 찾기
-                </Button> */}
+                  비밀번호 찾기
+                </Button>
 
                 <Button
-                  width="100%"
+                  width="50%"
                   padding="17px 0"
                   bgColor="bgColor"
                   fs="sm"

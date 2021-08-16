@@ -18,6 +18,7 @@ import SpeechBubble from './SpeechBubble';
 import RoomHeader from './RoomHeader';
 // reducer
 import { ChatCreators } from '../../../redux/modules/chat';
+import { MypageCreators } from '../../../redux/modules/mypage';
 // style
 import { WarningText, ChatInputAreaSize } from './style';
 
@@ -51,6 +52,12 @@ const ChatRoom = () => {
     dispatch(ChatCreators.DeleteChatRoom(targetUserPk));
 
     history.replace('/chat');
+  };
+
+  const blockUser = async () => {
+    await MypageCreators.AddBlockListDB(targetUserPk);
+
+    quitRoom();
   };
 
   const scrollToBottom = () => {
@@ -114,7 +121,7 @@ const ChatRoom = () => {
 
   return (
     <Grid margin="0 0 95px">
-      <RoomHeader quit={quitRoom} />
+      <RoomHeader quit={quitRoom} block={blockUser} />
 
       <Text
         fs="xs"

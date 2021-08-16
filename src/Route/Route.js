@@ -1,6 +1,6 @@
 import React from 'react';
 // route
-import { Redirect, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 // components
@@ -17,6 +17,7 @@ import GuideRequest from '../pages/Detail/GuideRequest';
 import Favorite from '../pages/Favorite';
 import MyInfo from '../pages/MyPage/MyInfo';
 import MyPromise from '../pages/MyPage/Promise';
+import Block from '../pages/MyPage/Block';
 import MyPromiseDetail from '../pages/MyPage/Promise/MyPromise';
 import MyPageModify from '../pages/MyPage/Modify';
 import CreateTrip from '../pages/MyPage/CreateTrip';
@@ -51,7 +52,6 @@ const Route = () => {
             exact
           />
           <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
-          <Redirect from="/manifest.json" to={pathURI.home} />
           <PrivateRoute path={pathURI.home} component={Home} exact />
           <PrivateRoute path={pathURI.search} component={Search} exact />
           <PrivateRoute path={pathURI.detail} component={Detail} exact />
@@ -59,6 +59,7 @@ const Route = () => {
           <PrivateRoute path={pathURI.favorite} component={Favorite} exact />
           <PrivateRoute path={pathURI.mypage} component={MyInfo} exact />
           <PrivateRoute path={pathURI.promise} component={MyPromise} exact />
+          <PrivateRoute path={pathURI.block} component={Block} exact />
           <PrivateRoute
             path="/mypage/promise/:page"
             component={MyPromiseDetail}
@@ -73,7 +74,7 @@ const Route = () => {
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
-          <PublicRoute component={NotFound} exact />
+          <PublicRoute component={NotFound} />
         </Switch>
       </Section>
     </>

@@ -15,6 +15,8 @@ const GET_MY_PROMISE = 'mypage/GET_MY_PROMISE';
 const AGREE_PROMISE = 'mypage/AGREE_PROMISE';
 const REJECT_PROMISE = 'mypage/REJECT_PROMISE';
 const CANCEL_CONFIRMED_PROM = 'mypage/CANCEL_CONFIRMED_PROM';
+const GET_BLOCK_LIST = 'mypage/GET_BLOCK_LIST';
+const DELETE_BLOCK_LIST = 'mypage/DELETE_BLOCK_LIST';
 
 const getMyInfo = createAction(GET_MY_INFO, myInfo => ({ myInfo }));
 const getMyTripInfo = createAction(GET_MY_TRIP_INFO, tripInfo => ({
@@ -38,6 +40,12 @@ const rejectPromise = createAction(REJECT_PROMISE, (type, requestId) => ({
 const cancelConfiremdProm = createAction(CANCEL_CONFIRMED_PROM, tripId => ({
   tripId,
 }));
+const getMyBlockList = createAction(GET_BLOCK_LIST, blockList => ({
+  blockList,
+}));
+const deletBlockList = createAction(DELETE_BLOCK_LIST, targetPk => ({
+  targetPk,
+}));
 
 const initialState = {
   myInfo: {},
@@ -47,6 +55,7 @@ const initialState = {
     requested: [],
     confirmed: [],
   },
+  blockList: [],
 };
 
 const GetMyInfoDB = () => {
@@ -180,6 +189,38 @@ const ToggleGuideDB = () => {
   apis.GuideToggle().catch(err => console.log(err));
 };
 
+const GetMyBlockListDB = () => {
+  return dispatch => {
+    apis
+      .GetBlockList()
+      .then(res => {
+        console.log(res.data);
+        dispatch(getMyBlockList(res.data ? res.data.blockedUsers : []));
+      })
+      .catch(err => console.log(err));
+  };
+};
+
+const AddBlockListDB = targetPk => {
+  apis
+    .AddBlockList({ targetPk })
+    .then(() => {
+      dispatch(addBlockList());
+    })
+    .catch(err => console.log(err));
+};
+
+const DeleteBlockListDB = targetPk => {
+  return dispatch => {
+    apis
+      .DeleteBlockList({ targetPk })
+      .then(() => {
+        dispatch(deletBlockList(targetPk));
+      })
+      .catch(err => console.log(err));
+  };
+};
+
 export default handleActions(
   {
     [GET_MY_INFO]: (state, action) =>
@@ -230,6 +271,18 @@ export default handleActions(
           prom => prom.tripId !== action.payload.tripId,
         );
       }),
+
+    [GET_BLOCK_LIST]: (state, action) =>
+      produce(state, draft => {
+        draft.blockList = action.payload.blockList;
+      }),
+
+    [DELETE_BLOCK_LIST]: (state, action) =>
+      produce(state, draft => {
+        draft.blockList = draft.blockList.filter(
+          block => block.userPk !== action.payload.targetPk,
+        );
+      }),
   },
   initialState,
 );
@@ -244,6 +297,9 @@ const MypageCreators = {
   AgreePromiseDB,
   RejectPromiseDB,
   CancelConfirmedPromDB,
+  GetMyBlockListDB,
+  AddBlockListDB,
+  DeleteBlockListDB,
 };
 
 export { MypageCreators };

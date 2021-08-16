@@ -70,7 +70,9 @@ const ProfileCard = ({ userInfo }) => {
       <Hr width="100%" margin="15px 0" />
       <Grid margin="10px 0 0 0">
         {userInfo.intro !== 'none' ? (
-          <Text fs="sm">{userInfo.intro}</Text>
+          <Text fs="sm" ws="pre-line">
+            {userInfo.intro}
+          </Text>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>
         )}
