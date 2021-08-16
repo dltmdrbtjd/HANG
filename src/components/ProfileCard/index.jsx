@@ -16,14 +16,13 @@ import { textOverflow } from '../../styles/Mixin';
 const ProfileCard = ({ userInfo }) => {
   const dispatch = useDispatch();
 
-  const AddLike = () => {
-    dispatch(FavoriteCreators.FavoriteAddDB({ targetPk: userInfo.userPk }));
-    dispatch(DetailCreators.LikeUpdateHandler(true));
-  };
-
-  const DelLike = () => {
-    dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userInfo.userPk }));
-    dispatch(DetailCreators.LikeUpdateHandler(false));
+  const LikeToggle = () => {
+    dispatch(FavoriteCreators.FavoriteToggle({ targetPk: userInfo.userPk }));
+    if (userInfo.like) {
+      dispatch(DetailCreators.LikeUpdateHandler(false));
+    } else {
+      dispatch(DetailCreators.LikeUpdateHandler(true));
+    }
   };
 
   return (
@@ -60,7 +59,7 @@ const ProfileCard = ({ userInfo }) => {
             top="12px"
             right="12px"
             _onClick={() => {
-              userInfo.like ? DelLike() : AddLike();
+              LikeToggle();
             }}
           >
             {userInfo.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
