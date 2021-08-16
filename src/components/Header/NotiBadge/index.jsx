@@ -55,6 +55,8 @@ const NotiBadge = () => {
 
   useEffect(() => {
     socket.on('newMessage', data => {
+      console.log(data);
+
       setChatLog(data);
 
       dispatch(ChatCreators.ChatHistoryUpdate(data));
