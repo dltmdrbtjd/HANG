@@ -9,7 +9,7 @@ import NotFoundImg from '../../Images/404_image.png';
 const NotFound = () => {
   return (
     <>
-      <MainTitle fs="xxl" margin="0 0 23px" padding="45px 0 0">
+      <MainTitle fs="xxl" fw="black" margin="0 0 23px" padding="45px 0 0">
         <Strong color="brandColor">잠깐!</Strong>
         <br /> 길을 잃어버린
         <br /> 여행자를 찾습니다

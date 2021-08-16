@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 // socket
@@ -29,8 +29,6 @@ const ChatRoom = () => {
     alarmCount: state.chat.alarmCount,
   }));
 
-  const messagesEndRef = useRef(null);
-
   const { userPk, nickname } = getUserInfo();
 
   const targetUserPk = parseInt(queryString.parse(location.search).number, 10);
@@ -54,7 +52,7 @@ const ChatRoom = () => {
   };
 
   const scrollToBottom = () => {
-    messagesEndRef.current && messagesEndRef.current.scrollIntoView(false);
+    window.scrollTo(0, document.body.scrollHeight);
   };
 
   useEffect(() => {
@@ -68,7 +66,7 @@ const ChatRoom = () => {
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
     socket.on('chatLogs', logs => {
-      console.log(logs);
+      console.log(`logs: ${logs}`);
       const addedChatLog = logs.chatLogs.map(log => JSON.parse(log));
 
       setChatLog(addedChatLog);
@@ -101,60 +99,64 @@ const ChatRoom = () => {
 
   return (
     <Grid margin="0 0 95px">
-      <div ref={messagesEndRef}>
-        <RoomHeader quit={quitRoom} />
+      <RoomHeader quit={quitRoom} />
 
-        <Text fs="xs" wb="keep-all" padding="10px 12px" addstyle={WarningText}>
-          매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
-          경우 제재 대상이 될 수 있습니다.
-        </Text>
+      <Text
+        fs="xs"
+        wb="keep-all"
+        color="darkG"
+        padding="10px 12px"
+        addstyle={WarningText}
+      >
+        매너있는 채팅 부탁드립니다. 약속을 일방적으로 파기하거나 지키지 않을
+        경우 제재 대상이 될 수 있습니다.
+      </Text>
 
-        {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
+      {/* <Text fs="xs" textAlign="center" margin="0 0 20px">
           채팅 시작 시간
         </Text> */}
 
-        {chatLog.map((chat, idx) => (
-          <SpeechBubble
-            person={userPk === chat.userPk}
-            key={(Date.now() + Math.random() + idx).toString(36)}
-          >
-            {chat.message}
-          </SpeechBubble>
-        ))}
-
-        <Grid
-          position="fixed"
-          bottom="110px"
-          left="50%"
-          translate="-50%, 0"
-          width="90%"
-          maxWidth="600px"
-          radius="12px"
-          bgColor="white"
-          border="1px solid #E7E7E7"
-          isFlex
-          hoz="space-between"
-          ver="center"
-          tab="max-width: 768px"
+      {chatLog.map((chat, idx) => (
+        <SpeechBubble
+          person={userPk === chat.userPk}
+          key={(Date.now() + Math.random() + idx).toString(36)}
         >
-          <Input
-            placeholder="채팅 내용 입력"
-            border="none"
-            value={message}
-            addstyle={ChatInputAreaSize}
-            _onChange={e => setMessage(e.target.value)}
-            _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
-          />
+          {chat.message}
+        </SpeechBubble>
+      ))}
 
-          <Button
-            padding="6px 15px"
-            margin="0 9px 0 0"
-            _onClick={() => sendMessage()}
-          >
-            전송
-          </Button>
-        </Grid>
-      </div>
+      <Grid
+        position="fixed"
+        bottom="110px"
+        left="50%"
+        translate="-50%, 0"
+        width="90%"
+        maxWidth="600px"
+        radius="12px"
+        bgColor="white"
+        border="1px solid #E7E7E7"
+        isFlex
+        hoz="space-between"
+        ver="center"
+        tab="max-width: 768px"
+      >
+        <Input
+          placeholder="채팅 내용 입력"
+          border="none"
+          value={message}
+          addstyle={ChatInputAreaSize}
+          _onChange={e => setMessage(e.target.value)}
+          _onKeyPress={e => (e.key === 'Enter' ? sendMessage() : null)}
+        />
+
+        <Button
+          padding="6px 15px"
+          margin="0 9px 0 0"
+          _onClick={() => sendMessage()}
+        >
+          전송
+        </Button>
+      </Grid>
     </Grid>
   );
 };
