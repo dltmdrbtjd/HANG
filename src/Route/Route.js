@@ -1,6 +1,6 @@
 import React from 'react';
 // route
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 // components
@@ -51,6 +51,7 @@ const Route = () => {
             exact
           />
           <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
+          <Redirect from="/manifest.json" to={pathURI.home} />
           <PrivateRoute path={pathURI.home} component={Home} exact />
           <PrivateRoute path={pathURI.search} component={Search} exact />
           <PrivateRoute path={pathURI.detail} component={Detail} exact />
