@@ -81,9 +81,7 @@ const Calendar = ({ setSelectDate }) => {
             key={(idx / Date.now() + Math.random()).toString(36)}
             width="48%"
           >
-            <SubTitle fs="la" margin="0 0 12px">
-              {dateInfo.title}
-            </SubTitle>
+            <SubTitle margin="0 0 12px">{dateInfo.title}</SubTitle>
 
             <Button
               _onClick={handleToggle}
