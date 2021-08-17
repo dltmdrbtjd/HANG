@@ -15,6 +15,7 @@ export interface Props {
   disColor?: string;
   shadow?: string;
   disabled?: boolean;
+  addstyle?: any;
   type?: string;
   _onClick?: any;
 }

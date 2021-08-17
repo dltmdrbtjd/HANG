@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react';
 import UlStyle from './style';
 
 export interface Props {
-  isFlex?: string;
+  isFlex?: boolean;
   hoz?: string;
   ver?: string;
   width?: string;
