@@ -243,10 +243,9 @@ const logOutDB = () => {
         socket.disconnect();
       })
       .then(() => {
-        delCookie();
-      })
-      .then(() => {
-        delCookie();
+        dispatch(
+          getUserInfo({ userId: null, nickname: null, profileImg: null }),
+        );
       })
       .then(() => {
         history.replace('/login');
