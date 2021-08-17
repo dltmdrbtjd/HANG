@@ -18,6 +18,7 @@ export interface Props {
   addstyle?: any;
   type?: string;
   _onClick?: any;
+  children?: React.ReactElement | React.ReactElement[] | string;
 }
 
 const Button: React.FC<Props> = forwardRef(

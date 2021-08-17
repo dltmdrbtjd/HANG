@@ -14,6 +14,7 @@ export interface Props {
   addstyle?: any;
   _onClick?: any;
   className?: string;
+  children?: React.ReactElement | React.ReactElement[] | string;
 }
 
 const List: React.FC<Props> = ({ children, _onClick, ...props }) => {

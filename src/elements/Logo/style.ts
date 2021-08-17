@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components';
 import { floatBox, flexBox } from '../../styles/Mixin';
 
 export interface Prop {
-  width: string;
-  height: string;
-  imgUrl: string;
+  width?: string;
+  height?: string;
+  imgUrl?: string;
   theme: {
     [propName: string]: any;
   };

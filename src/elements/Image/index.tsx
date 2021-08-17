@@ -2,11 +2,11 @@ import React from 'react';
 import ImageStyle from './style';
 
 export interface Props {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   addstyle?: any;
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
 }
 
 const Image: React.FC<Props> = ({ src, alt, ...props }) => {
