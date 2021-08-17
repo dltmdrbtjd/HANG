@@ -3,11 +3,10 @@ import React from 'react';
 import RadioStyle from './style';
 
 export interface Props {
-  width: string;
-  height: string;
-  border: string;
-  weigth: string;
-  marginRight: string;
+  width?: string;
+  height?: string;
+  weight?: string;
+  marginRight?: string;
 }
 
 const InputRadio: React.FC<Props> = (props) => {
@@ -17,7 +16,7 @@ const InputRadio: React.FC<Props> = (props) => {
 InputRadio.defaultProps = {
   width: '20px',
   height: '20px',
-  weigth: '5px',
+  weight: '5px',
   marginRight: '10px',
 };
 

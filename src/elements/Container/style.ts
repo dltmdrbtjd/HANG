@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { borderBox } from '../../styles/Mixin';
 
 export interface Prop {
-  padding: string;
-  height: string;
+  padding?: string;
+  height?: string;
   addstyle?: any;
 }
 

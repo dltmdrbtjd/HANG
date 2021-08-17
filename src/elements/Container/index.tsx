@@ -2,10 +2,10 @@ import React from 'react';
 import ContainerStyle from './style';
 
 export interface Props {
-  padding: string;
-  height: string;
+  padding?: string;
+  height?: string;
   addstyle?: any;
-  children?: React.ReactElement | React.ReactElement[];
+  children: React.ReactElement | React.ReactElement[];
 }
 
 const Container: React.FC<Props> = ({ children, ...props }) => {

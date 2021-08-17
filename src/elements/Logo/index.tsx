@@ -3,9 +3,9 @@ import React from 'react';
 import LogoStyle from './style';
 
 export interface Props {
-  width: string;
-  height: string;
-  imgUrl: string;
+  width?: string;
+  height?: string;
+  imgUrl?: string;
   children?: React.ReactElement | string;
 }
 
