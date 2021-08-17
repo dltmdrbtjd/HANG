@@ -25,6 +25,7 @@ export interface Props {
   z?: string;
   shadow?: string;
   translate?: string;
+  addstyle?: any;
 }
 
 const Ul: React.FC<Props> = forwardRef(({ children, ...props }, ref) => {
