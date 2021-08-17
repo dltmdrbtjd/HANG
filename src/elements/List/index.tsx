@@ -13,6 +13,7 @@ export interface Props {
   padding?: string;
   addstyle?: any;
   _onClick?: any;
+  className?: string;
   children?: React.ReactElement | React.ReactElement[] | string;
 }
 
