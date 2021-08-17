@@ -42,6 +42,10 @@ const MyInfo = () => {
     dispatch(UserCreators.logOutDB());
   };
 
+  const withdrawal = () => {
+    dispatch(UserCreators.WithDrawalUserDB());
+  };
+
   return (
     <>
       <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
@@ -61,11 +65,12 @@ const MyInfo = () => {
 
         <DropDown
           icon={<SettingsIcon />}
-          contents={['프로필 수정', '차단 목록', '로그아웃']}
+          contents={['프로필 수정', '차단 목록', '로그아웃', '회원 탈퇴']}
           methods={[
             () => history.push('/mypage/modify'),
             () => history.push('/mypage/block'),
             logOut,
+            withdrawal,
           ]}
           top="130px"
         />

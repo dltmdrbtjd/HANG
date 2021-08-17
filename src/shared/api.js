@@ -27,7 +27,7 @@ instance.interceptors.response.use(
 
     if (
       error.response.status === 401 &&
-      !['/signup', '/login'].includes(path)
+      !['/signup', '/login', '/signup/forgot_pwd'].includes(path)
     ) {
       window.alert('토큰이 만료되었습니다.');
       delCookie();
@@ -48,7 +48,8 @@ const apis = {
   Login: user => instance.post('/api/users/signin', user),
   LogOut: () => instance.delete('/api/users/signout'),
   ForgotPwd: userInfo => instance.post('/api/users/password', userInfo),
-  Exists: userInfo => instance.post('/user_exists', userInfo),
+  Exists: userInfo => instance.post('/api/users/exists', userInfo),
+  Withdrawal: () => instance.delete('/api/users/quit'),
 
   // alarm
   AlarmCheck: () => instance.get('/api/alarm'),

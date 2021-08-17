@@ -6,7 +6,7 @@ import apis from '../../shared/api';
 // reducer
 import { ImageCreators } from './image';
 // cookie
-import { setCookie, delCookie } from '../../shared/cookie';
+import { getCookie, setCookie, delCookie } from '../../shared/cookie';
 // user info
 import { setUserInfo, delUserInfo } from '../../shared/userInfo';
 // socket
@@ -243,14 +243,6 @@ const logOutDB = () => {
         socket.disconnect();
       })
       .then(() => {
-        dispatch(
-          getUserInfo({ userId: null, nickname: null, profileImg: null }),
-        );
-      })
-      .then(() => {
-        delCookie();
-      })
-      .then(() => {
         history.replace('/login');
       })
       .catch(err => console.error(err));
@@ -258,14 +250,14 @@ const logOutDB = () => {
 };
 
 const ExistsIdAndPhoneNumberDB = userInfo => {
-  // return dispatch => {
-  apis
-    .Exists({ ...userInfo })
-    .then(() => {
-      console.log('완료');
-    })
-    .catch(err => window.alert(err));
-  // };
+  return dispatch => {
+    apis
+      .Exists({ ...userInfo })
+      .then(() => {
+        console.log('완료');
+      })
+      .catch(err => window.alert(err));
+  };
 };
 
 const ForgotPasswordDB = userInfo => {
@@ -275,6 +267,24 @@ const ForgotPasswordDB = userInfo => {
       console.log('성공');
     })
     .catch(err => console.log(err));
+};
+
+const WithDrawalUserDB = () => {
+  return (dispatch, getState, { history }) => {
+    apis
+      .Withdrawal()
+      .then(async () => {
+        const userPk = getCookie().userPk;
+
+        delCookie();
+        delUserInfo();
+
+        await socket.emit('logout', { uid: userPk });
+        socket.disconnect();
+      })
+      .then(() => history.replace('/login'))
+      .catch(err => console.log(err));
+  };
 };
 
 export default handleActions(
@@ -346,6 +356,7 @@ const UserCreators = {
   initializeLogInInfo,
   ExistsIdAndPhoneNumberDB,
   ForgotPasswordDB,
+  WithDrawalUserDB,
 };
 
 export { UserCreators };

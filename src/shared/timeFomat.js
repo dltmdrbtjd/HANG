@@ -7,6 +7,9 @@ const timeFormat = time => {
   const diffTime = moment.duration(now.diff(pastTime));
 
   switch (true) {
+    case diffTime.asSeconds() < 60:
+      return '방금 전';
+
     case diffTime.asMinutes() < 60:
       return `${diffTime.minutes()}분 전`;
 

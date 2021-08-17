@@ -104,9 +104,9 @@ const PhoneAuth = ({ setPage, id, setId }) => {
           fs="la"
           fw="bold"
           width="100%"
-          // disabled={!smsVali.status}
+          disabled={!smsVali.status}
           _onClick={() => {
-            // existsIdAndPhoneNumber();
+            existsIdAndPhoneNumber();
             setPage(1);
           }}
         >

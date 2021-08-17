@@ -1,6 +1,4 @@
 import React from 'react';
-// moment
-import moment from 'moment';
 // redux
 import { useDispatch } from 'react-redux';
 // history
@@ -56,7 +54,7 @@ const ChatCard = ({
           <Grid width="auto" isFlex ver="flex-end" column>
             {time ? (
               <Span fs="xs" lh="24px">
-                {moment(time).format('HH:mm')}
+                {time}
               </Span>
             ) : null}
 
@@ -66,8 +64,8 @@ const ChatCard = ({
                 isFlex
                 hoz="center"
                 ver="center"
-                width="20px"
-                height="20px"
+                width="23px"
+                height="23px"
                 radius="50%"
                 bgColor="brandColor"
                 color="white"
