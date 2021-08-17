@@ -248,6 +248,9 @@ const logOutDB = () => {
         );
       })
       .then(() => {
+        delCookie();
+      })
+      .then(() => {
         history.replace('/login');
       })
       .catch(err => console.error(err));
