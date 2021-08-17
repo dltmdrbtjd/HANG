@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-task-manager';
+export const CACHE_NAME = 'pwa-task-manager';
 // 캐시할 파일
 const urlsToCache = [
   '/favicon.ico',

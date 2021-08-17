@@ -20,7 +20,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
         navigator.serviceWorker
-          .register('worker.js')
+          .register('worker.ts')
           .then(
             function (registration) {
               console.log('Worker registration successful', registration.scope);
