@@ -61,8 +61,12 @@ const MyInfo = () => {
 
         <DropDown
           icon={<SettingsIcon />}
-          contents={['프로필 수정', '로그아웃']}
-          methods={[() => history.push('/mypage/modify'), logOut]}
+          contents={['프로필 수정', '차단 목록', '로그아웃']}
+          methods={[
+            () => history.push('/mypage/modify'),
+            () => history.push('/mypage/block'),
+            logOut,
+          ]}
           top="130px"
         />
       </Grid>

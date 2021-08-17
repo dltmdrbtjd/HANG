@@ -243,10 +243,38 @@ const logOutDB = () => {
         socket.disconnect();
       })
       .then(() => {
+        dispatch(
+          getUserInfo({ userId: null, nickname: null, profileImg: null }),
+        );
+      })
+      .then(() => {
+        delCookie();
+      })
+      .then(() => {
         history.replace('/login');
       })
       .catch(err => console.error(err));
   };
+};
+
+const ExistsIdAndPhoneNumberDB = userInfo => {
+  // return dispatch => {
+  apis
+    .Exists({ ...userInfo })
+    .then(() => {
+      console.log('완료');
+    })
+    .catch(err => window.alert(err));
+  // };
+};
+
+const ForgotPasswordDB = userInfo => {
+  apis
+    .ForgotPwd(userInfo)
+    .then(() => {
+      console.log('성공');
+    })
+    .catch(err => console.log(err));
 };
 
 export default handleActions(
@@ -308,6 +336,7 @@ const UserCreators = {
   setLoginStatus,
   smsAuthDB,
   phoneAuthDB,
+  duplicateCheck,
   duplicateIdCheckDB,
   duplicateNickCheckDB,
   signUpDB,
@@ -315,6 +344,8 @@ const UserCreators = {
   logOutDB,
   initializeSignUpInfo,
   initializeLogInInfo,
+  ExistsIdAndPhoneNumberDB,
+  ForgotPasswordDB,
 };
 
 export { UserCreators };

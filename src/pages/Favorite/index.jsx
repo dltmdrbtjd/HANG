@@ -15,7 +15,7 @@ const Favorite = () => {
   const like = useSelector(state => state.favorite.boolean);
 
   const DelLike = userPk => {
-    dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userPk }));
+    dispatch(FavoriteCreators.FavoriteToggle({ targetPk: userPk }));
     dispatch(FavoriteCreators.FavoriteDelHandler(userPk));
   };
 

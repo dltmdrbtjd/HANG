@@ -28,6 +28,10 @@ const Header = () => {
         setTitle('프로필');
         break;
 
+      case /mypage\/block/.test(path):
+        setTitle('차단 목록');
+        break;
+
       case /mypage/.test(path):
         setTitle('마이페이지');
         break;

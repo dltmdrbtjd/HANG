@@ -47,6 +47,8 @@ const apis = {
   Duplicate: user => instance.post('/api/users/duplicate', user),
   Login: user => instance.post('/api/users/signin', user),
   LogOut: () => instance.delete('/api/users/signout'),
+  ForgotPwd: userInfo => instance.post('/api/users/password', userInfo),
+  Exists: userInfo => instance.post('/user_exists', userInfo),
 
   // alarm
   AlarmCheck: () => instance.get('/api/alarm'),
@@ -82,6 +84,12 @@ const apis = {
   CancelPromise: tripId => instance.patch('/api/mypage/reject_confirm', tripId),
   GuideToggle: () => instance.patch('/api/mypage/update_guide'),
 
+  // myinfo block
+  GetBlockList: () => instance.get('api/users/block'),
+  AddBlockList: targetPk => instance.post('api/users/block', targetPk),
+  DeleteBlockList: targetPk => instance.patch('api/users/block', targetPk),
+
+  // chat
   GetChatRoom: () => instance.get('/api/users/chat'),
 };
 

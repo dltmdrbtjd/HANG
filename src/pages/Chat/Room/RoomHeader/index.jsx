@@ -14,7 +14,7 @@ import DropDown from '../../../../components/DropDown';
 // style
 import HeaderStyle from '../../../../components/Header/style';
 
-const RoomHeader = ({ quit }) => {
+const RoomHeader = ({ quit, block }) => {
   const targetUserInfo = useSelector(state => state.chat.targetUserInfo);
 
   return (
@@ -39,8 +39,8 @@ const RoomHeader = ({ quit }) => {
 
           <DropDown
             icon={<MoreVertIcon />}
-            contents={['채팅방 나가기']}
-            methods={[quit]}
+            contents={['채팅방 나가기', '차단하고 나가기']}
+            methods={[quit, block]}
             top="70px"
           />
         </Grid>

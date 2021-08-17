@@ -11,12 +11,14 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import Onboarding from '../pages/Onboarding';
 import Welcome from '../pages/SignUp/Welcome';
+import ForgotPassword from '../pages/SignUp/ForgotPassword';
 import Search from '../pages/Search';
 import Detail from '../pages/Detail';
 import GuideRequest from '../pages/Detail/GuideRequest';
 import Favorite from '../pages/Favorite';
 import MyInfo from '../pages/MyPage/MyInfo';
 import MyPromise from '../pages/MyPage/Promise';
+import Block from '../pages/MyPage/Block';
 import MyPromiseDetail from '../pages/MyPage/Promise/MyPromise';
 import MyPageModify from '../pages/MyPage/Modify';
 import CreateTrip from '../pages/MyPage/CreateTrip';
@@ -50,6 +52,12 @@ const Route = () => {
             component={Welcome}
             exact
           />
+          <PublicRoute
+            path={pathURI.forgotPwd}
+            restricted
+            component={ForgotPassword}
+            exact
+          />
           <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
           <PrivateRoute path={pathURI.home} component={Home} exact />
           <PrivateRoute path={pathURI.search} component={Search} exact />
@@ -58,6 +66,7 @@ const Route = () => {
           <PrivateRoute path={pathURI.favorite} component={Favorite} exact />
           <PrivateRoute path={pathURI.mypage} component={MyInfo} exact />
           <PrivateRoute path={pathURI.promise} component={MyPromise} exact />
+          <PrivateRoute path={pathURI.block} component={Block} exact />
           <PrivateRoute
             path="/mypage/promise/:page"
             component={MyPromiseDetail}
@@ -72,7 +81,8 @@ const Route = () => {
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
-          <PublicRoute component={NotFound} exact />
+          <Redirect from="*" to="/" />
+          {/* <PublicRoute component={NotFound} /> */}
         </Switch>
       </Section>
     </>

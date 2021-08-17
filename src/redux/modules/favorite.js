@@ -21,26 +21,17 @@ const FavoriteLoadDB = () => {
     apis
       .LikeLoad()
       .then(res => {
-        dispatch(FavoriteLoad(res.data.likeusers));
+        dispatch(FavoriteLoad(res.data));
       })
       .catch(err => console.log(err));
   };
 };
 
 // 즐겨찾기 버튼 toggle시 사용
-const FavoriteAddDB = targetPk => {
+const FavoriteToggle = targetPk => {
   return () => {
     apis
       .Like(targetPk)
-      .then(() => {})
-      .catch(err => console.error(err));
-  };
-};
-
-const FavoriteDelDB = targetPk => {
-  return () => {
-    apis
-      .UnLike({ data: targetPk })
       .then(() => {})
       .catch(err => console.error(err));
   };
@@ -72,9 +63,8 @@ export default handleActions(
 
 const FavoriteCreators = {
   FavoriteLoadDB,
-  FavoriteAddDB,
-  FavoriteDelDB,
   FavoriteDelHandler,
+  FavoriteToggle,
 };
 
 export { FavoriteCreators };
