@@ -16,7 +16,7 @@ export interface Props {
   fw?: string;
   color?: string;
   lh?: string;
-  testAlign?: string;
+  textAlign?: string;
   position?: string;
   top?: string;
   right?: string;
