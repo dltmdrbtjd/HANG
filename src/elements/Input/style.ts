@@ -46,7 +46,6 @@ const InputStyle = styled.input<Prop>`
   }
 
   ${({addstyle}) => addstyle};
-
 `;
 
 export default InputStyle;

@@ -10,11 +10,11 @@ const flexBox = (hoz: string, ver: string, display = 'flex') => {
 
 const floatBox = (
   position: string,
-  top: string,
-  right: string,
-  bottom: string,
-  left: string,
-  zIndex: string,
+  top: string | number,
+  right: string | number,
+  bottom: string | number,
+  left: string | number,
+  zIndex: string | number,
 ) => {
   return css`
     position: ${position};
