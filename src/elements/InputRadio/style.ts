@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export interface Prop {
   width: string;
   height: string;
-  border: string;
+  weigth: string;
   marginRight: string;
   theme: {
     [propName: string]: any;
@@ -23,8 +23,8 @@ const RadioStyle = styled.input<Prop>`
 
   &[type='radio'] {
     background-color: ${({ theme }) => theme.color.white};
-    border: ${({ border, theme }) =>
-      border || `5px solid ${theme.color.semiLightG}`};
+    border: ${({ weigth, theme }) =>
+      `${weigth} solid ${theme.color.semiLightG}`};
   }
   &[type='radio']:checked {
     background-color: ${({ theme }) => theme.color.brandColor};
