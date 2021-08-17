@@ -8,6 +8,7 @@
 
 <p align='center'>
   <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
+  <img src="https://img.shields.io/badge/Typescript-v4.1.2-blue?logo=typescript"/>
   <img src='https://img.shields.io/badge/ReactRouter-v5.2.0-pink?logo=React Router'/>
   <img src='https://img.shields.io/badge/StyledComponents-v5.3.0-violet?logo=styled-components'/>
   <img src='https://img.shields.io/badge/Redux-v4.1.0-violet?logo=Redux'/>
