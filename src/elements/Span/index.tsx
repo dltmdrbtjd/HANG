@@ -2,7 +2,7 @@ import React from 'react';
 import SpanStyle from './style';
 
 export interface Props {
-  isFlex: string;
+  isFlex?: boolean;
   hoz: string;
   ver: string;
   width: string;

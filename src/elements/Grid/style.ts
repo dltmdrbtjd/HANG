@@ -9,7 +9,7 @@ import {
 } from '../../styles/Mixin';
 
 export interface Prop {
-  isFlex?: string;
+  isFlex?: boolean;
   hoz?: string;
   ver?: string;
   column?: string;
