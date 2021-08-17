@@ -1,11 +1,6 @@
 {
   "short_name": "HANG",
   "name": "HANG복한 여행!",
-  "start_url": "/",
-  "display": "standalone",
-  "orientation": "portrait",
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
   "icons": [
     {
       "src": "logo.png",
@@ -52,5 +47,9 @@
       "type": "image/png",
       "sizes": "256x256"
     }
-  ]
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
 }

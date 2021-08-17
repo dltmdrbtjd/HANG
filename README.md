@@ -1,10 +1,14 @@
+# HANG
+
 # HANG - 여행 동행 서비스
+
 <p align='center'>
 <img width='70%' src='https://user-images.githubusercontent.com/59644518/129475855-80e67a8d-22c3-4116-92df-177398cb346e.jpg'>
 </p>
 
 <p align='center'>
   <img src='https://img.shields.io/badge/React-v17.0.2-blue?logo=React'/>
+  <img src="https://img.shields.io/badge/Typescript-v4.1.2-blue?logo=typescript"/>
   <img src='https://img.shields.io/badge/ReactRouter-v5.2.0-pink?logo=React Router'/>
   <img src='https://img.shields.io/badge/StyledComponents-v5.3.0-violet?logo=styled-components'/>
   <img src='https://img.shields.io/badge/Redux-v4.1.0-violet?logo=Redux'/>
@@ -16,5 +20,3 @@
   <img src='https://img.shields.io/badge/prettier-v2.3.2-pink?logo=prettier'/>
   <img src='https://img.shields.io/badge/eslint-v7.31.0-yellow?logo=eslint'/>
 </p>
-
-
