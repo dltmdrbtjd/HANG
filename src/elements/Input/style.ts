@@ -15,18 +15,17 @@ export interface Prop {
   };
 }
 
-
 const InputStyle = styled.input<Prop>`
-  border: ${({border}) => (border)};
+  border: ${({ border }) => border};
   background: none;
-  border-radius: ${({radius}) => (radius)};
-  width: ${({width}) => (width)};
-  height: ${({height}) => (height)};
-  background-color: ${({bgColor}) => (bgColor)};
-  color:${({color}) => (color)};
-  font-size:${({fs}) => (fs)};
-  box-shadow: ${({shadow}) => (shadow)};
-  ${({padding}) => (padding)};
+  border-radius: ${({ radius }) => radius};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  background-color: ${({ bgColor }) => bgColor};
+  color: ${({ color }) => color};
+  font-size: ${({ fs }) => fs};
+  box-shadow: ${({ shadow }) => shadow};
+  ${({ padding }) => padding};
 `;
 
 export default InputStyle;

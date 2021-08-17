@@ -1,10 +1,10 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 import GlobalStyle from './GlobalStyle';
 
 interface Prop {
-  children?: ReactElement | ReactElement[] | string;
+  children?: React.ReactElement | React.ReactElement[] | string;
 }
 
 const GlobalThemeProvider = ({ children }: Prop) => {
