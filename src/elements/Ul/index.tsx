@@ -16,7 +16,7 @@ export interface Props {
   fw?: string;
   color?: string;
   lh?: string;
-  testAlign?: string;
+  textAlign?: string;
   position?: string;
   top?: string;
   right?: string;
@@ -25,6 +25,7 @@ export interface Props {
   z?: string;
   shadow?: string;
   translate?: string;
+  children?: React.ReactElement | React.ReactElement[] | string;
 }
 
 const Ul: React.FC<Props> = forwardRef(({ children, ...props }, ref) => {

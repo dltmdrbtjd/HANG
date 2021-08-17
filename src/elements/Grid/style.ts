@@ -26,7 +26,7 @@ export interface Prop {
   fw?: string;
   color?: string;
   lh?: string;
-  testAlign?: string;
+  textAlign?: string;
   position?: string;
   top?: string;
   right?: string;
@@ -42,7 +42,7 @@ export interface Prop {
   };
 }
 
-const makeItFlexBox = css`
+const makeItFlexBox = css<Prop>`
   ${({ hoz, ver, column }) => css`
     ${flexBox(hoz, ver)};
     ${column && 'flex-direction: column'};

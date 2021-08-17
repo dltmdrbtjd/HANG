@@ -10,39 +10,36 @@ import {
 
 export interface Prop {
   isFlex?: boolean;
-  hoz: string;
-  ver: string;
-  width: string;
-  height: string;
-  shadow: string;
-  radius: string;
-  bgColor: string;
-  margin: string;
-  padding: string;
-  fs: string;
-  fw: string;
-  color: string;
-  lh: string;
-  textAlign: string;
-  border: string;
-  borDirection: string;
-  position: string;
-  top: string;
-  right: string;
-  bottom: string;
-  left: string;
-  z: string;
+  hoz?: string;
+  ver?: string;
+  width?: string;
+  height?: string;
+  shadow?: string;
+  radius?: string;
+  bgColor?: string;
+  margin?: string;
+  padding?: string;
+  fs?: string;
+  fw?: string;
+  color?: string;
+  lh?: string;
+  textAlign?: string;
+  border?: string;
+  borDirection?: string;
+  position?: string;
+  top?: string;
+  right?: string;
+  bottom?: string;
+  left?: string;
+  z?: string;
   addstyle?: any;
   theme: {
     [propName: string]: any;
   };
 }
 
-const makeItFlexBox = css`
-  ${({ hoz, ver }) =>
-    css`
-      ${flexBox(hoz, ver, 'inline-flex')};
-    `}
+const makeItFlexBox = css<Prop>`
+  ${({ hoz, ver }) => flexBox(hoz, ver, 'inline-flex')}
 `;
 
 const SpanStyle = styled.span<Prop>`

@@ -23,7 +23,7 @@ export interface Prop {
   fw?: string;
   color?: string;
   lh?: string;
-  testAlign?: string;
+  textAlign?: string;
   position?: string;
   top?: string;
   right?: string;

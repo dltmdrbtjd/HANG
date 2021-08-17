@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 export interface Prop {
-  width: string;
-  height: string;
-  weigth: string;
-  marginRight: string;
+  width?: string;
+  height?: string;
+  weight?: string;
+  marginRight?: string;
   theme: {
     [propName: string]: any;
   };

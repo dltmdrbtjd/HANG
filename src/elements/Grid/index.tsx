@@ -19,7 +19,7 @@ export interface Props {
   fw?: string;
   color?: string;
   lh?: string;
-  testAlign?: string;
+  textAlign?: string;
   position?: string;
   top?: string;
   right?: string;
@@ -31,6 +31,7 @@ export interface Props {
   cursor?: string;
   addstyle?: any;
   _onClick?: any;
+  children?: React.ReactElement | React.ReactElement[] | string;
 }
 
 const Grid: React.FC<Props> = ({ _onClick, children, ...props }) => {
