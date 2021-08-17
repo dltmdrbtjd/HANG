@@ -5,6 +5,7 @@ import { borderBox } from '../../styles/Mixin';
 export interface Prop {
   padding: string;
   height: string;
+  addstyle?: any;
 }
 
 const ContainerStyle = styled.div<Prop>`

@@ -9,7 +9,7 @@ import {
 } from '../../styles/Mixin';
 
 export interface Prop {
-  isFlex: string;
+  isFlex?: boolean;
   hoz: string;
   ver: string;
   width: string;
@@ -32,6 +32,7 @@ export interface Prop {
   bottom: string;
   left: string;
   z: string;
+  addstyle?: any;
   theme: {
     [propName: string]: any;
   };

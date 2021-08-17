@@ -2,7 +2,7 @@ import React from 'react';
 import GridStyle from './style';
 
 export interface Props {
-  isFlex?: string;
+  isFlex?: boolean;
   hoz?: string;
   ver?: string;
   column?: string;
@@ -29,6 +29,7 @@ export interface Props {
   shadow?: string;
   translate?: string;
   cursor?: string;
+  addstyle?: any;
   _onClick?: any;
 }
 

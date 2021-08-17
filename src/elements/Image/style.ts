@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export interface Prop {
   width: string;
   height: string;
+  addstyle?: any;
 }
 
 const ImageStyle = styled.img<Prop>`

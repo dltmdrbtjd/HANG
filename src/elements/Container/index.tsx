@@ -4,6 +4,7 @@ import ContainerStyle from './style';
 export interface Props {
   padding: string;
   height: string;
+  addstyle?: any;
 }
 
 const Container: React.FC<Props> = ({ children, ...props }) => {

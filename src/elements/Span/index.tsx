@@ -2,7 +2,7 @@ import React from 'react';
 import SpanStyle from './style';
 
 export interface Props {
-  isFlex: string;
+  isFlex?: boolean;
   hoz: string;
   ver: string;
   width: string;
@@ -25,6 +25,7 @@ export interface Props {
   bottom: string;
   left: string;
   z: string;
+  addstyle?: any;
 }
 
 const Span: React.FC<Props> = ({ children, ...props }) => {
