@@ -51,7 +51,6 @@ const Route = () => {
             exact
           />
           <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
-          <Redirect from="/manifest.json" to={pathURI.home} />
           <PrivateRoute path={pathURI.home} component={Home} exact />
           <PrivateRoute path={pathURI.search} component={Search} exact />
           <PrivateRoute path={pathURI.detail} component={Detail} exact />
