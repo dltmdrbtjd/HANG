@@ -1,6 +1,6 @@
 import React from 'react';
 // route
-import { Switch } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 // components
@@ -72,7 +72,7 @@ const Route = () => {
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
-          <PublicRoute component={NotFound} exact />
+          <Redirect from="*" to="/" />
         </Switch>
       </Section>
     </>
