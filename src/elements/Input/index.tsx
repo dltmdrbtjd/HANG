@@ -18,6 +18,7 @@ export interface Props {
   placeholder?: string;
   _onChange?: any;
   _onKeyPress?: any;
+  addstyle?: any;
 }
 
 const Input: React.FC<Props> = ({
