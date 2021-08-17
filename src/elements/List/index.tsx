@@ -13,6 +13,7 @@ export interface Props {
   padding?: string;
   addstyle?: any;
   _onClick?: any;
+  children?: React.ReactElement | React.ReactElement[] | string;
 }
 
 const List: React.FC<Props> = ({ children, _onClick, ...props }) => {

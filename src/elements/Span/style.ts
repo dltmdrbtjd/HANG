@@ -38,11 +38,8 @@ export interface Prop {
   };
 }
 
-const makeItFlexBox = css`
-  ${({ hoz, ver }) =>
-    css`
-      ${flexBox(hoz, ver, 'inline-flex')};
-    `}
+const makeItFlexBox = css<Prop>`
+  ${({ hoz, ver }) => flexBox(hoz, ver, 'inline-flex')}
 `;
 
 const SpanStyle = styled.span<Prop>`

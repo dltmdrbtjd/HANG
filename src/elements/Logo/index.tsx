@@ -6,6 +6,7 @@ export interface Props {
   width: string;
   height: string;
   imgUrl: string;
+  children?: React.ReactElement | string;
 }
 
 const Logo: React.FC<Props> = ({ children, ...props }) => {
