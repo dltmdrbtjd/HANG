@@ -6,6 +6,7 @@ export interface Props {
   width: string;
   height: string;
   border: string;
+  weigth: string;
   marginRight: string;
 }
 
@@ -16,6 +17,7 @@ const InputRadio: React.FC<Props> = (props) => {
 InputRadio.defaultProps = {
   width: '20px',
   height: '20px',
+  weigth: '5px',
   marginRight: '10px',
 };
 
