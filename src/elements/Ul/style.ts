@@ -37,10 +37,8 @@ export interface Prop {
   };
 }
 
-const makeItFlexBox = css`
-  ${({ hoz, ver }) => css`
-    ${flexBox(hoz, ver)};
-  `}
+const makeItFlexBox = css<Prop>`
+  ${({ hoz, ver }) => flexBox(hoz, ver)};
 `;
 
 const UlStyle = styled.ul<Prop>`

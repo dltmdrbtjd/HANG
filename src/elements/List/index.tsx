@@ -11,6 +11,7 @@ export interface Props {
   bgColor?: string;
   fs?: string;
   padding?: string;
+  addstyle?: any;
   _onClick?: any;
 }
 

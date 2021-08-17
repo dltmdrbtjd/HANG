@@ -25,6 +25,7 @@ export interface Props {
   bottom: string;
   left: string;
   z: string;
+  addstyle?: any;
 }
 
 const Span: React.FC<Props> = ({ children, ...props }) => {

@@ -15,6 +15,7 @@ export interface Prop {
   color?: string;
   disColor?: string;
   shadow?: string;
+  addstyle?: any;
   theme: {
     [propName: string]: any;
   };

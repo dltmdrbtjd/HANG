@@ -4,6 +4,7 @@ import ImageStyle from './style';
 export interface Props {
   width: string;
   height: string;
+  addstyle?: any;
   src: string;
   alt: string;
 }

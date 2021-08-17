@@ -12,6 +12,7 @@ export interface Prop {
   bgColor?: string;
   fs?: string;
   padding?: string;
+  addstyle?: any;
   theme: {
     [propName: string]: any;
   };

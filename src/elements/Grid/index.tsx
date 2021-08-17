@@ -29,6 +29,7 @@ export interface Props {
   shadow?: string;
   translate?: string;
   cursor?: string;
+  addstyle?: any;
   _onClick?: any;
 }
 

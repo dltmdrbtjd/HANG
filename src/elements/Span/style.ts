@@ -32,6 +32,7 @@ export interface Prop {
   bottom: string;
   left: string;
   z: string;
+  addstyle?: any;
   theme: {
     [propName: string]: any;
   };

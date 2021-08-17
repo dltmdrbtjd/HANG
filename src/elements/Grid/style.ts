@@ -36,6 +36,7 @@ export interface Prop {
   shadow?: string;
   translate?: string;
   cursor?: string;
+  addstyle?: any;
   theme: {
     [propName: string]: any;
   };
