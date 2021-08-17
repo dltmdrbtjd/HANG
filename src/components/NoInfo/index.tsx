@@ -5,9 +5,10 @@ import { Text } from '../../elements';
 export interface Props {
   list: any[];
   contents: string;
+  children: React.ReactElement | React.ReactElement[];
 }
 
-const NoInfo: React.FC<Props> = ({ children, list, contents }) => {
+const NoInfo: React.FC<Props> = ({ list, contents, children }) => {
   if (list.length) return <>{children}</>;
 
   return <Text fs="la">{contents}</Text>;
