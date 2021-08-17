@@ -99,7 +99,7 @@ const Login = () => {
                   fw="lg"
                   color="darkG"
                   _onClick={() => {
-                    history.push('/signup');
+                    history.push('/signup/forgot_pwd');
                   }}
                 >
                   비밀번호 찾기

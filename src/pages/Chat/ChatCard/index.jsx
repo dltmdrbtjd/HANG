@@ -73,7 +73,7 @@ const ChatCard = ({
                 color="white"
                 margin="6px 0 0"
               >
-                {unchecked}
+                {unchecked < 10 ? unchecked : '9+'}
               </Span>
             ) : null}
           </Grid>

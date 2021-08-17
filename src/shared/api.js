@@ -47,6 +47,8 @@ const apis = {
   Duplicate: user => instance.post('/api/users/duplicate', user),
   Login: user => instance.post('/api/users/signin', user),
   LogOut: () => instance.delete('/api/users/signout'),
+  ForgotPwd: userInfo => instance.post('/api/users/password', userInfo),
+  Exists: userInfo => instance.post('/user_exists', userInfo),
 
   // alarm
   AlarmCheck: () => instance.get('/api/alarm'),

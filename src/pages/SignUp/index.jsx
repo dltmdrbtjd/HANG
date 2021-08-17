@@ -14,7 +14,6 @@ import { UserCreators } from '../../redux/modules/user';
 import PhoneAuth from './PhoneAuth';
 import EnterIdPwd from './EnterIdPwd';
 import FillOutProfile from './FillOutProfile';
-import Welcome from './Welcome';
 // validation
 import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
 // style
@@ -151,8 +150,6 @@ const SignUp = () => {
           </form>
         )}
       </Formik>
-
-      {page === 4 ? <Welcome /> : null}
     </>
   );
 };

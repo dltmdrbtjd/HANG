@@ -21,7 +21,7 @@ const FavoriteLoadDB = () => {
     apis
       .LikeLoad()
       .then(res => {
-        dispatch(FavoriteLoad(res.data.likeusers));
+        dispatch(FavoriteLoad(res.data));
       })
       .catch(err => console.log(err));
   };

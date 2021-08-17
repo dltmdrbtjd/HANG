@@ -1,6 +1,6 @@
 import React from 'react';
 // route
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 // components
@@ -11,6 +11,7 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import Onboarding from '../pages/Onboarding';
 import Welcome from '../pages/SignUp/Welcome';
+import ForgotPassword from '../pages/SignUp/ForgotPassword';
 import Search from '../pages/Search';
 import Detail from '../pages/Detail';
 import GuideRequest from '../pages/Detail/GuideRequest';
@@ -51,6 +52,12 @@ const Route = () => {
             component={Welcome}
             exact
           />
+          <PublicRoute
+            path={pathURI.forgotPwd}
+            restricted
+            component={ForgotPassword}
+            exact
+          />
           <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
           <PrivateRoute path={pathURI.home} component={Home} exact />
           <PrivateRoute path={pathURI.search} component={Search} exact />
@@ -74,7 +81,8 @@ const Route = () => {
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
-          <PublicRoute component={NotFound} />
+          <Redirect from="*" to="/" />
+          {/* <PublicRoute component={NotFound} /> */}
         </Switch>
       </Section>
     </>

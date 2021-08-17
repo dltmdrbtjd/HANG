@@ -17,7 +17,7 @@ const PhoneAuth = ({ pNum, setPnum, setPage, errorMsg }) => {
   const [authNum, setAuthNum] = useState('');
 
   const userPhoneAuth = () => {
-    dispatch(UserCreators.smsAuthDB({ pNum }));
+    dispatch(UserCreators.smsAuthDB({ pNum, status: 1 }));
   };
 
   const smsAuth = authInfo => {

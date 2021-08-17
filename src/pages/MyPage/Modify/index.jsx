@@ -68,6 +68,22 @@ const MyPageModify = () => {
 
     setRegion(userInfo.region);
     setCity(userInfo.city);
+
+    return () => {
+      dispatch(
+        UserCreators.duplicateCheck({
+          id: {
+            status: false,
+            errorMsg: '',
+          },
+
+          nickname: {
+            status: false,
+            errorMsg: '',
+          },
+        }),
+      );
+    };
   }, []);
 
   return (
