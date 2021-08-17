@@ -1,5 +1,10 @@
 import React from 'react';
 import Input from './elements/Input';
+import Strong from './elements/Strong';
+import TextArea from './elements/TextArea';
+import Text from './elements/Text';
+import SubTitle from './elements/SubTitle';
+import MainTitle from './elements/MainTitle';
 
 const App = () => {
   return (
@@ -9,8 +14,15 @@ const App = () => {
         placeholder="여행자/길잡이를 검색하세요"
         radius="40px"
         padding="11px 45px 11px 23px"
-        fs="14px"
+        fs="sl"
       />
+      <Strong>ㅋㅋㅎㅇ</Strong>
+      <TextArea />
+      <Text fw="bold" fs="md" color="brandColor" textAlign="center">
+        ㅎㅇ
+      </Text>
+      <SubTitle>ㅋㅋㅎㅇㄹ</SubTitle>
+      <MainTitle>ㅎㅇㅎㅇㅎㅇㅎㅇㅎ</MainTitle>
     </>
   );
 };
