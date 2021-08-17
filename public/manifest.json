@@ -48,8 +48,8 @@
       "sizes": "256x256"
     }
   ],
-  "start_url": "/index.html",
-  "display": "standalone",
+  "start_url": "/",
+  "display": "fullscreen",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }

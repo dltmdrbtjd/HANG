@@ -116,7 +116,7 @@ const Search = props => {
 
   useEffect(() => {
     dispatch(SearchCreators.SearchLoadDB(MainSearch));
-    setPage(1);
+    setPage(0);
   }, [query.keyword]);
 
   return (

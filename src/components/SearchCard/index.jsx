@@ -19,23 +19,23 @@ const SearchCard = ({ userInfo, category, idx }) => {
   const dispatch = useDispatch();
   const path = useLocation().pathname;
 
-  const AddLike = () => {
-    dispatch(FavoriteCreators.FavoriteAddDB({ targetPk: userInfo.userPk }));
+  const LikeToggle = () => {
+    dispatch(FavoriteCreators.FavoriteToggle({ targetPk: userInfo.userPk }));
     if (path.includes('/search')) {
-      dispatch(SearchCreators.likeUpdateHandler(idx, true));
+      if (userInfo.like) {
+        dispatch(SearchCreators.likeUpdateHandler(idx, false));
+      } else {
+        dispatch(SearchCreators.likeUpdateHandler(idx, true));
+      }
     } else if (path.includes('/')) {
-      dispatch(HomeCreators.likeUpdateHandler(category, idx, true));
+      if (userInfo.like) {
+        dispatch(HomeCreators.likeUpdateHandler(category, idx, false));
+      } else {
+        dispatch(HomeCreators.likeUpdateHandler(category, idx, true));
+      }
     }
   };
 
-  const DelLike = () => {
-    dispatch(FavoriteCreators.FavoriteDelDB({ targetPk: userInfo.userPk }));
-    if (path.includes('/search')) {
-      dispatch(SearchCreators.likeUpdateHandler(idx, false));
-    } else if (path.includes('/')) {
-      dispatch(HomeCreators.likeUpdateHandler(category, idx, false));
-    }
-  };
   return (
     <Grid padding="6px 0">
       <Grid
@@ -79,7 +79,7 @@ const SearchCard = ({ userInfo, category, idx }) => {
           top="12px"
           right="12px"
           _onClick={() => {
-            userInfo.like ? DelLike() : AddLike();
+            LikeToggle();
           }}
           z="2"
         >
