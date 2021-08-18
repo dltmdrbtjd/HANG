@@ -40,7 +40,7 @@ const Input: React.FC<Props> = ({
       type={type}
       accept={accept}
       onChange={_onChange}
-      onkeyPress={_onKeyPress}
+      onKeyPress={_onKeyPress}
       name={name}
       {...props}
     />
