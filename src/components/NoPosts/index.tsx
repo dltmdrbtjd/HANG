@@ -16,7 +16,7 @@ export interface Props {
   children: React.ReactElement | React.ReactElement[];
 }
 
-const NoPosts = ({ list, title, coment, link, children }) => {
+const NoPosts = ({ list, title, coment, link, children }: Props) => {
   if (list.length) return <>{children}</>;
 
   return (

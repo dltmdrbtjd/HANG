@@ -8,7 +8,7 @@ export interface Props {
   children: React.ReactElement | React.ReactElement[];
 }
 
-const NoInfo: React.FC<Props> = ({ list, contents, children }) => {
+const NoInfo = ({ list, contents, children }: Props) => {
   if (list.length) return <>{children}</>;
 
   return <Text fs="la">{contents}</Text>;

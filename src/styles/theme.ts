@@ -1,4 +1,4 @@
-const calRem = (size) => `${size / 16}rem`;
+const calRem = (size: number): string => `${size / 16}rem`;
 
 const fontSize = {
   status: calRem(8),

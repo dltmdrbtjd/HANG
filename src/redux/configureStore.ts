@@ -9,8 +9,11 @@ import rootReducer from './modules';
 
 export const history = createBrowserHistory();
 
-// history 넣기, 로거사용
-const middleware = [thunk.withExtraArgument({ history }), logger];
+// history 넣기
+const middleware = [thunk.withExtraArgument({ history })];
+
+// 개발 환경일 때만 logger 사용
+if (process.env.NODE_ENV === 'development') middleware.push(logger);
 
 // Chrome Extension
 // window 타입 선언
@@ -25,5 +28,4 @@ const enhancer = composeEnhancers(applyMiddleware(...middleware));
 
 // 미들웨어와 리듀서 묶어서 store생성
 const store = createStore(rootReducer, enhancer);
-
 export default store;
