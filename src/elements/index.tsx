@@ -8,6 +8,7 @@ import Text from './Text';
 import TextArea from './TextArea';
 import Button from './Button';
 import Container from './Container';
+import Section from './Section';
 import Grid from './Grid';
 import Hr from './Hr';
 import Image from './Image';
@@ -28,6 +29,7 @@ export {
   TextArea,
   Button,
   Container,
+  Section,
   Grid,
   Hr,
   Image,
