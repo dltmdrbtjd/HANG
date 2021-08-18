@@ -1,6 +1,8 @@
-import { createAction, handleActions } from 'redux-actions';
-import produce from 'immer';
+import { createReducer, createAction,  PayloadAction } from '@reduxjs/toolkit';
+// apis
+import apis from '../../shared/api';
 
+// types
 interface TraveleCard {
   age: string;
   city: string;
@@ -22,23 +24,41 @@ interface Promise {
   endDate: string;
 }
 
-type homeType = {
-  confirmed: Promise;
-  guide: Array<TraveleCard>;
-  traveler: Array<TraveleCard>;
+interface homeType {
+  HomeData: {
+    confirmed: Promise;
+    guide: TraveleCard[];
+    traveler: TraveleCard[];
+  }
 }
 
-const LOAD = 'home/LOAD';
-const LIKE_UPDATE = 'home/LIKE_UPDATE';
+export const initalState: homeType = {
+  HomeData: {
+    confirmed: null,
+    guide: [],
+    traveler: [],
+  }
+}
 
-const HomeLoad = createAction<unknown>(LOAD, (confirmed:Promise, guide:homeType, traveler:homeType) => ({
-  confirmed
-  ,guide
-  ,traveler
-}));
+const getLoadAction = createAction<unknown>('home/HOME_LOAD');
 
-const LikeUpdate = createAction<unknown>(LIKE_UPDATE, (category: string, idx: number, like: boolean) => ({
-  category
-  ,idx
-  ,like
-}))
+const HomeReducer = createReducer(initalState, {
+  [getLoadAction.type]: (state: homeType ,action: PayloadAction<any>) => {
+    state.HomeData = action.payload;
+  }
+})
+
+const getMainData = () => async (dispatch, getState, {history}) => {
+  try {
+    const data = await apis.MainLoad();
+    dispatch(getLoadAction(data));
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export const homeActions = {
+  getMainData,
+}
+
+export default HomeReducer;
