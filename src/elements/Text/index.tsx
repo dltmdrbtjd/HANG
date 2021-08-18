@@ -2,7 +2,6 @@ import React from 'react';
 import TextStyle from './style';
 
 export interface Props {
-  children: string;
   width?: string;
   height?: string;
   margin?: string;
