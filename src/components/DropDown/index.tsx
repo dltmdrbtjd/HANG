@@ -17,12 +17,15 @@ const DropDown: React.FC<Props> = ({ icon, contents, methods, top }) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
-  const handleToggle = () => {
+  const handleToggle = (): void => {
     setOpen((prevOpen) => !prevOpen);
   };
 
-  const handleClose = (e) => {
-    if (anchorRef.current && anchorRef.current.contains(e.target)) {
+  const handleClose = (e: React.MouseEvent<EventTarget>): void => {
+    if (
+      anchorRef.current &&
+      anchorRef.current.contains(e.target as HTMLElement)
+    ) {
       return;
     }
 
@@ -47,20 +50,24 @@ const DropDown: React.FC<Props> = ({ icon, contents, methods, top }) => {
             z="9"
             shadow="0px 2px 3px rgba(196, 196, 196, 0.25)"
           >
-            {contents.map((content: string, idx: number) => {
-              const isLast = idx === contents.length - 1;
+            {contents.map(
+              (content: string, idx: number): React.ReactElement => {
+                const isLast: boolean = idx >= contents.length - 1;
 
-              return (
-                <List
-                  key={(idx * Date.now() + Math.random()).toString(36)}
-                  padding="16px 30px"
-                  _onClick={() => methods[idx]()}
-                  addstyle={isLast || outlineBox('1px solid #E7E7E7', 'bottom')}
-                >
-                  {content}
-                </List>
-              );
-            })}
+                return (
+                  <List
+                    key={(idx * Date.now() + Math.random()).toString(36)}
+                    padding="16px 30px"
+                    _onClick={() => methods[idx]()}
+                    addstyle={
+                      isLast || outlineBox('1px solid #E7E7E7', 'bottom')
+                    }
+                  >
+                    {content}
+                  </List>
+                );
+              },
+            )}
           </Ul>
         </ClickAwayListener>
       ) : null}
