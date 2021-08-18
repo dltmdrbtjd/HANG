@@ -18,7 +18,7 @@ export interface Prop {
   };
 }
 
-const makeItFlexBox = css`
+const makeItFlexBox = css<Prop>`
   ${({ hoz, ver }) =>
     css`
       ${flexBox(hoz, ver)};

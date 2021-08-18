@@ -34,7 +34,7 @@ export interface Prop {
   left?: string;
   z?: string;
   shadow?: string;
-  translate?: string;
+  translate?: any;
   cursor?: string;
   addstyle?: any;
   theme: {

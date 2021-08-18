@@ -27,7 +27,7 @@ export interface Props {
   left?: string;
   z?: string;
   shadow?: string;
-  translate?: string;
+  translate?: any;
   cursor?: string;
   addstyle?: any;
   _onClick?: any;

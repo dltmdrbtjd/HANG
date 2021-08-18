@@ -25,7 +25,7 @@ export interface Props {
   left?: string;
   z?: string;
   shadow?: string;
-  translate?: string;
+  translate?: any;
   addstyle?: any;
   children?: React.ReactElement | React.ReactElement[] | string;
 }

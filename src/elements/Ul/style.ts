@@ -26,7 +26,8 @@ export interface Prop {
   left?: string;
   z?: string;
   shadow?: string;
-  translate?: string;
+  translate?: any;
+  addstyle?: any;
   theme: {
     [propName: string]: any;
   };

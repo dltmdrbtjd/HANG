@@ -16,7 +16,7 @@ export interface Props {
   shadow?: string;
   disabled?: boolean;
   addstyle?: any;
-  type?: string;
+  type?: 'submit' | 'reset' | 'button' | undefined;
   _onClick?: any;
   children?: React.ReactElement | React.ReactElement[] | string;
 }

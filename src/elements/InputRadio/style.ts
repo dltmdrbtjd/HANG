@@ -23,8 +23,8 @@ const RadioStyle = styled.input<Prop>`
 
   &[type='radio'] {
     background-color: ${({ theme }) => theme.color.white};
-    border: ${({ weigth, theme }) =>
-      `${weigth} solid ${theme.color.semiLightG}`};
+    border: ${({ weight, theme }) =>
+      `${weight} solid ${theme.color.semiLightG}`};
   }
   &[type='radio']:checked {
     background-color: ${({ theme }) => theme.color.brandColor};

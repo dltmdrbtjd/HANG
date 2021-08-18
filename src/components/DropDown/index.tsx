@@ -13,7 +13,7 @@ export interface Props {
   top: string;
 }
 
-const DropDown: React.FC<Props> = ({ icon, contents, methods, top }) => {
+const Dropdown: React.FC<Props> = ({ icon, contents, methods, top }) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -75,4 +75,4 @@ const DropDown: React.FC<Props> = ({ icon, contents, methods, top }) => {
   );
 };
 
-export default DropDown;
+export default Dropdown;

@@ -14,25 +14,25 @@ export interface Prop {
   addstyle?: string;
   theme: {
     [propName: string]: any;
-  }
+  };
 }
 
-const TextAreaStyle = styled.textarea`
-  border-radius: ${({radius}) => radius};
-  width: ${({width}) => width};
-  height: ${({height}) => height};
-  background-color: ${({theme, bgColor}) => theme.color[bgColor]};
-  color: ${({theme, color}) => theme.color[color]};
-  font-size: ${({theme, fs}) => theme.fontSize[fs]};
+const TextAreaStyle = styled.textarea<Prop>`
+  border-radius: ${({ radius }) => radius};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  background-color: ${({ theme, bgColor }) => theme.color[bgColor]};
+  color: ${({ theme, color }) => theme.color[color]};
+  font-size: ${({ theme, fs }) => theme.fontSize[fs]};
   resize: none;
-  ${({padding}) => borderBox(padding)};
-  border: ${({border}) => border};
+  ${({ padding }) => borderBox(padding)};
+  border: ${({ border }) => border};
 
   &:focus {
     outline: none;
   }
 
-  ${({addstyle}) => addstyle};
+  ${({ addstyle }) => addstyle};
 `;
 
 export default TextAreaStyle;
