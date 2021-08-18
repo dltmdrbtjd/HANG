@@ -1,7 +1,7 @@
 const pathURI = {
   home: '/',
   onboarding: '/onboarding',
-  logIn: '/login',
+  signIn: '/signIn',
   signUp: '/signup',
   forgotPwd: '/signup/forgot_pwd',
   welcome: '/signup/welcome',
