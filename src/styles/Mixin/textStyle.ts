@@ -37,7 +37,7 @@ const textOverflow = () => {
   `;
 };
 
-const textOverflowWrap = (clamp: string) => {
+const textOverflowWrap = (clamp: string | number) => {
   return css`
     overflow: hidden;
     display: -webkit-box;
