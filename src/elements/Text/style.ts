@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 // mixin
-import { borderBox,textProps, addTextSettings } from 'src/styles/Mixin';
+import { borderBox, textProps, addTextSettings } from 'src/styles/Mixin';
 
 export interface Prop {
   width?: string;
@@ -18,14 +18,15 @@ export interface Prop {
   addstyle?: any;
 }
 
-const TextStyle = styled.p`
-  width: ${({width}) => width};
-  height: ${({height}) => height};
-  margin: ${({margin}) => margin};
-  ${({padding}) => borderBox(padding)};
-  ${({fs,fw,color,lh,textAlign}) => textProps(fs,fw,color,lh,textAlign)};
-  ${({ls,wb,ws}) => addTextSettings(ls,wb,ws)};
-  ${({addstyle}) => addstyle};
+const TextStyle = styled.p<Prop>`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  margin: ${({ margin }) => margin};
+  ${({ padding }) => borderBox(padding)};
+  ${({ fs, fw, color, lh, textAlign }) =>
+    textProps(fs, fw, color, lh, textAlign)};
+  ${({ ls, wb, ws }) => addTextSettings(ls, wb, ws)};
+  ${({ addstyle }) => addstyle};
 `;
 
 export default TextStyle;
