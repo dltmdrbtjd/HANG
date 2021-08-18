@@ -5,12 +5,11 @@ import CityTab from './style';
 
 export interface Props {
   toggle?: boolean;
+  setCity: any;
+  setGu: any;
 }
 
-const AreaSelectBox: React.FC<Props> = ({
-  toggle,
-  ...props
-}): React.ReactElement => {
+const AreaSelectBox = ({ toggle, ...props }: Props) => {
   const [currentCity, setCurrentCity] = React.useState<number>(0);
   const [currentGu, setCurrntGu] = React.useState<number>(0);
 
@@ -37,6 +36,11 @@ const AreaSelectBox: React.FC<Props> = ({
       setCityName('서울특별시');
     }
   };
+
+  React.useEffect(() => {
+    props.setCity(cityName);
+    props.setGu(guName);
+  }, [cityName, guName]);
 
   return (
     <>
