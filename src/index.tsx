@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+// redux store
+import { Provider } from 'react-redux';
+import store from './redux/configureStore';
+// service worker
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 // theme
 import GlobalThemeProvider from './styles/GlobalThemeProvider';
+// app
+import App from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <GlobalThemeProvider>
-      <App />
-    </GlobalThemeProvider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <GlobalThemeProvider>
+        <App />
+      </GlobalThemeProvider>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root'),
 );
 

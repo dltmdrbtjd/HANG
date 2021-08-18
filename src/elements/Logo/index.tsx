@@ -9,7 +9,7 @@ export interface Props {
   children?: React.ReactElement | string;
 }
 
-const Logo: React.FC<Props> = ({ children, ...props }) => {
+const Logo: React.FC<Props> = ({ children, ...props }): React.ReactElement => {
   return <LogoStyle {...props}>{children}</LogoStyle>;
 };
 

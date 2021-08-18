@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isLogin } from '../shared/cookie';
+import { isLogin } from '../shared/token';
 
 interface Public {
   component: React.ElementType;
   path: string;
-  restricted: boolean | undefined;
+  restricted: boolean;
   exact?: boolean | undefined;
 }
 

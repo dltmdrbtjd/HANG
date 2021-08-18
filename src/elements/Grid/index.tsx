@@ -34,7 +34,11 @@ export interface Props {
   children?: React.ReactElement | React.ReactElement[] | string;
 }
 
-const Grid: React.FC<Props> = ({ _onClick, children, ...props }) => {
+const Grid: React.FC<Props> = ({
+  _onClick,
+  children,
+  ...props
+}): React.ReactElement => {
   return (
     <GridStyle onClick={_onClick} {...props}>
       {children}

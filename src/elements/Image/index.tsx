@@ -9,7 +9,7 @@ export interface Props {
   alt?: string;
 }
 
-const Image: React.FC<Props> = ({ src, alt, ...props }) => {
+const Image: React.FC<Props> = ({ src, alt, ...props }): React.ReactElement => {
   if (!src) return null;
 
   return <ImageStyle src={src} alt={alt} {...props} />;

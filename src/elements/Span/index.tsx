@@ -29,7 +29,7 @@ export interface Props {
   children?: React.ReactElement | React.ReactElement[] | string;
 }
 
-const Span: React.FC<Props> = ({ children, ...props }) => {
+const Span: React.FC<Props> = ({ children, ...props }): React.ReactElement => {
   return <SpanStyle {...props}>{children}</SpanStyle>;
 };
 

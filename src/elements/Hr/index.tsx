@@ -8,7 +8,7 @@ export interface Props {
   bgColor?: string;
 }
 
-const Hr: React.FC<Props> = (props) => {
+const Hr: React.FC<Props> = (props): React.ReactElement => {
   return <HrStyle {...props} />;
 };
 

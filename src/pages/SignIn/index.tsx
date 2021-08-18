@@ -2,6 +2,12 @@ import React from 'react';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
+// api
+import apis from 'src/shared/api';
+// token
+import { setToken } from 'src/shared/token';
+// user info
+import { setUserInfo } from 'src/shared/userInfo';
 // history
 import { history } from '../../redux/configureStore';
 // elements
@@ -16,14 +22,41 @@ import {
 } from '../../elements/index';
 // image
 import LogoImg from '../../Images/Logo.png';
-// reducer
-import { SignIn, signInStatus } from './useSignIn';
 
-const Login = () => {
+interface UserInfo {
+  userId: string;
+  password: string;
+}
+
+interface SignInStatus {
+  status: boolean;
+  errorMsg: string;
+}
+
+const SignIn = (): React.ReactElement => {
   interface Value {
     userId: string;
     password: string;
   }
+
+  const [signInStatus, setSignInStatus] = React.useState<SignInStatus>({
+    status: false,
+    errorMsg: '',
+  });
+
+  const SignIn = (userInfo: UserInfo) => {
+    apis
+      .Login(userInfo)
+      .then(({ data }) => setToken(data.accessToken))
+      .then(() => setUserInfo())
+      .then(() => history.replace('/'))
+      .catch(() => {
+        setSignInStatus({
+          status: false,
+          errorMsg: '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.',
+        });
+      });
+  };
 
   return (
     <Container>
@@ -125,4 +158,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignIn;
