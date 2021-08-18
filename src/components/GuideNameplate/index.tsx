@@ -8,7 +8,7 @@ export interface Props {
   children: string;
 }
 
-const GuideNameplate: React.FC<Props> = ({ children }) => {
+const GuideNameplate = ({ children }: Props) => {
   return (
     <Strong color="brandColor" margin="0 3px 0 0" addstyle={NameplateStyle}>
       {children}

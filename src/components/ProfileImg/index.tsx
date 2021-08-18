@@ -11,7 +11,7 @@ export interface Props {
   imgUrl: string | null;
 }
 
-const ProfileImg: React.FC<Props> = ({ size, imgUrl }) => {
+const ProfileImg = ({ size, imgUrl }: Props) => {
   return (
     <Grid
       overflow="hidden"

@@ -4,7 +4,7 @@ import LabelStyle from './style';
 
 export interface Props {
   id?: string;
-  children: string;
+  children?: string;
   fw?: string;
   fs?: string;
   color?: string;

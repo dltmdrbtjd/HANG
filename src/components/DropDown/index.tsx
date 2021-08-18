@@ -13,7 +13,7 @@ export interface Props {
   top: string;
 }
 
-const Dropdown: React.FC<Props> = ({ icon, contents, methods, top }) => {
+const Dropdown = ({ icon, contents, methods, top }: Props) => {
   const [open, setOpen] = React.useState<boolean>(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
