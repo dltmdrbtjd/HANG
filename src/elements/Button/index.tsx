@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import ButtonStyle from './style';
 
 export interface Props {
@@ -21,7 +21,7 @@ export interface Props {
   children?: React.ReactElement | React.ReactElement[] | string;
 }
 
-const Button: React.FC<Props> = forwardRef(
+const Button = React.forwardRef<HTMLButtonElement, Props>(
   ({ disabled, type, _onClick, children, ...props }, ref) => {
     return (
       <ButtonStyle

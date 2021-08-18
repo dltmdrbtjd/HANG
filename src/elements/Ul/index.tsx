@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import UlStyle from './style';
 
 export interface Props {
@@ -10,6 +10,7 @@ export interface Props {
   margin?: string;
   bgColor?: string;
   radius?: string;
+  border?: string;
   overflow?: string;
   padding?: string;
   fs?: string;
@@ -29,12 +30,14 @@ export interface Props {
   children?: React.ReactElement | React.ReactElement[] | string;
 }
 
-const Ul: React.FC<Props> = forwardRef(({ children, ...props }, ref) => {
-  return (
-    <UlStyle ref={ref} {...props}>
-      {children}
-    </UlStyle>
-  );
-});
+const Ul = React.forwardRef<HTMLUListElement, Props>(
+  ({ children, ...props }, ref) => {
+    return (
+      <UlStyle ref={ref} {...props}>
+        {children}
+      </UlStyle>
+    );
+  },
+);
 
 export default Ul;
