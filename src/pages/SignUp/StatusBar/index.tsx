@@ -11,8 +11,8 @@ const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
 
   return (
-    <Grid isFlex hoz="center" padding="50px 0 0" margin="0 0 50px">
-      <Grid isFlex ver="center" width="auto">
+    <Grid isFlex hoz="center" padding="50px 0">
+      <Grid isFlex ver="center">
         {pageNav.map((page: number, idx: number) => {
           let color = 'gray';
 
@@ -57,7 +57,7 @@ const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
               {idx < pageNav.length - 1 ? (
                 <Hr
                   width="85px"
-                  bgColor={page < curPage ? 'brandColor' : 'semiLightG'}
+                  bgColor={page < curPage ? 'brandColor' : 'lightGray'}
                 />
               ) : null}
             </React.Fragment>
