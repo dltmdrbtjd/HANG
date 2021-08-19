@@ -1,4 +1,4 @@
-import { createReducer, createAction,  PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 // apis
 import apis from '../../shared/api';
 
@@ -24,41 +24,55 @@ interface Promise {
   endDate: string;
 }
 
+interface home {
+  confirmed: Promise;
+  guide: TraveleCard[];
+  traveler: TraveleCard[];
+}
+
 interface homeType {
   HomeData: {
     confirmed: Promise;
     guide: TraveleCard[];
     traveler: TraveleCard[];
-  }
+  },
+  loading: boolean,
 }
 
-export const initalState: homeType = {
+export const initialState: homeType = {
   HomeData: {
     confirmed: null,
     guide: [],
     traveler: [],
-  }
+  },
+  loading: false,
 }
 
-const getLoadAction = createAction<unknown>('home/HOME_LOAD');
-
-const HomeReducer = createReducer(initalState, {
-  [getLoadAction.type]: (state: homeType ,action: PayloadAction<any>) => {
-    state.HomeData = action.payload;
-  }
+export const fetchLoad = createAsyncThunk('home/HOME_LOAD', async () => {
+  return apis
+    .MainLoad()
+    .then(res => res.data)
+    .catch((err) => console.log(err));
 })
 
-const getMainData = () => async (dispatch, getState, {history}) => {
-  try {
-    const data = await apis.MainLoad();
-    dispatch(getLoadAction(data));
-  } catch (err) {
-    console.error(err);
+const homeSlice = createSlice({
+  name: 'home',
+  initialState,
+  reducers: {},
+  extraReducers: {
+    [fetchLoad.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [fetchLoad.fulfilled.type]: (state,action: PayloadAction<home>) => {
+      state.loading = false;
+      state.HomeData.confirmed = action.payload.confirmed;
+    },
+    [fetchLoad.rejected.type]: (state) => {
+      state.loading = false;
+      state.HomeData = initialState.HomeData;
+    }
   }
-}
+});
 
-export const homeActions = {
-  getMainData,
-}
-
-export default HomeReducer;
+const { reducer } = homeSlice;
+export default reducer;
