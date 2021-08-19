@@ -26,13 +26,13 @@ import { Text, Grid } from '../../elements';
 import { NavigationIcons, NavigationStyle } from './style';
 // import '../../Header/NotiBadge/style.css';
 // path
-// import { HeaderIncluded } from '../../Route/Path';
+import { HeaderIncluded } from '../../Route/Path';
 
 const Navigation = () => {
   const path: string = useLocation().pathname;
   // const chatAlarmChecked = useSelector((state) => state.chat.alarmCount);
 
-  return (
+  return HeaderIncluded.includes(path) || /mypage\/promise/.test(path) ? (
     <Grid
       width="100%"
       bgColor="bgColor"
@@ -107,7 +107,7 @@ const Navigation = () => {
         </NavigationIcons>
       </NavigationStyle>
     </Grid>
-  );
+  ) : null;
 };
 
 export default Navigation;
