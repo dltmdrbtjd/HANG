@@ -10,7 +10,6 @@ import {
   UserDetailType,
   GuideRequestType,
   DoGuideType,
-  LikeToggleType,
   CreateTripEventType,
   DeleteTripEventType,
   UpdateProfileType,
@@ -85,7 +84,7 @@ const apis = {
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),
 
   // favorite
-  LikeToggle: (targetPk: LikeToggleType) =>
+  LikeToggle: (targetPk: number) =>
     instance.post('/api/like', targetPk),
   LikeLoad: () => instance.get('/api/like'),
 
