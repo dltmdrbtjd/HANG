@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux';
 // style
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { LikeUpdate } from 'src/redux/modules/HomeModule/home';
+import { SearchLikeUpdate } from 'src/redux/modules/SearchModule/search';
 import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
-// import { SearchCreators } from '../../redux/modules/search';
+import { HomeLikeUpdate } from 'src/redux/modules/HomeModule/home';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
@@ -15,7 +15,13 @@ import ProfileImg from '../ProfileImg/index';
 // import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
 import { textOverflow } from '../../styles/Mixin';
 
-const SearchCard = ({ userInfo, category, idx }) => {
+export type Props = {
+  userInfo: any;
+  category?: undefined | string;
+  idx: number;
+};
+
+const SearchCard = ({ userInfo, category, idx }: Props) => {
   const dispatch = useDispatch();
   const path = useLocation().pathname;
 
@@ -23,27 +29,19 @@ const SearchCard = ({ userInfo, category, idx }) => {
     dispatch(
       FavoriteCreators.fetchFavoriteToggle({ targetPk: userInfo.userPk }),
     );
-    if (path.includes('/')) {
+    if (path.includes('/search')) {
       if (userInfo.like) {
-        dispatch(LikeUpdate({ category, idx, like: false }));
+        dispatch(SearchLikeUpdate({ idx, like: false }));
       } else {
-        dispatch(LikeUpdate({ category, idx, like: true }));
+        dispatch(SearchLikeUpdate({ idx, like: true }));
+      }
+    } else if (path.includes('/')) {
+      if (userInfo.like) {
+        dispatch(HomeLikeUpdate({ category, idx, like: false }));
+      } else {
+        dispatch(HomeLikeUpdate({ category, idx, like: true }));
       }
     }
-
-    // if (path.includes('/search')) {
-    //   if (userInfo.like) {
-    //     dispatch(SearchCreators.likeUpdateHandler(idx, false));
-    //   } else {
-    //     dispatch(SearchCreators.likeUpdateHandler(idx, true));
-    //   }
-    // } else if (path.includes('/')) {
-    //   if (userInfo.like) {
-    //     dispatch(HomeCreators.likeUpdateHandler(category, idx, false));
-    //   } else {
-    //     dispatch(HomeCreators.likeUpdateHandler(category, idx, true));
-    //   }
-    // }
   };
 
   return (
@@ -65,6 +63,7 @@ const SearchCard = ({ userInfo, category, idx }) => {
         <Grid
           width="70%"
           margin="0 0 0 10px"
+          cursor="pointer"
           _onClick={() => {
             history.push(`/detail?user=${userInfo.userPk}`);
           }}
