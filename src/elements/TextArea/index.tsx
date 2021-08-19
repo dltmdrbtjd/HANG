@@ -13,7 +13,7 @@ export interface Props {
   fs?: string;
   padding?: string;
   radius?: string;
-  rows?: string;
+  rows?: number;
   border?: string;
 }
 
@@ -41,7 +41,7 @@ TextArea.defaultProps = {
   fs: 'md',
   padding: '12px',
   radius: '14px',
-  rows: '20',
+  rows: 20,
   border: '1px solid #E7E7E7',
   _onChange: () => {},
 };

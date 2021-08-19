@@ -6,7 +6,7 @@ export interface Props {
   children: React.ReactElement | React.ReactElement[];
 }
 
-const Section: React.FC = ({ children }) => {
+const Section: React.FC = ({ children }): React.ReactElement => {
   return <SectionStyle>{children}</SectionStyle>;
 };
 

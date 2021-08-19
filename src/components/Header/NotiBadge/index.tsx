@@ -30,71 +30,72 @@ interface ChatLog {
 }
 
 const NotiBadge = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  //   const pkList = useSelector((state) => state.chat.list).map(
-  //     (room) => room.targetPk,
-  //   );
+  // //   const pkList = useSelector((state) => state.chat.list).map(
+  // //     (room) => room.targetPk,
+  // //   );
 
-  const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
-  const [chatLog, setChatLog] = React.useState<ChatLog>({});
-  const ENDPOINT = 'https://soujinko.shop/';
-  const socket = socketIOClient(ENDPOINT);
-  //   const userPk = getUserInfo() && getUserInfo().userPk;
+  // const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
+  // const [chatLog, setChatLog] = React.useState<ChatLog>({});
+  // const ENDPOINT = 'https://soujinko.shop/';
+  // const socket = socketIOClient(ENDPOINT);
+  // //   const userPk = getUserInfo() && getUserInfo().userPk;
 
-  const NotiOff = () => {
-    setNewAlarm(false);
-    history.push('/noti');
-  };
+  // const NotiOff = () => {
+  //   setNewAlarm(false);
+  //   history.push('/noti');
+  // };
 
-  React.useEffect(() => {
-    // socket.emit('login', { uid: userPk });
-    socket.on('requested', (data) => {
-      setNewAlarm(data);
-    });
+  // React.useEffect(() => {
+  //   // socket.emit('login', { uid: userPk });
+  //   socket.on('requested', (data) => {
+  //     setNewAlarm(data);
+  //   });
 
-    apis
-      .AlarmCheck()
-      .then((res) => {
-        setNewAlarm(res.data);
-      })
-      .catch((err) => console.log(err));
+  //   apis
+  //     .AlarmCheck()
+  //     .then((res) => {
+  //       setNewAlarm(res.data);
+  //     })
+  //     .catch((err) => console.log(err));
 
-    socket.on('unchecked', () => {
-      dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
-    });
-  }, []);
+  //   socket.on('unchecked', () => {
+  //     dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
+  //   });
+  // }, []);
 
-  React.useEffect(() => {
-    socket.on('newMessage', (data) => {
-      setChatLog(data);
+  // React.useEffect(() => {
+  //   socket.on('newMessage', (data) => {
+  //     setChatLog(data);
 
-      dispatch(ChatCreators.ChatHistoryUpdate(data));
-    });
-  }, [pkList]);
+  //     dispatch(ChatCreators.ChatHistoryUpdate(data));
+  //   });
+  // }, [pkList]);
 
-  React.useEffect(() => {
-    if (chatLog.userPk && !pkList.includes(chatLog.userPk)) {
-      socket.emit('newRoom', { targetPk: chatLog.userPk });
-      socket.on('newRoom', (data) => {
-        dispatch(
-          ChatCreators.CreateChatRoom({
-            lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
-            unchecked: 1,
-            targetPk: chatLog.userPk,
-            ...data,
-          }),
-        );
-      });
-    }
-  }, [chatLog]);
+  // React.useEffect(() => {
+  //   if (chatLog.userPk && !pkList.includes(chatLog.userPk)) {
+  //     socket.emit('newRoom', { targetPk: chatLog.userPk });
+  //     socket.on('newRoom', (data) => {
+  //       dispatch(
+  //         ChatCreators.CreateChatRoom({
+  //           lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
+  //           unchecked: 1,
+  //           targetPk: chatLog.userPk,
+  //           ...data,
+  //         }),
+  //       );
+  //     });
+  //   }
+  // }, [chatLog]);
 
   return (
     // name="alarm"
-    <Button _onClick={NotiOff} form="text">
+    // _onClick={NotiOff}
+    <Button form="text">
       <Grid>
         <Badge
-          invisible={!newAlarm}
+          // invisible={!newAlarm}
           variant="dot"
           overlap="circular"
           color="secondary"

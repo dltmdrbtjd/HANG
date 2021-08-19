@@ -31,7 +31,7 @@ export interface Props {
 }
 
 const Ul = React.forwardRef<HTMLUListElement, Props>(
-  ({ children, ...props }, ref) => {
+  ({ children, ...props }, ref): React.ReactElement => {
     return (
       <UlStyle ref={ref} {...props}>
         {children}

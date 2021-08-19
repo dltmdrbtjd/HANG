@@ -24,14 +24,14 @@ export interface Prop {
 const buttonShapeSetting = (form: string) => {
   switch (form) {
     case 'text':
-      return css`
+      return css<Prop>`
         background: none;
         padding: 0;
         color: ${({ color, theme }) => color && theme.color[color]};
       `;
 
     default:
-      return css`
+      return css<Prop>`
         background-color: ${({ bgColor, theme }) => theme.color[bgColor]};
         color: ${({ color, theme }) =>
           color ? theme.color[color] : theme.color.white};

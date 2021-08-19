@@ -1,12 +1,15 @@
 import React from 'react';
-import { Button } from './elements';
+// route
+import { ConnectedRouter } from 'connected-react-router';
+import Route from './route/Route';
+// history
+import { history } from './redux/configureStore';
 
-const App = () => {
+const App = (): React.ReactElement => {
   return (
-    <>
-      <div className="App">웰컴투 타입스크립트</div>
-      <Button>열어 지역</Button>
-    </>
+    <ConnectedRouter history={history}>
+      <Route />
+    </ConnectedRouter>
   );
 };
 
