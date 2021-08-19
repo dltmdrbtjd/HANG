@@ -6,7 +6,7 @@ import PrivateRoute from './PrivateRoute';
 // components
 import Section from '../elements/Section';
 // pages
-// import Home from '../pages/Home';
+import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 // import SignUp from '../pages/SignUp';
 // import Onboarding from '../pages/Onboarding';
@@ -64,7 +64,7 @@ const Route = () => {
             component={Onboarding}
             exact
           /> */}
-          {/* <PrivateRoute path={pathURI.home} component={Home} exact /> */}
+          <PrivateRoute path={pathURI.home} component={Home} exact />
           {/* <PrivateRoute path={pathURI.search} component={Search} exact />
           <PrivateRoute path={pathURI.detail} component={Detail} exact />
           <PrivateRoute path={pathURI.request} component={GuideRequest} exact />
