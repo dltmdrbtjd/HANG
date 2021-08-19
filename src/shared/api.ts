@@ -7,7 +7,6 @@ import {
   DuplicateType,
   LoginType,
   SearchType,
-  UserDetailType,
   GuideRequestType,
   DoGuideType,
   CreateTripEventType,
@@ -48,7 +47,7 @@ instance.interceptors.response.use(
     ) {
       window.alert('토큰이 만료되었습니다.');
       delToken();
-      window.location.replace('/login');
+      window.location.replace('/signIn');
     }
 
     return Promise.reject(error);
@@ -78,7 +77,7 @@ const apis = {
   Search: (content: SearchType) => instance.post('/api/main/search', content),
 
   // user detail
-  UserDetail: (userPk: UserDetailType) => instance.get(`/api/user/${userPk}`),
+  UserDetail: (userPk: number | string | string[]) => instance.get(`/api/user/${userPk}`),
   MyPromise: () => instance.get('/api/guide'),
   GuideRequest: (info: GuideRequestType) => instance.post('/api/guide', info),
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),
