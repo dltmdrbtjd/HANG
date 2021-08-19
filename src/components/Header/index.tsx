@@ -3,7 +3,7 @@ import React from 'react';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 // router
 import { useLocation } from 'react-router-dom';
-import { HeaderIncluded } from '../../route/Path';
+import { HeaderIncluded } from '../../Route/Path';
 // history
 import { history } from '../../redux/configureStore';
 // components
