@@ -1,11 +1,11 @@
 import axios from 'axios';
 // types
 import {
-  SmsType,
+  PhoneType,
   SignUpType,
   PauthType,
   DuplicateType,
-  LoginType,
+  SignInType,
   SearchType,
   GuideRequestType,
   DoGuideType,
@@ -57,13 +57,14 @@ instance.interceptors.response.use(
 // 사용할 api들
 const apis = {
   // user
-  SMSAuth: (phone: SmsType) => instance.post('/api/users/sms_auth', phone),
+  PhoneVerification: (phone: PhoneType) =>
+    instance.post('/api/users/sms_auth', phone),
   SignUp: (user: SignUpType) => instance.post('/api/users', user),
   Pauth: (authInfo: PauthType) => instance.post('/api/users/p_auth', authInfo),
   Duplicate: (user: DuplicateType) =>
     instance.post('/api/users/duplicate', user),
-  Login: (user: LoginType) => instance.post('/api/users/signin', user),
-  LogOut: () => instance.delete('/api/users/signout'),
+  SignIn: (user: SignInType) => instance.post('/api/users/signin', user),
+  SignOut: () => instance.delete('/api/users/signout'),
 
   // alarm
   AlarmCheck: () => instance.get('/api/alarm'),
@@ -83,8 +84,7 @@ const apis = {
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),
 
   // favorite
-  LikeToggle: (targetPk: number) =>
-    instance.post('/api/like', targetPk),
+  LikeToggle: (targetPk: number) => instance.post('/api/like', targetPk),
   LikeLoad: () => instance.get('/api/like'),
 
   // myinfo

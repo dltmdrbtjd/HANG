@@ -1,7 +1,8 @@
 // user module => api types
-export type SmsType = {
+export type PhoneType = {
   pNum: string;
-}
+  status: number;
+};
 
 export type SignUpType = {
   userId: string;
@@ -13,22 +14,22 @@ export type SignUpType = {
   profileImg: string | null;
   gender: string;
   pNum: string;
-}
+};
 
 export type PauthType = {
   pNum: string;
   aNum: string;
-}
+};
 
 export type DuplicateType = {
   userId?: string;
   nickname?: string;
-}
+};
 
-export type LoginType = {
+export type SignInType = {
   userId: string;
   password: string;
-}
+};
 
 // search module => api types
 export type SearchType = {
@@ -38,20 +39,18 @@ export type SearchType = {
   traveler?: boolean;
   guide?: boolean;
   pageNum?: number;
-}
-
-// detail module => api types
+};
 
 export type GuideRequestType = {
   pagePk: number;
   tripId: string;
   startDate: string;
   endDate: string;
-}
+};
 
 export type DoGuideType = {
   tripId: number;
-}
+};
 
 // myinfo module => api types
 export type CreateTripEventType = {
@@ -60,11 +59,11 @@ export type CreateTripEventType = {
   startDate: string;
   endDate: string;
   tripInfo: string;
-}
+};
 
 export type DeleteTripEventType = {
   tripId: number;
-}
+};
 
 export type UpdateProfileType = {
   nickname: string;
@@ -73,17 +72,17 @@ export type UpdateProfileType = {
   region: string;
   city: string;
   intro: string;
-}
+};
 
 export type AgreePromiseType = {
   tripId: number;
   requestId: number;
-}
+};
 
 export type RejectPromiseType = {
   requestId: number;
-}
+};
 
 export type CancelPromiseType = {
   tripId: number;
-}
+};

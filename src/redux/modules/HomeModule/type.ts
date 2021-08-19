@@ -31,8 +31,8 @@ export interface homeType {
     confirmed: any;
     guide: TraveleCard[];
     traveler: TraveleCard[];
-  },
-  loading: boolean,
+  };
+  loading: boolean;
 }
 
 export interface like {
