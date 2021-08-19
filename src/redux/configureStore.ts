@@ -5,12 +5,14 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { connectRouter } from 'connected-react-router';
 // modules
-import HomeReducer from './modules/home';
+import HomeReducer from './modules/HomeModule/home';
+import FavoriteReducer from './modules/FavoriteModule/favorite';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   home: HomeReducer,
+  favorite: FavoriteReducer,
   router: connectRouter(history),
 })
 
