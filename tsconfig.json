@@ -18,5 +18,5 @@
     "noFallthroughCasesInSwitch": true
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "public/worker.ts"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "public/worker.js"]
 }
