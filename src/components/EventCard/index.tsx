@@ -6,7 +6,7 @@ import { Grid, Text, MainTitle, Button } from 'src/elements';
 import { textOverflowWrap } from 'src/styles/Mixin';
 import Modal from '../Modal';
 
-type Info = {
+interface Info {
   city: string;
   endDate: string;
   partner: any;
@@ -16,19 +16,21 @@ type Info = {
   tripInfo: string;
   nickname: string;
   userPk: number;
-};
+}
 
-interface Props {
-  userInfo: Info;
-  sub2Text: string;
-  btnText: string;
-  mainText: string;
-  agreeText: string;
-  callback: any;
+export interface Props {
+  userInfo?: Info;
+  subText?: string;
+  sub2Text?: string;
+  btnText?: string;
+  mainText?: string;
+  agreeText?: string;
+  callback?: any;
 }
 
 const EventCard = ({
   userInfo,
+  subText,
   sub2Text,
   mainText,
   agreeText,
@@ -73,7 +75,7 @@ const EventCard = ({
           close={closeModalHandler}
           agree={agreeModalHandler}
           mainText={mainText}
-          subText={userInfo && userInfo.nickname}
+          subText={subText}
           subText2={sub2Text}
           agreeText={agreeText}
         />

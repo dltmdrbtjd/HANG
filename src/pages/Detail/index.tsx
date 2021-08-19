@@ -1,0 +1,124 @@
+import React from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import queryString from 'query-string';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
+import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
+import apis from 'src/shared/api';
+import socket from 'src/shared/socket';
+import { history, RootState } from '../../redux/configureStore';
+// style
+import { Grid, MainTitle, Button, Image, Container } from '../../elements';
+// redux
+// import { ChatCreators } from '../../redux/modules/chat';
+// component
+import ProfileCard from '../../components/ProfileCard';
+import EventCard from '../../components/EventCard';
+import ToastMessage from '../../components/ToastMessage';
+// style
+// import { TabEventWrapper } from '../MyPage/MyInfo/style';
+// image
+import chat from '../../Images/NavigationIcons/onchat.svg';
+
+const Detail = () => {
+  const dispatch = useDispatch();
+
+  const { eventList, userInfo, message }: any = useSelector<RootState>(
+    (state) => ({
+      eventList: state.detail.tripInfo,
+      userInfo: state.detail.userInfo,
+      message: state.toastMessage.Message,
+    }),
+    shallowEqual,
+  );
+
+  const GuideHandler = () => {
+    history.push(
+      `/detail/request?user=${userInfo.userPk}&nickname=${userInfo.nickname}`,
+    );
+  };
+
+  const query = queryString.parse(location.search);
+
+  const TraveleRequestHandler = (pk, userPk) => {
+    apis
+      .DoGuide({ tripId: pk })
+      .then(() => {
+        socket.emit('request', { uid: userPk });
+        dispatch(fetchMessage(true));
+      })
+      .catch((err) => {
+        window.alert(err.response.data.errorMessage);
+      });
+  };
+
+  // const chooseChatRoom = () => {
+  //   dispatch(
+  //     ChatCreators.ChooseChatRoom({
+  //       nickname: userInfo.nickname,
+  //       profileImg: userInfo.profileImg,
+  //     }),
+  //   );
+
+  //   history.push(`/chat/room?number=${query.user}`);
+  // };
+
+  React.useEffect(() => {
+    dispatch(DetailCreators.fetchDetailLoad(query.user));
+    if (message) {
+      setTimeout(() => {
+        dispatch(fetchMessage(false));
+      }, 1500);
+    }
+  }, [message]);
+
+  return (
+    <Container>
+      <Grid>
+        <MainTitle fs="xl">프로필</MainTitle>
+        <ProfileCard userInfo={userInfo} />
+        <Grid isFlex hoz="flex-end" margin="17px 0 60px 0">
+          <Button
+            width="48px"
+            height="48px"
+            radius="50%"
+            bgColor="white"
+            border="0.5px solid #E7E7E7"
+            padding="10px 9px"
+            margin="0 7px 0 0"
+            // _onClick={chooseChatRoom}
+          >
+            <Image src={chat} alt="chat icon" />
+          </Button>
+
+          <Button padding="14px 18px" _onClick={GuideHandler}>
+            길잡이 부탁하기
+          </Button>
+        </Grid>
+        <MainTitle fs="sxl">
+          {userInfo && userInfo.nickname}님의 여행 이벤트
+        </MainTitle>
+        {eventList ? (
+          <Grid>
+            {eventList.map((item, idx) => {
+              return (
+                <EventCard
+                  key={idx}
+                  userInfo={item}
+                  subText={`${userInfo.nickname}님의`}
+                  sub2Text="길잡이가 되어주시겠습니까?"
+                  btnText="길잡이 되어주기"
+                  callback={() => {
+                    TraveleRequestHandler(item.tripId, item.userPk);
+                  }}
+                />
+              );
+            })}
+          </Grid>
+        ) : null}
+        {message && <ToastMessage msg="신청이 완료되었습니다." />}
+      </Grid>
+    </Container>
+  );
+};
+
+export default Detail;

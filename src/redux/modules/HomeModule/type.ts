@@ -28,7 +28,7 @@ export interface home {
 
 export interface homeType {
   HomeData: {
-    confirmed: Promise;
+    confirmed: any;
     guide: TraveleCard[];
     traveler: TraveleCard[];
   },

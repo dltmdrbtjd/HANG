@@ -13,7 +13,3 @@ export interface favoriteType {
   list: FavoriteUser[];
   loading: boolean;
 }
-
-export interface favorite {
-  list: FavoriteUser[];
-}

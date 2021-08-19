@@ -41,9 +41,6 @@ export type SearchType = {
 }
 
 // detail module => api types
-export type UserDetailType = {
-  userPk: number;
-}
 
 export type GuideRequestType = {
   pagePk: number;

@@ -2,7 +2,7 @@ import {  createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 // apis
 import apis from 'src/shared/api';
 // types
-import { favoriteType, favorite } from './type';
+import { favoriteType } from './type';
 
 const initialState: favoriteType = {
   list: [],
@@ -42,9 +42,9 @@ const favoriteSlice = createSlice({
     [fetchFavoriteLoad.pending.type]: (state) => {
       state.loading = true;
     },
-    [fetchFavoriteLoad.fulfilled.type]: (state, action: PayloadAction<favorite>) => {
+    [fetchFavoriteLoad.fulfilled.type]: (state, action: PayloadAction<[]>) => {
       state.loading = false;
-      state.list = action.payload.list;
+      state.list = action.payload;
     },
     [fetchFavoriteLoad.rejected.type]: (state) => {
       state.loading = false;

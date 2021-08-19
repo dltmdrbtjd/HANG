@@ -9,12 +9,13 @@ export interface Props {
   bgColor?: string;
   radius?: string;
   padding?: string;
+  border?: string;
   fs?: string;
   fw?: string;
   color?: string;
   disColor?: string;
   shadow?: string;
-  disabled?: boolean;
+  disabled?: any;
   addstyle?: any;
   type?: 'submit' | 'reset' | 'button' | undefined;
   _onClick?: any;
