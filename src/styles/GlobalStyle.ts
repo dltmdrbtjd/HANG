@@ -1,7 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-const GlobalStyle = createGlobalStyle`
+interface Prop {
+  theme: {
+    [propName: string]: any;
+  };
+}
+
+const GlobalStyle = createGlobalStyle<Prop>`
   ${reset};
 
   body {

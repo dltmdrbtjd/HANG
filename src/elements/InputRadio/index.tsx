@@ -9,7 +9,7 @@ export interface Props {
   marginRight?: string;
 }
 
-const InputRadio: React.FC<Props> = (props) => {
+const InputRadio: React.FC<Props> = (props): React.ReactElement => {
   return <RadioStyle type="radio" {...props} />;
 };
 

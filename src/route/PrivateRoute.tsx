@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { isLogin } from '../shared/cookie';
+import { isLogin } from '../shared/token';
 
 interface Private {
   component: React.ElementType;

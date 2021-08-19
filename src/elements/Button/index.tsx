@@ -22,7 +22,10 @@ export interface Props {
 }
 
 const Button = React.forwardRef<HTMLButtonElement, Props>(
-  ({ disabled, type, _onClick, children, ...props }, ref) => {
+  (
+    { disabled, type, _onClick, children, ...props },
+    ref,
+  ): React.ReactElement => {
     return (
       <ButtonStyle
         type={type}

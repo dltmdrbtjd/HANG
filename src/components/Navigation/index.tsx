@@ -29,8 +29,8 @@ import { NavigationIcons, NavigationStyle } from './style';
 // import { HeaderIncluded } from '../../Route/Path';
 
 const Navigation = () => {
-  const path: string = useLocation().pathNaem;
-  const chatAlarmChecked = useSelector((state) => state.chat.alarmCount);
+  const path: string = useLocation().pathname;
+  // const chatAlarmChecked = useSelector((state) => state.chat.alarmCount);
 
   return (
     <Grid
@@ -81,7 +81,7 @@ const Navigation = () => {
           onClick={() => history.push('/chat')}
         >
           <Badge
-            invisible={!chatAlarmChecked}
+            // invisible={!chatAlarmChecked}
             variant="dot"
             overlap="circular"
             color="secondary"

@@ -8,7 +8,10 @@ export interface Props {
   children: React.ReactElement | React.ReactElement[];
 }
 
-const Container: React.FC<Props> = ({ children, ...props }) => {
+const Container: React.FC<Props> = ({
+  children,
+  ...props
+}): React.ReactElement => {
   return <ContainerStyle {...props}>{children}</ContainerStyle>;
 };
 
