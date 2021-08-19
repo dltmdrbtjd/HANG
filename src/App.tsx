@@ -6,6 +6,7 @@ import Route from './route/Route';
 import { history } from './redux/configureStore';
 // components
 import Header from './components/Header';
+import Navigation from './components/Navigation';
 
 const App = (): React.ReactElement => {
   return (
@@ -13,6 +14,7 @@ const App = (): React.ReactElement => {
       <Header />
 
       <Route />
+      <Navigation />
     </ConnectedRouter>
   );
 };

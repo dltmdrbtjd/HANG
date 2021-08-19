@@ -2,6 +2,8 @@ import React from 'react';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
+// types
+import { SignInType } from 'src/shared/ApiTypes';
 // apis
 import apis from 'src/shared/api';
 // token
@@ -22,11 +24,6 @@ import {
 // image
 import LogoImg from '../../Images/Logo.png';
 
-interface UserInfo {
-  userId: string;
-  password: string;
-}
-
 interface SignInStatus {
   status: boolean;
   errorMsg: string;
@@ -38,7 +35,7 @@ const SignIn = (): React.ReactElement => {
     errorMsg: '',
   });
 
-  const SignIn = (userInfo: UserInfo): void => {
+  const SignIn = (userInfo: SignInType): void => {
     apis
       .SignIn(userInfo)
       .then(({ data }) => setToken(data.accessToken))
@@ -64,7 +61,7 @@ const SignIn = (): React.ReactElement => {
           userId: yup.string().required('아이디를 입력해주세요'),
           password: yup.string().required('비밀번호를 입력해주세요'),
         })}
-        onSubmit={(values: UserInfo, { setSubmitting }) => {
+        onSubmit={(values: SignInType, { setSubmitting }) => {
           SignIn(values);
           setSubmitting(false);
         }}

@@ -9,19 +9,19 @@ export interface Props {
   bgColor?: string;
   radius?: string;
   padding?: string;
+  border?: string;
   fs?: string;
   fw?: string;
   color?: string;
   disColor?: string;
   shadow?: string;
-  disabled?: boolean;
+  disabled?: any;
   addstyle?: any;
   type?: 'submit' | 'reset' | 'button' | undefined;
   _onClick?: any;
-  children?: React.ReactElement | React.ReactElement[] | string;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, Props>(
+const Button: React.FC<Props> = React.forwardRef<HTMLButtonElement, Props>(
   (
     { disabled, type, _onClick, children, ...props },
     ref,

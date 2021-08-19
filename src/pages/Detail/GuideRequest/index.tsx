@@ -1,0 +1,147 @@
+import React from 'react';
+// moment
+import moment from 'moment';
+// query
+import queryString from 'query-string';
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
+import { RootState, history } from 'src/redux/configureStore';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
+// apis , socket
+import apis from 'src/shared/api';
+import socket from 'src/shared/socket';
+// style
+import {
+  Grid,
+  MainTitle,
+  Text,
+  Button,
+  Label,
+  Container,
+} from '../../../elements';
+import { RadioBtn, maxWidth } from './style';
+// components
+import Modal from '../../../components/Modal';
+
+const GuideRequest = () => {
+  const dispatch = useDispatch();
+  const myPromise: any = useSelector<RootState>(
+    (state) => state.detail.myTripInfo,
+  );
+  const userPk = useSelector<RootState>(
+    (state) => state.detail.userInfo.userPk,
+  );
+
+  const [checked, setChecked] = React.useState<number>(0);
+  const [index, setIndex] = React.useState<number>(0);
+  const [startDate, setStartDate] = React.useState<string>('');
+  const [endDate, setEndDate] = React.useState<string>('');
+  const [modal, setModal] = React.useState<boolean>(false);
+
+  const openModalHandler = () => {
+    setModal(true);
+    setStartDate(moment.utc(myPromise[index].startDate).format('YYYY-MM-DD'));
+    setEndDate(moment.utc(myPromise[index].endDate).format('YYYY-MM-DD'));
+  };
+
+  const agreeModalHandler = (userInfo) => {
+    apis
+      .GuideRequest(userInfo)
+      .then(() => {
+        socket.emit('request', { uid: userPk });
+        dispatch(fetchMessage(true));
+        history.goBack();
+      })
+      .catch((err) => {
+        window.alert('이미 신청한 약속이에요!');
+      });
+    setModal(false);
+  };
+
+  const closeModalHandler = () => {
+    setModal(false);
+  };
+
+  const query = queryString.parse(location.search);
+  const ModalMessage = `${query.nickname}님에게`;
+
+  const promiseData = {
+    pagePk: Number(query.user),
+    tripId: checked,
+    startDate,
+    endDate,
+  };
+
+  React.useEffect(() => {
+    dispatch(DetailCreators.fetctMyTripInfo());
+  }, []);
+
+  return (
+    <Container>
+      <MainTitle fs="xl">나의 약속 리스트</MainTitle>
+      {myPromise.length > 0
+        ? myPromise.map((item, idx) => (
+            <Grid
+              isFlex
+              ver="center"
+              key={idx}
+              padding="20px 0"
+              border="0.5px solid #E7E7E7"
+              borDirection="bottom"
+            >
+              <Grid width="auto">
+                <RadioBtn
+                  type="radio"
+                  id={item.city}
+                  name="city"
+                  checked={checked === item.tripId}
+                  onChange={() => {
+                    setChecked(item.tripId);
+                    setIndex(idx);
+                  }}
+                />
+              </Grid>
+              <Label id={item.city}>
+                <Text fs="sm">
+                  {moment.utc(item.startDate).format('MM. DD')} -{' '}
+                  {moment.utc(item.endDate).format('MM. DD')}
+                </Text>
+                <Text fs="la" fw="bold">
+                  {item.region} {item.city}
+                </Text>
+              </Label>
+            </Grid>
+          ))
+        : '등록하신 약속이 없어요!'}
+      <Grid
+        width="90%"
+        position="fixed"
+        bottom="120px"
+        left="50%"
+        translate="-50%,0"
+        addstyle={maxWidth}
+      >
+        <Button
+          padding="16px 0"
+          width="100%"
+          disabled={myPromise.length > 0 ? '' : 'disabled'}
+          _onClick={openModalHandler}
+        >
+          선택 완료
+        </Button>
+      </Grid>
+      <Modal
+        open={modal}
+        close={closeModalHandler}
+        agree={() => {
+          agreeModalHandler(promiseData);
+        }}
+        subText={ModalMessage}
+        subText2="길잡이를 부탁하시겠습니까?"
+      />
+    </Container>
+  );
+};
+
+export default GuideRequest;

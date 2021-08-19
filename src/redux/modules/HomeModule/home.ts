@@ -6,7 +6,7 @@ import { homeType, home, like } from './type';
 
 export const initialState: homeType = {
   HomeData: {
-    confirmed: null,
+    confirmed: {},
     guide: [],
     traveler: [],
   },
@@ -26,7 +26,7 @@ const homeSlice = createSlice({
   name: 'home',
   initialState,
   reducers: {
-    LikeUpdate: (state, action: PayloadAction<like>) => {
+    HomeLikeUpdate: (state, action: PayloadAction<like>) => {
       let TraveleDoubleCheck;
       let GuideDoubleCheck;
 
@@ -77,5 +77,5 @@ const HomeCreators = {
 
 export { HomeCreators };
 const { reducer, actions } = homeSlice;
-export const { LikeUpdate } = actions;
+export const { HomeLikeUpdate } = actions;
 export default reducer;

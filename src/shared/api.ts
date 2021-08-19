@@ -1,13 +1,12 @@
 import axios from 'axios';
 // types
 import {
-  SmsType,
+  PhoneType,
   SignUpType,
   PauthType,
   DuplicateType,
-  LoginType,
+  SignInType,
   SearchType,
-  UserDetailType,
   GuideRequestType,
   DoGuideType,
   CreateTripEventType,
@@ -48,7 +47,7 @@ instance.interceptors.response.use(
     ) {
       window.alert('토큰이 만료되었습니다.');
       delToken();
-      window.location.replace('/login');
+      window.location.replace('/signIn');
     }
 
     return Promise.reject(error);
@@ -58,12 +57,13 @@ instance.interceptors.response.use(
 // 사용할 api들
 const apis = {
   // user
-  SMSAuth: (phone: SmsType) => instance.post('/api/users/sms_auth', phone),
+  PhoneVerification: (phone: PhoneType) =>
+    instance.post('/api/users/sms_auth', phone),
   SignUp: (user: SignUpType) => instance.post('/api/users', user),
   Pauth: (authInfo: PauthType) => instance.post('/api/users/p_auth', authInfo),
   Duplicate: (user: DuplicateType) =>
     instance.post('/api/users/duplicate', user),
-  SignIn: (user: LoginType) => instance.post('/api/users/signin', user),
+  SignIn: (user: SignInType) => instance.post('/api/users/signin', user),
   SignOut: () => instance.delete('/api/users/signout'),
 
   // alarm
@@ -78,7 +78,7 @@ const apis = {
   Search: (content: SearchType) => instance.post('/api/main/search', content),
 
   // user detail
-  UserDetail: (userPk: UserDetailType) => instance.get(`/api/user/${userPk}`),
+  UserDetail: (userPk: number | string | string[]) => instance.get(`/api/user/${userPk}`),
   MyPromise: () => instance.get('/api/guide'),
   GuideRequest: (info: GuideRequestType) => instance.post('/api/guide', info),
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),

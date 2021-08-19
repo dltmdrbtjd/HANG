@@ -11,6 +11,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 0,
+    'no-restricted-globals': 0,
     'linebreak-style': 0,
     'import/prefer-default-export': 0,
     'import/extensions': 0,

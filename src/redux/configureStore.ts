@@ -7,12 +7,20 @@ import { connectRouter } from 'connected-react-router';
 // modules
 import HomeReducer from './modules/HomeModule/home';
 import FavoriteReducer from './modules/FavoriteModule/favorite';
+import SearchReducer from './modules/SearchModule/search';
+import DetailReducer from './modules/DetailModule/detail';
+import ToastReducer from './modules/ToastMessage/toastMessage';
+import AlarmReducer from './modules/AlarmModule/alarm';
 
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
   home: HomeReducer,
   favorite: FavoriteReducer,
+  search: SearchReducer,
+  toastMessage: ToastReducer,
+  detail: DetailReducer,
+  alarm: AlarmReducer,
   router: connectRouter(history),
 });
 

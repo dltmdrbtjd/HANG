@@ -9,7 +9,7 @@ import { Grid, Input } from 'src/elements';
 // redux
 import { history } from 'src/redux/configureStore';
 
-const SearchBar = (props) => {
+const SearchBar = ({ margin, ...props }) => {
   const [keyword, SetKeyWord] = React.useState<string>('');
   const path: string = useLocation().pathname;
 
@@ -33,7 +33,7 @@ const SearchBar = (props) => {
   }, [keyword]);
 
   return (
-    <Grid position="relative" isFlex ver="center">
+    <Grid margin={margin} position="relative" isFlex ver="center">
       <Input
         placeholder="여행자/길잡이를 검색하세요"
         _onChange={_.debounce(InputValue, 100)}
