@@ -21,6 +21,7 @@ const toast = keyframes`
 const ToastMessageStyle = styled.div<Prop>`
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 376px;
   height: 54px;
   text-align: center;
