@@ -6,10 +6,10 @@ export interface Props {
   open?: any;
   close?: any;
   agree?: any;
-  mainText: string;
+  mainText?: string;
   subText?: string;
   subText2?: string;
-  agreeText: string;
+  agreeText?: string;
 }
 
 const Modal = ({
@@ -41,6 +41,7 @@ const Modal = ({
               {subText} {subText ? <br /> : null} {subText2}
             </Text>
             <Grid
+              width="100%"
               isFlex
               margin="33px 0 0 0"
               position="absolute"
@@ -64,6 +65,11 @@ const Modal = ({
       ) : null}
     </>
   );
+};
+
+Modal.defaultProps = {
+  mainText: '길잡이 되어주기',
+  agreeText: '신청',
 };
 
 export default Modal;
