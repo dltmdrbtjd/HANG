@@ -1,31 +1,27 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-// middleware
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { createBrowserHistory } from 'history';
+
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-// redux router
-import { createBrowserHistory } from 'history';
-// reducer
-import rootReducer from './modules';
+import { connectRouter } from 'connected-react-router';
+// modules
+import HomeReducer from './modules/home';
 
 export const history = createBrowserHistory();
 
-// history 넣기
-const middleware = [thunk.withExtraArgument({ history })];
+const rootReducer = combineReducers({
+  home: HomeReducer,
+  router: connectRouter(history),
+})
 
-// 개발 환경일 때만 logger 사용
-if (process.env.NODE_ENV === 'development') middleware.push(logger);
+const middlewares = [thunk.withExtraArgument({ history })];
+if (process.env.NODE_ENV === 'development') middlewares.push(logger);
 
-// Chrome Extension
-// window 타입 선언
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
-// Redux devTools 설정
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(applyMiddleware(...middleware));
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: [...middlewares],
+  devTools: process.env.NODE_ENV !== 'production',
+})
 
-// 미들웨어와 리듀서 묶어서 store생성
-const store = createStore(rootReducer, enhancer);
+export type RootState = ReturnType<typeof store.getState>;
 export default store;
