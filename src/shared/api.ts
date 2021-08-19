@@ -63,8 +63,8 @@ const apis = {
   Pauth: (authInfo: PauthType) => instance.post('/api/users/p_auth', authInfo),
   Duplicate: (user: DuplicateType) =>
     instance.post('/api/users/duplicate', user),
-  Login: (user: LoginType) => instance.post('/api/users/signin', user),
-  LogOut: () => instance.delete('/api/users/signout'),
+  SignIn: (user: LoginType) => instance.post('/api/users/signin', user),
+  SignOut: () => instance.delete('/api/users/signout'),
 
   // alarm
   AlarmCheck: () => instance.get('/api/alarm'),
@@ -84,8 +84,7 @@ const apis = {
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),
 
   // favorite
-  LikeToggle: (targetPk: number) =>
-    instance.post('/api/like', targetPk),
+  LikeToggle: (targetPk: number) => instance.post('/api/like', targetPk),
   LikeLoad: () => instance.get('/api/like'),
 
   // myinfo

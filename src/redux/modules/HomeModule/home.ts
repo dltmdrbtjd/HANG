@@ -11,7 +11,7 @@ export const initialState: homeType = {
     traveler: [],
   },
   loading: false,
-}
+};
 
 const fetchHomeLoad = createAsyncThunk('home/HOME_LOAD', async () => {
   try {
@@ -19,8 +19,8 @@ const fetchHomeLoad = createAsyncThunk('home/HOME_LOAD', async () => {
     return response;
   } catch (err) {
     return console.log(err);
-  };
-})
+  }
+});
 
 const homeSlice = createSlice({
   name: 'home',
@@ -30,50 +30,52 @@ const homeSlice = createSlice({
       let TraveleDoubleCheck;
       let GuideDoubleCheck;
 
-      if(state.HomeData.guide.length > 0){
+      if (state.HomeData.guide.length > 0) {
         TraveleDoubleCheck = state.HomeData.traveler.findIndex(
-          i => i.userPk === state.HomeData.guide[action.payload.idx].userPk,
+          (i) => i.userPk === state.HomeData.guide[action.payload.idx].userPk,
         );
       }
-      if(state.HomeData.traveler.length > 0) {
+      if (state.HomeData.traveler.length > 0) {
         GuideDoubleCheck = state.HomeData.guide.findIndex(
-          i => i.userPk === state.HomeData.traveler[action.payload.idx].userPk,
+          (i) =>
+            i.userPk === state.HomeData.traveler[action.payload.idx].userPk,
         );
       }
 
-      if(action.payload.category === 'guide'){
+      if (action.payload.category === 'guide') {
         state.HomeData.guide[action.payload.idx].like = action.payload.like;
-        if(TraveleDoubleCheck !== -1) {
-          state.HomeData.traveler[TraveleDoubleCheck].like = action.payload.like;
+        if (TraveleDoubleCheck !== -1) {
+          state.HomeData.traveler[TraveleDoubleCheck].like =
+            action.payload.like;
         }
-      } else if (action.payload.category === 'traveler'){
+      } else if (action.payload.category === 'traveler') {
         state.HomeData.traveler[action.payload.idx].like = action.payload.like;
-        if(GuideDoubleCheck !== -1) {
+        if (GuideDoubleCheck !== -1) {
           state.HomeData.guide[GuideDoubleCheck].like = action.payload.like;
         }
       }
-    }
+    },
   },
   extraReducers: {
     [fetchHomeLoad.pending.type]: (state) => {
       state.loading = true;
     },
-    [fetchHomeLoad.fulfilled.type]: (state,action: PayloadAction<home>) => {
+    [fetchHomeLoad.fulfilled.type]: (state, action: PayloadAction<home>) => {
       state.loading = false;
       state.HomeData = action.payload;
     },
     [fetchHomeLoad.rejected.type]: (state) => {
       state.loading = false;
       state.HomeData = initialState.HomeData;
-    }
-  }
+    },
+  },
 });
 
 const HomeCreators = {
   fetchHomeLoad,
-}
+};
 
-export { HomeCreators }
-const { reducer,actions } = homeSlice;
+export { HomeCreators };
+const { reducer, actions } = homeSlice;
 export const { LikeUpdate } = actions;
 export default reducer;

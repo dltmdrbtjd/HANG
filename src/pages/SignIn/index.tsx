@@ -2,11 +2,10 @@ import React from 'react';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
-// api
+// apis
 import apis from 'src/shared/api';
 // token
 import { setToken } from 'src/shared/token';
-// user info
 import { setUserInfo } from 'src/shared/userInfo';
 // history
 import { history } from '../../redux/configureStore';
@@ -34,19 +33,14 @@ interface SignInStatus {
 }
 
 const SignIn = (): React.ReactElement => {
-  interface Value {
-    userId: string;
-    password: string;
-  }
-
   const [signInStatus, setSignInStatus] = React.useState<SignInStatus>({
-    status: false,
+    status: true,
     errorMsg: '',
   });
 
-  const SignIn = (userInfo: UserInfo) => {
+  const SignIn = (userInfo: UserInfo): void => {
     apis
-      .Login(userInfo)
+      .SignIn(userInfo)
       .then(({ data }) => setToken(data.accessToken))
       .then(() => setUserInfo())
       .then(() => history.replace('/'))
@@ -59,7 +53,7 @@ const SignIn = (): React.ReactElement => {
   };
 
   return (
-    <Container>
+    <Container padding="0">
       <Grid height="300px" position="relative">
         <Logo width="169px" height="162px" imgUrl={LogoImg} />
       </Grid>
@@ -70,7 +64,7 @@ const SignIn = (): React.ReactElement => {
           userId: yup.string().required('아이디를 입력해주세요'),
           password: yup.string().required('비밀번호를 입력해주세요'),
         })}
-        onSubmit={(values: Value, { setSubmitting }) => {
+        onSubmit={(values: UserInfo, { setSubmitting }) => {
           SignIn(values);
           setSubmitting(false);
         }}
@@ -126,29 +120,27 @@ const SignIn = (): React.ReactElement => {
               </Button>
 
               <Grid>
-                <Button
-                  width="50%"
-                  padding="17px 0"
-                  bgColor="bgColor"
-                  fs="sm"
-                  fw="regular"
-                  color="darkG"
-                  _onClick={() => history.push('/signup/forgot_pwd')}
-                >
-                  비밀번호 찾기
-                </Button>
-
-                <Button
-                  width="50%"
-                  padding="17px 0"
-                  bgColor="bgColor"
-                  fs="sm"
-                  fw="regular"
-                  color="darkG"
-                  _onClick={() => history.push('/signup')}
-                >
-                  회원가입
-                </Button>
+                {[
+                  { content: '비밀번호 찾기', url: '/signup/forgot_pwd' },
+                  { content: '회원가입', url: '/signup' },
+                ].map(
+                  (content: { content: string; url: string }, idx: number) => {
+                    return (
+                      <Button
+                        width="50%"
+                        padding="17px 0"
+                        bgColor="bgColor"
+                        fs="sm"
+                        fw="regular"
+                        color="darkG"
+                        _onClick={() => history.push(content.url)}
+                        key={(Date.now() + Math.random() + idx).toString(36)}
+                      >
+                        {content.content}
+                      </Button>
+                    );
+                  },
+                )}
               </Grid>
             </Grid>
           </form>
