@@ -56,11 +56,6 @@ export type DoGuideType = {
   tripId: number;
 }
 
-// favorite module => api types
-export type LikeToggleType = {
-  targetPk: number;
-}
-
 // myinfo module => api types
 export type CreateTripEventType = {
   region: string;
