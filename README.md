@@ -11,7 +11,8 @@
   <img src="https://img.shields.io/badge/Typescript-v4.1.2-blue?logo=typescript"/>
   <img src='https://img.shields.io/badge/ReactRouter-v5.2.0-pink?logo=React Router'/>
   <img src='https://img.shields.io/badge/StyledComponents-v5.3.0-violet?logo=styled-components'/>
-  <img src='https://img.shields.io/badge/Redux-v4.1.0-violet?logo=Redux'/>
+  <img src='https://img.shields.io/badge/Redux-v4.1.0-764ABC?logo=Redux'/>
+  <img src='https://img.shields.io/badge/ReduxToolkit-v1.6.1-764ABC?'/>
   <img src='https://img.shields.io/badge/Node-v14.15.4-green?logo=Node.js'/>
   <img src='https://img.shields.io/badge/Axios-v0.21.1-pink?'/>
   <img src='https://img.shields.io/badge/socket.io-v4.1.3-white?logo=Socket.io'/>
