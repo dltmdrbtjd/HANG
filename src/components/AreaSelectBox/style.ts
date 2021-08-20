@@ -10,7 +10,7 @@ const CityTab = css`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: ${({theme}) => theme.color.gray};
+    background-color: ${({theme}) => theme.color.OpacityGray};
     border-radius: 6px;
   }
 
