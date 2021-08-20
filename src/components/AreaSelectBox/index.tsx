@@ -11,6 +11,10 @@ export interface Props {
   region?: string;
 }
 
+// default값 사용하는 방법 !
+// <AreaSelectBox city={지역(서울,부산,제주)의 index} region={해당 지역구(관악구,서초구,중구)}/>
+// 이렇게 사용하시면 초기값 설정이 가능합니다. 혹시 안되면 말씀해주세요@@
+
 const AreaSelectBox = ({ city, region, toggle, ...props }: Props) => {
   const [currentCity, setCurrentCity] = React.useState<number>(0);
   const [currentGu, setCurrntGu] = React.useState<number>(0);
