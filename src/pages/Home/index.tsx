@@ -4,9 +4,11 @@ import moment from 'moment';
 // redux
 import { HomeCreators } from 'src/redux/modules/HomeModule/home';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // components
 import SearchBar from 'src/components/SearchBar';
 import SearchCard from 'src/components/SearchCard';
+import ToastMessage from '../../components/ToastMessage';
 import { RootState, history } from '../../redux/configureStore';
 // style
 import { Grid, Text, MainTitle, Container } from '../../elements/index';
@@ -16,17 +18,27 @@ import { textOverflow } from '../../styles/Mixin';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { promise, guide, traveler, list }: any = useSelector<RootState>(
-    (state) => ({
-      list: state.home.HomeData,
-      promise: state.home.HomeData.confirmed,
-      guide: state.home.HomeData.guide,
-      traveler: state.home.HomeData.traveler,
-    }),
-    shallowEqual,
-  );
+  const { promise, guide, traveler, list, message }: any =
+    useSelector<RootState>(
+      (state) => ({
+        list: state.home.HomeData,
+        promise: state.home.HomeData.confirmed,
+        guide: state.home.HomeData.guide,
+        traveler: state.home.HomeData.traveler,
+        message: state.toastMessage.Message,
+      }),
+      shallowEqual,
+    );
 
   const mainlist = Object.keys(list);
+
+  React.useEffect(() => {
+    if (message) {
+      setTimeout(() => {
+        dispatch(fetchMessage(false));
+      }, 1500);
+    }
+  }, [message]);
 
   React.useEffect(() => {
     dispatch(HomeCreators.fetchHomeLoad());
@@ -110,6 +122,7 @@ const Home = () => {
             : ''}
         </Grid>
       </Grid>
+      {message && <ToastMessage msg="관심목록에 추가되었습니다" />}
     </Container>
   );
 };

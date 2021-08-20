@@ -7,7 +7,7 @@ import { SearchState, like } from './type';
 const initialState: SearchState = {
   list: [],
   loading: false,
-  nextItem: true,
+  nextItem: false,
 }
 
 const fetchSearchLoad = createAsyncThunk('search/SEARCH_LOAD', async(MainSearch:any):Promise<any> => {

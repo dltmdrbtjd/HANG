@@ -22,6 +22,8 @@ import chat from '../../Images/NavigationIcons/onchat.svg';
 const Detail = () => {
   const dispatch = useDispatch();
 
+  const [toast, setToast] = React.useState<number>(0);
+
   const { eventList, userInfo, message }: any = useSelector<RootState>(
     (state) => ({
       eventList: state.detail.tripInfo,
@@ -63,7 +65,6 @@ const Detail = () => {
   // };
 
   React.useEffect(() => {
-    dispatch(DetailCreators.fetchDetailLoad(query.user));
     if (message) {
       setTimeout(() => {
         dispatch(fetchMessage(false));
@@ -71,11 +72,15 @@ const Detail = () => {
     }
   }, [message]);
 
+  React.useEffect(() => {
+    dispatch(DetailCreators.fetchDetailLoad(query.user));
+  }, []);
+
   return (
     <Container>
       <Grid>
         <MainTitle fs="xl">프로필</MainTitle>
-        <ProfileCard userInfo={userInfo} />
+        <ProfileCard userInfo={userInfo} setToast={setToast} />
         <Grid isFlex hoz="flex-end" margin="17px 0 60px 0">
           <Button
             width="48px"
@@ -115,7 +120,15 @@ const Detail = () => {
             })}
           </Grid>
         ) : null}
-        {message && <ToastMessage msg="신청이 완료되었습니다." />}
+        {message && (
+          <ToastMessage
+            msg={
+              toast === 1
+                ? '관식목록에 추가되었습니다'
+                : '신청이 완료되었습니다'
+            }
+          />
+        )}
       </Grid>
     </Container>
   );

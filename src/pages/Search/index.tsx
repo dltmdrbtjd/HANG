@@ -5,10 +5,12 @@ import queryString from 'query-string';
 import { useInView } from 'react-intersection-observer';
 import { RootState } from 'src/redux/configureStore';
 import { SearchCreators } from 'src/redux/modules/SearchModule/search';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // components
 import SearchBar from '../../components/SearchBar';
 import AreaSelectBox from '../../components/AreaSelectBox';
 import SearchCard from '../../components/SearchCard';
+import ToastMessage from '../../components/ToastMessage';
 // style
 import { Button, Grid, Text, Strong, Container } from '../../elements';
 import CategoryBtn from './style';
@@ -26,6 +28,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const userlist: any = useSelector<RootState>((state) => state.search.list);
   const nextItem = useSelector<RootState>((state) => state.search.nextItem);
+  const message = useSelector<RootState>((state) => state.toastMessage.Message);
   // pageNum
   const [page, setPage] = React.useState<number>(1);
   const [ref, inView] = useInView();
@@ -34,6 +37,7 @@ const Search = () => {
   const [cityOpen, setCityOpen] = React.useState<boolean>(false);
   const [traveler, setTraveler] = React.useState<boolean>(false);
   const [guide, setGuide] = React.useState<boolean>(false);
+  const [subText, setSubText] = React.useState<string>('회원목록');
 
   // 도시,구 state
   const [city, setCity] = React.useState<string>('');
@@ -56,6 +60,7 @@ const Search = () => {
     traveler: Number(traveler),
     guide: Number(guide),
   };
+
   const MainSearch: SearchData = {
     keyword: query.keyword,
     region: city,
@@ -73,6 +78,7 @@ const Search = () => {
     pageNum: page,
   };
 
+  // 카테고리 버튼 이벤트 핸들러
   const CityOpenhandler = () => {
     if (!cityOpen) {
       setCityOpen(true);
@@ -84,6 +90,7 @@ const Search = () => {
       setGu('');
     }
   };
+
   const Travelerhandler = () => {
     if (!traveler) {
       setTraveler(true);
@@ -92,6 +99,7 @@ const Search = () => {
       setTraveler(false);
     }
   };
+
   const Guidehandler = () => {
     if (!guide) {
       setGuide(true);
@@ -100,9 +108,17 @@ const Search = () => {
       setGuide(false);
     }
   };
+
   const SearchHandler = () => {
     setCityName(city);
     setGuName(gu);
+    if (traveler) {
+      setSubText('여행자');
+    } else if (guide) {
+      setSubText('길잡이');
+    } else {
+      setSubText('회원목록');
+    }
     dispatch(SearchCreators.fetchSearchSend(SendSearch));
     setPage(1);
   };
@@ -122,12 +138,20 @@ const Search = () => {
     if (inView && nextItem) {
       setPage((state) => state + 1);
     }
-  }, [inView, nextItem]);
+  }, [inView]);
 
   React.useEffect(() => {
     dispatch(SearchCreators.fetchSearchLoad(MainSearch));
     setPage(1);
   }, [query.keyword]);
+
+  React.useEffect(() => {
+    if (message) {
+      setTimeout(() => {
+        dispatch(fetchMessage(false));
+      }, 1500);
+    }
+  }, [message]);
 
   return (
     <Container>
@@ -136,12 +160,13 @@ const Search = () => {
         <Grid width="auto">
           <CategoryBtn
             radius="20px"
+            width="80px"
+            height="32px"
             color={!cityOpen ? 'gray' : 'brandColor'}
             bgColor={
               !cityOpen ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
             }
             border={!cityOpen ? '1px solid #c4c4c4' : '1px solid #ff9900'}
-            padding="8px 30px"
             onClick={CityOpenhandler}
             fw="bold"
           >
@@ -156,7 +181,8 @@ const Search = () => {
               !traveler ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'
             }
             border={!traveler ? '1px solid #c4c4c4' : '1px solid #ff9900'}
-            padding="8px 15px"
+            width="80px"
+            height="32px"
             onClick={Travelerhandler}
             fw="bold"
           >
@@ -167,7 +193,8 @@ const Search = () => {
             color={!guide ? 'gray' : 'brandColor'}
             bgColor={!guide ? 'rgba(231,231,231,0.5)' : 'rgba(255,153,0,0.2)'}
             border={!guide ? '1px solid #c4c4c4' : '1px solid #ff9900'}
-            padding="8px 15px"
+            width="80px"
+            height="32px"
             onClick={Guidehandler}
             margin="0 0 0 10px"
             fw="bold"
@@ -177,25 +204,21 @@ const Search = () => {
         </Grid>
       </Grid>
       <AreaSelectBox toggle={cityOpen} setGu={setGu} setCity={setCity} />
-      <Button
-        _onClick={SearchHandler}
-        fw="bold"
-        width="100%"
-        padding="14px 0"
-        margin="26px 0 0"
-      >
+      <Button _onClick={SearchHandler} fw="bold" width="100%" height="54px">
         검색
       </Button>
-      <Text margin="40px 0 0">
-        <Strong>{cityName ? `${cityName}` : '회원 목록입니다.'}</Strong>
-        {guName ? ` ${guName}의 회원목록입니다.` : ''}
+      <Text margin="28px 0 12px 0">
+        <Strong>{cityName ? `${cityName}` : ''}</Strong>
+        <Strong> {guName ? `${guName}의 ` : ``}</Strong>
+        <Strong fw="md"> {guName ? `${subText}입니다.` : ''}</Strong>
       </Text>
       {userlist
         ? userlist.map((item, idx) => {
             return <SearchCard userInfo={item} key={idx} idx={idx} />;
           })
         : ''}
-      <div ref={ref} style={{ marginBottom: '30px' }} />
+      <div ref={ref} style={{ height: '10px' }} />
+      {message && <ToastMessage msg="관심목록에 추가되었습니다" />}
     </Container>
   );
 };

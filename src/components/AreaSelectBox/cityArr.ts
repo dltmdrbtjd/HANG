@@ -1,4 +1,4 @@
-const CityArr = [
+const CityArr: any = [
   {
     city: '서울',
     gu: [

@@ -8,8 +8,8 @@ import { MainTitle, Container } from '../../elements';
 import StatusBar from './StatusBar';
 // pages
 import PhoneAuth from './PhoneAuth';
-import EnterIdPwd from './EnterIdPwd';
-import FillOutProfile from './FillOutProfile';
+// import EnterIdPwd from './EnterIdPwd';
+// import FillOutProfile from './FillOutProfile';
 // validation
 import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
 
@@ -30,7 +30,7 @@ const SignUp = () => {
 
   return (
     <Container>
-      <StatusBar curPage={page} setPage={setPage} />
+      {/* <StatusBar curPage={page} setPage={setPage} />
 
       <MainTitle fs="xl" fw="extraBold">
         {title[page - 1]}
@@ -113,7 +113,7 @@ const SignUp = () => {
             ) : null}
           </form>
         )}
-      </Formik>
+      </Formik> */}
     </Container>
   );
 };

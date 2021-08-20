@@ -1,7 +1,7 @@
 import React from 'react';
 // route
 import { ConnectedRouter } from 'connected-react-router';
-import Route from './route/Route';
+import Route from './Route/Route';
 // history
 import { history } from './redux/configureStore';
 // components

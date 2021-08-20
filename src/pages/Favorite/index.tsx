@@ -26,8 +26,9 @@ const Favorite = () => {
   React.useEffect(() => {
     dispatch(FavoriteCreators.fetchFavoriteLoad());
   }, []);
+
   return (
-    <Container>
+    <Container padding="70px 0 80px 0">
       {FavoriteList
         ? FavoriteList.map((item, idx) => {
             return (
