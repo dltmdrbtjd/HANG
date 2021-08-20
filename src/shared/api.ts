@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { history } from 'src/redux/configureStore';
 // types
 import {
   PhoneType,
@@ -17,7 +18,7 @@ import {
   CancelPromiseType,
 } from './ApiTypes';
 // cookie
-import { getToken, delToken } from './token';
+import { getToken, delToken, setToken } from './token';
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
   baseURL: 'https://soujinko.shop',
@@ -30,7 +31,6 @@ instance.interceptors.request.use((config) => {
   config.headers['X-Requested-With'] = 'XMLHttpRequest';
   config.headers.token = getToken();
   config.headers.Accept = 'application/json';
-
   return config;
 });
 
@@ -41,15 +41,17 @@ instance.interceptors.response.use(
   (error) => {
     const path = window.location.pathname;
 
-    if (
+    if(error.response.status === 307){
+      setToken(error.response.data.newAccessToken);
+      history.go(0);
+    } else if (
       error.response.status === 401 &&
       !['/signup', '/login'].includes(path)
     ) {
-      window.alert('토큰이 만료되었습니다.');
+      window.alert('토근이 만료되었습니다. 다시 로그인해주세요.');
       delToken();
-      window.location.replace('/signIn');
+      history.push('/signIn');
     }
-
     return Promise.reject(error);
   },
 );
