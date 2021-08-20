@@ -14,10 +14,12 @@ interface Props {
   errorMsg: string;
 }
 
-interface PhoneVerification {
+export interface Status {
   status: number;
   errorMsg: string;
 }
+
+export const currentType: string[] = ['primary', 'safe', 'danger'];
 
 const PhoneAuth: React.FC<Props> = ({
   pNum,
@@ -26,17 +28,15 @@ const PhoneAuth: React.FC<Props> = ({
   status,
   errorMsg,
 }) => {
-  const [phoneVeri, setPhoneVeri] = React.useState<PhoneVerification>({
+  const [phoneVeri, setPhoneVeri] = React.useState<Status>({
     status: 0,
     errorMsg: '',
   });
-  const [smsVeri, setSMSVeri] = React.useState<PhoneVerification>({
+  const [smsVeri, setSMSVeri] = React.useState<Status>({
     status: 0,
     errorMsg: '',
   });
   const [aNum, setaNum] = React.useState<string>('');
-
-  const currentType = ['primary', 'safe', 'danger'];
 
   const PhoneVerification = () => {
     apis
@@ -64,20 +64,22 @@ const PhoneAuth: React.FC<Props> = ({
             placeholder="전화번호 입력"
             type="tel"
             width="58%"
+            name="pNum"
+            value={pNum}
+            _onChange={setPnum}
             status={currentType[phoneVeri.status]}
-            {...setPnum}
           />
 
           <Button
             width="40%"
-            disabled={!!(!pNum || errorMsg)}
+            disabled={!(pNum && !errorMsg)}
             _onClick={PhoneVerification}
           >
             인증번호 받기
           </Button>
         </Grid>
 
-        {!errorMsg || phoneVeri.status === 2 ? (
+        {errorMsg || phoneVeri.status === 2 ? (
           <Text fs="sm" color="danger">
             {errorMsg || phoneVeri.errorMsg}
           </Text>
@@ -88,7 +90,6 @@ const PhoneAuth: React.FC<Props> = ({
             <Grid isFlex hoz="space-between" margin="0 0 24px">
               <ValidateInput
                 placeholder="인증번호 입력"
-                type="number"
                 width="58%"
                 value={aNum}
                 status={currentType[smsVeri.status]}
@@ -116,6 +117,7 @@ const PhoneAuth: React.FC<Props> = ({
           fs="la"
           fw="bold"
           width="100%"
+          disabled={smsVeri.status !== 1}
           _onClick={() => setPage((page: number) => page + 1)}
         >
           다음

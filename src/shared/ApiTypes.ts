@@ -12,7 +12,7 @@ export type SignUpType = {
   region: string;
   city: string;
   profileImg: string | null;
-  gender: string;
+  gender: number;
   pNum: string;
 };
 

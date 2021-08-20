@@ -2,6 +2,10 @@ import React from 'react';
 // form
 import { Formik } from 'formik';
 import * as yup from 'yup';
+// api
+import apis from 'src/shared/api';
+// image upload
+import uploadProfileImage from 'src/util/imageUpload';
 // elements
 import { MainTitle, Container } from '../../elements';
 // components
@@ -10,29 +14,56 @@ import StatusBar from './StatusBar';
 import PhoneAuth from './PhoneAuth';
 import EnterIdPwd from './EnterIdPwd';
 import FillOutProfile from './FillOutProfile';
+import Welcome from './Welcome';
 // validation
 import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
+
+interface userInfo {
+  pNum: string;
+  userId: string;
+  password: string;
+  nickname: string;
+}
 
 const SignUp = () => {
   const [page, setPage] = React.useState(1);
 
-  const [region, setRegion] = React.useState('서울특별시');
-  const [city, setCity] = React.useState('종로구');
-  const [gender, setGender] = React.useState(0);
+  const [region, setRegion] = React.useState<string>('서울');
+  const [city, setCity] = React.useState<string>('강남구');
+  const [gender, setGender] = React.useState<number>(0);
   const [age, setAge] = React.useState('');
   const [profile, setProfile] = React.useState(null);
+
+  const signUpDB = (userInfo: userInfo) => {
+    uploadProfileImage(profile).then((res) => {
+      const profileImg = res;
+
+      apis
+        .SignUp({
+          ...userInfo,
+          profileImg,
+          region,
+          city,
+          gender,
+          age: parseInt(age, 10),
+        })
+        .then(() => setPage((page: number) => page + 1))
+        .catch((err) => console.log(err));
+    });
+  };
 
   const title = [
     '번호\u00A0인증이 필요한\u00A0서비스\u00A0입니다',
     '행에서\u00A0사용할 아이디와\u00A0비밀번호를\u00A0입력해주세요',
     '행에서\u00A0사용할 프로필을\u00A0설정해주세요',
+    '당신만의\u00A0행복한\u00A0여행이 시작됩니다!',
   ];
 
   return (
-    <Container>
+    <Container padding="0">
       <StatusBar curPage={page} setPage={setPage} />
 
-      <MainTitle fs="xl" fw="extraBold">
+      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px">
         {title[page - 1]}
       </MainTitle>
 
@@ -69,8 +100,8 @@ const SignUp = () => {
             .min(1, '닉네임을 입력해주세요')
             .max(16, '닉네임은 16자까지 입력할 수 있습니다'),
         })}
-        onSubmit={(values, { setSubmitting }) => {
-          signUp(values);
+        onSubmit={(values: userInfo, { setSubmitting }) => {
+          signUpDB(values);
           setSubmitting(false);
         }}
       >
@@ -79,7 +110,7 @@ const SignUp = () => {
             {page === 1 ? (
               <PhoneAuth
                 pNum={formik.values.pNum}
-                setPnum={formik.getFieldProps('pNum')}
+                setPnum={formik.handleChange('pNum')}
                 setPage={setPage}
                 status={1}
                 errorMsg={formik.errors.pNum}
@@ -90,11 +121,11 @@ const SignUp = () => {
               <EnterIdPwd
                 userId={formik.values.userId}
                 setUserId={formik.handleChange('userId')}
+                idErrorMsg={formik.errors.userId}
                 password={formik.values.password}
                 setPassword={formik.handleChange('password')}
-                setPage={setPage}
-                idErrorMsg={formik.errors.userId}
                 pwdErrorMsg={formik.errors.password}
+                setPage={setPage}
               />
             ) : null}
 
@@ -114,6 +145,8 @@ const SignUp = () => {
           </form>
         )}
       </Formik>
+
+      {page === 4 ? <Welcome /> : null}
     </Container>
   );
 };

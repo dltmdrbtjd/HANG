@@ -10,6 +10,7 @@ export interface Prop {
   bgColor?: string;
   radius?: string;
   padding?: string;
+  border?: string;
   fs?: string;
   fw?: string;
   color?: string;
@@ -47,7 +48,7 @@ const ButtonStyle = styled.button<Prop>`
   box-shadow: ${({ shadow }) => shadow};
   border-radius: ${({ radius }) => radius};
   cursor: pointer;
-  border: none;
+  border: ${({ border }) => border};
   font-size: ${({ fs, theme }) => fs && theme.fontSize[fs]};
   font-weight: ${({ fw, theme }) => fw && theme.fontWeight[fw]};
   ${({ form }) => buttonShapeSetting(form)};

@@ -3,25 +3,24 @@ import React from 'react';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 // image upload
 import imageCompression from 'browser-image-compression';
-// redux
-import { useSelector, useDispatch } from 'react-redux';
 // elements
-import { Grid, Label, Image, Input } from '../../elements';
+import { Grid, Label, Input } from '../../elements';
 // components
 import ProfileImg from '../ProfileImg';
 // style
 import HideElem from './style';
-// image
-// import defaultProfile from '../../Images/profile.png';
 
 export interface Props {
   setProfile: any;
 }
 
 const SelectImage = ({ setProfile }: Props) => {
-  const dispatch = useDispatch();
-  const profilePre = null;
-  // useSelector((state) => state.image.profilePre)
+  const [profileImg, setProfileImg] = React.useState<string>(null);
+  const bufToString = (buf: ArrayBuffer | string): string => {
+    if (typeof buf === 'string') return buf;
+
+    return String.fromCharCode.apply(null, new Uint16Array(buf));
+  };
 
   // 이미지 선택 시 미리보기 이미지 설정
   const selectFile = async (
@@ -43,8 +42,10 @@ const SelectImage = ({ setProfile }: Props) => {
         reader.readAsDataURL(compressedFile);
 
         reader.onload = () => {
+          const imageUrl = bufToString(reader.result);
+
           setProfile(compressedFile);
-          // dispatch(ImageCreators.setProfilePre(reader.result));
+          setProfileImg(imageUrl);
         };
       }
     } catch (error) {
@@ -72,7 +73,7 @@ const SelectImage = ({ setProfile }: Props) => {
         addstyle={HideElem}
       />
 
-      <ProfileImg size="large" imgUrl={profilePre} />
+      <ProfileImg size="large" imgUrl={profileImg} />
 
       <Grid
         width="34px"

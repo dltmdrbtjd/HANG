@@ -35,13 +35,13 @@ const Input: React.FC<Props> = ({
   return (
     <InputStyle
       id={id}
+      type={type}
+      name={name}
       value={value}
       placeholder={placeholder}
-      type={type}
       accept={accept}
       onChange={_onChange}
       onKeyPress={_onKeyPress}
-      name={name}
       {...props}
     />
   );
