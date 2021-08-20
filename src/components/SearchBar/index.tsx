@@ -35,6 +35,7 @@ const SearchBar = ({ margin, ...props }) => {
   return (
     <Grid margin={margin} position="relative" isFlex ver="center">
       <Input
+        fs="smm"
         placeholder="여행자/길잡이를 검색하세요"
         _onChange={_.debounce(InputValue, 100)}
         _onKeyPress={KeyPressHandler}
