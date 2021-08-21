@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <Container>
       <Grid overflow="auto">
-        {list.confirmed ? (
+        {list.promise ? (
           <>
             <MainTitle fs="la" margin="0 0 10px">
               확정된 약속
@@ -51,16 +51,16 @@ const Home = () => {
                   history.push('/mypage/promise/3');
                 }}
               >
-                <ProfileImg imgUrl={list.confirmed.profileImg} size="medium" />
+                <ProfileImg imgUrl={list.promise.profileImg} size="medium" />
                 <Grid margin="0 0 0 10px" addstyle="flex: 1">
                   <Grid>
                     <Text fs="la" fw="bold" addstyle={textOverflow()}>
-                      {list.confirmed.nickname} 님과의 약속
+                      {list.promise.nickname} 님과의 약속
                     </Text>
                   </Grid>
                   <Text>
-                    {moment.utc(list.confirmed.startDate).format('MM. DD')} -{' '}
-                    {moment.utc(list.confirmed.endDate).format('MM. DD')}
+                    {moment.utc(list.promise.startDate).format('MM. DD')} -{' '}
+                    {moment.utc(list.promise.endDate).format('MM. DD')}
                   </Text>
                 </Grid>
               </Grid>
