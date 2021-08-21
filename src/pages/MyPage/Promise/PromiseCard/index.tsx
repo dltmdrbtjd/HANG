@@ -119,14 +119,6 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
     },
   };
 
-  //   React.useEffect(() => {
-  //     if (open.toastMsgOpen) {
-  //       setTimeout(() => {
-  //         setOpen({ ...open, toastMsgOpen: false });
-  //       }, 1500);
-  //     }
-  //   }, [open.toastMsgOpen]);
-
   React.useEffect(() => {
     setPromiseType(type);
   }, []);
