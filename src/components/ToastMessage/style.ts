@@ -33,7 +33,7 @@ const ToastMessageStyle = styled.div<Prop>`
   bottom: 120px;
   left: 50%;
   transform: translateX(-50%);
-  animation: ${toast} 2s;
+  animation: ${toast} 2.0s;
 `;
 
 export default ToastMessageStyle;
