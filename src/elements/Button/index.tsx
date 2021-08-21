@@ -20,9 +20,10 @@ export interface Props {
   arialabel?: string;
   type?: 'submit' | 'reset' | 'button' | undefined;
   _onClick?: any;
+  children?: React.ReactElement | React.ReactElement[] | string | number;
 }
 
-const Button: React.FC<Props> = React.forwardRef<HTMLButtonElement, Props>(
+const Button = React.forwardRef<HTMLButtonElement, Props>(
   (
     { arialabel, disabled, type, _onClick, children, ...props },
     ref,
@@ -46,10 +47,11 @@ Button.defaultProps = {
   disabled: false,
   fw: 'bold',
   type: 'button',
+  border: 'none',
   radius: '14px',
   padding: '12px 0',
   bgColor: 'brandColor',
-  disColor: 'semiLightG',
+  disColor: 'lightGray',
   _onClick: () => {},
 };
 

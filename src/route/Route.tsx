@@ -8,7 +8,7 @@ import Section from '../elements/Section';
 // pages
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
-// import SignUp from '../pages/SignUp';
+import SignUp from '../pages/SignUp';
 // import Onboarding from '../pages/Onboarding';
 // import Welcome from '../pages/SignUp/Welcome';
 // import ForgotPassword from '../pages/SignUp/ForgotPassword';
@@ -40,13 +40,13 @@ const Route = () => {
             component={SignIn}
             exact
           />
-          {/* <PublicRoute
+          <PublicRoute
             path={pathURI.signUp}
             restricted
             component={SignUp}
             exact
           />
-          <PublicRoute
+          {/* <PublicRoute
             path={pathURI.welcome}
             restricted
             component={Welcome}

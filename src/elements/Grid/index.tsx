@@ -46,6 +46,7 @@ const Grid: React.FC<Props> = ({
 };
 
 Grid.defaultProps = {
+  width: '100%',
   _onClick: () => {},
 };
 

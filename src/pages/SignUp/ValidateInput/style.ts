@@ -37,7 +37,7 @@ const setGridWithStatus = (status: string) => {
 
     default:
       return css<Prop>`
-        border: 1px solid ${({ theme }) => theme.color.semiLightG};
+        border: 1px solid ${({ theme }) => theme.color.lightGray};
       `;
   }
 };
@@ -47,6 +47,22 @@ const InputInitialized = styled.input`
   border: none;
   background: none;
   padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: ${({ theme }) => theme.color.gray};
+  }
+
+  &::-webkit-input-placeholder {
+    color: ${({ theme }) => theme.color.gray};
+  }
+
+  &::-ms-input-placeholder {
+    color: ${({ theme }) => theme.color.gray};
+  }
 `;
 
 export { setGridWithStatus, setSpanWithStatus, InputInitialized };

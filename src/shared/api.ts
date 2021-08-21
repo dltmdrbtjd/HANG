@@ -80,7 +80,8 @@ const apis = {
   Search: (content: SearchType) => instance.post('/api/main/search', content),
 
   // user detail
-  UserDetail: (userPk: number | string | string[]) => instance.get(`/api/user/${userPk}`),
+  UserDetail: (userPk: number | string | string[]) =>
+    instance.get(`/api/user/${userPk}`),
   MyPromise: () => instance.get('/api/guide'),
   GuideRequest: (info: GuideRequestType) => instance.post('/api/guide', info),
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),

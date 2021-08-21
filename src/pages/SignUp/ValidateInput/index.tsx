@@ -1,7 +1,7 @@
 import React from 'react';
 // icon
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 // elements
 import { Grid, Span } from '../../../elements';
 // style
@@ -16,6 +16,7 @@ interface Props {
   width?: string;
   id?: string;
   type?: string;
+  name?: string;
   value?: string | number;
   placeholder: string;
   _onChange?: any;
@@ -26,6 +27,7 @@ const ValidateInput: React.FC<Props> = ({
   width,
   id,
   type,
+  name,
   value,
   placeholder,
   _onChange,
@@ -42,19 +44,20 @@ const ValidateInput: React.FC<Props> = ({
       addstyle={setGridWithStatus(status)}
     >
       <InputInitialized
-        type={type}
         id={id}
+        type={type}
+        name={name}
         value={value}
         placeholder={placeholder}
         onChange={_onChange}
       />
 
-      {status !== 'primary' ? (
+      {status && status !== 'primary' ? (
         <Span width="24px" height="24px" addstyle={setSpanWithStatus(status)}>
           {status === 'danger' ? (
             <HighlightOffIcon />
           ) : (
-            <RadioButtonUncheckedIcon />
+            <CheckCircleOutlineIcon />
           )}
         </Span>
       ) : null}
