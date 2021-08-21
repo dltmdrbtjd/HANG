@@ -18,28 +18,26 @@ import moment from 'moment';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
 // history
-import { history, useTypedSelector } from '../../../../redux/configureStore';
+import { history } from '../../../../redux/configureStore';
 // elements
 import { Button, Grid, Text, Strong, Span } from '../../../../elements';
 // components
 import ProfileImg from '../../../../components/ProfileImg';
 import Modal from '../../../../components/Modal';
-import ToastMessage from '../../../../components/ToastMessage';
 import GuideNameplate from '../../../../components/GuideNameplate';
 import { textOverflow } from '../../../../styles/Mixin';
 
-interface Props {
+export interface Props {
   promInfo: PromInfo;
   guide?: boolean;
   type: string;
+  stateSetter?: any;
 }
 
-const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
+const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [promiseType, setPromiseType] = React.useState(type);
-
-  const toastMessage = useTypedSelector((state) => state.toastMessage.Message);
 
   const AgreeProm = () => {
     apis
@@ -79,10 +77,10 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       subText2: '길잡이가 되어주시겠습니까?',
       agreeText: '확인',
       agree: () => {
+        stateSetter(`${promInfo.nickname} 님의 요청을 수락했습니다.`);
         AgreeProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
-      toastMsg: `${promInfo.nickname} 님의 요청을 수락했습니다.`,
     },
 
     received: {
@@ -91,10 +89,10 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       subText2: '요청을 거절하시겠습니까?',
       agreeText: '확인',
       agree: () => {
+        stateSetter(`${promInfo.nickname} 님의 요청을 거절했습니다.`);
         RejectProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
-      toastMsg: `${promInfo.nickname} 님의 요청을 거절했습니다.`,
     },
 
     requested: {
@@ -103,10 +101,10 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       subText2: '요청을 취소하시겠습니까?',
       agreeText: '확인',
       agree: () => {
+        stateSetter(`요청을 취소했습니다.`);
         RejectProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
-      toastMsg: `요청을 취소했습니다.`,
     },
 
     confirmed: {
@@ -114,10 +112,10 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       subText: `${promInfo.nickname} 님과의`,
       subText2: '약속을 취소하시겠습니까?',
       agree: () => {
+        stateSetter(`요청이 취소되었습니다.`);
         cancelConfiremedProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
-      toastMsg: `요청을 취소되었습니다.`,
     },
   };
 
@@ -190,7 +188,13 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
           </Button>
         </Grid>
       ) : (
-        <Button width="100%" radius="0" _onClick={() => setOpen(true)}>
+        <Button
+          width="100%"
+          radius="0"
+          _onClick={() => {
+            setOpen(true);
+          }}
+        >
           취소
         </Button>
       )}
@@ -200,9 +204,6 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
         close={() => setOpen(false)}
         {...modalMessage[promiseType]}
       />
-      {toastMessage ? (
-        <ToastMessage msg={modalMessage[promiseType].toastMsg} />
-      ) : null}
     </Grid>
   );
 };

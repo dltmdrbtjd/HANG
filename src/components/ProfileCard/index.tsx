@@ -32,7 +32,7 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
     } else {
       dispatch(DetailLikeUpdate(true));
       setToast(1);
-      dispatch(fetchMessage(true));
+      dispatch(fetchMessage({ Message: true }));
     }
   };
 

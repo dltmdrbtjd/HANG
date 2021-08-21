@@ -38,6 +38,7 @@ const SignIn = (): React.ReactElement => {
   });
 
   const [terms, setTerms] = React.useState<boolean>(false);
+  const tutorial = localStorage.getItem('tutorial');
 
   const TermsHandler = (url) => {
     if (url === '/signup/forgot_pwd') {
@@ -52,7 +53,13 @@ const SignIn = (): React.ReactElement => {
       .SignIn(userInfo)
       .then(({ data }) => setToken(data.accessToken))
       .then(() => setUserInfo())
-      .then(() => history.replace('/'))
+      .then(() => {
+        if (tutorial === 'true') {
+          history.replace('/');
+        } else {
+          history.push('/tutorial');
+        }
+      })
       .catch(() => {
         setSignInStatus({
           status: false,

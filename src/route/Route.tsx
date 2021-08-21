@@ -1,8 +1,9 @@
 import React from 'react';
 // route
 import { Redirect, Switch } from 'react-router-dom';
-import PublicRoute from './PublicRoute';
+import Tutorial from 'src/pages/Tutorial';
 import PrivateRoute from './PrivateRoute';
+import PublicRoute from './PublicRoute';
 // components
 import Section from '../elements/Section';
 // pages
@@ -77,6 +78,7 @@ const Route = () => {
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
            */}
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
+          <PrivateRoute path={pathURI.tutorial} component={Tutorial} exact />
           <Redirect from="*" to="/" />
           {/* <PublicRoute component={NotFound} /> */}
         </Switch>

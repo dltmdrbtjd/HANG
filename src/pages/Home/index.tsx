@@ -7,6 +7,7 @@ import { shallowEqual, useDispatch } from 'react-redux';
 // components
 import SearchBar from 'src/components/SearchBar';
 import SearchCard from 'src/components/SearchCard';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import ToastMessage from '../../components/ToastMessage';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
@@ -17,13 +18,11 @@ import { textOverflow } from '../../styles/Mixin';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { promise, guide, traveler, list, message }: any = useTypedSelector(
+  const { guide, traveler, list }: any = useTypedSelector(
     (state) => ({
       list: state.home.HomeData,
-      promise: state.home.HomeData.confirmed,
       guide: state.home.HomeData.guide,
       traveler: state.home.HomeData.traveler,
-      message: state.toastMessage.Message,
     }),
     shallowEqual,
   );
@@ -32,11 +31,12 @@ const Home = () => {
 
   React.useEffect(() => {
     dispatch(HomeCreators.fetchHomeLoad());
+    dispatch(fetchMessage({ Message: false }));
   }, []);
   return (
     <Container>
       <Grid overflow="auto">
-        {promise ? (
+        {list.promise ? (
           <>
             <MainTitle fs="la" margin="0 0 10px">
               확정된 약속
@@ -51,16 +51,16 @@ const Home = () => {
                   history.push('/mypage/promise/3');
                 }}
               >
-                <ProfileImg imgUrl={promise.profileImg} size="medium" />
+                <ProfileImg imgUrl={list.promise.profileImg} size="medium" />
                 <Grid margin="0 0 0 10px" addstyle="flex: 1">
                   <Grid>
                     <Text fs="la" fw="bold" addstyle={textOverflow()}>
-                      {promise.nickname} 님과의 약속
+                      {list.promise.nickname} 님과의 약속
                     </Text>
                   </Grid>
                   <Text>
-                    {moment.utc(promise.startDate).format('MM. DD')} -{' '}
-                    {moment.utc(promise.endDate).format('MM. DD')}
+                    {moment.utc(list.promise.startDate).format('MM. DD')} -{' '}
+                    {moment.utc(list.promise.endDate).format('MM. DD')}
                   </Text>
                 </Grid>
               </Grid>
@@ -112,7 +112,7 @@ const Home = () => {
             : ''}
         </Grid>
       </Grid>
-      {message && <ToastMessage msg="관심목록에 추가되었습니다" />}
+      <ToastMessage msg="관심목록에 추가되었습니다" />
     </Container>
   );
 };

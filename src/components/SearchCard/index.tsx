@@ -35,14 +35,14 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
         dispatch(SearchLikeUpdate({ idx, like: false }));
       } else {
         dispatch(SearchLikeUpdate({ idx, like: true }));
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       }
     } else if (path.includes('/')) {
       if (userInfo.like) {
         dispatch(HomeLikeUpdate({ category, idx, like: false }));
       } else {
         dispatch(HomeLikeUpdate({ category, idx, like: true }));
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       }
     }
   };

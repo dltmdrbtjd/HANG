@@ -46,10 +46,15 @@ const Detail = () => {
       .DoGuide({ tripId: pk })
       .then(() => {
         socket.emit('request', { uid: userPk });
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       })
       .catch((err) => {
-        window.alert(err.response.data.errorMessage);
+        dispatch(
+          fetchMessage({
+            Message: true,
+            error: err.response.data.errorMessage,
+          }),
+        );
       });
   };
 
