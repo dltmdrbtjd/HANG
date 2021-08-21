@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
+import { TypedUseSelectorHook, useSelector } from 'react-redux';
 
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
@@ -36,4 +37,5 @@ const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 export default store;
