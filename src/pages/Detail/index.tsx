@@ -72,7 +72,6 @@ const Detail = () => {
 
   React.useEffect(() => {
     dispatch(DetailCreators.fetchDetailLoad(query.user));
-    dispatch(fetchMessage({ Message: false }));
   }, []);
 
   return (

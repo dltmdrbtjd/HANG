@@ -80,7 +80,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       agreeText: '확인',
       agree: () => {
         AgreeProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
       toastMsg: `${promInfo.nickname} 님의 요청을 수락했습니다.`,
     },
@@ -92,7 +92,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       agreeText: '확인',
       agree: () => {
         RejectProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
       toastMsg: `${promInfo.nickname} 님의 요청을 거절했습니다.`,
     },
@@ -104,7 +104,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       agreeText: '확인',
       agree: () => {
         RejectProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
       toastMsg: `요청을 취소했습니다.`,
     },
@@ -115,7 +115,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       subText2: '약속을 취소하시겠습니까?',
       agree: () => {
         cancelConfiremedProm();
-        dispatch(fetchMessage(true));
+        dispatch(fetchMessage({ Message: true }));
       },
       toastMsg: `요청을 취소되었습니다.`,
     },
