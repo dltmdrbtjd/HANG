@@ -2,21 +2,19 @@ import React from 'react';
 
 // reudx
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   FavoriteCreators,
   favoriteDelete,
 } from 'src/redux/modules/FavoriteModule/favorite';
-import { history, RootState } from '../../redux/configureStore';
+import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Container, Grid, Text } from '../../elements';
 import ProfileImg from '../../components/ProfileImg';
 
 const Favorite = () => {
   const dispatch = useDispatch();
-  const FavoriteList: any = useSelector<RootState>(
-    (state) => state.favorite.list,
-  );
+  const FavoriteList: any = useTypedSelector((state) => state.favorite.list);
 
   const DelLike = (userPk: number) => {
     dispatch(FavoriteCreators.fetchFavoriteToggle({ targetPk: userPk }));

@@ -14,7 +14,7 @@ const Hr: React.FC<Props> = (props): React.ReactElement => {
 
 Hr.defaultProps = {
   height: '1px',
-  bgColor: 'semiLightG',
+  bgColor: 'lightGray',
 };
 
 export default Hr;

@@ -86,7 +86,7 @@ const MyInfo = () => {
         />
       </Grid>
 
-      {/* <ProfileCard userInfo={myInfo} /> */}
+      <ProfileCard userInfo={myInfo} />
 
       <Grid isFlex hoz="space-between" margin="60px 0 0" ver="center">
         <SubTitle fs="la" fw="bold" width="auto">

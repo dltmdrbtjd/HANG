@@ -12,6 +12,9 @@ const toastMessageSlice = createSlice({
   reducers:{
     fetchMessage: (state,action: PayloadAction<boolean>) => {
       state.Message = action.payload;
+      setTimeout(() => {
+        state.Message = false
+      }, 1500);
     },
   },
 });

@@ -10,7 +10,9 @@ import apis from 'src/shared/api';
 import { setToken } from 'src/shared/token';
 import { setUserInfo } from 'src/shared/userInfo';
 // history
+import TermsOfUse from 'src/components/TermsOfUse';
 import { history } from '../../redux/configureStore';
+// component
 // elements
 import {
   Logo,
@@ -34,6 +36,16 @@ const SignIn = (): React.ReactElement => {
     status: true,
     errorMsg: '',
   });
+
+  const [terms, setTerms] = React.useState<boolean>(false);
+
+  const TermsHandler = (url) => {
+    if (url === '/signup/forgot_pwd') {
+      history.push('/signup/forgot_pwd');
+    } else {
+      setTerms(true);
+    }
+  };
 
   const SignIn = (userInfo: SignInType): void => {
     apis
@@ -130,7 +142,7 @@ const SignIn = (): React.ReactElement => {
                         fs="sm"
                         fw="regular"
                         color="darkG"
-                        _onClick={() => history.push(content.url)}
+                        _onClick={() => TermsHandler(content.url)}
                         key={(Date.now() + Math.random() + idx).toString(36)}
                       >
                         {content.content}
@@ -143,6 +155,7 @@ const SignIn = (): React.ReactElement => {
           </form>
         )}
       </Formik>
+      {terms && <TermsOfUse setTerms={setTerms} />}
     </Container>
   );
 };

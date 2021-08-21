@@ -4,9 +4,9 @@ import moment from 'moment';
 // query
 import queryString from 'query-string';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, shallowEqual } from 'react-redux';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
-import { RootState, history } from 'src/redux/configureStore';
+import { useTypedSelector, history } from 'src/redux/configureStore';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // apis , socket
 import apis from 'src/shared/api';
@@ -26,11 +26,12 @@ import Modal from '../../../components/Modal';
 
 const GuideRequest = () => {
   const dispatch = useDispatch();
-  const myPromise: any = useSelector<RootState>(
-    (state) => state.detail.myTripInfo,
-  );
-  const userPk = useSelector<RootState>(
-    (state) => state.detail.userInfo.userPk,
+  const { myPromise, userPk }: any = useTypedSelector(
+    (state) => ({
+      myPromise: state.detail.myTripInfo,
+      userPk: state.detail.userInfo.userPk,
+    }),
+    shallowEqual,
   );
 
   const [checked, setChecked] = React.useState<number>(0);

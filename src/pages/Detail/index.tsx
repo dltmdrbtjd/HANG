@@ -1,11 +1,11 @@
 import React from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch, shallowEqual } from 'react-redux';
 import queryString from 'query-string';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
 import apis from 'src/shared/api';
 import socket from 'src/shared/socket';
-import { history, RootState } from '../../redux/configureStore';
+import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Grid, MainTitle, Button, Image, Container } from '../../elements';
 // redux
@@ -24,7 +24,7 @@ const Detail = () => {
 
   const [toast, setToast] = React.useState<number>(0);
 
-  const { eventList, userInfo, message }: any = useSelector<RootState>(
+  const { eventList, userInfo, message }: any = useTypedSelector(
     (state) => ({
       eventList: state.detail.tripInfo,
       userInfo: state.detail.userInfo,
@@ -63,14 +63,6 @@ const Detail = () => {
 
   //   history.push(`/chat/room?number=${query.user}`);
   // };
-
-  React.useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        dispatch(fetchMessage(false));
-      }, 1500);
-    }
-  }, [message]);
 
   React.useEffect(() => {
     dispatch(DetailCreators.fetchDetailLoad(query.user));
