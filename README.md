@@ -1,5 +1,3 @@
-# HANG
-
 # HANG - 여행 동행 서비스
 
 <p align='center'>

@@ -11,7 +11,7 @@ const toast = keyframes`
     opacity: 0;
   }
   50% {
-    opacity: 0.8;
+    opacity: 1;
   }
   100% {
     opacity: 0;
@@ -29,6 +29,7 @@ const ToastMessageStyle = styled.div<Prop>`
   background-color: ${({ theme }) => theme.color.skyblue};
   box-shadow: 0 4px 4px rgba(134, 134, 134, 0.3);
   position: fixed;
+  z-index: 10;
   bottom: 120px;
   left: 50%;
   transform: translateX(-50%);

@@ -6,6 +6,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from 'react-redux';
 import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 
 import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
@@ -13,7 +14,7 @@ import ProfileImg from '../ProfileImg/index';
 // import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
 import { textOverflow } from '../../styles/Mixin';
 
-const ProfileCard = ({ userInfo }) => {
+const ProfileCard = ({ userInfo, setToast }) => {
   const dispatch = useDispatch();
 
   const LikeToggle = () => {
@@ -24,6 +25,8 @@ const ProfileCard = ({ userInfo }) => {
       dispatch(DetailLikeUpdate(false));
     } else {
       dispatch(DetailLikeUpdate(true));
+      setToast(1);
+      dispatch(fetchMessage(true));
     }
   };
 
@@ -58,6 +61,7 @@ const ProfileCard = ({ userInfo }) => {
             width="auto"
             color={userInfo.like ? 'brandColor' : 'darkG'}
             position="absolute"
+            cursor="pointer"
             top="12px"
             right="12px"
             _onClick={() => {

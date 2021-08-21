@@ -7,9 +7,15 @@ export interface Props {
   toggle?: boolean;
   setCity: any;
   setGu: any;
+  city?: number;
+  region?: string;
 }
 
-const AreaSelectBox = ({ toggle, ...props }: Props) => {
+// default값 사용하는 방법 !
+// <AreaSelectBox city={지역(서울,부산,제주)의 index} region={해당 지역구(관악구,서초구,중구)}/>
+// 이렇게 사용하시면 초기값 설정이 가능합니다. 혹시 안되면 말씀해주세요@@
+
+const AreaSelectBox = ({ city, region, toggle, ...props }: Props) => {
   const [currentCity, setCurrentCity] = React.useState<number>(0);
   const [currentGu, setCurrntGu] = React.useState<number>(0);
 
@@ -37,9 +43,18 @@ const AreaSelectBox = ({ toggle, ...props }: Props) => {
     }
   };
 
+  let RegionNum;
+  if (city && region) {
+    RegionNum = CityArr[city].gu.indexOf(region);
+  }
+
   React.useEffect(() => {
     props.setCity(cityName);
     props.setGu(guName);
+    if (city && region) {
+      setCurrentCity(city);
+      setCurrntGu(RegionNum);
+    }
   }, [cityName, guName]);
 
   return (
@@ -49,13 +64,14 @@ const AreaSelectBox = ({ toggle, ...props }: Props) => {
           width="100%"
           radius="14px"
           padding="12px"
-          bgColor="lightGray"
+          margin="0 0 26px 0"
+          bgColor="OpacityGray"
           isFlex
           hoz="space-between"
         >
           <Ul
             bgColor="bgColor"
-            fw="bold"
+            fw="regular"
             isFlex
             ver="align-items"
             textAlign="left"
@@ -84,7 +100,7 @@ const AreaSelectBox = ({ toggle, ...props }: Props) => {
           </Ul>
           <Ul
             bgColor="bgColor"
-            fw="bold"
+            fw="regular"
             isFlex
             ver="align-items"
             textAlign="left"

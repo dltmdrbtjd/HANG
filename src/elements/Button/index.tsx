@@ -17,6 +17,7 @@ export interface Props {
   shadow?: string;
   disabled?: any;
   addstyle?: any;
+  arialabel?: string;
   type?: 'submit' | 'reset' | 'button' | undefined;
   _onClick?: any;
   children?: React.ReactElement | React.ReactElement[] | string | number;
@@ -24,11 +25,12 @@ export interface Props {
 
 const Button = React.forwardRef<HTMLButtonElement, Props>(
   (
-    { disabled, type, _onClick, children, ...props },
+    { arialabel, disabled, type, _onClick, children, ...props },
     ref,
   ): React.ReactElement => {
     return (
       <ButtonStyle
+        aria-label={arialabel}
         type={type}
         ref={ref}
         onClick={_onClick}

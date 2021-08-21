@@ -8,6 +8,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { SearchLikeUpdate } from 'src/redux/modules/SearchModule/search';
 import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { HomeLikeUpdate } from 'src/redux/modules/HomeModule/home';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
@@ -34,12 +35,14 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
         dispatch(SearchLikeUpdate({ idx, like: false }));
       } else {
         dispatch(SearchLikeUpdate({ idx, like: true }));
+        dispatch(fetchMessage(true));
       }
     } else if (path.includes('/')) {
       if (userInfo.like) {
         dispatch(HomeLikeUpdate({ category, idx, like: false }));
       } else {
         dispatch(HomeLikeUpdate({ category, idx, like: true }));
+        dispatch(fetchMessage(true));
       }
     }
   };
@@ -49,6 +52,7 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
       <Grid
         position="relative"
         isFlex
+        ver="center"
         padding="12px 20px"
         radius="14px"
         bgColor="white"
@@ -62,8 +66,12 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
         />
         <Grid
           width="70%"
+          height="47px"
           margin="0 0 0 10px"
           cursor="pointer"
+          isFlex
+          column="column"
+          hoz="space-between"
           _onClick={() => {
             history.push(`/detail?user=${userInfo.userPk}`);
           }}
@@ -72,7 +80,8 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
             {userInfo && userInfo.nickname}
           </Text>
           <Text
-            color="darkG"
+            color="darkGray"
+            fs="sm"
             // mobile={SetTabFontSize('sm')}
             addstyle={textOverflow()}
           >
@@ -88,6 +97,7 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
           position="absolute"
           top="12px"
           right="12px"
+          cursor="pointer"
           _onClick={() => {
             LikeToggle();
           }}

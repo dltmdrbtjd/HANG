@@ -5,29 +5,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 // history
-import socketIOClient from 'socket.io-client';
+import socket from 'src/shared/socket';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
 // userInfo
-// import { getUserInfo } from '../../../shared/userInfo';
+import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
-// import apis from '../../../shared/api';
+import apis from '../../../shared/api';
 // reducer
 // import { ChatCreators } from '../../../redux/modules/chat';
 
-interface LastChat {
-  message: string;
-  curTime: number;
-  userPk: number;
-}
+// interface LastChat {
+//   message: string;
+//   curTime: number;
+//   userPk: number;
+// }
 
-interface ChatLog {
-  lastChat: LastChat[];
-  unchecked: string;
-  targetPk: number;
-}
+// interface ChatLog {
+//   lastChat: LastChat[];
+//   unchecked: string;
+//   targetPk: number;
+// }
 
 const NotiBadge = () => {
   // const dispatch = useDispatch();
@@ -36,34 +36,33 @@ const NotiBadge = () => {
   // //     (room) => room.targetPk,
   // //   );
 
-  // const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
+  const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
   // const [chatLog, setChatLog] = React.useState<ChatLog>({});
-  // const ENDPOINT = 'https://soujinko.shop/';
-  // const socket = socketIOClient(ENDPOINT);
-  // //   const userPk = getUserInfo() && getUserInfo().userPk;
 
-  // const NotiOff = () => {
-  //   setNewAlarm(false);
-  //   history.push('/noti');
-  // };
+  const userPk = getUserInfo() && getUserInfo().userPk;
 
-  // React.useEffect(() => {
-  //   // socket.emit('login', { uid: userPk });
-  //   socket.on('requested', (data) => {
-  //     setNewAlarm(data);
-  //   });
+  const NotiOff = () => {
+    setNewAlarm(false);
+    history.push('/noti');
+  };
 
-  //   apis
-  //     .AlarmCheck()
-  //     .then((res) => {
-  //       setNewAlarm(res.data);
-  //     })
-  //     .catch((err) => console.log(err));
+  React.useEffect(() => {
+    socket.emit('login', { uid: userPk });
+    socket.on('requested', (data) => {
+      setNewAlarm(data);
+    });
 
-  //   socket.on('unchecked', () => {
-  //     dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
-  //   });
-  // }, []);
+    apis
+      .AlarmCheck()
+      .then((res) => {
+        setNewAlarm(res.data);
+      })
+      .catch((err) => console.log(err));
+
+    // socket.on('unchecked', () => {
+    //   dispatch(ChatCreators.ChatAlarmCheck(Number(true)));
+    // });
+  }, []);
 
   // React.useEffect(() => {
   //   socket.on('newMessage', (data) => {
@@ -91,14 +90,14 @@ const NotiBadge = () => {
 
   return (
     // name="alarm"
-    // _onClick={NotiOff}
-    <Button form="text">
+    <Button form="text" arialabel="badge">
       <Grid>
         <Badge
-          // invisible={!newAlarm}
+          invisible={!newAlarm}
           variant="dot"
           overlap="circular"
           color="secondary"
+          onClick={NotiOff}
         >
           <NotificationsNoneIcon />
         </Badge>
