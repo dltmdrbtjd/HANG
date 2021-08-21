@@ -72,6 +72,7 @@ const MyPromise = () => {
             title="약속 잡으러 가기"
             coment="다른 사람들과 여행 약속을 잡아보세요"
             link="/"
+            margin="60px 0 0"
           >
             {received.length ? (
               <Grid margin="60px 0 0">

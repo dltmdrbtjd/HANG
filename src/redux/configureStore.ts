@@ -13,6 +13,7 @@ import DetailReducer from './modules/DetailModule/detail';
 import ToastReducer from './modules/ToastMessage/toastMessage';
 import AlarmReducer from './modules/AlarmModule/alarm';
 import MyPageReducer from './modules/MyPageModule/mypage';
+import ChatReducer from './modules/ChatModule/chat';
 
 export const history = createBrowserHistory();
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   detail: DetailReducer,
   alarm: AlarmReducer,
   mypage: MyPageReducer,
+  chat: ChatReducer,
   router: connectRouter(history),
 });
 

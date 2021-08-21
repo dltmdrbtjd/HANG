@@ -5,7 +5,6 @@ export interface Props {
   padding?: string;
   height?: string;
   addstyle?: any;
-  children: React.ReactElement | React.ReactElement[];
 }
 
 const Container: React.FC<Props> = ({
