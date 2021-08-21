@@ -10,18 +10,16 @@ import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 // import Onboarding from '../pages/Onboarding';
-// import Welcome from '../pages/SignUp/Welcome';
 // import ForgotPassword from '../pages/SignUp/ForgotPassword';
 import Search from '../pages/Search';
 import Detail from '../pages/Detail';
 import GuideRequest from '../pages/Detail/GuideRequest';
 import Favorite from '../pages/Favorite';
-// import MyInfo from '../pages/MyPage/MyInfo';
-// import MyPromise from '../pages/MyPage/Promise';
+import MyInfo from '../pages/MyPage/MyInfo';
+import MyPromise from '../pages/MyPage/Promise';
 // import Block from '../pages/MyPage/Block';
-// import MyPromiseDetail from '../pages/MyPage/Promise/MyPromise';
 // import MyPageModify from '../pages/MyPage/Modify';
-// import CreateTrip from '../pages/MyPage/CreateTrip';
+import CreateTrip from '../pages/MyPage/CreateTrip';
 import Noti from '../pages/Noti';
 // import Chat from '../pages/Chat';
 // import ChatRoom from '../pages/Chat/Room';
@@ -46,12 +44,7 @@ const Route = () => {
             component={SignUp}
             exact
           />
-          {/* <PublicRoute
-            path={pathURI.welcome}
-            restricted
-            component={Welcome}
-            exact
-          />
+          {/*
           <PublicRoute
             path={pathURI.forgotPwd}
             restricted
@@ -69,21 +62,17 @@ const Route = () => {
           <PrivateRoute path={pathURI.search} component={Search} exact />
           <PrivateRoute path={pathURI.detail} component={Detail} exact />
           <PrivateRoute path={pathURI.request} component={GuideRequest} exact />
-          {/* 
           <PrivateRoute path={pathURI.mypage} component={MyInfo} exact />
           <PrivateRoute path={pathURI.promise} component={MyPromise} exact />
-          <PrivateRoute path={pathURI.block} component={Block} exact />
-          <PrivateRoute
-            path="/mypage/promise/:page"
-            component={MyPromiseDetail}
-            exact
-          />
-          <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
           <PrivateRoute
             path="/mypage/create_trip"
             component={CreateTrip}
             exact
           />
+
+          {/* 
+          <PrivateRoute path={pathURI.block} component={Block} exact />
+          <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact /> */}
           <PrivateRoute path={pathURI.noti} component={Noti} exact />

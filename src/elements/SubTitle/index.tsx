@@ -2,7 +2,6 @@ import React from 'react';
 import SubTitleStyle from './style';
 
 export interface Props {
-  children: string;
   width?: string;
   height?: string;
   margin?: string;

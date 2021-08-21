@@ -1,7 +1,10 @@
 import { css } from 'styled-components';
+// mixin
+import { flexBox } from 'src/styles/Mixin';
 
 const FloatButton = css`
   position: relative;
+  ${flexBox(null, 'center', 'inline-flex')};
 `;
 
 const ToggleLabelStyle = (checked: boolean) => {

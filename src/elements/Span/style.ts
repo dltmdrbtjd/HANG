@@ -43,6 +43,7 @@ const makeItFlexBox = css<Prop>`
 `;
 
 const SpanStyle = styled.span<Prop>`
+  display: inline-block;
   ${({ isFlex }) => isFlex && makeItFlexBox};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
