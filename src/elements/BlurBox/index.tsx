@@ -7,13 +7,23 @@ export interface Props {
   hoz?: string;
   ver?: string;
   isFlex?: any;
+  _onClick?: any;
 }
 
 const BlurBox: React.FC<Props> = ({
   children,
+  _onClick,
   ...props
 }): React.ReactElement => {
-  return <BlurBoxStyle {...props}>{children}</BlurBoxStyle>;
+  return (
+    <BlurBoxStyle onClick={_onClick} {...props}>
+      {children}
+    </BlurBoxStyle>
+  );
+};
+
+BlurBox.defaultProps = {
+  _onClick: () => {},
 };
 
 export default BlurBox;
