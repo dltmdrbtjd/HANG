@@ -8,13 +8,19 @@ import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 
+// style
+import { outlineBox } from 'src/styles/Mixin/boxStyle';
 import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
-// style
 // import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
 import { textOverflow } from '../../styles/Mixin';
 
-const ProfileCard = ({ userInfo, setToast }) => {
+export interface Props {
+  userInfo?: any;
+  setToast?: any;
+}
+
+const ProfileCard = ({ userInfo, setToast }: Props) => {
   const dispatch = useDispatch();
 
   const LikeToggle = () => {
@@ -72,8 +78,8 @@ const ProfileCard = ({ userInfo, setToast }) => {
           </Grid>
         ) : null}
       </Grid>
-      <Hr width="100%" margin="15px 0" />
-      <Grid margin="10px 0 0 0">
+      <Hr width="100%" margin="13px 0" />
+      <Grid>
         {userInfo.intro !== 'none' ? (
           <Text fs="sm">{userInfo.intro}</Text>
         ) : (

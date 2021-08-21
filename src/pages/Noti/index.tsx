@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from 'src/redux/configureStore';
+import { useDispatch } from 'react-redux';
+import { useTypedSelector } from 'src/redux/configureStore';
 import { AlarmCreators } from 'src/redux/modules/AlarmModule/alarm';
 import { Grid, Button, Container } from '../../elements';
 import maxWidth from './style';
@@ -8,7 +8,7 @@ import AlaremCard from './AlarmCard';
 
 const Noti = () => {
   const dispatch = useDispatch();
-  const list: any = useSelector<RootState>((state) => state.alarm.list);
+  const list: any = useTypedSelector((state) => state.alarm.list);
 
   const AlarmDeleteBtn = () => {
     dispatch(AlarmCreators.fetchDeleteAlarm());

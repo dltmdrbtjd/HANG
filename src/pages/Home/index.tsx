@@ -3,13 +3,12 @@ import React from 'react';
 import moment from 'moment';
 // redux
 import { HomeCreators } from 'src/redux/modules/HomeModule/home';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
+import { shallowEqual, useDispatch } from 'react-redux';
 // components
 import SearchBar from 'src/components/SearchBar';
 import SearchCard from 'src/components/SearchCard';
 import ToastMessage from '../../components/ToastMessage';
-import { RootState, history } from '../../redux/configureStore';
+import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Grid, Text, MainTitle, Container } from '../../elements/index';
 import PromiseCard from './style';
@@ -18,27 +17,18 @@ import { textOverflow } from '../../styles/Mixin';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { promise, guide, traveler, list, message }: any =
-    useSelector<RootState>(
-      (state) => ({
-        list: state.home.HomeData,
-        promise: state.home.HomeData.confirmed,
-        guide: state.home.HomeData.guide,
-        traveler: state.home.HomeData.traveler,
-        message: state.toastMessage.Message,
-      }),
-      shallowEqual,
-    );
+  const { promise, guide, traveler, list, message }: any = useTypedSelector(
+    (state) => ({
+      list: state.home.HomeData,
+      promise: state.home.HomeData.confirmed,
+      guide: state.home.HomeData.guide,
+      traveler: state.home.HomeData.traveler,
+      message: state.toastMessage.Message,
+    }),
+    shallowEqual,
+  );
 
   const mainlist = Object.keys(list);
-
-  React.useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        dispatch(fetchMessage(false));
-      }, 1500);
-    }
-  }, [message]);
 
   React.useEffect(() => {
     dispatch(HomeCreators.fetchHomeLoad());
