@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import queryString from 'query-string';
 import { useInView } from 'react-intersection-observer';
-import { RootState } from 'src/redux/configureStore';
+import { useTypedSelector } from 'src/redux/configureStore';
 import { SearchCreators } from 'src/redux/modules/SearchModule/search';
-import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // components
 import SearchBar from '../../components/SearchBar';
 import AreaSelectBox from '../../components/AreaSelectBox';
@@ -16,7 +15,7 @@ import { Button, Grid, Text, Strong, Container } from '../../elements';
 import CategoryBtn from './style';
 
 export interface SearchData {
-  keyword: string | string[];
+  keyword?: string | string[];
   region: string;
   city: string;
   traveler: number;
@@ -26,9 +25,12 @@ export interface SearchData {
 
 const Search = () => {
   const dispatch = useDispatch();
-  const userlist: any = useSelector<RootState>((state) => state.search.list);
-  const nextItem = useSelector<RootState>((state) => state.search.nextItem);
-  const message = useSelector<RootState>((state) => state.toastMessage.Message);
+
+  const { userlist, nextItem, message }: any = useTypedSelector((state) => ({
+    userlist: state.search.list,
+    nextItem: state.search.nextItem,
+    message: state.toastMessage.Message,
+  }));
   // pageNum
   const [page, setPage] = React.useState<number>(1);
   const [ref, inView] = useInView();
@@ -62,19 +64,12 @@ const Search = () => {
   };
 
   const MainSearch: SearchData = {
+    ...SendSearch,
     keyword: query.keyword,
-    region: city,
-    city: gu,
-    traveler: Number(traveler),
-    guide: Number(guide),
   };
 
   const MoreSearch: SearchData = {
-    keyword: finduser,
-    region: city,
-    city: gu,
-    traveler: Number(traveler),
-    guide: Number(guide),
+    ...SendSearch,
     pageNum: page,
   };
 
@@ -144,14 +139,6 @@ const Search = () => {
     dispatch(SearchCreators.fetchSearchLoad(MainSearch));
     setPage(1);
   }, [query.keyword]);
-
-  React.useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        dispatch(fetchMessage(false));
-      }, 1500);
-    }
-  }, [message]);
 
   return (
     <Container>
