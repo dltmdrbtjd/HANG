@@ -70,7 +70,7 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
           margin="0 0 0 10px"
           cursor="pointer"
           isFlex
-          column="column"
+          column
           hoz="space-between"
           _onClick={() => {
             history.push(`/detail?user=${userInfo.userPk}`);

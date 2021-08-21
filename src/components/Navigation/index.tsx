@@ -2,8 +2,7 @@ import React from 'react';
 // material
 import Badge from '@material-ui/core/Badge';
 // redux
-import { useSelector } from 'react-redux';
-import { history } from 'src/redux/configureStore';
+import { history, useTypedSelector } from 'src/redux/configureStore';
 // router
 import { useLocation } from 'react-router';
 // serach
@@ -30,9 +29,9 @@ import { HeaderIncluded } from '../../route/Path';
 
 const Navigation = () => {
   const path: string = useLocation().pathname;
-  // const chatAlarmChecked = useSelector((state) => state.chat.alarmCount);
+  const chatAlarmChecked = useTypedSelector((state) => state.chat.alarmCount);
 
-  return HeaderIncluded.includes(path) || /mypage\/promise/.test(path) ? (
+  return HeaderIncluded.includes(path) ? (
     <Grid
       width="100%"
       bgColor="bgColor"
@@ -81,7 +80,7 @@ const Navigation = () => {
           onClick={() => history.push('/chat')}
         >
           <Badge
-            // invisible={!chatAlarmChecked}
+            invisible={!chatAlarmChecked}
             variant="dot"
             overlap="circular"
             color="secondary"

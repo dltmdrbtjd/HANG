@@ -5,11 +5,11 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
 import apis from 'src/shared/api';
 import socket from 'src/shared/socket';
+// redux
+import { ChooseChatRoom } from 'src/redux/modules/ChatModule/chat';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Grid, MainTitle, Button, Image, Container } from '../../elements';
-// redux
-// import { ChatCreators } from '../../redux/modules/chat';
 // component
 import ProfileCard from '../../components/ProfileCard';
 import EventCard from '../../components/EventCard';
@@ -58,16 +58,17 @@ const Detail = () => {
       });
   };
 
-  // const chooseChatRoom = () => {
-  //   dispatch(
-  //     ChatCreators.ChooseChatRoom({
-  //       nickname: userInfo.nickname,
-  //       profileImg: userInfo.profileImg,
-  //     }),
-  //   );
+  const chooseChatRoom = () => {
+    dispatch(
+      ChooseChatRoom({
+        nickname: userInfo.nickname,
+        profileImg: userInfo.profileImg,
+        targetPk: parseInt(query.user as string, 10),
+      }),
+    );
 
-  //   history.push(`/chat/room?number=${query.user}`);
-  // };
+    history.push(`/chat/room`);
+  };
 
   React.useEffect(() => {
     dispatch(DetailCreators.fetchDetailLoad(query.user));
@@ -88,7 +89,7 @@ const Detail = () => {
             border="0.5px solid #E7E7E7"
             padding="10px 9px"
             margin="0 7px 0 0"
-            // _onClick={chooseChatRoom}
+            _onClick={chooseChatRoom}
           >
             <Image src={chat} alt="chat icon" />
           </Button>

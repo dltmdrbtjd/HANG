@@ -22,8 +22,8 @@ import MyPromise from '../pages/MyPage/Promise';
 // import MyPageModify from '../pages/MyPage/Modify';
 import CreateTrip from '../pages/MyPage/CreateTrip';
 import Noti from '../pages/Noti';
-// import Chat from '../pages/Chat';
-// import ChatRoom from '../pages/Chat/Room';
+import Chat from '../pages/Chat';
+import ChatRoom from '../pages/Chat/Room';
 // import NotFound from '../pages/NotFound';
 // pathname
 import { pathURI } from './Path';
@@ -70,12 +70,13 @@ const Route = () => {
             component={CreateTrip}
             exact
           />
+          <PrivateRoute path={pathURI.chat} component={Chat} exact />
+          <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
 
           {/* 
           <PrivateRoute path={pathURI.block} component={Block} exact />
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
-          <PrivateRoute path={pathURI.chat} component={Chat} exact />
-          <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact /> */}
+           */}
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute path={pathURI.tutorial} component={Tutorial} exact />
           <Redirect from="*" to="/" />

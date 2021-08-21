@@ -8,7 +8,7 @@ const initialState: messageState = {
 }
 
 const toastMessageSlice = createSlice({
-  name:'toastMessage',
+  name: 'toastMessage',
   initialState,
   reducers:{
     fetchMessage: (state,action: PayloadAction<messageState>) => {
