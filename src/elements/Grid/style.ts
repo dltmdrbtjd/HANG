@@ -12,7 +12,7 @@ export interface Prop {
   isFlex?: boolean;
   hoz?: string;
   ver?: string;
-  column?: string;
+  column?: boolean;
   width?: string;
   height?: string;
   margin?: string;

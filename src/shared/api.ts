@@ -41,7 +41,7 @@ instance.interceptors.response.use(
   (error) => {
     const path = window.location.pathname;
 
-    if(error.response.status === 307){
+    if (error.response.status === 307) {
       setToken(error.response.data.newAccessToken);
       history.go(0);
     } else if (

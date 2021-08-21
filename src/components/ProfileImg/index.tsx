@@ -7,7 +7,7 @@ import { setProfileImageSize, ImagePosition } from './style';
 import defaultProfile from '../../Images/profile.png';
 
 export interface Props {
-  size: string;
+  size?: string;
   imgUrl: string | null;
 }
 

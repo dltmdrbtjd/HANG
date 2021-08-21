@@ -134,9 +134,7 @@ const EnterIdPwd: React.FC<Props> = ({
           disabled={
             !(idDupCheck.status === 1 && !pwdErrorMsg && pwdCheck === password)
           }
-          _onClick={() => {
-            setPage((page: number) => page + 1);
-          }}
+          _onClick={() => setPage((page: number) => page + 1)}
         >
           다음
         </Button>
