@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import { useInView } from 'react-intersection-observer';
 import { useTypedSelector } from 'src/redux/configureStore';
 import { SearchCreators } from 'src/redux/modules/SearchModule/search';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // components
 import SearchBar from '../../components/SearchBar';
 import AreaSelectBox from '../../components/AreaSelectBox';
@@ -137,6 +138,7 @@ const Search = () => {
 
   React.useEffect(() => {
     dispatch(SearchCreators.fetchSearchLoad(MainSearch));
+    dispatch(fetchMessage({ Message: false }));
     setPage(1);
   }, [query.keyword]);
 
