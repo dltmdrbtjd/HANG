@@ -11,6 +11,7 @@ import SearchReducer from './modules/SearchModule/search';
 import DetailReducer from './modules/DetailModule/detail';
 import ToastReducer from './modules/ToastMessage/toastMessage';
 import AlarmReducer from './modules/AlarmModule/alarm';
+import MyPageReducer from './modules/MyPageModule/mypage';
 
 export const history = createBrowserHistory();
 
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   toastMessage: ToastReducer,
   detail: DetailReducer,
   alarm: AlarmReducer,
+  mypage: MyPageReducer,
   router: connectRouter(history),
 });
 

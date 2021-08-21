@@ -2,6 +2,9 @@ import React from 'react';
 import ButtonStyle from './style';
 
 export interface Props {
+  isFlex?: boolean;
+  hoz?: string;
+  ver?: string;
   form?: string;
   width?: string;
   height?: string;
@@ -20,7 +23,7 @@ export interface Props {
   arialabel?: string;
   type?: 'submit' | 'reset' | 'button' | undefined;
   _onClick?: any;
-  children?: React.ReactElement | React.ReactElement[] | string | number;
+  children?: any;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, Props>(
