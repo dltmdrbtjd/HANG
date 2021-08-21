@@ -9,6 +9,7 @@ import {
   RejectPromise,
   CancelPromise,
 } from 'src/redux/modules/MyPageModule/mypage';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // type
 import { PromInfo } from 'src/redux/modules/MyPageModule/type';
 // date format
@@ -17,7 +18,7 @@ import moment from 'moment';
 import CallMadeIcon from '@material-ui/icons/CallMade';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
 // history
-import { history } from '../../../../redux/configureStore';
+import { history, useTypedSelector } from '../../../../redux/configureStore';
 // elements
 import { Button, Grid, Text, Strong, Span } from '../../../../elements';
 // components
@@ -37,6 +38,8 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [promiseType, setPromiseType] = React.useState(type);
+
+  const toastMessage = useTypedSelector((state) => state.toastMessage.Message);
 
   const AgreeProm = () => {
     apis
@@ -77,6 +80,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       agreeText: '확인',
       agree: () => {
         AgreeProm();
+        dispatch(fetchMessage(true));
       },
       toastMsg: `${promInfo.nickname} 님의 요청을 수락했습니다.`,
     },
@@ -88,6 +92,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       agreeText: '확인',
       agree: () => {
         RejectProm();
+        dispatch(fetchMessage(true));
       },
       toastMsg: `${promInfo.nickname} 님의 요청을 거절했습니다.`,
     },
@@ -99,6 +104,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       agreeText: '확인',
       agree: () => {
         RejectProm();
+        dispatch(fetchMessage(true));
       },
       toastMsg: `요청을 취소했습니다.`,
     },
@@ -109,6 +115,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
       subText2: '약속을 취소하시겠습니까?',
       agree: () => {
         cancelConfiremedProm();
+        dispatch(fetchMessage(true));
       },
       toastMsg: `요청을 취소되었습니다.`,
     },
@@ -154,7 +161,7 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
           </Text>
         </Grid>
 
-        <Span color="darkG">
+        <Span color="darkGray" position="absolute" top="12px" right="12px">
           {guide ? <CallMadeIcon /> : <CallReceivedIcon />}
         </Span>
       </Grid>
@@ -193,9 +200,9 @@ const PromiseCard: React.FC<Props> = ({ promInfo, guide, type }) => {
         close={() => setOpen(false)}
         {...modalMessage[promiseType]}
       />
-      {/* {open.toastMsgOpen ? (
+      {toastMessage ? (
         <ToastMessage msg={modalMessage[promiseType].toastMsg} />
-      ) : null} */}
+      ) : null}
     </Grid>
   );
 };

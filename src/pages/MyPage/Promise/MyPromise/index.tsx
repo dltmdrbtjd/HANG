@@ -46,10 +46,10 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
             {promise[type].map((promInfo: PromInfo, idx: number) => (
               <PromiseCard
                 key={(Date.now() + Math.random() * idx).toString(36)}
-                type={pageBreak[type]}
+                type={type}
                 guide={
                   {}.hasOwnProperty.call(pageBreak[type], 'guide')
-                    ? pageBreak[type]
+                    ? pageBreak[type].guide
                     : promInfo.guide
                 }
                 promInfo={promInfo}

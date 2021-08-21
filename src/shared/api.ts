@@ -19,6 +19,7 @@ import {
 } from './ApiTypes';
 // cookie
 import { getToken, delToken, setToken } from './token';
+import { setUserInfo } from './userInfo';
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
   baseURL: 'https://soujinko.shop',
@@ -43,6 +44,7 @@ instance.interceptors.response.use(
 
     if (error.response.status === 307) {
       setToken(error.response.data.newAccessToken);
+      setUserInfo();
       history.go(0);
     } else if (
       error.response.status === 401 &&

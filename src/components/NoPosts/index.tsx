@@ -13,10 +13,11 @@ export interface Props {
   title: string;
   coment: string;
   link: string;
+  margin?: string;
   children: React.ReactElement | React.ReactElement[];
 }
 
-const NoPosts = ({ list, title, coment, link, children }: Props) => {
+const NoPosts = ({ list, title, coment, link, margin, children }: Props) => {
   if (list.length) return <>{children}</>;
 
   return (
@@ -28,6 +29,7 @@ const NoPosts = ({ list, title, coment, link, children }: Props) => {
       isFlex
       ver="center"
       cursor="pointer"
+      margin={margin}
       _onClick={() => history.push(link)}
     >
       <Button

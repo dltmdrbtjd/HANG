@@ -4,16 +4,16 @@ import { messageState } from './type';
 
 const initialState: messageState = {
   Message: false,
-}
+};
 
 const toastMessageSlice = createSlice({
-  name:'toastMessage',
+  name: 'toastMessage',
   initialState,
-  reducers:{
-    fetchMessage: (state,action: PayloadAction<boolean>) => {
+  reducers: {
+    fetchMessage: (state, action: PayloadAction<boolean>) => {
       state.Message = action.payload;
       setTimeout(() => {
-        state.Message = false
+        state.Message = false;
       }, 1500);
     },
   },
