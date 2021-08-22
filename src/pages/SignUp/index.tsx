@@ -28,7 +28,7 @@ interface userInfo {
 }
 
 const SignUp = () => {
-  const [page, setPage] = React.useState<number>(4);
+  const [page, setPage] = React.useState<number>(1);
 
   const [region, setRegion] = React.useState<string>('서울');
   const [city, setCity] = React.useState<string>('강남구');
