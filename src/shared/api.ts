@@ -48,7 +48,7 @@ instance.interceptors.response.use(
       history.go(0);
     } else if (
       error.response.status === 401 &&
-      !['/signup', '/login'].includes(path)
+      !['/signup', '/signIn'].includes(path)
     ) {
       window.alert('토근이 만료되었습니다. 다시 로그인해주세요.');
       delToken();
@@ -69,6 +69,9 @@ const apis = {
     instance.post('/api/users/duplicate', user),
   SignIn: (user: SignInType) => instance.post('/api/users/signin', user),
   SignOut: () => instance.delete('/api/users/signout'),
+  ForgotPwd: (userInfo) => instance.post('/api/users/password', userInfo),
+  Exists: (userInfo) => instance.post('/api/users/exists', userInfo),
+  Withdrawal: () => instance.delete('/api/users/quit'),
 
   // alarm
   AlarmCheck: () => instance.get('/api/alarm'),
@@ -108,6 +111,12 @@ const apis = {
   CancelPromise: (tripId: CancelPromiseType) =>
     instance.patch('/api/mypage/reject_confirm', tripId),
   GuideToggle: () => instance.patch('/api/mypage/update_guide'),
+
+  // myinfo block
+  GetBlockList: () => instance.get('api/users/block'),
+  AddBlockList: (targetPk) => instance.post('api/users/block', targetPk),
+  DeleteBlockList: (targetPk: { targetPk: number }) =>
+    instance.patch('api/users/block', targetPk),
 
   GetChatRoom: () => instance.get('/api/users/chat'),
 };

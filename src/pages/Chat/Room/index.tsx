@@ -1,6 +1,6 @@
 import React from 'react';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import {
   DeleteChatRoom,
   ChatAlarmCheck,
@@ -8,6 +8,8 @@ import {
 } from 'src/redux/modules/ChatModule/chat';
 // socket
 import socket from 'src/shared/socket';
+// apis
+import apis from 'src/shared/api';
 // moment
 import moment from 'moment';
 // history
@@ -19,15 +21,19 @@ import { Grid, Text, Input, Button, Container } from '../../../elements';
 // components
 import SpeechBubble from './SpeechBubble';
 import RoomHeader from './RoomHeader';
+import Modal from '../../../components/Modal';
 // style
 import { WarningText, ChatInputAreaSize } from './style';
 
 const ChatRoom = () => {
   const dispatch = useDispatch();
-  const { alarmCount, targetUserInfo } = useTypedSelector((state) => ({
-    alarmCount: state.chat.alarmCount,
-    targetUserInfo: state.chat.targetUserInfo,
-  }));
+  const { alarmCount, targetUserInfo } = useTypedSelector(
+    (state) => ({
+      alarmCount: state.chat.alarmCount,
+      targetUserInfo: state.chat.targetUserInfo,
+    }),
+    shallowEqual,
+  );
   const unchecked: number = useSelector(getUnchecked);
 
   const { userPk, nickname } = getUserInfo();
@@ -36,6 +42,7 @@ const ChatRoom = () => {
 
   const [chatLog, setChatLog] = React.useState([]);
   const [message, setMessage] = React.useState('');
+  const [open, setOpen] = React.useState(false);
 
   const messageRef = React.useRef(null);
 
@@ -43,18 +50,19 @@ const ChatRoom = () => {
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
     `${targetUserPk}:${userPk}`;
 
-  const quitRoom = () => {
+  const QuitRoom = () => {
     socket.emit('ByeBye', { roomName, userPk });
     dispatch(DeleteChatRoom(targetUserPk));
 
     history.replace('/chat');
   };
 
-  //   const blockUser = async () => {
-  //     await MypageCreators.AddBlockListDB(targetUserPk);
-
-  //     quitRoom();
-  //   };
+  const BlockUser = async () => {
+    apis
+      .AddBlockList({ targetPk: targetUserPk })
+      .then(() => QuitRoom())
+      .catch((err) => console.log(err));
+  };
 
   const scrollToBottom = () => {
     if (messageRef.current) {
@@ -115,7 +123,10 @@ const ChatRoom = () => {
     <div ref={messageRef}>
       <Container>
         <Grid margin="0 0 95px">
-          <RoomHeader quit={quitRoom} targetUserInfo={targetUserInfo} />
+          <RoomHeader
+            methods={[QuitRoom, () => setOpen(true)]}
+            targetUserInfo={targetUserInfo}
+          />
 
           <Text
             fs="xs"
@@ -184,6 +195,15 @@ const ChatRoom = () => {
             </Button>
           </Grid>
         </Grid>
+
+        <Modal
+          open={open}
+          close={() => setOpen(false)}
+          mainText="차단하기"
+          subText2={`${targetUserInfo.nickname} 님을 정말 차단시겠습니까?`}
+          agreeText="확인"
+          agree={BlockUser}
+        />
       </Container>
     </div>
   );
