@@ -18,14 +18,7 @@ import { textOverflow } from '../../styles/Mixin';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { guide, traveler, list }: any = useTypedSelector(
-    (state) => ({
-      list: state.home.HomeData,
-      guide: state.home.HomeData.guide,
-      traveler: state.home.HomeData.traveler,
-    }),
-    shallowEqual,
-  );
+  const list = useTypedSelector((state) => state.home.HomeData);
 
   const mainlist = Object.keys(list);
 
@@ -36,7 +29,7 @@ const Home = () => {
   return (
     <Container>
       <Grid overflow="auto">
-        {list.promise ? (
+        {list.promise.nickname ? (
           <>
             <MainTitle fs="la" margin="0 0 10px">
               확정된 약속
@@ -81,8 +74,8 @@ const Home = () => {
           <MainTitle fs="la" margin="0 0 6px">
             내 지역을 여행하고 싶은 여행자예요
           </MainTitle>
-          {traveler
-            ? traveler.map((item, idx) => {
+          {list.traveler
+            ? list.traveler.map((item, idx) => {
                 return (
                   <SearchCard
                     key={idx}
@@ -98,8 +91,8 @@ const Home = () => {
           <MainTitle fs="la" margin="0 0 6px">
             내 지역에 함께 있는 길잡이예요
           </MainTitle>
-          {guide
-            ? guide.map((item, idx) => {
+          {list.guide
+            ? list.guide.map((item, idx) => {
                 return (
                   <SearchCard
                     key={idx}

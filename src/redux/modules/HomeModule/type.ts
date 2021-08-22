@@ -21,14 +21,14 @@ export interface Promise {
 }
 
 export interface home {
-  confirmed: Promise;
+  promise: Promise;
   guide: TraveleCard[];
   traveler: TraveleCard[];
 }
 
 export interface homeType {
   HomeData: {
-    confirmed: any;
+    promise: any;
     guide: TraveleCard[];
     traveler: TraveleCard[];
   };
