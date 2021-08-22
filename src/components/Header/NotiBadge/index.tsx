@@ -7,7 +7,7 @@ import { NewMessage } from 'src/redux/modules/ChatModule/type';
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 // history
-import socket from 'src/shared/socket';
+import socket from 'src/util/socket';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';

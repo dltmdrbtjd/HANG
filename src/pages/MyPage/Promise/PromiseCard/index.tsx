@@ -136,12 +136,12 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
         <ProfileImg size="large" imgUrl={promInfo.profileImg} />
 
         <Grid width="60%" margin="0 0 0 14px">
-          <Text margin="0 0 15px" addstyle={textOverflow()} lh="32px">
+          <Text margin="0 0 15px" lh="32px" wb="keep-all">
             <Strong>{promInfo.nickname}</Strong> 님에게{' '}
             <GuideNameplate>길잡이</GuideNameplate> 요청
           </Text>
 
-          <Text>
+          <Text color="darkGray">
             {moment.utc(promInfo.startDate).format('MM.DD')} -{' '}
             {moment.utc(promInfo.endDate).format('MM.DD')}
           </Text>

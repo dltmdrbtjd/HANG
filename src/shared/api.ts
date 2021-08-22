@@ -48,7 +48,7 @@ instance.interceptors.response.use(
       history.go(0);
     } else if (
       error.response.status === 401 &&
-      !['/signup', '/signIn'].includes(path)
+      !['/signup', '/signIn', '/onboarding'].includes(path)
     ) {
       window.alert('토근이 만료되었습니다. 다시 로그인해주세요.');
       delToken();

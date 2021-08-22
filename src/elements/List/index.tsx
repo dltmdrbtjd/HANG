@@ -10,6 +10,7 @@ export interface Props {
   radius?: string;
   bgColor?: string;
   fs?: string;
+  textAlign?: string;
   padding?: string;
   addstyle?: any;
   _onClick?: any;

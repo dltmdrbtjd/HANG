@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
 import { ChatCreators } from 'src/redux/modules/ChatModule/chat';
 // time
-import timeFormat from 'src/shared/timeFormat';
+import timeFormat from 'src/util/timeFormat';
 // elements
 import { Container } from '../../elements';
 // components

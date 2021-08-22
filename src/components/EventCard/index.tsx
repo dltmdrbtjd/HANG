@@ -58,9 +58,10 @@ const EventCard = ({
       radius="14px"
       position="relative"
       overflow="hidden"
+      shadow="0px 2px 3px rgba(136, 136, 136, 0.25)"
     >
       <Grid padding="20px">
-        <Text>
+        <Text color="darkGray">
           {userInfo && moment.utc(userInfo.startDate).format('MM. DD')} -{' '}
           {userInfo && moment.utc(userInfo.endDate).format('MM. DD')}
         </Text>

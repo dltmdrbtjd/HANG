@@ -7,7 +7,7 @@ import apis from 'src/shared/api';
 // image upload
 import uploadProfileImage from 'src/util/imageUpload';
 // elements
-import { MainTitle, Container, Grid, Button } from '../../elements';
+import { MainTitle, Container } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // pages
@@ -16,7 +16,9 @@ import EnterIdPwd from './EnterIdPwd';
 import FillOutProfile from './FillOutProfile';
 import Welcome from './Welcome';
 // validation
-import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
+import { phoneRegExp, idRegExp, pwdRegExp } from '../../util/validation';
+// style
+import PreLine from './style';
 
 interface userInfo {
   pNum: string;
@@ -69,17 +71,17 @@ const SignUp = () => {
   };
 
   const title = [
-    '번호\u00A0인증이 필요한\u00A0서비스\u00A0입니다',
-    '행에서\u00A0사용할 아이디와\u00A0비밀번호를\u00A0입력해주세요',
-    '행에서\u00A0사용할 프로필을\u00A0설정해주세요',
-    '당신만의\u00A0행복한\u00A0여행이 시작됩니다!',
+    '번호\u00A0인증이\n필요한\u00A0서비스\u00A0입니다',
+    '행에서\u00A0사용할\n아이디와\u00A0비밀번호를\u00A0입력해주세요',
+    '행에서\u00A0사용할\n프로필을\u00A0설정해주세요',
+    '당신만의\u00A0행복한\u00A0여행이\n시작됩니다!',
   ];
 
   return (
     <Container padding="0">
       <StatusBar curPage={page} setPage={setPage} />
 
-      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px">
+      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px" addstyle={PreLine}>
         {title[page - 1]}
       </MainTitle>
 

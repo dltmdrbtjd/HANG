@@ -7,6 +7,12 @@ const Transition = css`
 const CalcHeight = css`
   width: 100vw;
   height: calc(100vh - 70px);
+
+  a {
+    text-indent: -9999px;
+    overflow: hidden;
+    display: block;
+  }
 `;
 
 export { Transition, CalcHeight };
