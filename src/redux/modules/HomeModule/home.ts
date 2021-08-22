@@ -6,7 +6,7 @@ import { homeType, home, like } from './type';
 
 export const initialState: homeType = {
   HomeData: {
-    confirmed: {},
+    promise: {},
     guide: [],
     traveler: [],
   },
