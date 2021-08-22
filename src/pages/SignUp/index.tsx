@@ -34,22 +34,38 @@ const SignUp = () => {
   const [age, setAge] = React.useState('');
   const [profile, setProfile] = React.useState(null);
 
-  const signUpDB = (userInfo: userInfo) => {
-    uploadProfileImage(profile).then((res) => {
-      const profileImg = res;
+  const SignUpDB = (userInfo: userInfo) => {
+    if (profile) {
+      uploadProfileImage(profile).then((res) => {
+        const profileImg = res;
 
-      apis
-        .SignUp({
-          ...userInfo,
-          profileImg,
-          region,
-          city,
-          gender,
-          age: parseInt(age, 10),
-        })
-        .then(() => setPage((page: number) => page + 1))
-        .catch((err) => console.log(err));
-    });
+        apis
+          .SignUp({
+            ...userInfo,
+            profileImg,
+            region,
+            city,
+            gender,
+            age: parseInt(age, 10),
+          })
+          .then(() => setPage((page: number) => page + 1))
+          .catch((err) => console.log(err));
+      });
+
+      return;
+    }
+
+    apis
+      .SignUp({
+        ...userInfo,
+        profileImg: null,
+        region,
+        city,
+        gender,
+        age: parseInt(age, 10),
+      })
+      .then(() => setPage((page: number) => page + 1))
+      .catch((err) => console.log(err));
   };
 
   const title = [
@@ -101,7 +117,7 @@ const SignUp = () => {
             .max(16, '닉네임은 16자까지 입력할 수 있습니다'),
         })}
         onSubmit={(values: userInfo, { setSubmitting }) => {
-          signUpDB(values);
+          SignUpDB(values);
           setSubmitting(false);
         }}
       >

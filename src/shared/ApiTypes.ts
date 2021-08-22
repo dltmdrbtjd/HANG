@@ -68,7 +68,6 @@ export type DeleteTripEventType = {
 export type UpdateProfileType = {
   nickname: string;
   profileImg: string;
-  age: number;
   region: string;
   city: string;
   intro: string;

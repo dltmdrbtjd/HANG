@@ -1,12 +1,10 @@
 import React from 'react';
-// api
-import apis from 'src/shared/api';
-// types
-import { Status, currentType } from '../PhoneAuth';
+// type
+import { Status } from '../PhoneAuth';
 // elements
 import { Grid, Button, Text, Label, InputRadio } from '../../../elements';
 // components
-import ValidateInput from '../ValidateInput';
+import NicknameDupCheck from './NicknameDupCheck/indext';
 import InputImage from '../../../components/SelectImage';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 import SelectBox from './SelectBox';
@@ -27,53 +25,19 @@ const FillOutProfile = ({
     errorMsg: '',
   });
   const [radio, setRadio] = React.useState<number>(0);
-
-  const NickDuplicateCheck = () => {
-    apis
-      .Duplicate({ nickname })
-      .then(() => setNickDupCheck({ status: 1, errorMsg: '' }))
-      .catch(() =>
-        setNickDupCheck({ status: 2, errorMsg: '중복되는 닉네임이 있습니다.' }),
-      );
-  };
-
   const ageOptions = ['10대', '20대', '30대', '40대', '50대', '60대 이상'];
 
   return (
     <>
       <InputImage setProfile={setProfile} />
 
-      <Grid margin="0 0 15px">
-        <Label fs="lg" id="nickname" lh="2" fw="semiBold">
-          닉네임
-        </Label>
-
-        <Grid isFlex hoz="space-between">
-          <ValidateInput
-            id="nickname"
-            placeholder="닉네임 입력"
-            width="58%"
-            name="nickname"
-            value={nickname}
-            _onChange={setNickname}
-            status={currentType[nickDupCheck.status]}
-          />
-
-          <Button
-            width="40%"
-            disabled={!(nickname && !nickErrorMsg)}
-            _onClick={NickDuplicateCheck}
-          >
-            중복 확인
-          </Button>
-        </Grid>
-
-        {nickErrorMsg || nickDupCheck.status === 2 ? (
-          <Text fs="sm" color="danger" margin="8px 0 0">
-            {nickErrorMsg || nickDupCheck.errorMsg}
-          </Text>
-        ) : null}
-      </Grid>
+      <NicknameDupCheck
+        nickname={nickname}
+        setNickname={setNickname}
+        nickErrorMsg={nickErrorMsg}
+        nickDupCheck={nickDupCheck}
+        setNickDupCheck={setNickDupCheck}
+      />
 
       <Grid isFlex hoz="space-between">
         <Grid>
