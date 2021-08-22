@@ -25,7 +25,7 @@ import { Text, Grid } from '../../elements';
 import { NavigationIcons, NavigationStyle } from './style';
 // import '../../Header/NotiBadge/style.css';
 // path
-import { HeaderIncluded } from '../../Route/Path';
+import { HeaderIncluded } from '../../route/Path';
 
 const Navigation = () => {
   const path: string = useLocation().pathname;

@@ -3,8 +3,8 @@ import React from 'react';
 import { history } from 'src/redux/configureStore';
 import { Redirect, Switch } from 'react-router-dom';
 import Tutorial from 'src/pages/Tutorial';
-import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
 // components
 import Section from '../elements/Section';
 // pages

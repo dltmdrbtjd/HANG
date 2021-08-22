@@ -4,20 +4,28 @@ import BlockIcon from '@material-ui/icons/Block';
 // apis
 import apis from 'src/shared/api';
 // redux
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
 import {
   MyPageCreators,
   DeleteBlockList,
 } from 'src/redux/modules/MyPageModule/mypage';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // elements
 import { Grid, Text, Button, Container } from '../../../elements';
 // components
 import ProfileImg from '../../../components/ProfileImg';
+import ToastMessage from '../../../components/ToastMessage';
 
 const Block = () => {
   const dispatch = useDispatch();
-  const blockList = useTypedSelector((state) => state.mypage.blockList);
+  const { blockList, message } = useTypedSelector(
+    (state) => ({
+      blockList: state.mypage.blockList,
+      message: state.toastMessage.Message,
+    }),
+    shallowEqual,
+  );
 
   React.useEffect(() => {
     dispatch(MyPageCreators.fetchGetBlockList());
@@ -26,7 +34,10 @@ const Block = () => {
   const deleteBlockList = (targetPk: number) => {
     apis
       .DeleteBlockList({ targetPk })
-      .then(() => dispatch(DeleteBlockList(targetPk)))
+      .then(() => {
+        dispatch(DeleteBlockList(targetPk));
+        dispatch(fetchMessage({ Message: true, error: '' }));
+      })
       .catch((err) => console.log(err));
   };
 
@@ -64,6 +75,8 @@ const Block = () => {
           </Grid>
         );
       })}
+
+      {message && <ToastMessage msg="차단 해제됐습니다." />}
     </Container>
   );
 };

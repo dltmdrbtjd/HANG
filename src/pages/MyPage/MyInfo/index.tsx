@@ -73,7 +73,10 @@ const MyInfo = () => {
   const DeleteTrip = (tripId: DeleteTripEventType) => {
     apis
       .DeleteTripEvent(tripId)
-      .then(() => dispatch(DeleteTripEvent(tripId.tripId)))
+      .then(() => {
+        dispatch(DeleteTripEvent(tripId.tripId));
+        dispatch(fetchMessage({ Message: true, error: '' }));
+      })
       .catch((err) => console.log(err));
   };
 
@@ -179,8 +182,6 @@ const MyInfo = () => {
           ))}
         </NoPosts>
 
-        {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
-
         <Modal
           open={open}
           close={() => setOpen(false)}
@@ -189,6 +190,8 @@ const MyInfo = () => {
           agreeText="확인"
           agree={WithDrawalUser}
         />
+
+        {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
       </Grid>
     </Container>
   );
