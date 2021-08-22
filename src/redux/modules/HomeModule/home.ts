@@ -31,15 +31,24 @@ const homeSlice = createSlice({
       let GuideDoubleCheck;
 
       if (state.HomeData.guide.length > 0) {
-        TraveleDoubleCheck = state.HomeData.traveler.findIndex(
-          (i) => i.userPk === state.HomeData.guide[action.payload.idx].userPk,
-        );
+        if(state.HomeData.guide[action.payload.idx] === undefined){
+          TraveleDoubleCheck = -1
+        } else {
+          TraveleDoubleCheck = state.HomeData.traveler.findIndex(
+            (i) => i.userPk === state.HomeData.guide[action.payload.idx].userPk,
+          );
+        }
       }
+      
       if (state.HomeData.traveler.length > 0) {
-        GuideDoubleCheck = state.HomeData.guide.findIndex(
-          (i) =>
-            i.userPk === state.HomeData.traveler[action.payload.idx].userPk,
-        );
+        if(state.HomeData.traveler[action.payload.idx] === undefined){
+          GuideDoubleCheck = -1
+        } else {
+          GuideDoubleCheck = state.HomeData.guide.findIndex(
+            (i) =>
+              i.userPk === state.HomeData.traveler[action.payload.idx].userPk,
+          );
+        }
       }
 
       if (action.payload.category === 'guide') {
