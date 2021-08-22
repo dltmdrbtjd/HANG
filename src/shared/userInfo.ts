@@ -10,9 +10,7 @@ interface UserInfo {
   userPk: number;
 }
 
-const setUserInfo = (): void => {
-  const userInfo = jwtDecode(getToken());
-
+const setUserInfo = (userInfo = jwtDecode(getToken())): void => {
   localStorage.setItem('userInfo', JSON.stringify(userInfo));
 };
 

@@ -20,12 +20,11 @@ import Favorite from '../pages/Favorite';
 import MyInfo from '../pages/MyPage/MyInfo';
 import MyPromise from '../pages/MyPage/Promise';
 import Block from '../pages/MyPage/BlockUser';
-// import MyPageModify from '../pages/MyPage/Modify';
+import MyPageModify from '../pages/MyPage/ModifyMyInfo';
 import CreateTrip from '../pages/MyPage/CreateTrip';
 import Noti from '../pages/Noti';
 import Chat from '../pages/Chat';
 import ChatRoom from '../pages/Chat/Room';
-// import NotFound from '../pages/NotFound';
 // pathname
 import { pathURI } from './Path';
 
@@ -80,14 +79,10 @@ const Route = () => {
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
           <PrivateRoute path={pathURI.block} component={Block} exact />
-
-          {/* 
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
-           */}
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute path={pathURI.tutorial} component={Tutorial} exact />
           <Redirect from="*" to="/" />
-          {/* <PublicRoute component={NotFound} /> */}
         </Switch>
       </Section>
     </>

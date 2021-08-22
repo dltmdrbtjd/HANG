@@ -12,10 +12,11 @@ import HideElem from './style';
 
 export interface Props {
   setProfile: any;
+  profile?: null | string;
 }
 
-const SelectImage = ({ setProfile }: Props) => {
-  const [profileImg, setProfileImg] = React.useState<string>(null);
+const SelectImage = ({ setProfile, profile }: Props) => {
+  const [profileImg, setProfileImg] = React.useState<string>(profile || null);
   const bufToString = (buf: ArrayBuffer | string): string => {
     if (typeof buf === 'string') return buf;
 

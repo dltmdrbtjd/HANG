@@ -80,6 +80,10 @@ const mypageSlice = createSlice({
   name: 'mypage',
   initialState,
   reducers: {
+    UpdateProfile: (state, action) => {
+      state.myInfo = action.payload;
+    },
+
     DeleteTripEvent: (state, action: PayloadAction<number>) => {
       state.tripList = state.tripList.filter(
         (trip) => trip.tripId !== action.payload,
@@ -165,6 +169,7 @@ const MyPageCreators = {
 export { MyPageCreators };
 const { reducer, actions } = mypageSlice;
 export const {
+  UpdateProfile,
   DeleteTripEvent,
   CreateTripEvent,
   AgreePromise,
