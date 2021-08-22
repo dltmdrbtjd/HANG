@@ -24,37 +24,38 @@ const AreaSelectBox = ({ city, region, toggle, ...props }: Props) => {
 
   const SelectCityHandler = (idx: number, city: string) => {
     setCurrentCity(idx);
-    setCurrntGu(0);
     setCityName(city);
     if (idx === 0) {
       setGuName('강남구');
+      setCurrntGu(0);
     } else if (idx === 1) {
       setGuName('강서구');
+      setCurrntGu(0);
     } else {
       setGuName('구좌읍');
+      setCurrntGu(0);
     }
   };
 
-  const SelectCurrentGu = (idx: number, gu: string) => {
+  const SelectCurrentGu = (idx: number, gu: string, cityNames: string) => {
     setCurrntGu(idx);
     setGuName(gu);
-    if (!cityName) {
-      setCityName('서울특별시');
-    }
+    setCityName(cityNames);
+    props.setCity(cityNames);
   };
 
-  let RegionNum;
-  if (city && region) {
-    RegionNum = CityArr[city].gu.indexOf(region);
-  }
+  React.useEffect(() => {
+    let RegionNum;
+    if (city === 0 || (city && region)) {
+      RegionNum = CityArr[city].gu.indexOf(region);
+      setCurrentCity(city);
+      setCurrntGu(RegionNum);
+    }
+  }, []);
 
   React.useEffect(() => {
     props.setCity(cityName);
     props.setGu(guName);
-    if (city && region) {
-      setCurrentCity(city);
-      setCurrntGu(RegionNum);
-    }
   }, [cityName, guName]);
 
   return (
@@ -117,7 +118,7 @@ const AreaSelectBox = ({ city, region, toggle, ...props }: Props) => {
                   key={idx}
                   className={currentGu === idx ? 'submenu focused' : 'submenu'}
                   _onClick={() => {
-                    SelectCurrentGu(idx, ele);
+                    SelectCurrentGu(idx, ele, CityArr[currentCity].city);
                   }}
                 >
                   {ele}
