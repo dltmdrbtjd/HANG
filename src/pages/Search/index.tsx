@@ -78,8 +78,8 @@ const Search = () => {
   const CityOpenhandler = () => {
     if (!cityOpen) {
       setCityOpen(true);
-      setCity('서울특별시');
-      setGu('종로구');
+      setCity('서울');
+      setGu('강남구');
     } else {
       setCityOpen(false);
       setCity('');
