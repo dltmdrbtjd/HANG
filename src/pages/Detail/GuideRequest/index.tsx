@@ -10,7 +10,7 @@ import { useTypedSelector, history } from 'src/redux/configureStore';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // apis , socket
 import apis from 'src/shared/api';
-import socket from 'src/shared/socket';
+import socket from 'src/util/socket';
 // style
 import ToastMessage from 'src/components/ToastMessage';
 import {

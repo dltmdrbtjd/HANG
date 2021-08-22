@@ -22,7 +22,7 @@ const SubTitle: React.FC<Props> = ({
 };
 
 SubTitle.defaultProps = {
-  fw: 'semiBold',
+  fw: 'bold',
 };
 
 export default SubTitle;

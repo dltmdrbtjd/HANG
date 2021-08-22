@@ -25,8 +25,15 @@ const Page2 = () => {
           내가 처음 가는 곳을 가장 잘 아는 친구와 동네 구석구석 여행해 보세요
         </Text>
 
-        <Grid position="absolute" top="40%" left="0">
-          <Image src={OnboardingImg2} />
+        <Grid position="absolute" top="33%" left="0">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.freepik.com/vectors/menu"
+          >
+            Menu vector created by pikisuperstar - www.freepik.com
+            <Image src={OnboardingImg2} />
+          </a>
         </Grid>
       </Container>
     </Grid>

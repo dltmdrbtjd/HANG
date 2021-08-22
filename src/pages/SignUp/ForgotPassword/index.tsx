@@ -7,7 +7,7 @@ import { history } from 'src/redux/configureStore';
 // apis
 import apis from 'src/shared/api';
 // validate
-import { phoneRegExp, pwdRegExp } from 'src/shared/validation';
+import { phoneRegExp, pwdRegExp } from 'src/util/validation';
 // page
 import EnterUserInfo from './EnterUserInfo';
 import EnterPassword from './EnterPassword';

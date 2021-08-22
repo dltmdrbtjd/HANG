@@ -11,6 +11,7 @@ export interface Prop {
   radius?: string;
   bgColor?: string;
   fs?: string;
+  textAlign?: string;
   padding?: string;
   addstyle?: any;
   theme: {
@@ -32,6 +33,7 @@ const ListStyle = styled.li<Prop>`
   border-radius: ${({ radius }) => radius};
   background-color: ${({ bgColor }) => bgColor};
   font-size: ${({ fs, theme }) => theme.fontSize[fs]};
+  text-align: ${({ textAlign }) => textAlign};
   cursor: pointer;
   ${({ padding }) => borderBox(padding)};
 

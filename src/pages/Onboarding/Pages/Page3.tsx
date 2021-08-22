@@ -30,8 +30,15 @@ const Page3 = () => {
           당신만의 행복한 여행을 만들러 갈까요?
         </Text>
 
-        <Grid position="absolute" top="28%" left="0">
-          <Image src={OnboardingImg3} />
+        <Grid position="absolute" top="25%" left="0">
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.freepik.com/vectors/people"
+          >
+            People vector created by stories - www.freepik.com
+            <Image src={OnboardingImg3} />
+          </a>
         </Grid>
 
         <Grid position="absolute" bottom="20px" left="0">

@@ -12,7 +12,7 @@ import {
 } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // socket
-import socket from 'src/shared/socket';
+import socket from 'src/util/socket';
 // token
 import { delToken } from 'src/shared/token';
 import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
@@ -153,7 +153,8 @@ const MyInfo = () => {
           ver="center"
           form="text"
           fs="xs"
-          color="darkG"
+          fw="regular"
+          color="darkGray"
           _onClick={() => history.push('/mypage/create_trip')}
         >
           추가하기 <ControlPointIcon style={{ marginLeft: '4px' }} />

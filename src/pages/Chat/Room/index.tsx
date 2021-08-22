@@ -7,7 +7,7 @@ import {
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
 // socket
-import socket from 'src/shared/socket';
+import socket from 'src/util/socket';
 // apis
 import apis from 'src/shared/api';
 // moment

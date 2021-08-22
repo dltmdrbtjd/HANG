@@ -5,6 +5,8 @@ import { history } from '../../../redux/configureStore';
 import { Grid, Button, Image } from '../../../elements';
 // images
 import WelcomeImg from '../../../Images/welcome.gif';
+// style
+import TextHidden from './style';
 
 const Welcome = (): React.ReactElement => {
   return (
@@ -15,11 +17,16 @@ const Welcome = (): React.ReactElement => {
         left="0"
         translate="0, -40%"
         overflow="hidden"
-        isFlex
-        hoz="center"
-        ver="center"
+        addstyle={TextHidden}
       >
-        <Image width="140%" src={WelcomeImg} />
+        <a
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.freepik.com/vectors/people"
+        >
+          People vector created by freepik - www.freepik.com
+          <Image width="140%" src={WelcomeImg} />
+        </a>
       </Grid>
 
       <Grid position="absolute" bottom="20px" left="0">
