@@ -1,5 +1,6 @@
 import React from 'react';
 // route
+import { history } from 'src/redux/configureStore';
 import { Redirect, Switch } from 'react-router-dom';
 import Tutorial from 'src/pages/Tutorial';
 import PrivateRoute from './PrivateRoute';
@@ -10,7 +11,7 @@ import Section from '../elements/Section';
 import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
-// import Onboarding from '../pages/Onboarding';
+import Onboarding from '../pages/Onboarding';
 // import ForgotPassword from '../pages/SignUp/ForgotPassword';
 import Search from '../pages/Search';
 import Detail from '../pages/Detail';
@@ -29,10 +30,22 @@ import ChatRoom from '../pages/Chat/Room';
 import { pathURI } from './Path';
 
 const Route = () => {
+  React.useEffect(() => {
+    const sawOnboarding = localStorage.getItem('onboarding');
+
+    if (!sawOnboarding) history.replace('/onboarding');
+  }, []);
+
   return (
     <>
       <Section>
         <Switch>
+          <PublicRoute
+            path={pathURI.onboarding}
+            restricted={false}
+            component={Onboarding}
+            exact
+          />
           <PublicRoute
             path={pathURI.signIn}
             restricted
@@ -50,12 +63,6 @@ const Route = () => {
             path={pathURI.forgotPwd}
             restricted
             component={ForgotPassword}
-            exact
-          />
-          <PublicRoute
-            path={pathURI.onboarding}
-            restricted={false}
-            component={Onboarding}
             exact
           /> */}
           <PrivateRoute path={pathURI.home} component={Home} exact />
