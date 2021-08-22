@@ -10,6 +10,12 @@ import {
   MyPageCreators,
   DeleteTripEvent,
 } from 'src/redux/modules/MyPageModule/mypage';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
+// socket
+import socket from 'src/shared/socket';
+// token
+import { delToken, getToken } from 'src/shared/token';
+import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
@@ -51,10 +57,36 @@ const MyInfo = () => {
     dispatch(MyPageCreators.fetchGetMyInfo());
   }, []);
 
+  const deleteUserInfo = () => {
+    const { userPk } = getUserInfo();
+
+    delToken();
+    delUserInfo();
+
+    socket.emit('logout', { uid: userPk });
+    socket.disconnect();
+  };
+
   const DeleteTrip = (tripId: DeleteTripEventType) => {
     apis
       .DeleteTripEvent(tripId)
       .then(() => dispatch(DeleteTripEvent(tripId.tripId)))
+      .catch((err) => console.log(err));
+  };
+
+  const SignOut = () => {
+    apis
+      .SignOut()
+      .then(() => deleteUserInfo())
+      .then(() => history.replace('/signIn'))
+      .catch((err) => console.error(err));
+  };
+
+  const WithDrawalUserDB = () => {
+    apis
+      .Withdrawal()
+      .then(() => deleteUserInfo())
+      .then(() => history.replace('/signIn'))
       .catch((err) => console.log(err));
   };
 
@@ -81,6 +113,8 @@ const MyInfo = () => {
           methods={[
             () => history.push('/mypage/modify'),
             () => history.push('/mypage/block'),
+            SignOut,
+            WithDrawalUserDB,
           ]}
           top="130px"
         />
@@ -129,7 +163,15 @@ const MyInfo = () => {
               mainText="여행 이벤트 삭제하기"
               sub2Text="여행 이벤트를 삭제하시겠습니까?"
               agreeText="삭제"
-              callback={() => DeleteTrip({ tripId: tripInfo.tripId })}
+              callback={() => {
+                DeleteTrip({ tripId: tripInfo.tripId });
+                dispatch(
+                  fetchMessage({
+                    Message: false,
+                    error: '여행 이벤트가 삭제되었습니다.',
+                  }),
+                );
+              }}
             />
           ))}
         </NoPosts>
