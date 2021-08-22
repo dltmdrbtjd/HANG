@@ -7,7 +7,7 @@ import apis from 'src/shared/api';
 // image upload
 import uploadProfileImage from 'src/util/imageUpload';
 // elements
-import { MainTitle, Container } from '../../elements';
+import { MainTitle, Container, Grid, Button } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // pages
@@ -26,7 +26,7 @@ interface userInfo {
 }
 
 const SignUp = () => {
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState<number>(1);
 
   const [region, setRegion] = React.useState<string>('서울');
   const [city, setCity] = React.useState<string>('강남구');
@@ -124,13 +124,33 @@ const SignUp = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             {page === 1 ? (
-              <PhoneAuth
-                pNum={formik.values.pNum}
-                setPnum={formik.handleChange('pNum')}
-                setPage={setPage}
-                status={1}
-                errorMsg={formik.errors.pNum}
-              />
+              <>
+                <Grid
+                  position="absolute"
+                  top="50%"
+                  left="0"
+                  translate="0, -50%"
+                >
+                  <PhoneAuth
+                    pNum={formik.values.pNum}
+                    setPnum={formik.handleChange('pNum')}
+                    status={1}
+                    errorMsg={formik.errors.pNum}
+                  />
+                </Grid>
+
+                <Grid position="absolute" bottom="20px" left="0">
+                  <Button
+                    fs="la"
+                    fw="bold"
+                    width="100%"
+                    // disabled={smsVeri.status !== 1}
+                    _onClick={() => setPage((page: number) => page + 1)}
+                  >
+                    다음
+                  </Button>
+                </Grid>
+              </>
             ) : null}
 
             {page === 2 ? (
