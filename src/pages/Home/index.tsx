@@ -3,7 +3,7 @@ import React from 'react';
 import moment from 'moment';
 // redux
 import { HomeCreators } from 'src/redux/modules/HomeModule/home';
-import { shallowEqual, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // components
 import SearchBar from 'src/components/SearchBar';
 import SearchCard from 'src/components/SearchCard';
