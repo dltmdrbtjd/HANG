@@ -19,7 +19,7 @@ import GuideRequest from '../pages/Detail/GuideRequest';
 import Favorite from '../pages/Favorite';
 import MyInfo from '../pages/MyPage/MyInfo';
 import MyPromise from '../pages/MyPage/Promise';
-// import Block from '../pages/MyPage/Block';
+import Block from '../pages/MyPage/BlockUser';
 // import MyPageModify from '../pages/MyPage/Modify';
 import CreateTrip from '../pages/MyPage/CreateTrip';
 import Noti from '../pages/Noti';
@@ -79,9 +79,9 @@ const Route = () => {
           />
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
+          <PrivateRoute path={pathURI.block} component={Block} exact />
 
           {/* 
-          <PrivateRoute path={pathURI.block} component={Block} exact />
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
            */}
           <PrivateRoute path={pathURI.noti} component={Noti} exact />

@@ -20,6 +20,7 @@ export const initialState: MyPageState = {
     requested: [],
     confirmed: [],
   },
+  blockList: [],
   loading: false,
 };
 
@@ -51,6 +52,21 @@ const fetchGetMyPromise = createAsyncThunk(
         requested: data.requested,
         confirmed: data.confirmed,
       };
+
+      return payload;
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+  },
+);
+
+const fetchGetBlockList = createAsyncThunk(
+  'mypage/GET_BLOCK_LIST',
+  async (): Promise<any> => {
+    try {
+      const { data } = await apis.GetBlockList();
+      const payload = data ? data.blockedUsers : [];
 
       return payload;
     } catch (err) {
@@ -93,6 +109,12 @@ const mypageSlice = createSlice({
         (prom: PromInfo) => prom.tripId !== action.payload,
       );
     },
+
+    DeleteBlockList: (state, action: PayloadAction<number>) => {
+      state.blockList = state.blockList.filter(
+        (block) => block.userPk !== action.payload,
+      );
+    },
   },
   extraReducers: {
     [fetchGetMyInfo.pending.type]: (state) => {
@@ -120,12 +142,24 @@ const mypageSlice = createSlice({
     [fetchGetMyPromise.rejected.type]: (state) => {
       state.loading = false;
     },
+
+    [fetchGetBlockList.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [fetchGetBlockList.fulfilled.type]: (state, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.blockList = action.payload;
+    },
+    [fetchGetBlockList.rejected.type]: (state) => {
+      state.loading = false;
+    },
   },
 });
 
 const MyPageCreators = {
   fetchGetMyInfo,
   fetchGetMyPromise,
+  fetchGetBlockList,
 };
 
 export { MyPageCreators };
@@ -136,5 +170,6 @@ export const {
   AgreePromise,
   RejectPromise,
   CancelPromise,
+  DeleteBlockList,
 } = actions;
 export default reducer;

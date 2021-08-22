@@ -115,7 +115,8 @@ const apis = {
   // myinfo block
   GetBlockList: () => instance.get('api/users/block'),
   AddBlockList: (targetPk) => instance.post('api/users/block', targetPk),
-  DeleteBlockList: (targetPk) => instance.patch('api/users/block', targetPk),
+  DeleteBlockList: (targetPk: { targetPk: number }) =>
+    instance.patch('api/users/block', targetPk),
 
   GetChatRoom: () => instance.get('/api/users/chat'),
 };

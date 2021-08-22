@@ -49,6 +49,7 @@ export interface MyPromise {
 export interface MyPageState {
   myInfo: any;
   tripList: TripInfo[];
-  loading: boolean;
   promise: MyPromise;
+  blockList: any[];
+  loading: boolean;
 }
