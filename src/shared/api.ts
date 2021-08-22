@@ -112,6 +112,11 @@ const apis = {
     instance.patch('/api/mypage/reject_confirm', tripId),
   GuideToggle: () => instance.patch('/api/mypage/update_guide'),
 
+  // myinfo block
+  GetBlockList: () => instance.get('api/users/block'),
+  AddBlockList: (targetPk) => instance.post('api/users/block', targetPk),
+  DeleteBlockList: (targetPk) => instance.patch('api/users/block', targetPk),
+
   GetChatRoom: () => instance.get('/api/users/chat'),
 };
 

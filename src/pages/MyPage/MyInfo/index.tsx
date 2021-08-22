@@ -14,7 +14,7 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // socket
 import socket from 'src/shared/socket';
 // token
-import { delToken, getToken } from 'src/shared/token';
+import { delToken } from 'src/shared/token';
 import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
@@ -180,6 +180,7 @@ const MyInfo = () => {
         </NoPosts>
 
         {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
+
         <Modal
           open={open}
           close={() => setOpen(false)}
