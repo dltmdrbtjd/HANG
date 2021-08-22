@@ -1,6 +1,6 @@
 import React from 'react';
 // type
-import { Status } from '../PhoneAuth';
+import { Status } from '../PhoneAuth/PhoneAuth';
 // elements
 import { Grid, Button, Text, Label, InputRadio } from '../../../elements';
 // components

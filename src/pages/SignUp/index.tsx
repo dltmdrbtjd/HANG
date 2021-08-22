@@ -11,7 +11,7 @@ import { MainTitle, Container, Grid, Button } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // pages
-import PhoneAuth from './PhoneAuth';
+import PhoneValidationCheck from './PhoneAuth';
 import EnterIdPwd from './EnterIdPwd';
 import FillOutProfile from './FillOutProfile';
 import Welcome from './Welcome';
@@ -124,33 +124,12 @@ const SignUp = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             {page === 1 ? (
-              <>
-                <Grid
-                  position="absolute"
-                  top="50%"
-                  left="0"
-                  translate="0, -50%"
-                >
-                  <PhoneAuth
-                    pNum={formik.values.pNum}
-                    setPnum={formik.handleChange('pNum')}
-                    status={1}
-                    errorMsg={formik.errors.pNum}
-                  />
-                </Grid>
-
-                <Grid position="absolute" bottom="20px" left="0">
-                  <Button
-                    fs="la"
-                    fw="bold"
-                    width="100%"
-                    // disabled={smsVeri.status !== 1}
-                    _onClick={() => setPage((page: number) => page + 1)}
-                  >
-                    다음
-                  </Button>
-                </Grid>
-              </>
+              <PhoneValidationCheck
+                pNum={formik.values.pNum}
+                setPnum={formik.handleChange('pNum')}
+                errorMsg={formik.errors.pNum}
+                setPage={setPage}
+              />
             ) : null}
 
             {page === 2 ? (
