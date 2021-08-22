@@ -38,6 +38,7 @@ import EventCard from '../../../components/EventCard';
 import DropDown from '../../../components/DropDown';
 import NoPosts from '../../../components/NoPosts';
 import ToastMessage from '../../../components/ToastMessage';
+import Modal from '../../../components/Modal';
 // style
 import SubTitleTextHidden from './style';
 
@@ -52,6 +53,8 @@ const MyInfo = () => {
     }),
     shallowEqual,
   );
+
+  const [open, setOpen] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     dispatch(MyPageCreators.fetchGetMyInfo());
@@ -82,7 +85,7 @@ const MyInfo = () => {
       .catch((err) => console.error(err));
   };
 
-  const WithDrawalUserDB = () => {
+  const WithDrawalUser = () => {
     apis
       .Withdrawal()
       .then(() => deleteUserInfo())
@@ -114,7 +117,7 @@ const MyInfo = () => {
             () => history.push('/mypage/modify'),
             () => history.push('/mypage/block'),
             SignOut,
-            WithDrawalUserDB,
+            () => setOpen(true),
           ]}
           top="130px"
         />
@@ -177,6 +180,14 @@ const MyInfo = () => {
         </NoPosts>
 
         {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
+        <Modal
+          open={open}
+          close={() => setOpen(false)}
+          mainText="회원 탈퇴"
+          subText2="탈퇴 하시겠습니까?"
+          agreeText="확인"
+          agree={WithDrawalUser}
+        />
       </Grid>
     </Container>
   );
