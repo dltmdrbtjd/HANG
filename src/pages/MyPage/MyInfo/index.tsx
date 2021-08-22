@@ -10,6 +10,12 @@ import {
   MyPageCreators,
   DeleteTripEvent,
 } from 'src/redux/modules/MyPageModule/mypage';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
+// socket
+import socket from 'src/shared/socket';
+// token
+import { delToken } from 'src/shared/token';
+import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
@@ -32,6 +38,7 @@ import EventCard from '../../../components/EventCard';
 import DropDown from '../../../components/DropDown';
 import NoPosts from '../../../components/NoPosts';
 import ToastMessage from '../../../components/ToastMessage';
+import Modal from '../../../components/Modal';
 // style
 import SubTitleTextHidden from './style';
 
@@ -47,14 +54,42 @@ const MyInfo = () => {
     shallowEqual,
   );
 
+  const [open, setOpen] = React.useState<boolean>(false);
+
   React.useEffect(() => {
     dispatch(MyPageCreators.fetchGetMyInfo());
   }, []);
+
+  const deleteUserInfo = () => {
+    const { userPk } = getUserInfo();
+
+    delToken();
+    delUserInfo();
+
+    socket.emit('logout', { uid: userPk });
+    socket.disconnect();
+  };
 
   const DeleteTrip = (tripId: DeleteTripEventType) => {
     apis
       .DeleteTripEvent(tripId)
       .then(() => dispatch(DeleteTripEvent(tripId.tripId)))
+      .catch((err) => console.log(err));
+  };
+
+  const SignOut = () => {
+    apis
+      .SignOut()
+      .then(() => deleteUserInfo())
+      .then(() => history.replace('/signIn'))
+      .catch((err) => console.error(err));
+  };
+
+  const WithDrawalUser = () => {
+    apis
+      .Withdrawal()
+      .then(() => deleteUserInfo())
+      .then(() => history.replace('/signIn'))
       .catch((err) => console.log(err));
   };
 
@@ -81,6 +116,8 @@ const MyInfo = () => {
           methods={[
             () => history.push('/mypage/modify'),
             () => history.push('/mypage/block'),
+            SignOut,
+            () => setOpen(true),
           ]}
           top="130px"
         />
@@ -129,12 +166,29 @@ const MyInfo = () => {
               mainText="여행 이벤트 삭제하기"
               sub2Text="여행 이벤트를 삭제하시겠습니까?"
               agreeText="삭제"
-              callback={() => DeleteTrip({ tripId: tripInfo.tripId })}
+              callback={() => {
+                DeleteTrip({ tripId: tripInfo.tripId });
+                dispatch(
+                  fetchMessage({
+                    Message: false,
+                    error: '여행 이벤트가 삭제되었습니다.',
+                  }),
+                );
+              }}
             />
           ))}
         </NoPosts>
 
         {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
+
+        <Modal
+          open={open}
+          close={() => setOpen(false)}
+          mainText="회원 탈퇴"
+          subText2="탈퇴 하시겠습니까?"
+          agreeText="확인"
+          agree={WithDrawalUser}
+        />
       </Grid>
     </Container>
   );
