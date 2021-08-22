@@ -42,6 +42,7 @@ import Modal from '../../../components/Modal';
 // style
 import SubTitleTextHidden from './style';
 import { flexBox } from '../../../styles/Mixin';
+import { setTabletCardLayout } from '../../../styles/Media';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
@@ -161,7 +162,7 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      <Grid margin="0 0 60px">
+      <Grid margin="0 0 60px" tab={setTabletCardLayout}>
         <NoPosts
           list={tripList}
           title="여행 이벤트 등록하기"
@@ -197,9 +198,9 @@ const MyInfo = () => {
           agreeText="확인"
           agree={WithDrawalUser}
         />
-
-        {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
       </Grid>
+
+      {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
     </Container>
   );
 };

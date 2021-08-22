@@ -30,6 +30,7 @@ export interface Props {
   translate?: any;
   cursor?: string;
   addstyle?: any;
+  tab?: any;
   _onClick?: any;
 }
 

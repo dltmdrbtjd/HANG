@@ -11,9 +11,7 @@ import { SubTitle, Grid } from '../../../../elements';
 import PromiseCard from '../PromiseCard';
 import NoInfo from '../../../../components/NoInfo';
 // style
-// import { TabMenuWrapper } from '../../style';
-// import { TabEventWrapper } from '../../MyInfo/style';
-// import TabSize from '../../../../components/EventCard/style';
+import { setTabletCardLayout } from '../../../../styles/Media';
 
 const MyPromiseDetail = ({ type }: { type: string }) => {
   const promise = useSelector<RootState>((state) => state.mypage.promise);
@@ -45,7 +43,7 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
         </SubTitle>
 
         <NoInfo list={promise[type]} contents={pageBreak[type].postComent}>
-          <Grid>
+          <Grid tab={setTabletCardLayout}>
             {promise[type].map((promInfo: PromInfo, idx: number) => (
               <PromiseCard
                 key={(Date.now() + Math.random() * idx).toString(36)}
@@ -61,6 +59,7 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
             ))}
           </Grid>
         </NoInfo>
+
         <ToastMessage msg={msg} />
       </Grid>
     </>

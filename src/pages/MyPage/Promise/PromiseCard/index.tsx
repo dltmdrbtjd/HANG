@@ -25,7 +25,7 @@ import { Button, Grid, Text, Strong, Span } from '../../../../elements';
 import ProfileImg from '../../../../components/ProfileImg';
 import Modal from '../../../../components/Modal';
 import GuideNameplate from '../../../../components/GuideNameplate';
-import { textOverflow } from '../../../../styles/Mixin';
+import { textOverflow, limitWidth } from '../../../../styles/Mixin';
 
 export interface Props {
   promInfo: PromInfo;
@@ -135,7 +135,7 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
       >
         <ProfileImg size="large" imgUrl={promInfo.profileImg} />
 
-        <Grid width="60%" margin="0 0 0 14px">
+        <Grid width="60%" margin="0 0 0 14px" addstyle={limitWidth}>
           <Text margin="0 0 15px" lh="32px" wb="keep-all">
             <Strong>{promInfo.nickname}</Strong> 님에게{' '}
             <GuideNameplate>길잡이</GuideNameplate> 요청

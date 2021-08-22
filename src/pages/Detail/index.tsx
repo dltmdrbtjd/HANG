@@ -15,7 +15,7 @@ import ProfileCard from '../../components/ProfileCard';
 import EventCard from '../../components/EventCard';
 import ToastMessage from '../../components/ToastMessage';
 // style
-// import { TabEventWrapper } from '../MyPage/MyInfo/style';
+import { setTabletCardLayout } from '../../styles/Media';
 // image
 import chat from '../../Images/NavigationIcons/onchat.svg';
 
@@ -101,7 +101,7 @@ const Detail = () => {
           {userInfo && userInfo.nickname}님의 여행 이벤트
         </MainTitle>
         {eventList ? (
-          <Grid>
+          <Grid tab={setTabletCardLayout}>
             {eventList.map((item, idx) => {
               return (
                 <EventCard
