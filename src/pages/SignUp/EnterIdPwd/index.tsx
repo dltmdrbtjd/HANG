@@ -2,7 +2,7 @@ import React from 'react';
 // api
 import apis from 'src/shared/api';
 // types
-import { Status, currentType } from '../PhoneAuth';
+import { Status, currentType } from '../PhoneAuth/PhoneAuth';
 // elements
 import { Grid, Button, Text, Label } from '../../../elements';
 // components

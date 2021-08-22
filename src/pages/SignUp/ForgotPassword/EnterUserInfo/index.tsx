@@ -4,7 +4,7 @@ import apis from 'src/shared/api';
 // elements
 import { Grid, Input, Button, Text } from 'src/elements';
 // page
-import PhoneAuth from '../../PhoneAuth';
+import PhoneAuth, { Status } from '../../PhoneAuth/PhoneAuth';
 
 const EnterUserInfo = ({
   pNum,
@@ -16,6 +16,10 @@ const EnterUserInfo = ({
 }) => {
   const [existsStatus, setExistsStatus] = React.useState({
     status: true,
+    errorMsg: '',
+  });
+  const [smsVeri, setSMSVeri] = React.useState<Status>({
+    status: 0,
     errorMsg: '',
   });
 
@@ -47,6 +51,8 @@ const EnterUserInfo = ({
           setPnum={setPnum}
           errorMsg={errorMsg}
           status={0}
+          smsVeri={smsVeri}
+          setSMSVeri={setSMSVeri}
         />
 
         {!existsStatus.status ? (
@@ -61,7 +67,7 @@ const EnterUserInfo = ({
           fs="la"
           fw="bold"
           width="100%"
-          // disabled={smsVeri.status !== 1}
+          disabled={smsVeri.status !== 1}
           _onClick={ExistsIdAndPhoneNumberDB}
         >
           다음

@@ -10,7 +10,7 @@ import apis from 'src/shared/api';
 // token
 import { getUserInfo, setUserInfo } from 'src/shared/userInfo';
 // type
-import { Status } from '../../SignUp/PhoneAuth';
+import { Status } from '../../SignUp/PhoneAuth/PhoneAuth';
 // elements
 import {
   Grid,
