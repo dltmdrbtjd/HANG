@@ -20,7 +20,14 @@ const Home = () => {
   const dispatch = useDispatch();
   const list = useTypedSelector((state) => state.home.HomeData);
 
-  const mainlist = Object.keys(list);
+  function listData() {
+    if (list) {
+      return Object.keys(list);
+    }
+    return null;
+  }
+
+  const mainlist = listData();
 
   React.useEffect(() => {
     dispatch(HomeCreators.fetchHomeLoad());
@@ -29,7 +36,7 @@ const Home = () => {
   return (
     <Container>
       <Grid overflow="auto">
-        {list.promise.nickname ? (
+        {list && list.promise.nickname ? (
           <>
             <MainTitle fs="la" margin="0 0 10px">
               확정된 약속
@@ -74,7 +81,7 @@ const Home = () => {
           <MainTitle fs="la" margin="0 0 6px">
             내 지역을 여행하고 싶은 여행자예요
           </MainTitle>
-          {list.traveler
+          {list && list.traveler
             ? list.traveler.map((item, idx) => {
                 return (
                   <SearchCard
@@ -91,7 +98,7 @@ const Home = () => {
           <MainTitle fs="la" margin="0 0 6px">
             내 지역에 함께 있는 길잡이예요
           </MainTitle>
-          {list.guide
+          {list && list.guide
             ? list.guide.map((item, idx) => {
                 return (
                   <SearchCard

@@ -2,8 +2,11 @@ import React from 'react';
 import { Image, Grid, Button } from 'src/elements';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { history } from 'src/redux/configureStore';
-import ButtonStyle from './style';
+import SwiperCore, { Pagination } from 'swiper';
+import 'swiper/components/pagination/pagination.scss';
+import { ButtonStyle, ImageStyle, boxWidth } from './style';
 import 'swiper/swiper.scss';
+import './swiper.scss';
 
 import tutorial1 from '../../Images/Tutorials/tutorial1.png';
 import tutorial2 from '../../Images/Tutorials/tutorial2.png';
@@ -15,6 +18,9 @@ import tutorial7 from '../../Images/Tutorials/tutorial7.png';
 import tutorial8 from '../../Images/Tutorials/tutorial8.png';
 
 const Tutorial = () => {
+  const [page, setPageNum] = React.useState<number>(0);
+  SwiperCore.use([Pagination]);
+
   const ImageArr = [
     tutorial1,
     tutorial2,
@@ -31,25 +37,50 @@ const Tutorial = () => {
     history.push('/');
   };
 
+  React.useEffect(() => {
+    setPageNum(0);
+  }, []);
+
   return (
-    <Grid position="relative">
-      <Swiper initialSlide={1} spaceBetween={0}>
+    <Grid
+      position="relative"
+      height="100vh"
+      bgColor="darkGray"
+      addstyle={boxWidth}
+      margin="0 auto"
+      overflow="hidden"
+    >
+      <Swiper
+        initialSlide={0}
+        spaceBetween={0}
+        pagination={{ clickable: true }}
+        onSlideChange={() => {
+          setPageNum((state) => state + 1);
+        }}
+      >
         {ImageArr.map((item, idx) => {
           return (
             <SwiperSlide key={idx}>
-              <Image src={item} alt="튜토리얼" />
+              <Image
+                src={item}
+                addstyle={ImageStyle}
+                alt="튜토리얼"
+                height="100%"
+              />
             </SwiperSlide>
           );
         })}
       </Swiper>
-      <Button
-        _onClick={SkipBtn}
-        width="90%"
-        height="54px"
-        addstyle={ButtonStyle}
-      >
-        시작하기
-      </Button>
+      {page === 0 ? null : (
+        <Button
+          _onClick={SkipBtn}
+          width="85%"
+          height="54px"
+          addstyle={ButtonStyle}
+        >
+          홈으로 이동
+        </Button>
+      )}
     </Grid>
   );
 };

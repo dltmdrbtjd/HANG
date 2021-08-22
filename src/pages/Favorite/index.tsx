@@ -55,7 +55,7 @@ const Favorite = () => {
                   <Text fs="la" fw="bold">
                     {item.nickname}
                   </Text>
-                  <Text fs="sm">
+                  <Text fs="sm" color="darkGray">
                     {item.gender === 1 ? '남자' : '여자'} · {item.age}대 ·{' '}
                     {item.region} {item.city}
                   </Text>

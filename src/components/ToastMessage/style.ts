@@ -22,12 +22,11 @@ const ToastMessageStyle = styled.div<Prop>`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 376px;
+  width: 80%;
   height: 54px;
   text-align: center;
   border-radius: 14px;
   background-color: ${({ theme }) => theme.color.skyblue};
-  box-shadow: 0 4px 4px rgba(134, 134, 134, 0.3);
   position: fixed;
   z-index: 10;
   bottom: 120px;
