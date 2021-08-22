@@ -41,6 +41,7 @@ import ToastMessage from '../../../components/ToastMessage';
 import Modal from '../../../components/Modal';
 // style
 import SubTitleTextHidden from './style';
+import { flexBox } from '../../../styles/Mixin';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
@@ -137,7 +138,12 @@ const MyInfo = () => {
       </Grid>
 
       <Grid margin="60px 0 15px" isFlex hoz="space-between">
-        <SubTitle fs="la" fw="bold" width="auto">
+        <SubTitle
+          fs="la"
+          fw="bold"
+          width="auto"
+          addstyle={flexBox(null, 'center')}
+        >
           <Strong addstyle={SubTitleTextHidden}>{myInfo.nickname}</Strong> 님의
           여행 이벤트
         </SubTitle>

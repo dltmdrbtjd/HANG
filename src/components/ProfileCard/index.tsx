@@ -9,11 +9,10 @@ import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 
 // style
-import { outlineBox } from 'src/styles/Mixin/boxStyle';
+import { textOverflow } from '../../styles/Mixin';
 import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 // import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
-import { textOverflow } from '../../styles/Mixin';
 
 export interface Props {
   userInfo?: any;
@@ -48,7 +47,7 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
       <Grid isFlex ver="center">
         <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
         <Grid width="75%" margin="0 0 0 13px">
-          <Text fs="la" fw="bold">
+          <Text fs="la" fw="bold" addstyle={textOverflow()}>
             {userInfo && userInfo.nickname}
           </Text>
           <Text
