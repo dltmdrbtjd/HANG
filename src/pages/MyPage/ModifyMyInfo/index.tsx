@@ -50,10 +50,10 @@ const MyPageModify = () => {
       intro,
       region,
       city,
-      profileImg: null,
+      profileImg,
     };
 
-    if (profileImg && profileImg !== 'null') {
+    if (profileImg && typeof profileImg === 'object') {
       uploadProfileImage(profileImg).then((res) => {
         const updateProfile = {
           ...updateInfo,
