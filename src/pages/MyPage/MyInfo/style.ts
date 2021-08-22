@@ -3,7 +3,8 @@ import { css } from 'styled-components';
 import { textOverflow } from '../../../styles/Mixin';
 
 const SubTitleTextHidden = css`
-  max-width: 70%;
+  display: inline-block;
+  max-width: 140px;
   ${textOverflow()};
 `;
 

@@ -12,7 +12,7 @@ import Home from '../pages/Home';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import Onboarding from '../pages/Onboarding';
-// import ForgotPassword from '../pages/SignUp/ForgotPassword';
+import ForgotPassword from '../pages/SignUp/ForgotPassword';
 import Search from '../pages/Search';
 import Detail from '../pages/Detail';
 import GuideRequest from '../pages/Detail/GuideRequest';
@@ -57,13 +57,13 @@ const Route = () => {
             component={SignUp}
             exact
           />
-          {/*
+
           <PublicRoute
             path={pathURI.forgotPwd}
             restricted
             component={ForgotPassword}
             exact
-          /> */}
+          />
           <PrivateRoute path={pathURI.home} component={Home} exact />
           <PrivateRoute path={pathURI.favorite} component={Favorite} exact />
           <PrivateRoute path={pathURI.search} component={Search} exact />
