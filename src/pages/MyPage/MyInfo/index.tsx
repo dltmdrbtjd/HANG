@@ -12,7 +12,7 @@ import {
 } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // socket
-import socket from 'src/shared/socket';
+import socket from 'src/util/socket';
 // token
 import { delToken } from 'src/shared/token';
 import { delUserInfo, getUserInfo } from 'src/shared/userInfo';

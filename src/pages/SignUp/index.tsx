@@ -16,7 +16,7 @@ import EnterIdPwd from './EnterIdPwd';
 import FillOutProfile from './FillOutProfile';
 import Welcome from './Welcome';
 // validation
-import { phoneRegExp, idRegExp, pwdRegExp } from '../../shared/validation';
+import { phoneRegExp, idRegExp, pwdRegExp } from '../../util/validation';
 // style
 import PreLine from './style';
 

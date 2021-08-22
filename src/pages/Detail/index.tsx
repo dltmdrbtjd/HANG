@@ -4,7 +4,7 @@ import queryString from 'query-string';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
 import apis from 'src/shared/api';
-import socket from 'src/shared/socket';
+import socket from 'src/util/socket';
 // redux
 import { ChooseChatRoom } from 'src/redux/modules/ChatModule/chat';
 import { history, useTypedSelector } from '../../redux/configureStore';
