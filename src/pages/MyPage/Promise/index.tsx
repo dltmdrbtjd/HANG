@@ -88,7 +88,7 @@ const MyPromise = () => {
                     isFlex
                     ver="center"
                     form="text"
-                    color="darkG"
+                    color="darkGray"
                     fw="regular"
                     _onClick={() =>
                       setOpenDetail({ open: true, type: 'received' })
@@ -128,7 +128,7 @@ const MyPromise = () => {
                     isFlex
                     ver="center"
                     form="text"
-                    color="darkG"
+                    color="darkGray"
                     fw="regular"
                     _onClick={() =>
                       setOpenDetail({ open: true, type: 'requested' })
@@ -170,7 +170,7 @@ const MyPromise = () => {
                     isFlex
                     ver="center"
                     form="text"
-                    color="darkG"
+                    color="darkGray"
                     fw="regular"
                     _onClick={() =>
                       setOpenDetail({ open: true, type: 'confirmed' })

@@ -153,7 +153,8 @@ const MyInfo = () => {
           ver="center"
           form="text"
           fs="xs"
-          color="darkG"
+          fw="regular"
+          color="darkGray"
           _onClick={() => history.push('/mypage/create_trip')}
         >
           추가하기 <ControlPointIcon style={{ marginLeft: '4px' }} />

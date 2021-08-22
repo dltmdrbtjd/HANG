@@ -56,8 +56,9 @@ const Dropdown = ({ icon, contents, methods, top }: Props) => {
               return (
                 <List
                   key={(idx * Date.now() + Math.random()).toString(36)}
+                  textAlign="center"
                   padding="16px 30px"
-                  _onClick={methods ? () => methods[idx]() : null}
+                  _onClick={() => methods[idx]()}
                   addstyle={isLast || outlineBox('1px solid #E7E7E7', 'bottom')}
                 >
                   {content}
