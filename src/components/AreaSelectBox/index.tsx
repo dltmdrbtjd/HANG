@@ -7,6 +7,7 @@ export interface Props {
   toggle?: boolean;
   setCity: any;
   setGu: any;
+  setCityNum?: number;
   city?: number;
   region?: string;
 }
@@ -26,23 +27,33 @@ const AreaSelectBox = ({ city, region, toggle, ...props }: Props) => {
     setCurrentCity(idx);
     setCityName(city);
     if (idx === 0) {
-      setGuName('강남구');
+      setGuName('');
       setCurrntGu(0);
     } else if (idx === 1) {
-      setGuName('강서구');
+      setGuName('');
       setCurrntGu(0);
     } else {
-      setGuName('구좌읍');
+      setGuName('');
       setCurrntGu(0);
     }
   };
 
   const SelectCurrentGu = (idx: number, gu: string, cityNames: string) => {
     setCurrntGu(idx);
-    setGuName(gu);
+    if (idx === 0) {
+      setGuName('');
+    } else {
+      setGuName(gu);
+    }
     setCityName(cityNames);
     props.setCity(cityNames);
   };
+
+  React.useEffect(() => {
+    if (!toggle) {
+      setCurrntGu(props.setCityNum);
+    }
+  }, [toggle]);
 
   React.useEffect(() => {
     let RegionNum;
