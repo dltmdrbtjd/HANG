@@ -91,7 +91,7 @@ const EnterIdPwd: React.FC<Props> = ({
             비밀번호
           </Label>
 
-          <Grid margin="0 0 15px">
+          <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 20px')}>
             <ValidateInput
               id="password"
               placeholder="비밀번호 입력"
@@ -141,7 +141,12 @@ const EnterIdPwd: React.FC<Props> = ({
         width="100%"
         margin="60px 0 20px"
         disabled={
-          !(idDupCheck.status === 1 && !pwdErrorMsg && pwdCheck === password)
+          !(
+            idDupCheck.status === 1 &&
+            password &&
+            !pwdErrorMsg &&
+            pwdCheck === password
+          )
         }
         _onClick={() => setPage((page: number) => page + 1)}
       >

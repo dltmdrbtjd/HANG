@@ -8,4 +8,8 @@ const SignUpWrapperHeight = css`
   }
 `;
 
+export const ForgotPwdWrapperHeight = css`
+  min-height: calc(100vh - 70px);
+`;
+
 export default SignUpWrapperHeight;
