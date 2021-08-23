@@ -61,6 +61,8 @@ const NotiBadge = () => {
   }, []);
 
   React.useEffect(() => {
+    console.log('new message 호출');
+
     socket.on('newMessage', (data: NewMessage) => {
       setChatLog(data);
 
@@ -70,6 +72,8 @@ const NotiBadge = () => {
 
   React.useEffect(() => {
     if (chatLog.userPk && !userPkList.includes(chatLog.userPk)) {
+      console.log('new room 호출');
+
       socket.emit('newRoom', { targetPk: chatLog.userPk });
       socket.on('newRoom', (data) => {
         dispatch(

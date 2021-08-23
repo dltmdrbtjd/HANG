@@ -80,7 +80,6 @@ const ChatRoom = () => {
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
     socket.on('chatLogs', (logs) => {
-      console.log(logs);
       const addedChatLog = logs.chatLogs.map((log) => JSON.parse(log));
 
       setChatLog(addedChatLog);
@@ -215,4 +214,4 @@ const ChatRoom = () => {
   );
 };
 
-export default ChatRoom;
+export default React.memo(ChatRoom);

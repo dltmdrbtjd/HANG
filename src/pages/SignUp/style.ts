@@ -1,10 +1,15 @@
 import { css } from 'styled-components';
-// mixin
-import { setMediaFontSize } from 'src/styles/Media';
 
-const PreLine = css`
-  white-space: pre-line;
-  ${setMediaFontSize('tab')}
+const SignUpWrapperHeight = css`
+  min-height: calc(100vh - 130px);
+
+  @media ${({ theme }) => theme.deviceSize.tablet} {
+    min-height: calc(100vh - 90px);
+  }
 `;
 
-export default PreLine;
+export const ForgotPwdWrapperHeight = css`
+  min-height: calc(100vh - 70px);
+`;
+
+export default SignUpWrapperHeight;

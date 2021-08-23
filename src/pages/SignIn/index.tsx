@@ -12,7 +12,6 @@ import { setUserInfo } from 'src/shared/userInfo';
 // history
 import TermsOfUse from 'src/components/TermsOfUse';
 import { history } from '../../redux/configureStore';
-// component
 // elements
 import {
   Logo,
@@ -68,7 +67,7 @@ const SignIn = (): React.ReactElement => {
   };
 
   return (
-    <Container padding="0" isFlex>
+    <Container padding="0">
       <Grid height="300px" position="relative">
         <Logo width="169px" height="162px" imgUrl={LogoImg} />
       </Grid>

@@ -36,7 +36,9 @@ const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
                 bgColor={page < curPage ? 'brandColor' : 'bgColor'}
                 fs="status"
                 fw="bold"
-                _onClick={page < 4 && isPastPage ? () => setPage(page) : null}
+                _onClick={
+                  curPage < 4 && isPastPage ? () => setPage(page) : null
+                }
                 border={`1px solid ${isPastPage ? '#FF9900' : '#C4C4C4'}`}
               >
                 {page}

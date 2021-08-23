@@ -22,12 +22,12 @@ const CalcHeight = css`
 `;
 
 const TabletImageSize = css<Prop>`
-  ${({ theme }) => theme.media.tablet`
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     width: 52%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  `};
+  }
 `;
 
 export { Transition, CalcHeight, TabletImageSize };
