@@ -54,14 +54,12 @@ const NotiBadge = () => {
         setNewAlarm(res.data);
       })
       .catch((err) => console.log(err));
-
-    socket.on('unchecked', () => {
-      dispatch(ChatAlarmCheck(Number(true)));
-    });
   }, []);
 
   React.useEffect(() => {
-    console.log('new message 호출');
+    socket.on('unchecked', () => {
+      dispatch(ChatAlarmCheck(Number(true)));
+    });
 
     socket.on('newMessage', (data: NewMessage) => {
       setChatLog(data);
@@ -72,8 +70,6 @@ const NotiBadge = () => {
 
   React.useEffect(() => {
     if (chatLog.userPk && !userPkList.includes(chatLog.userPk)) {
-      console.log('new room 호출');
-
       socket.emit('newRoom', { targetPk: chatLog.userPk });
       socket.on('newRoom', (data) => {
         dispatch(
