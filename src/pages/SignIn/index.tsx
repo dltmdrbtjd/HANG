@@ -68,7 +68,7 @@ const SignIn = (): React.ReactElement => {
   };
 
   return (
-    <Container padding="0" isFlex>
+    <Container padding="0">
       <Grid height="300px" position="relative">
         <Logo width="169px" height="162px" imgUrl={LogoImg} />
       </Grid>

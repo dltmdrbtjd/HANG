@@ -10,22 +10,23 @@ import {
   Button,
 } from 'src/elements';
 import { history } from 'src/redux/configureStore';
+import { setMediaLimitBoxSize } from 'src/styles/Media';
 import MaxHeight from './style';
 
 const TermOfUse = ({ setTerms }) => {
   return (
     <BlurBox
       isFlex
+      hoz="center"
       ver="flex-end"
-      _onClick={() => {
-        setTerms(false);
-      }}
+      _onClick={() => setTerms(false)}
     >
       <Grid
         bgColor="white"
         height="392px"
         radius="20px 20px 0 0"
         padding="20px 24px 12px 24px"
+        addstyle={setMediaLimitBoxSize('768px')}
       >
         <MainTitle fw="extraBold" fs="xl" lh="1.3" margin="0 0 48px 0">
           개인정보 수집 및 이용에 <br /> 동의해주세요.

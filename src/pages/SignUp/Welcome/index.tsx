@@ -34,7 +34,7 @@ const Welcome = (): React.ReactElement => {
           fs="la"
           fw="bold"
           width="100%"
-          _onClick={() => history.push('/login')}
+          _onClick={() => history.push('/signin')}
         >
           시작하기
         </Button>

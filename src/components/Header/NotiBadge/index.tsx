@@ -54,13 +54,13 @@ const NotiBadge = () => {
         setNewAlarm(res.data);
       })
       .catch((err) => console.log(err));
-
-    socket.on('unchecked', () => {
-      dispatch(ChatAlarmCheck(Number(true)));
-    });
   }, []);
 
   React.useEffect(() => {
+    socket.on('unchecked', () => {
+      dispatch(ChatAlarmCheck(Number(true)));
+    });
+
     socket.on('newMessage', (data: NewMessage) => {
       setChatLog(data);
 

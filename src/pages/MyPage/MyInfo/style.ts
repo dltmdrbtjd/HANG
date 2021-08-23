@@ -19,17 +19,17 @@ const SubTitleTextHidden = (width = '140px') => {
 export const setNicknameFont = css<Prop>`
   ${SubTitleTextHidden()};
 
-  ${({ theme }) => theme.media.tablet`
-    max-width: none
-  `};
+  @media ${({ theme }) => theme.deviceSize.tablet} {
+    max-width: none;
+  }
 `;
 
 export const setSubTitleFont = css`
   ${flexBox(null, 'center')};
 
-  ${({ theme }) => theme.media.mobile`
-    font-size: ${theme.fontSize.md};
-  `};
+  @media ${({ theme }) => theme.deviceSize.tablet} {
+    font-size: ${({ theme }) => theme.fontSize.md};
+  }
 `;
 
 export default SubTitleTextHidden;

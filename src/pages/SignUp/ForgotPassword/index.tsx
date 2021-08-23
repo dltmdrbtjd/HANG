@@ -28,7 +28,7 @@ const ForgotPassword = () => {
   const ForgotPasswordDB = (password: string) => {
     apis
       .ForgotPwd({ userId, newPassword: password })
-      .then(() => history.replace('/signIn'))
+      .then(() => history.replace('/signin'))
       .catch((err) => console.log(err));
   };
 

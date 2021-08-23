@@ -63,7 +63,7 @@ const Page3 = () => {
             color="darkG"
             bgColor="bgColor"
             width="100%"
-            _onClick={() => history.push('/signIn')}
+            _onClick={() => history.push('/signin')}
           >
             로그인
           </Button>

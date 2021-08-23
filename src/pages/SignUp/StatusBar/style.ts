@@ -7,9 +7,9 @@ interface Prop {
 }
 
 const setSmallMobileMargin = css<Prop>`
-  ${({ theme }) => theme.media.mobile`
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 30px 0;
-  `};
+  }
 `;
 
 export default setSmallMobileMargin;
