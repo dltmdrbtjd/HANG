@@ -5,6 +5,8 @@ import apis from 'src/shared/api';
 import { Grid, Button, Text } from '../../../../elements';
 // components
 import ValidateInput from '../../ValidateInput';
+// style
+import { setMediaMargin } from '../../../../styles/Media';
 
 export interface Status {
   status: number;
@@ -61,7 +63,12 @@ const PhoneAuth: React.FC<Props> = ({
 
   return (
     <>
-      <Grid isFlex hoz="space-between" margin="0 0 15px">
+      <Grid
+        isFlex
+        hoz="space-between"
+        margin="0 0 15px"
+        addstyle={setMediaMargin('0 0 20px')}
+      >
         <ValidateInput
           placeholder="전화번호 입력"
           type="tel"

@@ -7,6 +7,8 @@ import { currentType } from '../../PhoneAuth/PhoneAuth';
 import { Grid, Label, Button, Text } from '../../../../elements';
 // components
 import ValidateInput from '../../ValidateInput';
+// style
+import { setMediaMargin } from '../../../../styles/Media';
 
 const NicknameDupCheck = ({
   nickname,
@@ -25,7 +27,7 @@ const NicknameDupCheck = ({
   };
 
   return (
-    <Grid margin="0 0 15px">
+    <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 20px')}>
       <Label fs="lg" id="nickname" lh="2" fw="semiBold">
         닉네임
       </Label>

@@ -7,6 +7,8 @@ import { Status, currentType } from '../PhoneAuth/PhoneAuth';
 import { Grid, Button, Text, Label } from '../../../elements';
 // components
 import ValidateInput from '../ValidateInput';
+// style
+import { setMediaMargin } from '../../../styles/Media';
 
 interface Props {
   userId: string;
@@ -45,7 +47,7 @@ const EnterIdPwd: React.FC<Props> = ({
   return (
     <>
       <Grid position="absolute" top="50%" left="0" translate="0, -50%">
-        <Grid margin="0 0 15px">
+        <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 36px')}>
           <Label fs="lg" id="id" lh="2" fw="semiBold">
             아이디
           </Label>

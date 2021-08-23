@@ -8,6 +8,8 @@ import NicknameDupCheck from './NicknameDupCheck/indext';
 import InputImage from '../../../components/SelectImage';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 import SelectBox from './SelectBox';
+// style
+import { setMediaMargin } from '../../../styles/Media';
 
 const FillOutProfile = ({
   nickname,
@@ -39,7 +41,7 @@ const FillOutProfile = ({
         setNickDupCheck={setNickDupCheck}
       />
 
-      <Grid isFlex hoz="space-between">
+      <Grid isFlex hoz="space-between" addstyle={setMediaMargin('0 0 20px')}>
         <Grid>
           <Text lh="2" fw="semiBold" fs="lg">
             연령대
@@ -83,7 +85,7 @@ const FillOutProfile = ({
         </Grid>
       </Grid>
 
-      <Grid margin="0 0 15px">
+      <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 40px')}>
         <Text lh="2" fw="semiBold" fs="lg">
           지역 선택
         </Text>
