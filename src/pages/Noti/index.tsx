@@ -18,28 +18,26 @@ const Noti = () => {
     dispatch(AlarmCreators.fetchAlarmLoad());
   }, []);
   return (
-    <Container>
-      <Grid margin="-24px 0 80px">
-        {list
-          ? list.map((item, idx) => {
-              return <AlaremCard userInfo={item} key={idx} />;
-            })
-          : ''}
+    <Grid margin="-24px 0 80px" padding="90px 0 70px 0" overflow="auto">
+      {list
+        ? list.map((item, idx) => {
+            return <AlaremCard userInfo={item} key={idx} />;
+          })
+        : ''}
 
-        <Grid
-          width="90%"
-          position="fixed"
-          bottom="110px"
-          left="50%"
-          translate="-50%, 0"
-          addstyle={maxWidth}
-        >
-          <Button width="100%" fs="la" _onClick={AlarmDeleteBtn}>
-            전체삭제
-          </Button>
-        </Grid>
+      <Grid
+        width="90%"
+        position="fixed"
+        bottom="110px"
+        left="50%"
+        translate="-50%, 0"
+        addstyle={maxWidth}
+      >
+        <Button width="100%" fs="la" _onClick={AlarmDeleteBtn}>
+          전체삭제
+        </Button>
       </Grid>
-    </Container>
+    </Grid>
   );
 };
 
