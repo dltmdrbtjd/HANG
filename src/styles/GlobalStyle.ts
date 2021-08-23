@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle<Prop>`
   ${reset};
 
   body {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
     box-sizing: border-box;
     background-color: ${({ theme }) => theme.color.bgColor};
     color: ${({ theme }) => theme.color.black};
@@ -19,6 +20,7 @@ const GlobalStyle = createGlobalStyle<Prop>`
   }
 
   * {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
     margin: 0;
     padding: 0;
     font-size: ${({ theme }) => theme.fontSize.md};
