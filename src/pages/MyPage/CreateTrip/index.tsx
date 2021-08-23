@@ -21,7 +21,7 @@ import {
 import Calendar from './Calendar';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 // style
-import { setTabletBoxSize } from '../../../styles/Media';
+import { setMediaBoxSize } from '../../../styles/Media';
 
 const CreateTrip = () => {
   const dispatch = useDispatch();
@@ -89,7 +89,7 @@ const CreateTrip = () => {
           _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setTripInfo(e.target.value)
           }
-          addstyle={setTabletBoxSize(null, '170px')}
+          addstyle={setMediaBoxSize(null, '170px')}
         />
       </Grid>
 

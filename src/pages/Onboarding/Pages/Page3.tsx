@@ -15,7 +15,7 @@ import {
 import OnboardingImg3 from '../../../Images/onboarding3.svg';
 // style
 import { CalcHeight, TabletImageSize } from '../style';
-import { setTabletFontSize } from '../../../styles/Media';
+import { setMediaFontSize } from '../../../styles/Media';
 
 const Page3 = () => {
   return (
@@ -25,14 +25,14 @@ const Page3 = () => {
           fs="xxl"
           fw="black"
           margin="0 0 30px"
-          addstyle={setTabletFontSize('tab')}
+          addstyle={setMediaFontSize('tab')}
         >
           <Strong color="brandColor">행</Strong>
           복하게, 여<Strong color="brandColor">행</Strong>
           하라
         </MainTitle>
 
-        <Text fs="lg" wb="keep-all" addstyle={setTabletFontSize('sxl')}>
+        <Text fs="lg" wb="keep-all" addstyle={setMediaFontSize('sxl')}>
           당신만의 행복한 여행을 만들러 갈까요?
         </Text>
 

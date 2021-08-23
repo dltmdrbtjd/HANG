@@ -42,7 +42,7 @@ import Modal from '../../../components/Modal';
 // style
 import SubTitleTextHidden from './style';
 import { flexBox } from '../../../styles/Mixin';
-import { setTabletCardLayout } from '../../../styles/Media';
+import { setMediaCardLayout } from '../../../styles/Media';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
@@ -162,7 +162,7 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      <Grid margin="0 0 60px" addstyle={setTabletCardLayout()}>
+      <Grid margin="0 0 60px" addstyle={setMediaCardLayout()}>
         <NoPosts
           list={tripList}
           title="여행 이벤트 등록하기"

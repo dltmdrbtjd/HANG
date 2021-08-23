@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 // media
-import { setTabletLimitBoxSize } from '../../../../styles/Media';
+import { setMediaLimitBoxSize } from '../../../../styles/Media';
 
 const SpeechBubbleStyle = (person: boolean) => {
   return css`
@@ -19,7 +19,7 @@ const SpeechBubbleStyle = (person: boolean) => {
     word-wrap: break-word;
     word-break: keep-all;
 
-    ${setTabletLimitBoxSize('238px')}
+    ${setMediaLimitBoxSize('238px')}
   `;
 };
 

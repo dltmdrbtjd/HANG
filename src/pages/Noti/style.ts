@@ -1,11 +1,11 @@
 import { css } from 'styled-components';
 // media
-import { setTabletLimitBoxSize } from '../../styles/Media';
+import { setMediaLimitBoxSize } from '../../styles/Media';
 
 const maxWidth = css`
   max-width: 600px;
 
-  ${setTabletLimitBoxSize('768px')}
+  ${setMediaLimitBoxSize('768px')}
 `;
 
 export default maxWidth;

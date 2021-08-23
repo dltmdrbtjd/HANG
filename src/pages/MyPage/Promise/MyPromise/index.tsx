@@ -11,7 +11,7 @@ import { SubTitle, Grid } from '../../../../elements';
 import PromiseCard from '../PromiseCard';
 import NoInfo from '../../../../components/NoInfo';
 // style
-import { setTabletCardLayout } from '../../../../styles/Media';
+import { setMediaCardLayout } from '../../../../styles/Media';
 
 const MyPromiseDetail = ({ type }: { type: string }) => {
   const promise = useSelector<RootState>((state) => state.mypage.promise);
@@ -43,7 +43,7 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
         </SubTitle>
 
         <NoInfo list={promise[type]} contents={pageBreak[type].postComent}>
-          <Grid addstyle={setTabletCardLayout()}>
+          <Grid addstyle={setMediaCardLayout()}>
             {promise[type].map((promInfo: PromInfo, idx: number) => (
               <PromiseCard
                 key={(Date.now() + Math.random() * idx).toString(36)}

@@ -26,7 +26,7 @@ import RoomHeader from './RoomHeader';
 import Modal from '../../../components/Modal';
 // style
 import { WarningText, ChatInputAreaSize } from './style';
-import { setTabletLimitBoxSize } from '../../../styles/Media';
+import { setMediaLimitBoxSize } from '../../../styles/Media';
 
 const ChatRoom = () => {
   const dispatch = useDispatch();
@@ -177,7 +177,7 @@ const ChatRoom = () => {
             isFlex
             hoz="space-between"
             ver="center"
-            addstyle={setTabletLimitBoxSize('768px')}
+            addstyle={setMediaLimitBoxSize('768px')}
           >
             <Input
               placeholder="채팅 내용 입력"

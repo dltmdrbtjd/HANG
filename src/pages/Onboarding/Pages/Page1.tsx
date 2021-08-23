@@ -12,7 +12,7 @@ import {
 import OnboardingImg1 from '../../../Images/onboarding1.svg';
 // style
 import { CalcHeight, TabletImageSize } from '../style';
-import { setTabletFontSize } from '../../../styles/Media';
+import { setMediaFontSize } from '../../../styles/Media';
 
 const Page1 = () => {
   return (
@@ -22,12 +22,12 @@ const Page1 = () => {
           fs="xxl"
           fw="black"
           margin="0 0 30px"
-          addstyle={setTabletFontSize('tab')}
+          addstyle={setMediaFontSize('tab')}
         >
           나만 아는 여<Strong color="brandColor">행</Strong>
         </MainTitle>
 
-        <Text fs="lg" wb="keep-all" addstyle={setTabletFontSize('sxl')}>
+        <Text fs="lg" wb="keep-all" addstyle={setMediaFontSize('sxl')}>
           당신만 알고 있는 맛집, 숨은 명소들을 알려주는 여행 길잡이가 되어보세요
         </Text>
 
