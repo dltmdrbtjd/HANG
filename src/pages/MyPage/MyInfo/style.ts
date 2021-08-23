@@ -27,7 +27,7 @@ export const setNicknameFont = css<Prop>`
 export const setSubTitleFont = css`
   ${flexBox(null, 'center')};
 
-  @media ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.mobile} {
     font-size: ${({ theme }) => theme.fontSize.md};
   }
 `;
