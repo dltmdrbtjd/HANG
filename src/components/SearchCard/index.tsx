@@ -14,7 +14,7 @@ import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 // import SmallMobileProfileSize from './style';
 // import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
-import { textOverflow } from '../../styles/Mixin';
+import { limitWidth, textOverflow } from '../../styles/Mixin';
 
 export type Props = {
   userInfo: any;
@@ -59,11 +59,7 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
         border="0.5px solid #e7e7e7"
         z="1"
       >
-        <ProfileImg
-          size="medium"
-          imgUrl={userInfo && userInfo.profileImg}
-          // mobile={SmallMobileProfileSize}
-        />
+        <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
         <Grid
           width="70%"
           height="47px"
@@ -75,6 +71,7 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
           _onClick={() => {
             history.push(`/detail?user=${userInfo.userPk}`);
           }}
+          addstyle={limitWidth}
         >
           <Text fs="la" fw="bold" addstyle={textOverflow()}>
             {userInfo && userInfo.nickname}

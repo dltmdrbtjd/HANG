@@ -10,7 +10,7 @@ export interface Props {
 
 const GuideNameplate = ({ children }: Props) => {
   return (
-    <Strong color="brandColor" margin="0 3px 0 0" addstyle={NameplateStyle}>
+    <Strong color="brandColor" margin="0 4px" addstyle={NameplateStyle}>
       {children}
     </Strong>
   );

@@ -68,7 +68,12 @@ const EventCard = ({
         <MainTitle fs="la">
           {userInfo && userInfo.region} {userInfo && userInfo.city}
         </MainTitle>
-        <Text margin="10px 0 0 0" fs="sm" addstyle={textOverflowWrap(3)}>
+        <Text
+          margin="10px 0 0 0"
+          ws="pre-line"
+          fs="sm"
+          addstyle={textOverflowWrap(3)}
+        >
           {userInfo && userInfo.tripInfo}
         </Text>
         <Modal

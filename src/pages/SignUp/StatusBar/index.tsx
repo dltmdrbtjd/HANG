@@ -1,6 +1,8 @@
 import React from 'react';
 // elements
 import { Grid, Button, Hr } from '../../../elements/index';
+// style
+import setSmallMobileMargin from './style';
 
 interface Page {
   curPage: number;
@@ -11,7 +13,7 @@ const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
 
   return (
-    <Grid isFlex hoz="center" padding="50px 0">
+    <Grid isFlex hoz="center" padding="50px 0" addstyle={setSmallMobileMargin}>
       <Grid isFlex ver="center" width="auto">
         {pageNav.map((page: number, idx: number) => {
           let color = 'gray';
