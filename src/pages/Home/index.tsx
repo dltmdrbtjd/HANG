@@ -37,7 +37,7 @@ const Home = () => {
     <Container>
       <Grid overflow="auto">
         {list && list.promise.nickname ? (
-          <>
+          <Grid _onClick={() => history.push('/mypage/promise')}>
             <MainTitle fs="la" margin="0 0 10px">
               확정된 약속
             </MainTitle>
@@ -65,16 +65,21 @@ const Home = () => {
                 </Grid>
               </Grid>
             </PromiseCard>
-          </>
+          </Grid>
         ) : (
-          <PromiseCard>
-            <Text fs="la" fw="bold">
-              다른 지역으로 떠나보는 건 어떠세요?
-            </Text>
-            <Text fs="sm" fw="regular">
-              여행 일정을 공유하고 약속을 잡아 볼까요?
-            </Text>
-          </PromiseCard>
+          <Grid
+            cursor="pointer"
+            _onClick={() => history.push('/mypage/create_trip')}
+          >
+            <PromiseCard>
+              <Text fs="la" fw="bold">
+                다른 지역으로 떠나보는 건 어떠세요?
+              </Text>
+              <Text fs="sm" fw="regular">
+                여행 일정을 공유하고 약속을 잡아 볼까요?
+              </Text>
+            </PromiseCard>
+          </Grid>
         )}
         <SearchBar margin="28px 0 0 0" />
         <Grid margin="60px 0 0 0">
