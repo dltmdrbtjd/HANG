@@ -9,11 +9,11 @@ interface Prop {
 }
 
 const TextHidden = css<Prop>`
-  ${({ theme }) => theme.media.tablet`
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     width: 80%;
     left: 50%;
     transform: translate(-50%, -40%);
-  `};
+  }
 
   a {
     text-indent: -9999px;

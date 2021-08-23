@@ -23,7 +23,7 @@ import onmypage from '../../Images/NavigationIcons/onmypage.svg';
 // style
 import { Text, Grid } from '../../elements';
 import { NavigationIcons, NavigationStyle } from './style';
-// import '../../Header/NotiBadge/style.css';
+import '../Header/NotiBadge/style.css';
 // path
 import { HeaderIncluded } from '../../route/Path';
 

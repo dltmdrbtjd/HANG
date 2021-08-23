@@ -10,7 +10,7 @@ interface Prop {
 }
 
 const setTabletWrapper = css<Prop>`
-  ${({ theme }) => theme.media.tablet`
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     overflow: auto;
 
     &::-webkit-scrollbar {
@@ -24,12 +24,12 @@ const setTabletWrapper = css<Prop>`
     &::-webkit-scrollbar-thumb:hover {
       background: ${({ theme }) => theme.color.lightGray};
     }
-  `};
+  }
 `;
 
 const setTabletPromiseCard = (length: number) => {
   return css<Prop>`
-    ${({ theme }) => theme.media.tablet`
+    @media ${({ theme }) => theme.deviceSize.tablet} {
       width: ${432 * length}px;
 
       & > div {
@@ -43,7 +43,7 @@ const setTabletPromiseCard = (length: number) => {
         clear: both;
         content: '';
       }
-    `};
+    }
   `;
 };
 
@@ -55,13 +55,13 @@ const TextVerticalAlignCenter = css`
 const setNicknameFont = css<Prop>`
   ${SubTitleTextHidden('160px')};
 
-  ${({ theme }) => theme.media.tablet`
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     ${SubTitleTextHidden('120px')};
-  `};
+  }
 
-  ${({ theme }) => theme.media.mobile`
+  @media ${({ theme }) => theme.deviceSize.mobile} {
     ${SubTitleTextHidden('120px')};
-  `};
+  }
 `;
 
 export {

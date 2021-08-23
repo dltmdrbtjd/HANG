@@ -61,13 +61,13 @@ const MyInfo = () => {
     dispatch(MyPageCreators.fetchGetMyInfo());
   }, []);
 
-  const deleteUserInfo = () => {
+  const deleteUserInfo = async () => {
     const { userPk } = getUserInfo();
 
     delToken();
     delUserInfo();
 
-    socket.emit('logout', { uid: userPk });
+    await socket.emit('logout', { uid: userPk });
     socket.disconnect();
   };
 
@@ -85,7 +85,7 @@ const MyInfo = () => {
     apis
       .SignOut()
       .then(() => deleteUserInfo())
-      .then(() => history.replace('/signIn'))
+      .then(() => history.replace('/signin'))
       .catch((err) => console.error(err));
   };
 
@@ -93,7 +93,7 @@ const MyInfo = () => {
     apis
       .Withdrawal()
       .then(() => deleteUserInfo())
-      .then(() => history.replace('/signIn'))
+      .then(() => history.replace('/signin'))
       .catch((err) => console.log(err));
   };
 

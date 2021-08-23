@@ -2,7 +2,7 @@ import React from 'react';
 // history
 import { history } from '../../../redux/configureStore';
 // elements
-import { Grid, Button, Image } from '../../../elements';
+import { Grid, Button, Image, MainTitle } from '../../../elements';
 // images
 import WelcomeImg from '../../../Images/welcome.gif';
 // style
@@ -11,6 +11,12 @@ import TextHidden from './style';
 const Welcome = (): React.ReactElement => {
   return (
     <>
+      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px">
+        당신만의 행복한 여행이
+        <br />
+        시작됩니다!
+      </MainTitle>
+
       <Grid
         position="absolute"
         top="50%"
@@ -34,7 +40,7 @@ const Welcome = (): React.ReactElement => {
           fs="la"
           fw="bold"
           width="100%"
-          _onClick={() => history.push('/login')}
+          _onClick={() => history.push('/signin')}
         >
           시작하기
         </Button>

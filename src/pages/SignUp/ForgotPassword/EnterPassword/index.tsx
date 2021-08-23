@@ -1,16 +1,23 @@
 import React from 'react';
 // elements
-import { Grid, Text, Button } from 'src/elements';
+import { Grid, Text, Button, MainTitle } from 'src/elements';
 // components
 import ValidateInput from '../../ValidateInput';
+// style
+import { ForgotPwdWrapperHeight } from '../../style';
+import { setMediaMargin } from '../../../../styles/Media';
 
 const EnterPassword = ({ password, setPassword, pwdErrorMsg }) => {
   const [pwdCheck, setPwdCheck] = React.useState<string>('');
 
   return (
-    <>
-      <Grid position="absolute" top="50%" left="0" translate="0, -50%">
-        <Grid margin="0 0 15px">
+    <Grid isFlex column hoz="space-between" addstyle={ForgotPwdWrapperHeight}>
+      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px">
+        비밀번호 재설정
+      </MainTitle>
+
+      <Grid>
+        <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 20px')}>
           <ValidateInput
             id="password"
             placeholder="비밀번호 입력"
@@ -52,18 +59,17 @@ const EnterPassword = ({ password, setPassword, pwdErrorMsg }) => {
         </Grid>
       </Grid>
 
-      <Grid position="absolute" bottom="20px" left="0">
-        <Button
-          type="submit"
-          fs="la"
-          fw="bold"
-          width="100%"
-          disabled={!(password && !pwdErrorMsg && pwdCheck === password)}
-        >
-          비밀번호 변경
-        </Button>
-      </Grid>
-    </>
+      <Button
+        type="submit"
+        fs="la"
+        fw="bold"
+        width="100%"
+        margin="60px 0 0"
+        disabled={!(password && !pwdErrorMsg && pwdCheck === password)}
+      >
+        비밀번호 변경
+      </Button>
+    </Grid>
   );
 };
 

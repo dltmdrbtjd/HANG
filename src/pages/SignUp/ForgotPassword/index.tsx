@@ -12,7 +12,7 @@ import { phoneRegExp, pwdRegExp } from 'src/util/validation';
 import EnterUserInfo from './EnterUserInfo';
 import EnterPassword from './EnterPassword';
 // elements
-import { Container, MainTitle } from '../../../elements';
+import { Container } from '../../../elements';
 
 interface userInfo {
   pNum: string;
@@ -23,21 +23,15 @@ const ForgotPassword = () => {
   const [page, setPage] = React.useState<number>(1);
   const [userId, setUserId] = React.useState<string>('');
 
-  const title = ['비밀번호 찾기', '비밀번호 재설정'];
-
   const ForgotPasswordDB = (password: string) => {
     apis
       .ForgotPwd({ userId, newPassword: password })
-      .then(() => history.replace('/signIn'))
+      .then(() => history.replace('/signin'))
       .catch((err) => console.log(err));
   };
 
   return (
     <Container padding="50px 0 20px 0">
-      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px">
-        {title[page - 1]}
-      </MainTitle>
-
       <Formik
         initialValues={{
           pNum: '',

@@ -141,6 +141,7 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
         padding="32px 20px"
         position="relative"
         overflow="hidden"
+        cursor="pointer"
         _onClick={() => history.push(`/detail?user=${promInfo.userPk}`)}
       >
         <ProfileImg size="large" imgUrl={promInfo.profileImg} />
