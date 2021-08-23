@@ -40,7 +40,7 @@ const fetchMoreSearch = createAsyncThunk('search/SEARCH_MORE', async(content: an
   try {
     const response = (await apis.Search(content)).data.result;
 
-    if(!response){
+    if(!response && response.length > 9){
       const payload = {
         list: {},
         nextItem: false,

@@ -37,6 +37,7 @@ const Search = () => {
   const [ref, inView] = useInView();
 
   // 지역,여행자,길잡이 state
+  const [cityNum, setCityNum] = React.useState<number>(0);
   const [cityOpen, setCityOpen] = React.useState<boolean>(false);
   const [traveler, setTraveler] = React.useState<boolean>(false);
   const [guide, setGuide] = React.useState<boolean>(false);
@@ -67,6 +68,7 @@ const Search = () => {
   const MainSearch: SearchData = {
     ...SendSearch,
     keyword: query.keyword,
+    pageNum: page,
   };
 
   const MoreSearch: SearchData = {
@@ -79,9 +81,10 @@ const Search = () => {
     if (!cityOpen) {
       setCityOpen(true);
       setCity('서울');
-      setGu('강남구');
+      setGu('');
     } else {
       setCityOpen(false);
+      setCityNum(0);
       setCity('');
       setGu('');
     }
@@ -137,9 +140,9 @@ const Search = () => {
   }, [inView]);
 
   React.useEffect(() => {
+    setPage(1);
     dispatch(SearchCreators.fetchSearchLoad(MainSearch));
     dispatch(fetchMessage({ Message: false }));
-    setPage(1);
   }, [query.keyword]);
 
   return (
@@ -192,21 +195,29 @@ const Search = () => {
           </CategoryBtn>
         </Grid>
       </Grid>
-      <AreaSelectBox toggle={cityOpen} setGu={setGu} setCity={setCity} />
+      <AreaSelectBox
+        toggle={cityOpen}
+        setGu={setGu}
+        setCity={setCity}
+        setCityNum={cityNum}
+      />
       <Button _onClick={SearchHandler} fw="bold" width="100%" height="54px">
         검색
       </Button>
       <Text margin="28px 0 12px 0">
         <Strong>{cityName ? `${cityName}` : ''}</Strong>
-        <Strong> {guName ? `${guName}의 ` : ``}</Strong>
-        <Strong fw="md"> {guName ? `${subText}입니다.` : ''}</Strong>
+        <Strong> {guName ? `${guName}의 ` : ''}</Strong>
+        <Strong fw="md">
+          {' '}
+          {guName ? `${subText}입니다.` : '전체 회원목록입니다.'}
+        </Strong>
       </Text>
       {userlist
         ? userlist.map((item, idx) => {
             return <SearchCard userInfo={item} key={idx} idx={idx} />;
           })
         : ''}
-      <div ref={ref} style={{ height: '10px' }} />
+      <div ref={ref} style={{ marginTop: '100px', height: '20px' }} />
       {message && <ToastMessage msg="관심목록에 추가되었습니다" />}
     </Container>
   );
