@@ -26,7 +26,6 @@ import ProfileImg from '../../../../components/ProfileImg';
 import Modal from '../../../../components/Modal';
 import GuideNameplate from '../../../../components/GuideNameplate';
 // style
-import SubTitleTextHidden from '../../MyInfo/style';
 import { textOverflow, limitWidth } from '../../../../styles/Mixin';
 import { TextVerticalAlignCenter, setNicknameFont } from '../style';
 
@@ -127,7 +126,15 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
   }, []);
 
   return (
-    <Grid bgColor="white" radius="16px" overflow="hidden" margin="0 0 15px">
+    <Grid
+      bgColor="white"
+      radius="16px"
+      overflow="hidden"
+      margin="0 0 15px"
+      isFlex
+      column
+      hoz="space-between"
+    >
       <Grid
         isFlex
         ver="center"
@@ -187,13 +194,7 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
           </Button>
         </Grid>
       ) : (
-        <Button
-          width="100%"
-          radius="0"
-          _onClick={() => {
-            setOpen(true);
-          }}
-        >
+        <Button width="100%" radius="0" _onClick={() => setOpen(true)}>
           취소
         </Button>
       )}

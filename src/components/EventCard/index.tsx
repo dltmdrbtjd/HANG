@@ -56,9 +56,11 @@ const EventCard = ({
       margin="10px 0 20px"
       bgColor="white"
       radius="14px"
-      position="relative"
       overflow="hidden"
       shadow="0px 2px 3px rgba(136, 136, 136, 0.25)"
+      isFlex
+      column
+      hoz="space-between"
     >
       <Grid padding="20px">
         <Text color="darkGray">
