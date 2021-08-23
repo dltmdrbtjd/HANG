@@ -214,4 +214,4 @@ const ChatRoom = () => {
   );
 };
 
-export default ChatRoom;
+export default React.memo(ChatRoom);
