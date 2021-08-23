@@ -1,5 +1,11 @@
 import { css } from 'styled-components';
 
+interface Prop {
+  theme: {
+    [propName: string]: any;
+  };
+}
+
 const Transition = css`
   transition-duration: 0.5s;
 `;
@@ -15,4 +21,13 @@ const CalcHeight = css`
   }
 `;
 
-export { Transition, CalcHeight };
+const TabletImageSize = css<Prop>`
+  ${({ theme }) => theme.media.tablet`
+    width: 52%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `};
+`;
+
+export { Transition, CalcHeight, TabletImageSize };

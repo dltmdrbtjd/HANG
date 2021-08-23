@@ -9,10 +9,9 @@ import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 
 // style
-import { textOverflow } from '../../styles/Mixin';
+import { textOverflow, textOverflowWrap } from '../../styles/Mixin';
 import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
-// import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
 
 export interface Props {
   userInfo?: any;
@@ -50,12 +49,7 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
           <Text fs="la" fw="bold" addstyle={textOverflow()}>
             {userInfo && userInfo.nickname}
           </Text>
-          <Text
-            color="darkG"
-            fs="sm"
-            addstyle={textOverflow()}
-            // mobile={SetTabFontSize('sm')}
-          >
+          <Text color="darkGray" fs="sm" addstyle={textOverflow()}>
             {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
             {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
             {userInfo && userInfo.city}
@@ -80,7 +74,9 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
       <Hr width="100%" margin="13px 0" />
       <Grid>
         {userInfo.intro !== 'none' ? (
-          <Text fs="sm">{userInfo.intro}</Text>
+          <Text fs="sm" ws="pre-line" addstyle={textOverflowWrap(3)}>
+            {userInfo.intro}
+          </Text>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>
         )}

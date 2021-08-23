@@ -55,7 +55,7 @@
   background: #d4f0ff;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .rdrMonth {
     padding: 20px 15px;
   }

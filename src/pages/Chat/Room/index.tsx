@@ -6,6 +6,8 @@ import {
   ChatAlarmCheck,
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
+// query string
+import queryString from 'query-string';
 // socket
 import socket from 'src/util/socket';
 // apis
@@ -24,6 +26,7 @@ import RoomHeader from './RoomHeader';
 import Modal from '../../../components/Modal';
 // style
 import { WarningText, ChatInputAreaSize } from './style';
+import { setMediaLimitBoxSize } from '../../../styles/Media';
 
 const ChatRoom = () => {
   const dispatch = useDispatch();
@@ -38,13 +41,14 @@ const ChatRoom = () => {
 
   const { userPk, nickname } = getUserInfo();
 
-  const targetUserPk = targetUserInfo.targetPk;
-
   const [chatLog, setChatLog] = React.useState([]);
   const [message, setMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const messageRef = React.useRef(null);
+
+  const roomNumber = queryString.parse(location.search).number as string;
+  const targetUserPk = parseInt(roomNumber, 10);
 
   const roomName =
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
@@ -76,6 +80,7 @@ const ChatRoom = () => {
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
     socket.on('chatLogs', (logs) => {
+      console.log(logs);
       const addedChatLog = logs.chatLogs.map((log) => JSON.parse(log));
 
       setChatLog(addedChatLog);
@@ -172,6 +177,7 @@ const ChatRoom = () => {
             isFlex
             hoz="space-between"
             ver="center"
+            addstyle={setMediaLimitBoxSize('768px')}
           >
             <Input
               placeholder="채팅 내용 입력"

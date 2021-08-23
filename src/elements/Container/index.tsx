@@ -2,9 +2,9 @@ import React from 'react';
 import ContainerStyle from './style';
 
 export interface Props {
+  isFlex?: boolean;
   padding?: string;
   height?: string;
-  addstyle?: any;
 }
 
 const Container: React.FC<Props> = ({

@@ -11,6 +11,8 @@ import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Container, Grid, Text } from '../../elements';
 import ProfileImg from '../../components/ProfileImg';
+// style
+import { limitWidth, textOverflow } from '../../styles/Mixin';
 
 const Favorite = () => {
   const dispatch = useDispatch();
@@ -46,16 +48,18 @@ const Favorite = () => {
                   <ProfileImg size="medium" imgUrl={item.profileImg} />
                 </Grid>
                 <Grid
-                  width="100%"
+                  width="calc(100% - 90px)"
                   margin="0 0 0 23px"
+                  cursor="pointer"
                   _onClick={() => {
                     history.push(`/detail?user=${item.userPk}`);
                   }}
+                  addstyle={limitWidth}
                 >
                   <Text fs="la" fw="bold">
                     {item.nickname}
                   </Text>
-                  <Text fs="sm" color="darkGray">
+                  <Text fs="sm" color="darkGray" addstyle={textOverflow()}>
                     {item.gender === 1 ? '남자' : '여자'} · {item.age}대 ·{' '}
                     {item.region} {item.city}
                   </Text>

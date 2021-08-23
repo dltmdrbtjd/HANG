@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { Grid, Text, Button, BlurBox } from 'src/elements';
+// style
+import { setMediaBoxSize } from 'src/styles/Media';
 
 export interface Props {
   open?: any;

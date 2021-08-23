@@ -1,9 +1,9 @@
 import { css } from 'styled-components';
 // mixin
-import { textOverflow } from '../../../styles/Mixin';
+import { limitWidth, textOverflow } from '../../../styles/Mixin';
 
 const LimitWidth = css`
-  flex: 1;
+  ${limitWidth};
   ${textOverflow()};
 `;
 

@@ -9,10 +9,19 @@ import { history } from 'src/redux/configureStore';
 // apis
 import apis from 'src/shared/api';
 // elements
-import { Grid, MainTitle, SubTitle, Button, TextArea, Container } from '../../../elements';
+import {
+  Grid,
+  MainTitle,
+  SubTitle,
+  Button,
+  TextArea,
+  Container,
+} from '../../../elements';
 // components
 import Calendar from './Calendar';
 import AreaSelectBox from '../../../components/AreaSelectBox';
+// style
+import { setMediaBoxSize } from '../../../styles/Media';
 
 const CreateTrip = () => {
   const dispatch = useDispatch();
@@ -77,7 +86,10 @@ const CreateTrip = () => {
 
         <TextArea
           value={tripInfo}
-          _onChange={(e) => setTripInfo(e.target.value)}
+          _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTripInfo(e.target.value)
+          }
+          addstyle={setMediaBoxSize(null, '170px')}
         />
       </Grid>
 

@@ -1,9 +1,9 @@
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 interface Prop {
   theme: {
     [PropName: string]: any;
-  }
+  };
 }
 
 const toast = keyframes`
@@ -23,6 +23,7 @@ const ToastMessageStyle = styled.div<Prop>`
   align-items: center;
   justify-content: center;
   width: 80%;
+  max-width: 768px;
   height: 54px;
   text-align: center;
   border-radius: 14px;
@@ -32,7 +33,7 @@ const ToastMessageStyle = styled.div<Prop>`
   bottom: 120px;
   left: 50%;
   transform: translateX(-50%);
-  animation: ${toast} 2.0s;
+  animation: ${toast} 2s;
 `;
 
 export default ToastMessageStyle;

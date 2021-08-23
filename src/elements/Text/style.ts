@@ -16,6 +16,9 @@ export interface Prop {
   wb?: string;
   ws?: string;
   addstyle?: any;
+  theme: {
+    [propName: string]: any;
+  };
 }
 
 const TextStyle = styled.p<Prop>`
@@ -26,6 +29,7 @@ const TextStyle = styled.p<Prop>`
   ${({ fs, fw, color, lh, textAlign }) =>
     textProps(fs, fw, color, lh, textAlign)};
   ${({ ls, wb, ws }) => addTextSettings(ls, wb, ws)};
+
   ${({ addstyle }) => addstyle};
 `;
 

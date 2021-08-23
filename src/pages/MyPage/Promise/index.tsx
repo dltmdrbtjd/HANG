@@ -25,8 +25,7 @@ import PromiseCard from './PromiseCard';
 import NoPosts from '../../../components/NoPosts';
 import MyPromiseDetail from './MyPromise';
 // style
-// import { SetAlignItemsButton, TabMenuWrapper } from '../style';
-// import { TabWrapper, TabLayout, TabSize } from './style';
+import { setTabletWrapper, setTabletPromiseCard } from './style';
 
 const MyPromise = () => {
   const [msg, setMsg] = React.useState<string>('');
@@ -102,20 +101,20 @@ const MyPromise = () => {
                   </Button>
                 </Grid>
 
-                {/* <Grid tab={TabWrapper}> */}
-                <Grid>
-                  {received.slice(0, 3).map((promInfo: PromInfo) => (
-                    <PromiseCard
-                      key={(Date.now() + Math.random()).toString(36)}
-                      type="received"
-                      promInfo={promInfo}
-                      stateSetter={setMsg}
-                    />
-                  ))}
+                <Grid addstyle={setTabletWrapper}>
+                  <Grid addstyle={setTabletPromiseCard(received.length)}>
+                    {received.slice(0, 3).map((promInfo: PromInfo) => (
+                      <PromiseCard
+                        key={(Date.now() + Math.random()).toString(36)}
+                        type="received"
+                        promInfo={promInfo}
+                        stateSetter={setMsg}
+                      />
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
-            ) : // </Grid>
-            null}
+            ) : null}
 
             {requested.length ? (
               <Grid margin="60px 0 0">
@@ -143,21 +142,21 @@ const MyPromise = () => {
                   </Button>
                 </Grid>
 
-                {/* <Grid tab={TabWrapper}> */}
-                <Grid>
-                  {requested.slice(0, 3).map((promInfo: PromInfo) => (
-                    <PromiseCard
-                      key={(Date.now() + Math.random()).toString(36)}
-                      stateSetter={setMsg}
-                      guide
-                      type="requested"
-                      promInfo={promInfo}
-                    />
-                  ))}
+                <Grid addstyle={setTabletWrapper}>
+                  <Grid addstyle={setTabletPromiseCard(received.length)}>
+                    {requested.slice(0, 3).map((promInfo: PromInfo) => (
+                      <PromiseCard
+                        key={(Date.now() + Math.random()).toString(36)}
+                        stateSetter={setMsg}
+                        guide
+                        type="requested"
+                        promInfo={promInfo}
+                      />
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
-            ) : // </Grid>
-            null}
+            ) : null}
 
             {confirmed.length ? (
               <Grid margin="60px 0 0">
@@ -185,21 +184,21 @@ const MyPromise = () => {
                   </Button>
                 </Grid>
 
-                {/* <Grid tab={TabWrapper}> */}
-                <Grid>
-                  {confirmed.slice(0, 3).map((promInfo: PromInfo) => (
-                    <PromiseCard
-                      key={(Date.now() + Math.random()).toString(36)}
-                      stateSetter={setMsg}
-                      guide={Boolean(promInfo.guide)}
-                      promInfo={promInfo}
-                      type="confirmed"
-                    />
-                  ))}
+                <Grid addstyle={setTabletWrapper}>
+                  <Grid addstyle={setTabletPromiseCard(received.length)}>
+                    {confirmed.slice(0, 3).map((promInfo: PromInfo) => (
+                      <PromiseCard
+                        key={(Date.now() + Math.random()).toString(36)}
+                        stateSetter={setMsg}
+                        guide={Boolean(promInfo.guide)}
+                        promInfo={promInfo}
+                        type="confirmed"
+                      />
+                    ))}
+                  </Grid>
                 </Grid>
               </Grid>
-            ) : // </Grid>
-            null}
+            ) : null}
           </NoPosts>
         </Grid>
       ) : (

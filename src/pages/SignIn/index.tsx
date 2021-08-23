@@ -38,13 +38,15 @@ const SignIn = (): React.ReactElement => {
   });
 
   const [terms, setTerms] = React.useState<boolean>(false);
-  const tutorial = localStorage.getItem('tutorial');
+  const tutorial: string = localStorage.getItem('tutorial');
 
-  const TermsHandler = (url) => {
-    if (url === '/signup/forgot_pwd') {
-      history.push('/signup/forgot_pwd');
-    } else {
-      setTerms(true);
+  const TermsHandler = (url: string) => {
+    switch (url) {
+      case '/signup':
+        return setTerms(true);
+
+      default:
+        return history.push(url);
     }
   };
 
@@ -54,11 +56,8 @@ const SignIn = (): React.ReactElement => {
       .then(({ data }) => setToken(data.accessToken))
       .then(() => setUserInfo())
       .then(() => {
-        if (tutorial === 'true') {
-          history.replace('/');
-        } else {
-          history.push('/tutorial');
-        }
+        if (tutorial) history.replace('/');
+        else history.push('/tutorial');
       })
       .catch(() => {
         setSignInStatus({
@@ -69,7 +68,7 @@ const SignIn = (): React.ReactElement => {
   };
 
   return (
-    <Container padding="0">
+    <Container padding="0" isFlex>
       <Grid height="300px" position="relative">
         <Logo width="169px" height="162px" imgUrl={LogoImg} />
       </Grid>
@@ -162,6 +161,7 @@ const SignIn = (): React.ReactElement => {
           </form>
         )}
       </Formik>
+
       {terms && <TermsOfUse setTerms={setTerms} />}
     </Container>
   );

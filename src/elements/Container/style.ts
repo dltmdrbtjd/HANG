@@ -1,12 +1,17 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 // mixin
-import { borderBox } from '../../styles/Mixin';
+import { borderBox, flexBox } from '../../styles/Mixin';
 
 export interface Prop {
+  isFlex?: boolean;
   padding?: string;
   height?: string;
-  addstyle?: any;
 }
+
+export const ColumnContainer = css`
+  ${flexBox('space-between', null)};
+  flex-direction: column;
+`;
 
 const ContainerStyle = styled.div<Prop>`
   position: relative;
@@ -16,9 +21,9 @@ const ContainerStyle = styled.div<Prop>`
   margin: 0 auto;
   ${({ padding }) => borderBox(padding)};
 
-  ${({ addstyle }) => addstyle};
+  ${({ isFlex }) => isFlex && ColumnContainer};
 
-  @media only screen and (max-width: 800px) {
+  @media (max-width: 800px) {
     max-width: none;
     width: 90%;
   }

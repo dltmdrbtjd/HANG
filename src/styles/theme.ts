@@ -1,3 +1,10 @@
+import { css, CSSProp } from 'styled-components';
+
+interface Media {
+  mobile: (...args: string[]) => CSSProp | undefined;
+  tablet: (...args: string[]) => CSSProp | undefined;
+}
+
 const calRem = (size: number): string => `${size / 16}rem`;
 
 const fontSize = {
@@ -38,15 +45,50 @@ const color = {
 };
 
 const deviceSize = {
-  smallMobile: '(max-width: 395px)',
-  tab: '(min-width: 600px)',
+  mobile: 395,
+  tablet: 600,
 };
+
+const media = Object.keys(deviceSize).reduce(
+  (acc: Media, label: string) => {
+    switch (label) {
+      case 'mobile':
+        acc[label] = (...args: string[]) =>
+          css`
+            @media (max-width: ${deviceSize[label]}px) {
+              ${args}
+            }
+          `;
+
+        break;
+
+      case 'tablet':
+        acc[label] = (...args: string[]) =>
+          css`
+            @media (min-width: ${deviceSize[label]}px) {
+              ${args}
+            }
+          `;
+
+        break;
+
+      default:
+        break;
+    }
+
+    return acc;
+  },
+  {
+    mobile: null,
+    tablet: null,
+  },
+);
 
 const theme = {
   fontSize,
   fontWeight,
   color,
-  deviceSize,
+  media,
 };
 
 export default theme;

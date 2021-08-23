@@ -40,8 +40,8 @@ import NoPosts from '../../../components/NoPosts';
 import ToastMessage from '../../../components/ToastMessage';
 import Modal from '../../../components/Modal';
 // style
-import SubTitleTextHidden from './style';
-import { flexBox } from '../../../styles/Mixin';
+import { setSubTitleFont, setNicknameFont } from './style';
+import { setMediaCardLayout } from '../../../styles/Media';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
@@ -138,13 +138,8 @@ const MyInfo = () => {
       </Grid>
 
       <Grid margin="60px 0 15px" isFlex hoz="space-between">
-        <SubTitle
-          fs="la"
-          fw="bold"
-          width="auto"
-          addstyle={flexBox(null, 'center')}
-        >
-          <Strong addstyle={SubTitleTextHidden}>{myInfo.nickname}</Strong> 님의
+        <SubTitle fs="la" fw="bold" width="auto" addstyle={setSubTitleFont}>
+          <Strong addstyle={setNicknameFont}>{myInfo.nickname}</Strong> 님의
           여행 이벤트
         </SubTitle>
 
@@ -161,13 +156,13 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      <Grid margin="0 0 60px">
-        <NoPosts
-          list={tripList}
-          title="여행 이벤트 등록하기"
-          coment="여행 이벤트를 등록해보세요"
-          link="/mypage/create_trip"
-        >
+      <NoPosts
+        list={tripList}
+        title="여행 이벤트 등록하기"
+        coment="여행 이벤트를 등록해보세요"
+        link="/mypage/create_trip"
+      >
+        <Grid margin="0 0 60px" addstyle={setMediaCardLayout()}>
           {tripList.map((tripInfo, idx: number) => (
             <EventCard
               key={(idx * Date.now() + Math.random()).toString(36)}
@@ -187,19 +182,19 @@ const MyInfo = () => {
               }}
             />
           ))}
-        </NoPosts>
 
-        <Modal
-          open={open}
-          close={() => setOpen(false)}
-          mainText="회원 탈퇴"
-          subText2="탈퇴 하시겠습니까?"
-          agreeText="확인"
-          agree={WithDrawalUser}
-        />
+          <Modal
+            open={open}
+            close={() => setOpen(false)}
+            mainText="회원 탈퇴"
+            subText2="탈퇴 하시겠습니까?"
+            agreeText="확인"
+            agree={WithDrawalUser}
+          />
+        </Grid>
+      </NoPosts>
 
-        {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
-      </Grid>
+      {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
     </Container>
   );
 };
