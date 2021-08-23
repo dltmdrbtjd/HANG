@@ -62,7 +62,7 @@ const PhoneAuth: React.FC<Props> = ({
   };
 
   return (
-    <>
+    <Grid>
       <Grid
         isFlex
         hoz="space-between"
@@ -96,7 +96,7 @@ const PhoneAuth: React.FC<Props> = ({
 
       {phoneVeri.status === 1 ? (
         <>
-          <Grid isFlex hoz="space-between" margin="0 0 24px">
+          <Grid isFlex hoz="space-between">
             <ValidateInput
               placeholder="인증번호 입력"
               width="58%"
@@ -119,7 +119,7 @@ const PhoneAuth: React.FC<Props> = ({
           ) : null}
         </>
       ) : null}
-    </>
+    </Grid>
   );
 };
 

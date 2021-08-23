@@ -2,7 +2,14 @@ import React from 'react';
 // type
 import { Status } from '../PhoneAuth/PhoneAuth';
 // elements
-import { Grid, Button, Text, Label, InputRadio } from '../../../elements';
+import {
+  Grid,
+  Button,
+  Text,
+  Label,
+  InputRadio,
+  MainTitle,
+} from '../../../elements';
 // components
 import NicknameDupCheck from './NicknameDupCheck/indext';
 import InputImage from '../../../components/SelectImage';
@@ -10,6 +17,7 @@ import AreaSelectBox from '../../../components/AreaSelectBox';
 import SelectBox from './SelectBox';
 // style
 import { setMediaMargin } from '../../../styles/Media';
+import SignUpWrapperHeight from '../style';
 
 const FillOutProfile = ({
   nickname,
@@ -30,7 +38,13 @@ const FillOutProfile = ({
   const ageOptions = ['10대', '20대', '30대', '40대', '50대', '60대 이상'];
 
   return (
-    <>
+    <Grid isFlex column hoz="space-between" addstyle={SignUpWrapperHeight}>
+      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px">
+        행에서 사용할
+        <br />
+        프로필을 설정해주세요
+      </MainTitle>
+
       <InputImage setProfile={setProfile} />
 
       <NicknameDupCheck
@@ -103,7 +117,7 @@ const FillOutProfile = ({
       >
         다음
       </Button>
-    </>
+    </Grid>
   );
 };
 

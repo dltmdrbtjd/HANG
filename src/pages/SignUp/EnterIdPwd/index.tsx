@@ -4,11 +4,12 @@ import apis from 'src/shared/api';
 // types
 import { Status, currentType } from '../PhoneAuth/PhoneAuth';
 // elements
-import { Grid, Button, Text, Label } from '../../../elements';
+import { Grid, Button, Text, Label, MainTitle } from '../../../elements';
 // components
 import ValidateInput from '../ValidateInput';
 // style
 import { setMediaMargin } from '../../../styles/Media';
+import SignUpWrapperHeight from '../style';
 
 interface Props {
   userId: string;
@@ -45,8 +46,14 @@ const EnterIdPwd: React.FC<Props> = ({
   };
 
   return (
-    <>
-      <Grid position="absolute" top="50%" left="0" translate="0, -50%">
+    <Grid isFlex column hoz="space-between" addstyle={SignUpWrapperHeight}>
+      <MainTitle fs="xl" fw="extraBold" margin="0 0 60px">
+        행에서 사용할
+        <br />
+        아이디와 비밀번호를 입력해주세요
+      </MainTitle>
+
+      <Grid>
         <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 36px')}>
           <Label fs="lg" id="id" lh="2" fw="semiBold">
             아이디
@@ -128,20 +135,19 @@ const EnterIdPwd: React.FC<Props> = ({
         </Grid>
       </Grid>
 
-      <Grid position="absolute" bottom="20px" left="0">
-        <Button
-          fs="la"
-          fw="bold"
-          width="100%"
-          disabled={
-            !(idDupCheck.status === 1 && !pwdErrorMsg && pwdCheck === password)
-          }
-          _onClick={() => setPage((page: number) => page + 1)}
-        >
-          다음
-        </Button>
-      </Grid>
-    </>
+      <Button
+        fs="la"
+        fw="bold"
+        width="100%"
+        margin="60px 0 20px"
+        disabled={
+          !(idDupCheck.status === 1 && !pwdErrorMsg && pwdCheck === password)
+        }
+        _onClick={() => setPage((page: number) => page + 1)}
+      >
+        다음
+      </Button>
+    </Grid>
   );
 };
 

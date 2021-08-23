@@ -12,7 +12,6 @@ import { setUserInfo } from 'src/shared/userInfo';
 // history
 import TermsOfUse from 'src/components/TermsOfUse';
 import { history } from '../../redux/configureStore';
-// component
 // elements
 import {
   Logo,
