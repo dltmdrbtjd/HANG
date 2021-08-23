@@ -92,8 +92,11 @@ const Detail = () => {
           >
             <Image src={chat} alt="chat icon" />
           </Button>
-
-          <Button padding="14px 18px" _onClick={GuideHandler}>
+          <Button
+            padding="14px 18px"
+            _onClick={GuideHandler}
+            disabled={!(userInfo && userInfo.guide)}
+          >
             길잡이 부탁하기
           </Button>
         </Grid>
