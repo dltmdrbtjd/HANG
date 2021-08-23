@@ -48,7 +48,7 @@ const Home = () => {
                 ver="center"
                 cursor="pointer"
                 _onClick={() => {
-                  history.push('/mypage/promise/3');
+                  history.push('/mypage/promise');
                 }}
               >
                 <ProfileImg imgUrl={list.promise.profileImg} size="medium" />
