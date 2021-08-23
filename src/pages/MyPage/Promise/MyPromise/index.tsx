@@ -43,7 +43,7 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
         </SubTitle>
 
         <NoInfo list={promise[type]} contents={pageBreak[type].postComent}>
-          <Grid tab={setTabletCardLayout}>
+          <Grid addstyle={setTabletCardLayout()}>
             {promise[type].map((promInfo: PromInfo, idx: number) => (
               <PromiseCard
                 key={(Date.now() + Math.random() * idx).toString(36)}

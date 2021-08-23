@@ -37,7 +37,6 @@ export interface Prop {
   translate?: any;
   cursor?: string;
   addstyle?: any;
-  tab?: any;
   theme: {
     [propName: string]: any;
   };
@@ -69,8 +68,6 @@ const GridStyle = styled.div<Prop>`
     floatBox(position, top, right, bottom, left, z)};
 
   ${({ addstyle }) => addstyle};
-
-  ${({ tab, theme }) => theme.media.tablet`${tab}`};
 `;
 
 export default GridStyle;

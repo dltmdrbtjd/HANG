@@ -101,7 +101,7 @@ const Detail = () => {
           {userInfo && userInfo.nickname}님의 여행 이벤트
         </MainTitle>
         {eventList ? (
-          <Grid tab={setTabletCardLayout}>
+          <Grid addstyle={setTabletCardLayout()}>
             {eventList.map((item, idx) => {
               return (
                 <EventCard

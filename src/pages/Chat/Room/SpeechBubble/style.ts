@@ -1,4 +1,6 @@
 import { css } from 'styled-components';
+// media
+import { setTabletLimitBoxSize } from '../../../../styles/Media';
 
 const SpeechBubbleStyle = (person: boolean) => {
   return css`
@@ -16,11 +18,9 @@ const SpeechBubbleStyle = (person: boolean) => {
     white-space: pre-line;
     word-wrap: break-word;
     word-break: keep-all;
+
+    ${setTabletLimitBoxSize('238px')}
   `;
 };
 
-const TabSpeechBubble = css`
-  max-width: 238px;
-`;
-
-export { SpeechBubbleStyle, TabSpeechBubble };
+export { SpeechBubbleStyle };

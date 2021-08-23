@@ -32,7 +32,6 @@ const Noti = () => {
           bottom="110px"
           left="50%"
           translate="-50%, 0"
-          // tab="max-width: 768px"
           addstyle={maxWidth}
         >
           <Button width="100%" fs="la" _onClick={AlarmDeleteBtn}>

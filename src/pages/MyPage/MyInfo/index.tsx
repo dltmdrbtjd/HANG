@@ -162,7 +162,7 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      <Grid margin="0 0 60px" tab={setTabletCardLayout}>
+      <Grid margin="0 0 60px" addstyle={setTabletCardLayout()}>
         <NoPosts
           list={tripList}
           title="여행 이벤트 등록하기"

@@ -14,23 +14,29 @@ import {
 // images
 import OnboardingImg3 from '../../../Images/onboarding3.svg';
 // style
-import { CalcHeight } from '../style';
+import { CalcHeight, TabletImageSize } from '../style';
+import { setTabletFontSize } from '../../../styles/Media';
 
 const Page3 = () => {
   return (
     <Grid position="relative" addstyle={CalcHeight}>
       <Container padding="0" height="100%">
-        <MainTitle fs="xxl" fw="black" margin="0 0 30px">
+        <MainTitle
+          fs="xxl"
+          fw="black"
+          margin="0 0 30px"
+          addstyle={setTabletFontSize('tab')}
+        >
           <Strong color="brandColor">행</Strong>
           복하게, 여<Strong color="brandColor">행</Strong>
           하라
         </MainTitle>
 
-        <Text fs="lg" wb="keep-all">
+        <Text fs="lg" wb="keep-all" addstyle={setTabletFontSize('sxl')}>
           당신만의 행복한 여행을 만들러 갈까요?
         </Text>
 
-        <Grid position="absolute" top="25%" left="0">
+        <Grid position="absolute" top="25%" left="0" addstyle={TabletImageSize}>
           <a
             target="_blank"
             rel="noreferrer"

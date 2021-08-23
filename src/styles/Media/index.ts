@@ -1,3 +1,13 @@
-import { setTabletCardLayout, setTabletFontSize } from './tablet';
+import {
+  setTabletCardLayout,
+  setTabletFontSize,
+  setTabletBoxSize,
+  setTabletLimitBoxSize,
+} from './tablet';
 
-export { setTabletCardLayout, setTabletFontSize };
+export {
+  setTabletCardLayout,
+  setTabletFontSize,
+  setTabletBoxSize,
+  setTabletLimitBoxSize,
+};

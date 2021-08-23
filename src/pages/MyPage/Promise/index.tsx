@@ -101,8 +101,8 @@ const MyPromise = () => {
                   </Button>
                 </Grid>
 
-                <Grid tab={setTabletWrapper}>
-                  <Grid tab={setTabletPromiseCard(received.length)}>
+                <Grid addstyle={setTabletWrapper}>
+                  <Grid addstyle={setTabletPromiseCard(received.length)}>
                     {received.slice(0, 3).map((promInfo: PromInfo) => (
                       <PromiseCard
                         key={(Date.now() + Math.random()).toString(36)}
@@ -142,8 +142,8 @@ const MyPromise = () => {
                   </Button>
                 </Grid>
 
-                <Grid tab={setTabletWrapper}>
-                  <Grid tab={setTabletPromiseCard(received.length)}>
+                <Grid addstyle={setTabletWrapper}>
+                  <Grid addstyle={setTabletPromiseCard(received.length)}>
                     {requested.slice(0, 3).map((promInfo: PromInfo) => (
                       <PromiseCard
                         key={(Date.now() + Math.random()).toString(36)}
@@ -184,8 +184,8 @@ const MyPromise = () => {
                   </Button>
                 </Grid>
 
-                <Grid tab={setTabletWrapper}>
-                  <Grid tab={setTabletPromiseCard(received.length)}>
+                <Grid addstyle={setTabletWrapper}>
+                  <Grid addstyle={setTabletPromiseCard(received.length)}>
                     {confirmed.slice(0, 3).map((promInfo: PromInfo) => (
                       <PromiseCard
                         key={(Date.now() + Math.random()).toString(36)}
