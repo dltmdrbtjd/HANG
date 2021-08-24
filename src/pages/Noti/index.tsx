@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
 import { AlarmCreators } from 'src/redux/modules/AlarmModule/alarm';
-import { Grid, Button, Container } from '../../elements';
+import { Grid, Button } from '../../elements';
 import maxWidth from './style';
 import AlaremCard from './AlarmCard';
 
