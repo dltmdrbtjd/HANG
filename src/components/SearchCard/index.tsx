@@ -12,9 +12,8 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
-// import SmallMobileProfileSize from './style';
-// import { SetTabFontSize } from '../../pages/MyPage/Promise/PromiseCard/style';
-import { limitWidth, textOverflow } from '../../styles/Mixin';
+// style
+import { textOverflow } from '../../styles/Mixin';
 
 export type Props = {
   userInfo: any;
