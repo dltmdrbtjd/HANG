@@ -7,6 +7,8 @@ import { MyPageCreators } from 'src/redux/modules/MyPageModule/mypage';
 import { PromInfo } from 'src/redux/modules/MyPageModule/type';
 // icon
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+// user info
+import { getUserInfo } from 'src/shared/userInfo';
 // history
 import ToastMessage from 'src/components/ToastMessage';
 import { history, RootState } from '../../../redux/configureStore';

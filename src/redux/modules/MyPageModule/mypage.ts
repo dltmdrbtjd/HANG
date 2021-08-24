@@ -29,8 +29,7 @@ const fetchGetMyInfo = createAsyncThunk(
   'mypage/GET_MY_INFO',
   async (userPk: number): Promise<any> => {
     try {
-      const { data } = await apis.GetMyInfo(userPk);
-      console.log(data);
+      const { data } = await apis.GetUserInfo(userPk);
       const payload = {
         myInfo: data.userInfo,
         tripList: data.tripInfo ? data.tripInfo : [],
@@ -49,6 +48,7 @@ const fetchGetMyPromise = createAsyncThunk(
   async (): Promise<any> => {
     try {
       const { data } = await apis.GetMyPromise();
+      console.log(data);
       const payload = {
         received: data.received,
         requested: data.requested,
