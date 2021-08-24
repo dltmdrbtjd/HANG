@@ -161,6 +161,7 @@ const MyInfo = () => {
         title="여행 이벤트 등록하기"
         coment="여행 이벤트를 등록해보세요"
         link="/mypage/create_trip"
+        margin="60px 0"
       >
         <Grid margin="0 0 60px" addstyle={setMediaCardLayout()}>
           {tripList.map((tripInfo, idx: number) => (

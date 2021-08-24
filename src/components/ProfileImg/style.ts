@@ -10,8 +10,8 @@ const setProfileImageSize = (size: string) => {
 
     case 'medium':
       return css`
-        width: 60px;
-        padding-bottom: 60px;
+        width: 80px;
+        padding-bottom: 80px;
       `;
 
     case 'small':
