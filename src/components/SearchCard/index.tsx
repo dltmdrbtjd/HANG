@@ -8,7 +8,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { SearchLikeUpdate } from 'src/redux/modules/SearchModule/search';
 import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { HomeLikeUpdate } from 'src/redux/modules/HomeModule/home';
-import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
@@ -34,14 +33,12 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
         dispatch(SearchLikeUpdate({ idx, like: false }));
       } else {
         dispatch(SearchLikeUpdate({ idx, like: true }));
-        dispatch(fetchMessage({ Message: true }));
       }
     } else if (path.includes('/')) {
       if (userInfo.like) {
         dispatch(HomeLikeUpdate({ category, idx, like: false }));
       } else {
         dispatch(HomeLikeUpdate({ category, idx, like: true }));
-        dispatch(fetchMessage({ Message: true }));
       }
     }
   };
@@ -58,7 +55,13 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
         border="0.5px solid #e7e7e7"
         z="1"
       >
-        <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
+        <Grid
+          width="auto"
+          cursor="pointer"
+          _onClick={() => history.push(`/detail?user=${userInfo.userPk}`)}
+        >
+          <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
+        </Grid>
         <Grid
           width="calc(100% - 120px)"
           height="47px"

@@ -125,7 +125,6 @@ const MyPageModify = () => {
         </SubTitle>
 
         <AreaSelectBox
-          toggle
           setCity={setRegion}
           setGu={setCity}
           city={regionArr[userInfo.region]}

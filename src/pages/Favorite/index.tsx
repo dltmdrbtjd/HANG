@@ -45,7 +45,7 @@ const Favorite = () => {
                 key={idx}
               >
                 <Grid width="60px" height="60px">
-                  <ProfileImg size="medium" imgUrl={item.profileImg} />
+                  <ProfileImg imgUrl={item.profileImg} />
                 </Grid>
                 <Grid
                   width="calc(100% - 90px)"

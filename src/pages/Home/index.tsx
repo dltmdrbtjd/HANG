@@ -51,7 +51,7 @@ const Home = () => {
                   history.push('/mypage/promise');
                 }}
               >
-                <ProfileImg imgUrl={list.promise.profileImg} size="medium" />
+                <ProfileImg imgUrl={list.promise.profileImg} />
                 <Grid margin="0 0 0 10px" addstyle={limitWidth}>
                   <Grid>
                     <Text fs="la" fw="bold" addstyle={textOverflow()}>
@@ -81,7 +81,9 @@ const Home = () => {
             </PromiseCard>
           </Grid>
         )}
-        <SearchBar margin="28px 0 0 0" />
+        <Grid _onClick={() => history.push('/search')}>
+          <SearchBar margin="28px 0 0 0" />
+        </Grid>
         <Grid margin="60px 0 0 0">
           <MainTitle fs="la" margin="0 0 6px">
             내 지역을 여행하고 싶은 여행자예요

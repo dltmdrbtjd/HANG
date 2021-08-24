@@ -97,7 +97,7 @@ const CreateTrip = () => {
           여행 장소를 선택해주세요
         </SubTitle>
 
-        <AreaSelectBox toggle setCity={setRegion} setGu={setCity} />
+        <AreaSelectBox setCity={setRegion} setGu={setCity} />
       </Grid>
 
       <Grid margin="60px 0 30px">

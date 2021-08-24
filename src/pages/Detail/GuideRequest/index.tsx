@@ -8,6 +8,7 @@ import { useDispatch, shallowEqual } from 'react-redux';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
 import { useTypedSelector, history } from 'src/redux/configureStore';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
+import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // apis , socket
 import apis from 'src/shared/api';
 import socket from 'src/util/socket';
@@ -57,9 +58,9 @@ const GuideRequest = () => {
       })
       .catch((err) => {
         dispatch(
-          fetchMessage({
-            Message: true,
-            error: err.response.data.errorMessage,
+          activeAlert({
+            status: true,
+            errorMsg: err.response.data.errorMessage,
           }),
         );
       });
@@ -145,6 +146,7 @@ const GuideRequest = () => {
         agree={() => {
           agreeModalHandler(promiseData);
         }}
+        mainText="길잡이 부탁하기"
         subText={ModalMessage}
         subText2="길잡이를 부탁하시겠습니까?"
       />

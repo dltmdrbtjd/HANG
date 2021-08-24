@@ -20,8 +20,8 @@ export interface Props {
 const AlarmCard = ({ userInfo }: Props) => {
   return (
     <Grid
-      bgColor={!userInfo.checked ? 'white' : 'OpacityGray'}
       padding="20px 0 20px 20px"
+      opacity={!userInfo.checked ? '' : '50%'}
       isFlex
       ver="center"
       border="1px solid #E7E7E7"
@@ -29,10 +29,11 @@ const AlarmCard = ({ userInfo }: Props) => {
       addstyle={maxWidth}
       _onClick={() => history.push('/mypage/promise')}
     >
-      <ProfileImage size="medium" imgUrl={userInfo.profileImg} />
+      <ProfileImage imgUrl={userInfo.profileImg} />
 
       <Text width="auto" margin="0 0 0 15px" overflow="visible">
-        <Strong fw="bold">{userInfo.nickname}</Strong>님이{' '}
+        <Strong fw="bold">{userInfo.nickname}</Strong>
+        <Strong fw="md">{userInfo.guide ? '이' : '의'}</Strong>
         <GuideNameplate>{userInfo.guide ? '길잡이' : '길잡이'}</GuideNameplate>
         {userInfo.guide ? '를 해준대요 !' : '를 해줄래요 ?'}
       </Text>

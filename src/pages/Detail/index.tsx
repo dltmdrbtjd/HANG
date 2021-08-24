@@ -3,6 +3,7 @@ import { useDispatch, shallowEqual } from 'react-redux';
 import queryString from 'query-string';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
+import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 import apis from 'src/shared/api';
 import socket from 'src/util/socket';
 // user info
@@ -22,8 +23,6 @@ import chat from '../../Images/NavigationIcons/onchat.svg';
 
 const Detail = () => {
   const dispatch = useDispatch();
-
-  const [toast, setToast] = React.useState<number>(0);
 
   const { eventList, userInfo, message }: any = useTypedSelector(
     (state) => ({
@@ -51,9 +50,9 @@ const Detail = () => {
       })
       .catch((err) => {
         dispatch(
-          fetchMessage({
-            Message: true,
-            error: err.response.data.errorMessage,
+          activeAlert({
+            status: true,
+            errorMsg: err.response.data.errorMessage,
           }),
         );
       });
@@ -77,7 +76,7 @@ const Detail = () => {
     <Container>
       <Grid>
         <MainTitle fs="xl">프로필</MainTitle>
-        <ProfileCard userInfo={userInfo} setToast={setToast} />
+        <ProfileCard userInfo={userInfo} />
         <Grid isFlex hoz="flex-end" margin="17px 0 60px 0">
           <Button
             width="48px"
@@ -120,15 +119,7 @@ const Detail = () => {
             })}
           </Grid>
         ) : null}
-        {message && (
-          <ToastMessage
-            msg={
-              toast === 1
-                ? '관식목록에 추가되었습니다'
-                : '신청이 완료되었습니다'
-            }
-          />
-        )}
+        {message && <ToastMessage msg="신청이 완료되었습니다" />}
       </Grid>
     </Container>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid, Text, Button, BlurBox } from 'src/elements';
+import { Grid, Text, Button, BlurBox, Span } from 'src/elements';
 
 export interface Props {
   open?: any;
@@ -27,7 +27,8 @@ const Modal = ({
         <BlurBox isFlex hoz="center" ver="center">
           <Grid
             bgColor="white"
-            width="296px"
+            padding="0 20px"
+            width="298px"
             height="216px"
             position="relative"
             radius="14px"
@@ -37,11 +38,13 @@ const Modal = ({
             <Text margin="18px 0 0 0" fs="xl" fw="extraBold">
               {mainText}
             </Text>
-            <Text margin="37px 0 0 0">
+            <Span width="60px" height="1px" bgColor="gray" />
+            <Text margin="17px 0 0 0">
               {subText} {subText ? <br /> : null} {subText2}
             </Text>
             <Grid
               width="100%"
+              height="48px"
               isFlex
               margin="33px 0 0 0"
               position="absolute"
@@ -53,6 +56,7 @@ const Modal = ({
               </Button>
               <Button
                 bgColor="gray"
+                color="darkGray"
                 radius="none"
                 _onClick={close}
                 width="100%"

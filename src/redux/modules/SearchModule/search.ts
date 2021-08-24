@@ -10,19 +10,6 @@ const initialState: SearchState = {
   nextItem: false,
 }
 
-const fetchSearchLoad = createAsyncThunk('search/SEARCH_LOAD', async(MainSearch:any):Promise<any> => {
-  try {
-    const payload = {
-        list: (await apis.Search(MainSearch)).data.result,
-        nextItem: true,
-    }
-    return payload;
-  } catch (err) {
-    console.log(err);
-    return false;
-  }
-})
-
 const fetchSearchSend = createAsyncThunk('search/SEARCH_SEND', async(content: any):Promise<any> => {
   try {
     const payload = {
@@ -68,19 +55,6 @@ const searchSlice = createSlice({
     }
   },
   extraReducers: {
-    [fetchSearchLoad.pending.type]: (state) => {
-      state.loading = true;
-    },
-    [fetchSearchLoad.fulfilled.type]: (state,action: PayloadAction<SearchState>) => {
-      state.loading = false;
-      state.list = action.payload.list;
-      state.nextItem = action.payload.nextItem;
-    },
-    [fetchSearchLoad.rejected.type]: (state, action) => {
-      state.loading = false;
-      state.list = initialState.list;
-      state.nextItem = action.payload;
-    },
     [fetchSearchSend.pending.type]: (state) => {
       state.loading = true;
     },
@@ -113,7 +87,6 @@ const searchSlice = createSlice({
 })
 
 const SearchCreators = {
-  fetchSearchLoad,
   fetchSearchSend,
   fetchMoreSearch,
 }

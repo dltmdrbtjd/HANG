@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 interface Prop {
   theme: {
@@ -18,6 +18,10 @@ interface Prop {
   radius?: string;
 }
 
+const NotFoundImage = css`
+  margin: 36px auto 14px auto;
+`;
+
 const CategoryBtn = styled.button<Prop>`
   background-color: ${({bgColor}) => bgColor};
   width: ${({width}) => width};
@@ -34,4 +38,4 @@ const CategoryBtn = styled.button<Prop>`
   cursor: pointer;
 `;
 
-export default CategoryBtn;
+export {CategoryBtn, NotFoundImage};

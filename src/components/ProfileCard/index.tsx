@@ -6,7 +6,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from 'react-redux';
 import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
-import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 
 // style
 import { textOverflow, textOverflowWrap } from '../../styles/Mixin';
@@ -15,10 +14,9 @@ import ProfileImg from '../ProfileImg/index';
 
 export interface Props {
   userInfo?: any;
-  setToast?: any;
 }
 
-const ProfileCard = ({ userInfo, setToast }: Props) => {
+const ProfileCard = ({ userInfo }: Props) => {
   const dispatch = useDispatch();
 
   const LikeToggle = () => {
@@ -29,8 +27,6 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
       dispatch(DetailLikeUpdate(false));
     } else {
       dispatch(DetailLikeUpdate(true));
-      setToast(1);
-      dispatch(fetchMessage({ Message: true }));
     }
   };
 
@@ -44,7 +40,7 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
       position="relative"
     >
       <Grid isFlex ver="center">
-        <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
+        <ProfileImg imgUrl={userInfo && userInfo.profileImg} />
         <Grid width="75%" margin="0 0 0 13px">
           <Text fs="la" fw="bold" addstyle={textOverflow()}>
             {userInfo && userInfo.nickname}

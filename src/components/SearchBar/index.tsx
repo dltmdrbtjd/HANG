@@ -48,6 +48,7 @@ const SearchBar = ({ margin, ...props }) => {
         position="absolute"
         right="13px"
         top="10px"
+        color="gray"
       >
         <SearchIcon style={{ fontSize: '27px' }} />
       </Grid>
