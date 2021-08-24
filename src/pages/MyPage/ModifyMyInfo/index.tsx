@@ -19,6 +19,7 @@ import {
   Button,
   TextArea,
   Container,
+  Span,
 } from '../../../elements';
 // container
 import InputImage from '../../../components/SelectImage';
@@ -108,7 +109,9 @@ const MyPageModify = () => {
 
       <NicknameDupCheck
         nickname={nickname}
-        setNickname={(e) => setNickname(e.target.value)}
+        setNickname={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setNickname(e.target.value)
+        }
         nickErrorMsg={
           nickname.length > 16 ? '닉네임은 16자까지 입력할 수 있습니다' : null
         }
@@ -131,17 +134,25 @@ const MyPageModify = () => {
       </Grid>
 
       <Grid margin="60px 0 0">
-        <SubTitle fs="la" margin="0 0 12px">
-          자기 소개
-        </SubTitle>
+        <Grid isFlex hoz="space-between" ver="center" margin="0 0 12px">
+          <SubTitle fs="la">자기 소개</SubTitle>
 
-        <TextArea value={intro} _onChange={(e) => setIntro(e.target.value)} />
+          <Span fs="xs">{100 - intro.length}자 남음</Span>
+        </Grid>
+
+        <TextArea
+          value={intro}
+          _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setIntro(e.target.value)
+          }
+        />
       </Grid>
 
       <Button
         width="100%"
         fs="la"
         margin="20px 0 40px"
+        disabled={intro.length > 100}
         _onClick={updateProfile}
       >
         수정하기

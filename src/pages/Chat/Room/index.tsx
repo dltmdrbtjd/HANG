@@ -26,6 +26,37 @@ import Modal from '../../../components/Modal';
 import { WarningText, ChatInputAreaSize } from './style';
 import { setMediaLimitBoxSize } from '../../../styles/Media';
 
+interface ChatLogType {
+  curTime: number;
+  message: string;
+  userPk: number;
+}
+
+interface ShowChatLogType {
+  userPk: number;
+  chatLogs: ChatLogType[];
+}
+
+const ShowChatLog = React.memo<ShowChatLogType>(({ userPk, chatLogs }) => {
+  return (
+    <>
+      {chatLogs.map((chat, idx) => (
+        <SpeechBubble
+          person={userPk === chat.userPk}
+          next={
+            idx < chatLogs.length - 1
+              ? chat.userPk === chatLogs[idx + 1].userPk
+              : false
+          }
+          key={(Date.now() + Math.random() + idx).toString(36)}
+        >
+          {chat.message}
+        </SpeechBubble>
+      ))}
+    </>
+  );
+});
+
 const ChatRoom = () => {
   const targetUserInfo = getUserInfo('targetUserInfo');
   const targetUserPk = targetUserInfo.targetPk;
@@ -49,6 +80,7 @@ const ChatRoom = () => {
   const QuitRoom = () => {
     socket.emit('ByeBye', { roomName, userPk });
     dispatch(DeleteChatRoom(targetUserPk));
+    delUserInfo('targetUserInfo');
 
     history.replace('/chat');
   };
@@ -72,20 +104,19 @@ const ChatRoom = () => {
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
     socket.on('chatLogs', (logs) => {
-      const addedChatLog = logs.chatLogs.map((log) => JSON.parse(log));
+      const addedChatLog = logs.chatLogs.map((log: string) => JSON.parse(log));
 
       setChatLog(addedChatLog);
     });
 
     return () => {
       socket.emit('leave', { roomName, userPk });
-      delUserInfo('targetUserInfo');
     };
   }, []);
 
   React.useEffect(() => {
     socket.on('updateMessage', (data) => {
-      setChatLog([...chatLog, data]);
+      setChatLog(chatLog.concat(data));
     });
 
     scrollToBottom();
@@ -143,19 +174,7 @@ const ChatRoom = () => {
             {`${date.format(DATEFORMAT)} ${weekdays[date.days()]}`}
           </Text>
 
-          {chatLog.map((chat, idx) => (
-            <SpeechBubble
-              person={userPk === chat.userPk}
-              next={
-                idx < chatLog.length - 1
-                  ? chat.userPk === chatLog[idx + 1].userPk
-                  : false
-              }
-              key={(Date.now() + Math.random() + idx).toString(36)}
-            >
-              {chat.message}
-            </SpeechBubble>
-          ))}
+          <ShowChatLog userPk={userPk} chatLogs={chatLog} />
 
           <Grid
             position="fixed"

@@ -4,6 +4,7 @@ import moment from 'moment';
 // redux
 import { useDispatch } from 'react-redux';
 import { CreateTripEvent } from 'src/redux/modules/MyPageModule/mypage';
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // history
 import { history } from 'src/redux/configureStore';
 // apis
@@ -16,10 +17,12 @@ import {
   Button,
   TextArea,
   Container,
+  Span,
 } from '../../../elements';
 // components
 import Calendar from './Calendar';
 import AreaSelectBox from '../../../components/AreaSelectBox';
+import ToastMessage from '../../../components/ToastMessage';
 // style
 import { setMediaBoxSize } from '../../../styles/Media';
 
@@ -39,6 +42,17 @@ const CreateTrip = () => {
   const [tripInfo, setTripInfo] = React.useState('');
 
   const CreateTrip = () => {
+    if (!tripInfo) {
+      dispatch(
+        fetchMessage({
+          Message: true,
+          error: '소개 문구를 작성해주세요',
+        }),
+      );
+
+      return;
+    }
+
     const trip = {
       region,
       city,
@@ -55,12 +69,18 @@ const CreateTrip = () => {
       .then(() => {
         history.goBack();
       })
-      .catch((err) => console.log(err.config));
+      .catch((err) => {
+        dispatch(
+          fetchMessage({
+            Message: true,
+            error: err.response.data.errorMessage,
+          }),
+        );
+      });
   };
 
   React.useEffect(() => {
     setRegion('서울');
-    setCity('강남구');
   }, []);
 
   return (
@@ -80,9 +100,11 @@ const CreateTrip = () => {
       </Grid>
 
       <Grid margin="60px 0 30px">
-        <SubTitle fs="la" margin="0 0 12px">
-          본인이 원하는 여행을 소개해주세요
-        </SubTitle>
+        <Grid isFlex hoz="space-between" ver="center" margin="0 0 12px">
+          <SubTitle fs="la">본인이 원하는 여행을 소개해주세요</SubTitle>
+
+          <Span fs="xs">{60 - tripInfo.length}/60자</Span>
+        </Grid>
 
         <TextArea
           value={tripInfo}
@@ -93,9 +115,17 @@ const CreateTrip = () => {
         />
       </Grid>
 
-      <Button width="100%" fs="la" margin="0 0 40px" _onClick={CreateTrip}>
+      <Button
+        width="100%"
+        fs="la"
+        margin="0 0 40px"
+        disabled={tripInfo.length > 60}
+        _onClick={CreateTrip}
+      >
         등록하기
       </Button>
+
+      <ToastMessage msg="" />
     </Container>
   );
 };

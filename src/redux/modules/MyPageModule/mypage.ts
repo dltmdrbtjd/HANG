@@ -31,7 +31,7 @@ const fetchGetMyInfo = createAsyncThunk(
       const { data } = await apis.GetMyInfo();
       const payload = {
         myInfo: data.userInfo,
-        tripList: data.tripInfo,
+        tripList: data.tripInfo ? data.tripInfo : [],
       };
 
       return payload;

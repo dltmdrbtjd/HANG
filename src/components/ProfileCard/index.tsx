@@ -73,7 +73,7 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
       </Grid>
       <Hr width="100%" margin="13px 0" />
       <Grid>
-        {userInfo.intro !== 'none' ? (
+        {userInfo.intro && userInfo.intro !== 'none' ? (
           <Text fs="sm" ws="pre-line" addstyle={textOverflowWrap(3)}>
             {userInfo.intro}
           </Text>
