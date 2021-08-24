@@ -61,17 +61,14 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
       >
         <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
         <Grid
-          width="70%"
+          width="calc(100% - 120px)"
           height="47px"
           margin="0 0 0 10px"
           cursor="pointer"
           isFlex
           column
           hoz="space-between"
-          _onClick={() => {
-            history.push(`/detail?user=${userInfo.userPk}`);
-          }}
-          addstyle={limitWidth}
+          _onClick={() => history.push(`/detail?user=${userInfo.userPk}`)}
         >
           <Text fs="la" fw="bold" addstyle={textOverflow()}>
             {userInfo && userInfo.nickname}

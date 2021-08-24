@@ -7,7 +7,8 @@ import { SignInType } from 'src/shared/ApiTypes';
 // apis
 import apis from 'src/shared/api';
 // token
-import { setToken } from 'src/shared/token';
+import jwtDecode from 'jwt-decode';
+import { getToken, setToken } from 'src/shared/token';
 import { setUserInfo } from 'src/shared/userInfo';
 // history
 import TermsOfUse from 'src/components/TermsOfUse';
@@ -53,7 +54,7 @@ const SignIn = (): React.ReactElement => {
     apis
       .SignIn(userInfo)
       .then(({ data }) => setToken(data.accessToken))
-      .then(() => setUserInfo())
+      .then(() => setUserInfo('userInfo', jwtDecode(getToken())))
       .then(() => {
         if (tutorial) history.replace('/');
         else history.push('/tutorial');

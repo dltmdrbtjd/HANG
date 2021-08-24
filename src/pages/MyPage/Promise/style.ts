@@ -52,21 +52,4 @@ const TextVerticalAlignCenter = css`
   flex-wrap: wrap;
 `;
 
-const setNicknameFont = css<Prop>`
-  ${SubTitleTextHidden('160px')};
-
-  @media ${({ theme }) => theme.deviceSize.tablet} {
-    ${SubTitleTextHidden('120px')};
-  }
-
-  @media ${({ theme }) => theme.deviceSize.mobile} {
-    ${SubTitleTextHidden('120px')};
-  }
-`;
-
-export {
-  setTabletWrapper,
-  setTabletPromiseCard,
-  TextVerticalAlignCenter,
-  setNicknameFont,
-};
+export { setTabletWrapper, setTabletPromiseCard, TextVerticalAlignCenter };

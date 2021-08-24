@@ -62,10 +62,10 @@ const MyInfo = () => {
   }, []);
 
   const deleteUserInfo = async () => {
-    const { userPk } = getUserInfo();
+    const { userPk } = getUserInfo('userInfo');
 
     delToken();
-    delUserInfo();
+    delUserInfo('userInfo');
 
     await socket.emit('logout', { uid: userPk });
     socket.disconnect();

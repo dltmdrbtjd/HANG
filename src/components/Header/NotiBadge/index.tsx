@@ -35,7 +35,7 @@ const NotiBadge = () => {
     time: 0,
   });
 
-  const userPk = getUserInfo() && getUserInfo().userPk;
+  const userPk = getUserInfo('userInfo') && getUserInfo('userInfo').userPk;
 
   const NotiOff = () => {
     setNewAlarm(false);

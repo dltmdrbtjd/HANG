@@ -5,8 +5,9 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
 import apis from 'src/shared/api';
 import socket from 'src/util/socket';
+// user info
+import { setUserInfo } from 'src/shared/userInfo';
 // redux
-import { ChooseChatRoom } from 'src/redux/modules/ChatModule/chat';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Grid, MainTitle, Button, Image, Container } from '../../elements';
@@ -58,16 +59,16 @@ const Detail = () => {
       });
   };
 
-  const chooseChatRoom = () => {
-    dispatch(
-      ChooseChatRoom({
-        nickname: userInfo.nickname,
-        profileImg: userInfo.profileImg,
-        targetPk: parseInt(query.user as string, 10),
-      }),
-    );
+  const targetPk = parseInt(query.user as string, 10);
 
-    history.push(`/chat/room`);
+  const chooseChatRoom = () => {
+    setUserInfo('targetUserInfo', {
+      nickname: userInfo.nickname,
+      profileImg: userInfo.profileImg,
+      targetPk: parseInt(query.user as string, 10),
+    });
+
+    history.push(`/chat/room?number=${targetPk}`);
   };
 
   React.useEffect(() => {

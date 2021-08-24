@@ -34,7 +34,7 @@ const MyPageModify = () => {
   const [profileImg, setProfileImg] = React.useState(userInfo.profileImg);
   const [nickname, setNickname] = React.useState(userInfo.nickname);
   const [intro, setIntro] = React.useState(
-    !userInfo.intor || userInfo.intro === 'none'
+    userInfo.intro && userInfo.intro === 'none'
       ? `안녕하세요 ${nickname}입니다`
       : userInfo.intro,
   );
@@ -64,10 +64,10 @@ const MyPageModify = () => {
           .UpdateProfile(updateProfile)
           .then(() => {
             const newNickname = updateInfo.nickname;
-            const { nickname } = getUserInfo();
+            const { nickname } = getUserInfo('userInfo');
 
             if (newNickname !== nickname)
-              setUserInfo({ ...userInfo, nickname: newNickname });
+              setUserInfo('userInfo', { ...userInfo, nickname: newNickname });
           })
           .then(() => dispatch(UpdateProfile(updateProfile)))
           .then(() => history.replace('/mypage'))
@@ -81,10 +81,10 @@ const MyPageModify = () => {
       .UpdateProfile(updateInfo)
       .then(() => {
         const newNickname = updateInfo.nickname;
-        const { nickname } = getUserInfo();
+        const { nickname } = getUserInfo('userInfo');
 
         if (newNickname !== nickname)
-          setUserInfo({ ...userInfo, nickname: newNickname });
+          setUserInfo('userInfo', { ...userInfo, nickname: newNickname });
       })
       .then(() => dispatch(UpdateProfile(updateInfo)))
       .then(() => history.replace('/mypage'))

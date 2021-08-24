@@ -1,13 +1,11 @@
 import React from 'react';
 // redux
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   DeleteChatRoom,
   ChatAlarmCheck,
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
-// query string
-import queryString from 'query-string';
 // socket
 import socket from 'src/util/socket';
 // apis
@@ -17,7 +15,7 @@ import moment from 'moment';
 // history
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // user info
-import { getUserInfo } from '../../../shared/userInfo';
+import { delUserInfo, getUserInfo } from '../../../shared/userInfo';
 // elements
 import { Grid, Text, Input, Button, Container } from '../../../elements';
 // components
@@ -29,26 +27,20 @@ import { WarningText, ChatInputAreaSize } from './style';
 import { setMediaLimitBoxSize } from '../../../styles/Media';
 
 const ChatRoom = () => {
-  const dispatch = useDispatch();
-  const { alarmCount, targetUserInfo } = useTypedSelector(
-    (state) => ({
-      alarmCount: state.chat.alarmCount,
-      targetUserInfo: state.chat.targetUserInfo,
-    }),
-    shallowEqual,
-  );
-  const unchecked: number = useSelector(getUnchecked);
+  const targetUserInfo = getUserInfo('targetUserInfo');
+  const targetUserPk = targetUserInfo.targetPk;
 
-  const { userPk, nickname } = getUserInfo();
+  const dispatch = useDispatch();
+  const alarmCount = useTypedSelector((state) => state.chat.alarmCount);
+  const unchecked: number = useSelector(getUnchecked(targetUserPk));
+
+  const { userPk, nickname } = getUserInfo('userInfo');
 
   const [chatLog, setChatLog] = React.useState([]);
   const [message, setMessage] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
   const messageRef = React.useRef(null);
-
-  const roomNumber = queryString.parse(location.search).number as string;
-  const targetUserPk = parseInt(roomNumber, 10);
 
   const roomName =
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
@@ -61,7 +53,7 @@ const ChatRoom = () => {
     history.replace('/chat');
   };
 
-  const BlockUser = async () => {
+  const BlockUser = () => {
     apis
       .AddBlockList({ targetPk: targetUserPk })
       .then(() => QuitRoom())
@@ -87,6 +79,7 @@ const ChatRoom = () => {
 
     return () => {
       socket.emit('leave', { roomName, userPk });
+      delUserInfo('targetUserInfo');
     };
   }, []);
 

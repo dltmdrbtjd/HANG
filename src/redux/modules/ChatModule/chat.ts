@@ -7,17 +7,13 @@ import {
 import { RootState } from 'src/redux/configureStore';
 // apis
 import apis from 'src/shared/api';
+import { getUserInfo } from 'src/shared/userInfo';
 // type
-import { TargetUserInfo, NewMessage, ChatState } from './type';
+import { ChatInfo, NewMessage, ChatState } from './type';
 
 export const initialState: ChatState = {
   alarmCount: 0,
   list: [],
-  targetUserInfo: {
-    nickname: '',
-    profileImg: null,
-    targetPk: 0,
-  },
   loading: false,
 };
 
@@ -47,10 +43,6 @@ const chatSlice = createSlice({
     CreateChatRoom: (state, action) => {
       state.list.unshift(action.payload);
       state.alarmCount += 1;
-    },
-
-    ChooseChatRoom: (state, action: PayloadAction<TargetUserInfo>) => {
-      state.targetUserInfo = action.payload;
     },
 
     DeleteChatRoom: (state, action: PayloadAction<number>) => {
@@ -119,17 +111,17 @@ export const getUserPkList = createSelector(
   },
 );
 
-export const getUnchecked = createSelector(
-  (state: RootState) => state.chat.list,
-  (state: RootState) => state.chat.targetUserInfo,
-  (chatInfoList, targetUserInfo) => {
-    const [userPkList] = chatInfoList.filter(
-      (chatInfo) => chatInfo.targetPk === targetUserInfo.targetPk,
-    );
+export const getUnchecked = (targetPk: number) =>
+  createSelector(
+    (state: RootState) => state.chat.list,
+    (chatInfoList: ChatInfo[]) => {
+      const [userPkList] = chatInfoList.filter(
+        (chatInfo: ChatInfo) => chatInfo.targetPk === targetPk,
+      );
 
-    return userPkList ? parseInt(userPkList.unchecked, 10) : null;
-  },
-);
+      return userPkList ? parseInt(userPkList.unchecked, 10) : null;
+    },
+  );
 
 export const ChatCreators = {
   fetchGetChatRoomList,
@@ -138,7 +130,6 @@ const { reducer, actions } = chatSlice;
 export const {
   ChatAlarmCheck,
   CreateChatRoom,
-  ChooseChatRoom,
   DeleteChatRoom,
   ChatHistoryUpdate,
 } = actions;

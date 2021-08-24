@@ -22,4 +22,4 @@ const SpeechBubble = ({ person, next, children }) => {
   );
 };
 
-export default SpeechBubble;
+export default React.memo(SpeechBubble);

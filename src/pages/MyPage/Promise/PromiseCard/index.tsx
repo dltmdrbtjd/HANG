@@ -26,8 +26,9 @@ import ProfileImg from '../../../../components/ProfileImg';
 import Modal from '../../../../components/Modal';
 import GuideNameplate from '../../../../components/GuideNameplate';
 // style
+import SubTitleTextHidden from '../../MyInfo/style';
 import { textOverflow, limitWidth } from '../../../../styles/Mixin';
-import { TextVerticalAlignCenter, setNicknameFont } from '../style';
+import { TextVerticalAlignCenter } from '../style';
 
 export interface Props {
   promInfo: PromInfo;
@@ -146,13 +147,19 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
       >
         <ProfileImg size="large" imgUrl={promInfo.profileImg} />
 
-        <Grid width="auto" margin="0 0 0 14px" addstyle={limitWidth}>
+        <Grid
+          width="calc(100% - 114px)"
+          margin="0 0 0 14px"
+          addstyle={limitWidth}
+        >
           <Text
             margin="0 0 15px"
             wb="keep-all"
             addstyle={TextVerticalAlignCenter}
           >
-            <Strong addstyle={setNicknameFont}>{promInfo.nickname}</Strong>{' '}
+            <Strong addstyle={SubTitleTextHidden('160px')}>
+              {promInfo.nickname}
+            </Strong>{' '}
             님에게 <GuideNameplate>길잡이</GuideNameplate> 요청
           </Text>
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 import { history } from 'src/redux/configureStore';
 // types
 import {
@@ -44,7 +45,7 @@ instance.interceptors.response.use(
 
     if (error.response.status === 307) {
       setToken(error.response.data.newAccessToken);
-      setUserInfo();
+      setUserInfo('userInfo', jwtDecode(getToken()));
       history.go(0);
     } else if (
       error.response.status === 401 &&
