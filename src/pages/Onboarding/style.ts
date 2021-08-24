@@ -30,4 +30,15 @@ const TabletImageSize = css<Prop>`
   }
 `;
 
-export { Transition, CalcHeight, TabletImageSize };
+const PageMoveArrowStyle = css<Prop>`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+
+  @media ${({ theme }) => theme.deviceSize.tablet} {
+    display: inline-block;
+  }
+`;
+
+export { Transition, CalcHeight, TabletImageSize, PageMoveArrowStyle };

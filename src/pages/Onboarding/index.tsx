@@ -1,6 +1,9 @@
 import React from 'react';
+// icon
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 // elements
-import { Grid } from '../../elements';
+import { Button, Grid } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // pages
@@ -8,7 +11,7 @@ import Page1 from './Pages/Page1';
 import Page2 from './Pages/Page2';
 import Page3 from './Pages/Page3';
 // style
-import { Transition } from './style';
+import { Transition, PageMoveArrowStyle } from './style';
 
 const Onboarding = () => {
   const [page, setPage] = React.useState(1);
@@ -16,8 +19,8 @@ const Onboarding = () => {
   React.useEffect(() => {
     let moveX;
 
-    const pageMoveDesktop = (event) => {
-      const movement = moveX - event.offsetX;
+    const pageMoveDesktop = (e) => {
+      const movement = moveX - e.offsetX;
 
       if (movement > 30) {
         if (page >= 3) return;
@@ -32,8 +35,8 @@ const Onboarding = () => {
       }
     };
 
-    const pageMoveMobile = (event) => {
-      const movement = moveX - event.changedTouches[0].clientX;
+    const pageMoveMobile = (e) => {
+      const movement = moveX - e.changedTouches[0].clientX;
 
       if (movement > 70) {
         if (page >= 3) return;
@@ -78,7 +81,7 @@ const Onboarding = () => {
   }, []);
 
   return (
-    <Grid height="100vh" overflow="hidden">
+    <Grid height="100vh" overflow="hidden" position="relative">
       <StatusBar curPage={page} setPage={setPage} />
 
       <Grid
@@ -92,6 +95,13 @@ const Onboarding = () => {
         <Page2 />
         <Page3 />
       </Grid>
+
+      <Button addstyle={PageMoveArrowStyle} form="text">
+        <ArrowBackIosIcon fontSize="large" />
+      </Button>
+      <Button addstyle={PageMoveArrowStyle} form="text">
+        <ArrowBackIosIcon fontSize="large" />
+      </Button>
     </Grid>
   );
 };

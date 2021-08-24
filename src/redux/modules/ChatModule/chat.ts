@@ -86,7 +86,7 @@ const chatSlice = createSlice({
       action: PayloadAction<any[]>,
     ) => {
       state.list = action.payload.sort((a, b) => {
-        if (!(a.lastChat[0] && b.lastChat[0])) return -1;
+        if (!(a.lastChat[0] && b.lastChat[0])) return 1;
 
         const aLastChat = JSON.parse(a.lastChat[0]);
         const bLastChat = JSON.parse(b.lastChat[0]);

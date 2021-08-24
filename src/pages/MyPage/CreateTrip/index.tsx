@@ -4,7 +4,7 @@ import moment from 'moment';
 // redux
 import { useDispatch } from 'react-redux';
 import { CreateTripEvent } from 'src/redux/modules/MyPageModule/mypage';
-import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
+import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // history
 import { history } from 'src/redux/configureStore';
 // apis
@@ -17,7 +17,6 @@ import {
   Button,
   TextArea,
   Container,
-  Span,
 } from '../../../elements';
 // components
 import Calendar from './Calendar';
@@ -44,9 +43,9 @@ const CreateTrip = () => {
   const CreateTrip = () => {
     if (!tripInfo) {
       dispatch(
-        fetchMessage({
-          Message: true,
-          error: '소개 문구를 작성해주세요',
+        activeAlert({
+          status: true,
+          errorMsg: '소개 문구를 작성해주세요',
         }),
       );
 
@@ -72,9 +71,9 @@ const CreateTrip = () => {
       .catch((err) => {
         if (err.response.status === 400) {
           dispatch(
-            fetchMessage({
-              Message: true,
-              error: '해당 날짜에 이미 등록된 여행이 있습니다.',
+            activeAlert({
+              status: true,
+              errorMsg: '해당 날짜에 이미 등록된 여행이 있습니다.',
             }),
           );
         }
