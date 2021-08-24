@@ -10,7 +10,6 @@ const ImageStyle = styled.img<Prop>`
   display: block;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  object-fit: cover;
 
   ${({ addstyle }) => addstyle};
 `;

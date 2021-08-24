@@ -1,7 +1,7 @@
 import React from 'react';
 // route
 import { history } from 'src/redux/configureStore';
-import { Redirect, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import Tutorial from 'src/pages/Tutorial';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
@@ -25,6 +25,7 @@ import CreateTrip from '../pages/MyPage/CreateTrip';
 import Noti from '../pages/Noti';
 import Chat from '../pages/Chat';
 import ChatRoom from '../pages/Chat/Room';
+import NotFound from '../pages/NotFound';
 // pathname
 import { pathURI } from './Path';
 
@@ -39,12 +40,7 @@ const Route = () => {
     <>
       <Section>
         <Switch>
-          <PublicRoute
-            path={pathURI.onboarding}
-            restricted={false}
-            component={Onboarding}
-            exact
-          />
+          <PublicRoute path={pathURI.onboarding} component={Onboarding} exact />
           <PublicRoute
             path={pathURI.signIn}
             restricted
@@ -82,7 +78,7 @@ const Route = () => {
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute path={pathURI.tutorial} component={Tutorial} exact />
-          <Redirect from="*" to="/" />
+          <PublicRoute component={NotFound} />
         </Switch>
       </Section>
     </>

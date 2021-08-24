@@ -33,6 +33,7 @@ const ImagePosition = css`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  object-fit: cover;
 `;
 
 export { setProfileImageSize, ImagePosition };

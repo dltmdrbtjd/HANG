@@ -83,7 +83,7 @@ const ChatRoom = () => {
     `${targetUserPk}:${userPk}`;
 
   const QuitRoom = () => {
-    socket.emit('ByeBye', { roomName, userPk });
+    socket.emit('quit', { roomName, userPk });
     dispatch(DeleteChatRoom(targetUserPk));
     delUserInfo('targetUserInfo');
 

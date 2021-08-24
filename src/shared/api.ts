@@ -97,7 +97,7 @@ const apis = {
   LikeLoad: () => instance.get('/api/like'),
 
   // myinfo
-  GetMyInfo: () => instance.get('/api/mypage'),
+  GetMyInfo: (userPk: number) => instance.get(`api/mypage/:${userPk}`),
   CreateTripEvent: (tripInfo: CreateTripEventType) =>
     instance.post('/api/mypage/create_trip', tripInfo),
   DeleteTripEvent: (tripId: DeleteTripEventType) =>

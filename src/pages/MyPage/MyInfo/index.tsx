@@ -57,13 +57,13 @@ const MyInfo = () => {
 
   const [open, setOpen] = React.useState<boolean>(false);
 
+  const { userPk } = getUserInfo('userInfo');
+
   React.useEffect(() => {
-    dispatch(MyPageCreators.fetchGetMyInfo());
+    dispatch(MyPageCreators.fetchGetMyInfo(userPk));
   }, []);
 
   const deleteUserInfo = () => {
-    const { userPk } = getUserInfo('userInfo');
-
     delToken();
     delUserInfo('userInfo');
 
@@ -152,7 +152,7 @@ const MyInfo = () => {
           color="darkGray"
           _onClick={() => history.push('/mypage/create_trip')}
         >
-          추가하기 <ControlPointIcon style={{ marginLeft: '4px' }} />
+          등록하기 <ControlPointIcon style={{ marginLeft: '4px' }} />
         </Button>
       </Grid>
 
