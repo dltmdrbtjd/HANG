@@ -17,7 +17,6 @@ const Image: React.FC<Props> = ({ src, alt, ...props }): React.ReactElement => {
 
 Image.defaultProps = {
   width: '100%',
-  height: '100%',
 };
 
 export default Image;

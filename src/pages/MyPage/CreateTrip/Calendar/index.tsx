@@ -12,6 +12,7 @@ import moment from 'moment';
 import { Button, Grid, Span, Image } from '../../../../elements';
 // style
 import './calendar.css';
+import CalendarSelectButtonStyle, { SetArrowAngle } from './style';
 // image
 import Arrow from '../../../../Images/arrow.svg';
 
@@ -60,33 +61,27 @@ const Calendar = ({ setSelectDate }) => {
 
   return (
     <Grid position="relative">
-      <Grid isFlex hoz="space-between">
-        <Button
-          _onClick={handleToggle}
-          bgColor="white"
-          color="black"
-          shadow="none"
-          border="0.5px solid #E7E7E7"
-          fw="lg"
-          ref={dateRef}
-          isFlex
-          hoz="space-between"
-          ver="center"
-          padding="13px 15px 13px 45px"
-        >
-          <Span fw="regular">{moment(date[0].startDate).format(format)}</Span>
+      <Button
+        _onClick={handleToggle}
+        bgColor="white"
+        color="black"
+        shadow="none"
+        border="0.5px solid #E7E7E7"
+        fw="lg"
+        ref={dateRef}
+        padding="13px 20px"
+        addstyle={CalendarSelectButtonStyle}
+      >
+        <Span fw="regular">{moment(date[0].startDate).format(format)}</Span>
 
-          <Span fw="regular" margin="0 50px">
-            -
-          </Span>
+        <Span fw="regular">-</Span>
 
-          <Span fw="regular" margin="0 20px 0 0">
-            {moment(date[0].endDate).format(format)}
-          </Span>
+        <Span fw="regular">{moment(date[0].endDate).format(format)}</Span>
 
+        <Span addstyle={SetArrowAngle(angle)}>
           <Image width="10px" src={Arrow} alt="arrow button" />
-        </Button>
-      </Grid>
+        </Span>
+      </Button>
 
       {open ? (
         <ClickAwayListener onClickAway={handleClose}>

@@ -20,7 +20,7 @@ import {
 } from './ApiTypes';
 // cookie
 import { getToken, delToken, setToken } from './token';
-import { setUserInfo } from './userInfo';
+import { delUserInfo, setUserInfo } from './userInfo';
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
   baseURL: 'https://soujinko.shop',
@@ -53,6 +53,7 @@ instance.interceptors.response.use(
     ) {
       window.alert('토근이 만료되었습니다. 다시 로그인해주세요.');
       delToken();
+      delUserInfo('userInfo');
       history.push('/signIn');
     }
     return Promise.reject(error);

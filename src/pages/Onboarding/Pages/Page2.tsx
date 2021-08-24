@@ -11,7 +11,7 @@ import {
 // images
 import OnboardingImg2 from '../../../Images/onboarding2.svg';
 // style
-import { CalcHeight, TabletImageSize } from '../style';
+import { CalcHeight, LimitImageSize } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
 
 const Page2 = () => {
@@ -27,18 +27,29 @@ const Page2 = () => {
           또, 너만 아는 여<Strong color="brandColor">행</Strong>
         </MainTitle>
 
-        <Text fs="lg" wb="keep-all" addstyle={setMediaFontSize('sxl')}>
-          내가 처음 가는 곳을 가장 잘 아는 친구와 동네 구석구석 여행해 보세요
+        <Text
+          fs="lg"
+          wb="keep-all"
+          addstyle={setMediaFontSize('sxl')}
+          margin="0 0 40px"
+        >
+          내가 처음 가는 곳을 가장 잘 아는 친구와
+          <br /> 동네 구석구석 여행해 보세요
         </Text>
 
-        <Grid position="absolute" top="33%" left="0" addstyle={TabletImageSize}>
+        <Grid height="calc(100% - 210px)">
           <a
             target="_blank"
             rel="noreferrer"
             href="https://www.freepik.com/vectors/menu"
           >
             Menu vector created by pikisuperstar - www.freepik.com
-            <Image src={OnboardingImg2} />
+            <Image
+              width="auto"
+              height="100%"
+              addstyle={LimitImageSize}
+              src={OnboardingImg2}
+            />
           </a>
         </Grid>
       </Container>

@@ -17,17 +17,24 @@ const CalcHeight = css`
   a {
     text-indent: -9999px;
     overflow: hidden;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: grab;
+    height: 100%;
   }
 `;
 
-const TabletImageSize = css<Prop>`
+const LimitImageSize = css`
+  max-width: 100%;
+`;
+
+const PageMoveArrowStyle = css<Prop>`
+  display: none;
+
   @media ${({ theme }) => theme.deviceSize.tablet} {
-    width: 52%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: inline-block;
   }
 `;
 
-export { Transition, CalcHeight, TabletImageSize };
+export { Transition, CalcHeight, LimitImageSize, PageMoveArrowStyle };

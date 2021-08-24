@@ -14,10 +14,10 @@ const Onboarding = () => {
   const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
-    let moveX;
+    let moveX: number;
 
-    const pageMoveDesktop = (event) => {
-      const movement = moveX - event.offsetX;
+    const pageMoveDesktop = (e) => {
+      const movement = moveX - e.offsetX;
 
       if (movement > 30) {
         if (page >= 3) return;
@@ -32,8 +32,8 @@ const Onboarding = () => {
       }
     };
 
-    const pageMoveMobile = (event) => {
-      const movement = moveX - event.changedTouches[0].clientX;
+    const pageMoveMobile = (e) => {
+      const movement = moveX - e.changedTouches[0].clientX;
 
       if (movement > 70) {
         if (page >= 3) return;
@@ -78,7 +78,7 @@ const Onboarding = () => {
   }, []);
 
   return (
-    <Grid height="100vh" overflow="hidden">
+    <Grid height="100vh" overflow="hidden" position="relative">
       <StatusBar curPage={page} setPage={setPage} />
 
       <Grid

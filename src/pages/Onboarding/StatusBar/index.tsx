@@ -1,6 +1,12 @@
 import React from 'react';
+// icon
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 // elements
 import { Grid, Button } from '../../../elements/index';
+// style
+import { PageMoveArrowStyle } from '../style';
+import { setMediaBoxSize } from '../../../styles/Media';
 
 const StatusBar = ({ curPage, setPage }) => {
   const pageNav = [1, 2, 3];
@@ -10,9 +16,22 @@ const StatusBar = ({ curPage, setPage }) => {
       width="70px"
       isFlex
       hoz="space-between"
+      ver="center"
       padding="30px 0 0"
       margin="0 auto 30px"
+      addstyle={setMediaBoxSize('120px', null)}
     >
+      <Button
+        margin="3px 0 0"
+        form="text"
+        addstyle={PageMoveArrowStyle}
+        _onClick={() =>
+          curPage > 1 ? setPage((page: number) => page - 1) : null
+        }
+      >
+        <ArrowBackIosIcon fontSize="small" />
+      </Button>
+
       {pageNav.map((page, idx) => (
         <Button
           key={(page * idx + Date.now() + Math.random()).toString(36)}
@@ -24,6 +43,17 @@ const StatusBar = ({ curPage, setPage }) => {
           _onClick={() => setPage(page)}
         />
       ))}
+
+      <Button
+        margin="3px 0 0"
+        form="text"
+        addstyle={PageMoveArrowStyle}
+        _onClick={() =>
+          curPage < 3 ? setPage((page: number) => page + 1) : null
+        }
+      >
+        <ArrowForwardIosIcon fontSize="small" />
+      </Button>
     </Grid>
   );
 };
