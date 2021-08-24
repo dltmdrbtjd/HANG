@@ -3,8 +3,17 @@ import React from 'react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // style
 import { flexBox } from 'src/styles/Mixin';
+import { SetArrowAngle } from 'src/pages/MyPage/CreateTrip/Calendar/style';
 // elements
-import { Button, Strong, Image, Grid, Ul, List } from '../../../../elements';
+import {
+  Button,
+  Strong,
+  Image,
+  Grid,
+  Ul,
+  List,
+  Span,
+} from '../../../../elements';
 // image
 import Arrow from '../../../../Images/arrow.svg';
 
@@ -57,7 +66,10 @@ const SelectBox: React.FC<Props> = ({ initailOption, contents, setState }) => {
           addstyle={flexBox('space-between', 'center', 'inline-flex')}
         >
           <Strong fw="regular">{option}</Strong>
-          <Image width="10px" src={Arrow} alt="arrow" />
+
+          <Span addstyle={SetArrowAngle(selectBox.angle)}>
+            <Image width="10px" src={Arrow} alt="arrow" />
+          </Span>
         </Button>
 
         {selectBox.open && (

@@ -11,7 +11,7 @@ import {
 // images
 import OnboardingImg1 from '../../../Images/onboarding1.svg';
 // style
-import { CalcHeight, TabletImageSize } from '../style';
+import { CalcHeight, LimitImageSize } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
 
 const Page1 = () => {
@@ -27,18 +27,28 @@ const Page1 = () => {
           나만 아는 여<Strong color="brandColor">행</Strong>
         </MainTitle>
 
-        <Text fs="lg" wb="keep-all" addstyle={setMediaFontSize('sxl')}>
+        <Text
+          fs="lg"
+          wb="keep-all"
+          addstyle={setMediaFontSize('sxl')}
+          margin="0 0 40px"
+        >
           당신만 알고 있는 맛집, 숨은 명소들을 알려주는 여행 길잡이가 되어보세요
         </Text>
 
-        <Grid position="absolute" top="30%" left="0" addstyle={TabletImageSize}>
+        <Grid height="calc(100% - 210px)">
           <a
             target="_blank"
             rel="noreferrer"
             href="https://www.freepik.com/vectors/travel"
           >
             Travel vector created by stories - www.freepik.com
-            <Image src={OnboardingImg1} />
+            <Image
+              width="auto"
+              height="100%"
+              addstyle={LimitImageSize}
+              src={OnboardingImg1}
+            />
           </a>
         </Grid>
       </Container>

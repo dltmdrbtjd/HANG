@@ -1,9 +1,6 @@
 import React from 'react';
-// icon
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 // elements
-import { Button, Grid } from '../../elements';
+import { Grid } from '../../elements';
 // components
 import StatusBar from './StatusBar';
 // pages
@@ -11,13 +8,13 @@ import Page1 from './Pages/Page1';
 import Page2 from './Pages/Page2';
 import Page3 from './Pages/Page3';
 // style
-import { Transition, PageMoveArrowStyle } from './style';
+import { Transition } from './style';
 
 const Onboarding = () => {
   const [page, setPage] = React.useState(1);
 
   React.useEffect(() => {
-    let moveX;
+    let moveX: number;
 
     const pageMoveDesktop = (e) => {
       const movement = moveX - e.offsetX;
@@ -95,13 +92,6 @@ const Onboarding = () => {
         <Page2 />
         <Page3 />
       </Grid>
-
-      <Button addstyle={PageMoveArrowStyle} form="text">
-        <ArrowBackIosIcon fontSize="large" />
-      </Button>
-      <Button addstyle={PageMoveArrowStyle} form="text">
-        <ArrowBackIosIcon fontSize="large" />
-      </Button>
     </Grid>
   );
 };

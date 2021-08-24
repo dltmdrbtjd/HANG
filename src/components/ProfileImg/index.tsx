@@ -20,6 +20,7 @@ const ProfileImg = ({ size, imgUrl }: Props) => {
       position="relative"
     >
       <Image
+        height="100%"
         src={imgUrl && imgUrl !== 'null' ? imgUrl : defaultProfile}
         alt="profile image"
         addstyle={ImagePosition}
