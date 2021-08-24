@@ -70,12 +70,14 @@ const CreateTrip = () => {
         history.goBack();
       })
       .catch((err) => {
-        dispatch(
-          fetchMessage({
-            Message: true,
-            error: err.response.data.errorMessage,
-          }),
-        );
+        if (err.response.status === 400) {
+          dispatch(
+            fetchMessage({
+              Message: true,
+              error: '해당 날짜에 이미 등록된 여행이 있습니다.',
+            }),
+          );
+        }
       });
   };
 
@@ -100,11 +102,9 @@ const CreateTrip = () => {
       </Grid>
 
       <Grid margin="60px 0 30px">
-        <Grid isFlex hoz="space-between" ver="center" margin="0 0 12px">
-          <SubTitle fs="la">본인이 원하는 여행을 소개해주세요</SubTitle>
-
-          <Span fs="xs">{60 - tripInfo.length}/60자</Span>
-        </Grid>
+        <SubTitle fs="la" margin="0 0 12px">
+          본인이 원하는 여행을 소개해주세요
+        </SubTitle>
 
         <TextArea
           value={tripInfo}
@@ -113,6 +113,10 @@ const CreateTrip = () => {
           }
           addstyle={setMediaBoxSize(null, '170px')}
         />
+
+        <Grid fs="xs" textAlign="right">
+          {60 - tripInfo.length} / 60자
+        </Grid>
       </Grid>
 
       <Button

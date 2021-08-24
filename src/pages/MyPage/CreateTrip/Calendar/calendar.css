@@ -5,11 +5,12 @@
 .rdrMonths,
 .rdrMonth {
   width: 100%;
+  max-width: 422px;
 }
 
 .rdrDateRangeWrapper {
   position: absolute;
-  top: 95px;
+  top: 50px;
   border-radius: 14px;
   font-size: 14px;
   overflow: hidden;
@@ -53,15 +54,4 @@
 .rdrDay:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span:after,
 .rdrDay:not(.rdrDayPassive) .rdrSelected ~ .rdrDayNumber span:after {
   background: #d4f0ff;
-}
-
-@media (min-width: 600px) {
-  .rdrMonth {
-    padding: 20px 15px;
-  }
-
-  .rdrDay {
-    height: 3.5em;
-    line-height: 3.5em;
-  }
 }

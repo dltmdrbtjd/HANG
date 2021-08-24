@@ -4,8 +4,8 @@ import { isLogin } from '../shared/token';
 
 interface Public {
   component: React.ElementType;
-  path: string;
-  restricted: boolean;
+  path?: string;
+  restricted?: boolean;
   exact?: boolean | undefined;
 }
 
@@ -22,6 +22,8 @@ const PublicRoute = ({ component: Component, restricted, ...rest }: Public) => {
 
 PublicRoute.defaultProps = {
   exact: false,
+  restricted: false,
+  path: '',
 };
 
 export default PublicRoute;
