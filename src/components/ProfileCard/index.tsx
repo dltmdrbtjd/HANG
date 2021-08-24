@@ -6,7 +6,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { useDispatch } from 'react-redux';
 import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
-import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 
 // style
 import { textOverflow, textOverflowWrap } from '../../styles/Mixin';
@@ -30,7 +29,6 @@ const ProfileCard = ({ userInfo, setToast }: Props) => {
     } else {
       dispatch(DetailLikeUpdate(true));
       setToast(1);
-      dispatch(fetchMessage({ Message: true }));
     }
   };
 

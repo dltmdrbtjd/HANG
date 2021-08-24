@@ -120,15 +120,7 @@ const Detail = () => {
             })}
           </Grid>
         ) : null}
-        {message && (
-          <ToastMessage
-            msg={
-              toast === 1
-                ? '관식목록에 추가되었습니다'
-                : '신청이 완료되었습니다'
-            }
-          />
-        )}
+        {message && <ToastMessage msg="신청이 완료되었습니다" />}
       </Grid>
     </Container>
   );
