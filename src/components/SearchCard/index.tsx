@@ -55,7 +55,13 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
         border="0.5px solid #e7e7e7"
         z="1"
       >
-        <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
+        <Grid
+          width="auto"
+          cursor="pointer"
+          _onClick={() => history.push(`/detail?user=${userInfo.userPk}`)}
+        >
+          <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
+        </Grid>
         <Grid
           width="calc(100% - 120px)"
           height="47px"
