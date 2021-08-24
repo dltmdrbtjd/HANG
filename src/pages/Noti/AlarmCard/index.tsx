@@ -32,7 +32,8 @@ const AlarmCard = ({ userInfo }: Props) => {
       <ProfileImage size="medium" imgUrl={userInfo.profileImg} />
 
       <Text width="auto" margin="0 0 0 15px" overflow="visible">
-        <Strong fw="bold">{userInfo.nickname}</Strong>님이{' '}
+        <Strong fw="bold">{userInfo.nickname}</Strong>
+        <Strong fw="md">{userInfo.guide ? '이' : '의'}</Strong>
         <GuideNameplate>{userInfo.guide ? '길잡이' : '길잡이'}</GuideNameplate>
         {userInfo.guide ? '를 해준대요 !' : '를 해줄래요 ?'}
       </Text>
