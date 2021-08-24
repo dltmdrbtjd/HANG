@@ -28,9 +28,18 @@ const RoomHeader = ({ methods, targetUserInfo }) => {
               <ArrowBackIosIcon />
             </Button>
 
-            <ProfileImg imgUrl={targetUserInfo.profileImg} size="small" />
+            <Grid
+              isFlex
+              ver="center"
+              cursor="pointer"
+              _onClick={() =>
+                history.push(`/detail?user=${targetUserInfo.targetPk}`)
+              }
+            >
+              <ProfileImg imgUrl={targetUserInfo.profileImg} size="small" />
 
-            <Strong margin="0 0 0 12px">{targetUserInfo.nickname}</Strong>
+              <Strong margin="0 0 0 12px">{targetUserInfo.nickname}</Strong>
+            </Grid>
           </Grid>
 
           <DropDown

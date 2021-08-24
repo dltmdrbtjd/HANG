@@ -9,13 +9,11 @@ import reportWebVitals from './reportWebVitals';
 import GlobalThemeProvider from './styles/GlobalThemeProvider';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <GlobalThemeProvider>
-        <App />
-      </GlobalThemeProvider>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <GlobalThemeProvider>
+      <App />
+    </GlobalThemeProvider>
+  </Provider>,
   document.getElementById('root'),
 );
 

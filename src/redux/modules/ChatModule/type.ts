@@ -10,12 +10,6 @@ export interface LastChat {
   curTime: number;
 }
 
-export interface TargetUserInfo {
-  nickname: string;
-  profileImg: null | string;
-  targetPk: number;
-}
-
 export interface ChatInfo {
   lastChat: string[] | LastChat[];
   nickname: string;
@@ -27,6 +21,5 @@ export interface ChatInfo {
 export interface ChatState {
   alarmCount: number;
   list: ChatInfo[];
-  targetUserInfo: TargetUserInfo;
   loading: boolean;
 }

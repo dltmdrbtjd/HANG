@@ -36,7 +36,7 @@ const Block = () => {
       .DeleteBlockList({ targetPk })
       .then(() => {
         dispatch(DeleteBlockList(targetPk));
-        dispatch(fetchMessage({ Message: true, error: '' }));
+        dispatch(fetchMessage({ Message: true }));
       })
       .catch((err) => console.log(err));
   };

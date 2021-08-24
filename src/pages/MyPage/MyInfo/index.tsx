@@ -61,13 +61,13 @@ const MyInfo = () => {
     dispatch(MyPageCreators.fetchGetMyInfo());
   }, []);
 
-  const deleteUserInfo = async () => {
-    const { userPk } = getUserInfo();
+  const deleteUserInfo = () => {
+    const { userPk } = getUserInfo('userInfo');
 
     delToken();
-    delUserInfo();
+    delUserInfo('userInfo');
 
-    await socket.emit('logout', { uid: userPk });
+    socket.emit('logout', { uid: userPk });
     socket.disconnect();
   };
 
@@ -176,7 +176,6 @@ const MyInfo = () => {
                 dispatch(
                   fetchMessage({
                     Message: false,
-                    error: '여행 이벤트가 삭제되었습니다.',
                   }),
                 );
               }}

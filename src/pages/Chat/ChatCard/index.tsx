@@ -1,8 +1,6 @@
 import React from 'react';
-// redux
-import { useDispatch } from 'react-redux';
-import { ChooseChatRoom } from 'src/redux/modules/ChatModule/chat';
-// style
+// user info
+import { setUserInfo } from 'src/shared/userInfo';
 // history
 import { history } from '../../../redux/configureStore';
 // elements
@@ -11,6 +9,7 @@ import { Grid, Strong, Text, Span } from '../../../elements';
 import ProfileImg from '../../../components/ProfileImg';
 // reducer
 import { LimitWidth, BackgroundOpacity } from './style';
+import { textOverflow } from '../../../styles/Mixin';
 
 const ChatCard = ({
   targetUserPk,
@@ -20,10 +19,14 @@ const ChatCard = ({
   unchecked,
   time,
 }) => {
-  const dispatch = useDispatch();
   const chooseChatRoom = () => {
-    dispatch(ChooseChatRoom({ nickname, profileImg, targetPk: targetUserPk }));
-    history.push(`/chat/room?number=${targetUserPk}`);
+    setUserInfo('targetUserInfo', {
+      nickname,
+      profileImg,
+      targetPk: targetUserPk,
+    });
+
+    history.push('/chat/room');
   };
 
   return (
@@ -45,7 +48,11 @@ const ChatCard = ({
                 {nickname}
               </Strong>
 
-              {message ? <Text margin="6px 0 0">{message}</Text> : null}
+              {message ? (
+                <Text margin="6px 0 0" addstyle={textOverflow()}>
+                  {message}
+                </Text>
+              ) : null}
             </Grid>
           </Grid>
 

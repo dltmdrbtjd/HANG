@@ -68,13 +68,6 @@ const SignUp = () => {
       .catch((err) => console.log(err));
   };
 
-  const title = [
-    '번호\u00A0인증이\n필요한\u00A0서비스\u00A0입니다',
-    '',
-    '행에서\u00A0사용할\n프로필을\u00A0설정해주세요',
-    '당신만의\u00A0행복한\u00A0여행이\n시작됩니다!',
-  ];
-
   return (
     <Container padding="0">
       <StatusBar curPage={page} setPage={setPage} />

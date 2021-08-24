@@ -1,8 +1,3 @@
-// jwt decode
-import jwtDecode from 'jwt-decode';
-
-import { getToken } from './token';
-
 interface UserInfo {
   exp: number;
   iat: number;
@@ -10,18 +5,27 @@ interface UserInfo {
   userPk: number;
 }
 
-const setUserInfo = (userInfo = jwtDecode(getToken())): void => {
-  localStorage.setItem('userInfo', JSON.stringify(userInfo));
+interface TargetUserInfo {
+  nickname: string;
+  profileImg: null | string;
+  targetPk: number;
+}
+
+const setUserInfo = (
+  key: string,
+  userInfo: UserInfo | TargetUserInfo,
+): void => {
+  localStorage.setItem(key, JSON.stringify(userInfo));
 };
 
-const getUserInfo = (): UserInfo => {
-  const userInfo = localStorage.getItem('userInfo');
+const getUserInfo = (key: string): any => {
+  const userInfo = localStorage.getItem(key);
 
   return JSON.parse(userInfo);
 };
 
-const delUserInfo = (): void => {
-  localStorage.removeItem('userInfo');
+const delUserInfo = (key: string): void => {
+  localStorage.removeItem(key);
 };
 
 export { setUserInfo, getUserInfo, delUserInfo };

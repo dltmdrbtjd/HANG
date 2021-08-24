@@ -1,13 +1,11 @@
 import React from 'react';
 // redux
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   DeleteChatRoom,
   ChatAlarmCheck,
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
-// query string
-import queryString from 'query-string';
 // socket
 import socket from 'src/util/socket';
 // apis
@@ -17,7 +15,7 @@ import moment from 'moment';
 // history
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // user info
-import { getUserInfo } from '../../../shared/userInfo';
+import { delUserInfo, getUserInfo } from '../../../shared/userInfo';
 // elements
 import { Grid, Text, Input, Button, Container } from '../../../elements';
 // components
@@ -28,27 +26,57 @@ import Modal from '../../../components/Modal';
 import { WarningText, ChatInputAreaSize } from './style';
 import { setMediaLimitBoxSize } from '../../../styles/Media';
 
-const ChatRoom = () => {
-  const dispatch = useDispatch();
-  const { alarmCount, targetUserInfo } = useTypedSelector(
-    (state) => ({
-      alarmCount: state.chat.alarmCount,
-      targetUserInfo: state.chat.targetUserInfo,
-    }),
-    shallowEqual,
+interface ChatLogType {
+  curTime: number;
+  message: string;
+  userPk: number;
+}
+
+interface ShowChatLogType {
+  userPk: number;
+  chatLogs: ChatLogType[];
+}
+
+const ShowChatLog = React.memo<ShowChatLogType>(({ userPk, chatLogs }) => {
+  return (
+    <>
+      {chatLogs.map((chat, idx) => (
+        <SpeechBubble
+          person={userPk === chat.userPk}
+          next={
+            idx < chatLogs.length - 1
+              ? chat.userPk === chatLogs[idx + 1].userPk
+              : false
+          }
+          key={(Date.now() + Math.random() + idx).toString(36)}
+        >
+          {chat.message}
+        </SpeechBubble>
+      ))}
+    </>
   );
-  const unchecked: number = useSelector(getUnchecked);
+});
 
-  const { userPk, nickname } = getUserInfo();
+const ChatRoom = () => {
+  const targetUserInfo = getUserInfo('targetUserInfo');
+  const targetUserPk = targetUserInfo.targetPk;
 
-  const [chatLog, setChatLog] = React.useState([]);
-  const [message, setMessage] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch();
+  const alarmCount = useTypedSelector((state) => state.chat.alarmCount);
+  const unchecked: number = useSelector(getUnchecked(targetUserPk));
 
-  const messageRef = React.useRef(null);
+  const { userPk, nickname } = getUserInfo('userInfo');
 
-  const roomNumber = queryString.parse(location.search).number as string;
-  const targetUserPk = parseInt(roomNumber, 10);
+  const [chatLogs, setChatLogs] = React.useState<ChatLogType[]>([]);
+  const [chatLog, setChatLog] = React.useState<ChatLogType>({
+    curTime: 0,
+    message: '',
+    userPk: 0,
+  });
+  const [message, setMessage] = React.useState<string>('');
+  const [open, setOpen] = React.useState<boolean>(false);
+
+  const messageRef = React.useRef<HTMLDivElement>(null);
 
   const roomName =
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
@@ -57,11 +85,12 @@ const ChatRoom = () => {
   const QuitRoom = () => {
     socket.emit('ByeBye', { roomName, userPk });
     dispatch(DeleteChatRoom(targetUserPk));
+    delUserInfo('targetUserInfo');
 
     history.replace('/chat');
   };
 
-  const BlockUser = async () => {
+  const BlockUser = () => {
     apis
       .AddBlockList({ targetPk: targetUserPk })
       .then(() => QuitRoom())
@@ -80,9 +109,9 @@ const ChatRoom = () => {
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
     socket.on('chatLogs', (logs) => {
-      const addedChatLog = logs.chatLogs.map((log) => JSON.parse(log));
+      const addedChatLog = logs.chatLogs.map((log: string) => JSON.parse(log));
 
-      setChatLog(addedChatLog);
+      setChatLogs(addedChatLog);
     });
 
     return () => {
@@ -91,11 +120,15 @@ const ChatRoom = () => {
   }, []);
 
   React.useEffect(() => {
+    scrollToBottom();
+  }, [chatLogs]);
+
+  React.useEffect(() => {
     socket.on('updateMessage', (data) => {
-      setChatLog([...chatLog, data]);
+      setChatLog(data);
     });
 
-    scrollToBottom();
+    setChatLogs(chatLogs.concat(chatLog));
   }, [chatLog]);
 
   const sendMessage = () => {
@@ -121,7 +154,7 @@ const ChatRoom = () => {
     '금요일',
     '토요일',
   ];
-  const date = chatLog[0] ? moment(chatLog[0].curTime) : moment();
+  const date = chatLogs[0] ? moment(chatLogs[0].curTime) : moment();
 
   return (
     <div ref={messageRef}>
@@ -150,19 +183,7 @@ const ChatRoom = () => {
             {`${date.format(DATEFORMAT)} ${weekdays[date.days()]}`}
           </Text>
 
-          {chatLog.map((chat, idx) => (
-            <SpeechBubble
-              person={userPk === chat.userPk}
-              next={
-                idx < chatLog.length - 1
-                  ? chat.userPk === chatLog[idx + 1].userPk
-                  : false
-              }
-              key={(Date.now() + Math.random() + idx).toString(36)}
-            >
-              {chat.message}
-            </SpeechBubble>
-          ))}
+          <ShowChatLog userPk={userPk} chatLogs={chatLogs} />
 
           <Grid
             position="fixed"
