@@ -26,7 +26,7 @@ const ChatCard = ({
       targetPk: targetUserPk,
     });
 
-    history.push(`/chat/room?number=${targetUserPk}`);
+    history.push('/chat/room');
   };
 
   return (

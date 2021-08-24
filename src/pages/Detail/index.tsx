@@ -59,8 +59,6 @@ const Detail = () => {
       });
   };
 
-  const targetPk = parseInt(query.user as string, 10);
-
   const chooseChatRoom = () => {
     setUserInfo('targetUserInfo', {
       nickname: userInfo.nickname,
@@ -68,7 +66,7 @@ const Detail = () => {
       targetPk: parseInt(query.user as string, 10),
     });
 
-    history.push(`/chat/room?number=${targetPk}`);
+    history.push('/chat/room');
   };
 
   React.useEffect(() => {

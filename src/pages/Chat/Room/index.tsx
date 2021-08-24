@@ -67,11 +67,16 @@ const ChatRoom = () => {
 
   const { userPk, nickname } = getUserInfo('userInfo');
 
-  const [chatLog, setChatLog] = React.useState([]);
-  const [message, setMessage] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const [chatLogs, setChatLogs] = React.useState<ChatLogType[]>([]);
+  const [chatLog, setChatLog] = React.useState<ChatLogType>({
+    curTime: 0,
+    message: '',
+    userPk: 0,
+  });
+  const [message, setMessage] = React.useState<string>('');
+  const [open, setOpen] = React.useState<boolean>(false);
 
-  const messageRef = React.useRef(null);
+  const messageRef = React.useRef<HTMLDivElement>(null);
 
   const roomName =
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
@@ -106,7 +111,7 @@ const ChatRoom = () => {
     socket.on('chatLogs', (logs) => {
       const addedChatLog = logs.chatLogs.map((log: string) => JSON.parse(log));
 
-      setChatLog(addedChatLog);
+      setChatLogs(addedChatLog);
     });
 
     return () => {
@@ -115,11 +120,15 @@ const ChatRoom = () => {
   }, []);
 
   React.useEffect(() => {
+    scrollToBottom();
+  }, [chatLogs]);
+
+  React.useEffect(() => {
     socket.on('updateMessage', (data) => {
-      setChatLog(chatLog.concat(data));
+      setChatLog(data);
     });
 
-    scrollToBottom();
+    setChatLogs(chatLogs.concat(chatLog));
   }, [chatLog]);
 
   const sendMessage = () => {
@@ -145,7 +154,7 @@ const ChatRoom = () => {
     '금요일',
     '토요일',
   ];
-  const date = chatLog[0] ? moment(chatLog[0].curTime) : moment();
+  const date = chatLogs[0] ? moment(chatLogs[0].curTime) : moment();
 
   return (
     <div ref={messageRef}>
@@ -174,7 +183,7 @@ const ChatRoom = () => {
             {`${date.format(DATEFORMAT)} ${weekdays[date.days()]}`}
           </Text>
 
-          <ShowChatLog userPk={userPk} chatLogs={chatLog} />
+          <ShowChatLog userPk={userPk} chatLogs={chatLogs} />
 
           <Grid
             position="fixed"
