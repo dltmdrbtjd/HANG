@@ -15,7 +15,7 @@ const AreaSelectBox = ({ city, region, ...props }: Props) => {
   const path = useLocation().pathname;
 
   let Citys = CityArr;
-  if (path.includes('/mypage/modify')) {
+  if (path.includes('/mypage/modify') || path.includes('/signup')) {
     Citys = CityArr.filter((region) => region.gu.length > 1);
   }
 
