@@ -51,7 +51,7 @@ const Home = () => {
                   history.push('/mypage/promise');
                 }}
               >
-                <ProfileImg imgUrl={list.promise.profileImg} size="medium" />
+                <ProfileImg imgUrl={list.promise.profileImg} />
                 <Grid margin="0 0 0 10px" addstyle={limitWidth}>
                   <Grid>
                     <Text fs="la" fw="bold" addstyle={textOverflow()}>
