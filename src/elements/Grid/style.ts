@@ -37,6 +37,7 @@ export interface Prop {
   translate?: any;
   cursor?: string;
   addstyle?: any;
+  opacity?: string;
   theme: {
     [propName: string]: any;
   };
@@ -52,6 +53,7 @@ const makeItFlexBox = css<Prop>`
 const GridStyle = styled.div<Prop>`
   ${({ isFlex }) => isFlex && makeItFlexBox};
   width: ${({ width }) => width};
+  opacity: ${({opacity}) => opacity};
   height: ${({ height }) => height};
   margin: ${({ margin }) => margin};
   background-color: ${({ bgColor, theme }) => theme.color[bgColor]};
