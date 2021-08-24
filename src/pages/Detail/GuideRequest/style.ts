@@ -9,8 +9,8 @@ interface Prop {
 const RadioBtn = styled.input<Prop>`
   &[type='radio'],
   &[type='radio']:checked {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 30px;
     cursor: pointer;
     margin-right: 22px;
