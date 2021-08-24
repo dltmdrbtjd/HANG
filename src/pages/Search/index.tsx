@@ -11,8 +11,9 @@ import AreaSelectBox from '../../components/AreaSelectBox';
 import SearchCard from '../../components/SearchCard';
 import ToastMessage from '../../components/ToastMessage';
 // style
-import { Button, Grid, Text, Strong, Container } from '../../elements';
-import CategoryBtn from './style';
+import { Button, Grid, Text, Strong, Container, Image } from '../../elements';
+import { CategoryBtn, NotFoundImage } from './style';
+import NotFound from '../../Images/notfound/searchnofound.png';
 
 export interface SearchData {
   keyword?: string | string[];
@@ -136,7 +137,7 @@ const Search = () => {
         <Grid width="auto">
           <CategoryBtn
             radius="20px"
-            width="80px"
+            width="66px"
             height="32px"
             color={category === 0 ? 'brandColor' : 'gray'}
             bgColor={
@@ -186,16 +187,24 @@ const Search = () => {
       <Button _onClick={SearchHandler} fw="bold" width="100%" height="54px">
         검색
       </Button>
-      <Text margin="28px 0 12px 0">
-        <Strong>{cityName ? `${cityName}` : '전체'}</Strong>
-        <Strong> {guName ? `${guName}의 ` : ''}</Strong>
-        <Strong fw="md"> {subText}입니다.</Strong>
-      </Text>
+      {userlist.length > 0 ? (
+        <Text margin="28px 0 12px 0">
+          <Strong>{cityName ? `${cityName}` : '전체'}</Strong>
+          <Strong> {guName ? `${guName}의 ` : ''}</Strong>
+          <Strong fw="md"> {subText}입니다.</Strong>
+        </Text>
+      ) : null}
       {userlist
         ? userlist.map((item, idx) => {
             return <SearchCard userInfo={item} key={idx} idx={idx} />;
           })
         : ''}
+      {userlist.length < 1 ? (
+        <>
+          <Image width="80%" src={NotFound} addstyle={NotFoundImage} />
+          <Text textAlign="center">검색된 회원이 없습니다.</Text>
+        </>
+      ) : null}
       <div ref={ref} style={{ marginTop: '100px', height: '20px' }} />
       {message && <ToastMessage msg="관심목록에 추가되었습니다" />}
     </Container>
