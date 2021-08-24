@@ -1,5 +1,9 @@
 const CityArr: any = [
   {
+    city: '전체',
+    gu: [],
+  },
+  {
     city: '서울',
     gu: [
       '전체',
