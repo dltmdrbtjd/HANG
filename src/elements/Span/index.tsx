@@ -25,11 +25,25 @@ export interface Props {
   bottom?: string;
   left?: string;
   z?: string;
+  cursor?: string;
   addstyle?: any;
+  _onClick?: any;
 }
 
-const Span: React.FC<Props> = ({ children, ...props }): React.ReactElement => {
-  return <SpanStyle {...props}>{children}</SpanStyle>;
+const Span: React.FC<Props> = ({
+  children,
+  _onClick,
+  ...props
+}): React.ReactElement => {
+  return (
+    <SpanStyle {...props} onClick={_onClick}>
+      {children}
+    </SpanStyle>
+  );
+};
+
+Span.defaultProps = {
+  _onClick: () => {},
 };
 
 export default Span;

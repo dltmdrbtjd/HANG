@@ -7,7 +7,7 @@ interface Prop {
 }
 
 const Transition = css`
-  transition-duration: 0.5s;
+  transition: left 0.5s;
 `;
 
 const CalcHeight = css`

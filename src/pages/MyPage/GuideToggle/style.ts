@@ -7,7 +7,7 @@ const FloatButton = css`
   ${flexBox(null, 'center', 'inline-flex')};
 `;
 
-const ToggleLabelStyle = (checked: boolean) => {
+const ToggleLabelStyle = (checked: number) => {
   return css`
     transition: right, 0.5s;
     position: relative;
@@ -16,7 +16,7 @@ const ToggleLabelStyle = (checked: boolean) => {
   `;
 };
 
-const ToggleNameStyle = (checked: boolean) => {
+const ToggleNameStyle = (checked: number) => {
   return css`
     position: absolute;
     ${checked ? 'left: 10px' : 'right: 10px'};

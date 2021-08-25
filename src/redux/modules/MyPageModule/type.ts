@@ -1,6 +1,3 @@
-// type
-import { UserInfo } from '../DetailModule/type';
-
 export interface TripInfo {
   tripId: number;
   userPk?: number;
@@ -36,8 +33,16 @@ export interface RejectProm {
 }
 
 export interface MyInfo {
-  myInfo: any;
-  tripList: TripInfo[];
+  age: string;
+  city: string;
+  gender: number;
+  guide: number;
+  intro: string;
+  nickname: string;
+  profileImg: string | null;
+  region: string;
+  userId: string;
+  userPk: number;
 }
 
 export interface MyPromise {
@@ -47,7 +52,7 @@ export interface MyPromise {
 }
 
 export interface MyPageState {
-  myInfo: any;
+  myInfo: MyInfo;
   tripList: TripInfo[];
   promise: MyPromise;
   blockList: any[];

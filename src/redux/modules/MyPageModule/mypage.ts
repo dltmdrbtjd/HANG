@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 // apis
 import apis from 'src/shared/api';
-import { getUserInfo } from 'src/shared/userInfo';
 // types
 import {
   TripInfo,
@@ -14,7 +13,18 @@ import {
 } from './type';
 
 export const initialState: MyPageState = {
-  myInfo: {},
+  myInfo: {
+    age: '',
+    city: '',
+    gender: 0,
+    guide: 0,
+    intro: '',
+    nickname: '',
+    profileImg: null,
+    region: '',
+    userId: '',
+    userPk: 0,
+  },
   tripList: [],
   promise: {
     received: [],
@@ -48,7 +58,6 @@ const fetchGetMyPromise = createAsyncThunk(
   async (): Promise<any> => {
     try {
       const { data } = await apis.GetMyPromise();
-      console.log(data);
       const payload = {
         received: data.received,
         requested: data.requested,
@@ -82,7 +91,7 @@ const mypageSlice = createSlice({
   name: 'mypage',
   initialState,
   reducers: {
-    UpdateProfile: (state, action) => {
+    UpdateProfile: (state, action: PayloadAction<MyInfo>) => {
       state.myInfo = action.payload;
     },
 
@@ -121,12 +130,20 @@ const mypageSlice = createSlice({
         (block) => block.userPk !== action.payload,
       );
     },
+
+    SetGuideToggle: (state, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      state.myInfo.guide = action.payload;
+    },
   },
   extraReducers: {
     [fetchGetMyInfo.pending.type]: (state) => {
       state.loading = true;
     },
-    [fetchGetMyInfo.fulfilled.type]: (state, action: PayloadAction<MyInfo>) => {
+    [fetchGetMyInfo.fulfilled.type]: (
+      state,
+      action: PayloadAction<{ myInfo: MyInfo; tripList: TripInfo[] }>,
+    ) => {
       state.loading = false;
       state.myInfo = action.payload.myInfo;
       state.tripList = action.payload.tripList;
@@ -178,5 +195,6 @@ export const {
   RejectPromise,
   CancelPromise,
   DeleteBlockList,
+  SetGuideToggle,
 } = actions;
 export default reducer;

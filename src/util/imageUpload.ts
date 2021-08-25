@@ -15,27 +15,31 @@ AWS.config.update({
   }),
 });
 
-const uploadProfileImage = (image: blob): Promise<string> => {
+const uploadProfileImage = (image: blob | string | null): Promise<any> => {
   return new Promise((resolve, reject) => {
-    const upload = new AWS.S3.ManagedUpload({
-      params: {
-        Bucket: 'hang-image-upload/profile',
-        Key: image.name,
-        Body: image,
-      },
-    });
-
-    const promise = upload.promise();
-
-    promise
-      .then(() => {
-        resolve(
-          `https://dpcgepgmqx2vj.cloudfront.net/profile/${image.name}?w=100&h=100`,
-        );
-      })
-      .catch((err) => {
-        reject(err);
+    if (image && typeof image === 'object') {
+      const upload = new AWS.S3.ManagedUpload({
+        params: {
+          Bucket: 'hang-image-upload/profile',
+          Key: image.name,
+          Body: image,
+        },
       });
+
+      const promise = upload.promise();
+
+      promise
+        .then(() => {
+          resolve(
+            `https://dpcgepgmqx2vj.cloudfront.net/profile/${image.name}?w=100&h=100`,
+          );
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    } else {
+      resolve(image);
+    }
   });
 };
 
