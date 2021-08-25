@@ -16,7 +16,7 @@ describe('서버에서 시간을 전달받았을때', () => {
   test('3일 전에 받았을때 3일 전을 반환한다.', () => {
     expect(timeFormat(days)).toEqual('3일 전');
   });
-  test('2달 전에 받았을때 6.26을 반환한다.', () => {
+  test('2달 전에 받았을때 6.27을 반환한다. (2021.08.26기준)', () => {
     expect(timeFormat(month)).toEqual('6.27');
   });
 });
