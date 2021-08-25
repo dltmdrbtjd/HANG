@@ -35,37 +35,21 @@ const SignUp = () => {
   const [profile, setProfile] = React.useState(null);
 
   const SignUpDB = (userInfo: userInfo) => {
-    if (profile) {
-      uploadProfileImage(profile).then((res) => {
-        const profileImg = res;
+    uploadProfileImage(profile).then((res) => {
+      const profileImg = res;
 
-        apis
-          .SignUp({
-            ...userInfo,
-            profileImg,
-            region,
-            city,
-            gender,
-            age: parseInt(age, 10),
-          })
-          .then(() => setPage((page: number) => page + 1))
-          .catch((err) => console.log(err));
-      });
-
-      return;
-    }
-
-    apis
-      .SignUp({
-        ...userInfo,
-        profileImg: null,
-        region,
-        city,
-        gender,
-        age: parseInt(age, 10),
-      })
-      .then(() => setPage((page: number) => page + 1))
-      .catch((err) => console.log(err));
+      apis
+        .SignUp({
+          ...userInfo,
+          profileImg,
+          region,
+          city,
+          gender,
+          age: parseInt(age, 10),
+        })
+        .then(() => setPage((page: number) => page + 1))
+        .catch((err) => console.log(err));
+    });
   };
 
   return (
