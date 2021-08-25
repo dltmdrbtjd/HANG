@@ -1,6 +1,8 @@
 import React from 'react';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
+// global state
+import { signInStatus } from 'src/globalState/signInStatus';
 // type
 import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // material
@@ -35,7 +37,9 @@ const NotiBadge = () => {
     time: 0,
   });
 
-  const userPk = getUserInfo('userInfo') && getUserInfo('userInfo').userPk;
+  const { isLogIn } = React.useContext(signInStatus);
+
+  const userPk = isLogIn && getUserInfo('userInfo').userPk;
 
   const NotiOff = () => {
     setNewAlarm(false);
@@ -43,29 +47,33 @@ const NotiBadge = () => {
   };
 
   React.useEffect(() => {
-    socket.emit('login', { uid: userPk });
-    socket.on('requested', (data) => {
-      setNewAlarm(data);
-    });
+    if (isLogIn) {
+      socket.emit('login', { uid: userPk });
+      socket.on('requested', (data) => {
+        setNewAlarm(data);
+      });
 
-    apis
-      .AlarmCheck()
-      .then((res) => {
-        setNewAlarm(res.data);
-      })
-      .catch((err) => console.log(err));
+      apis
+        .AlarmCheck()
+        .then((res) => {
+          setNewAlarm(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   React.useEffect(() => {
-    socket.on('unchecked', () => {
-      dispatch(ChatAlarmCheck(Number(true)));
-    });
+    if (isLogIn) {
+      socket.on('unchecked', () => {
+        dispatch(ChatAlarmCheck(Number(true)));
+      });
 
-    socket.on('newMessage', (data: NewMessage) => {
-      setChatLog(data);
+      socket.on('newMessage', (data: NewMessage) => {
+        setChatLog(data);
 
-      dispatch(ChatHistoryUpdate(data));
-    });
+        dispatch(ChatHistoryUpdate(data));
+      });
+    }
   }, []);
 
   React.useEffect(() => {

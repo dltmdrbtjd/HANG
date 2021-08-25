@@ -15,6 +15,4 @@ const delToken = (): void => {
   ).toUTCString()};`;
 };
 
-const isLogin = (): boolean => Boolean(getToken());
-
-export { getToken, setToken, delToken, isLogin };
+export { getToken, setToken, delToken };
