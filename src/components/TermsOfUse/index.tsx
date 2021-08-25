@@ -23,7 +23,7 @@ const TermOfUse = ({ setTerms }) => {
     >
       <Grid
         bgColor="white"
-        height="392px"
+        height="442px"
         radius="20px 20px 0 0"
         padding="20px 24px 12px 24px"
         addstyle={setMediaLimitBoxSize('768px')}
