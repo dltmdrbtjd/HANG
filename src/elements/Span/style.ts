@@ -32,6 +32,7 @@ export interface Prop {
   bottom?: string;
   left?: string;
   z?: string;
+  cursor?: string;
   addstyle?: any;
   theme: {
     [propName: string]: any;
@@ -51,6 +52,7 @@ const SpanStyle = styled.span<Prop>`
   border-radius: ${({ radius }) => radius};
   background-color: ${({ bgColor, theme }) => theme.color[bgColor]};
   margin: ${({ margin }) => margin};
+  cursor: ${({ cursor }) => cursor};
   ${({ padding }) => borderBox(padding)};
   ${({ fs, fw, color, lh, textAlign }) =>
     textProps(fs, fw, color, lh, textAlign)};
