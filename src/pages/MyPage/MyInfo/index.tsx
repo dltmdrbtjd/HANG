@@ -6,10 +6,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import apis from 'src/shared/api';
 // redux
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import {
-  MyPageCreators,
-  DeleteTripEvent,
-} from 'src/redux/modules/MyPageModule/mypage';
+import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // socket
 import socket from 'src/util/socket';
@@ -58,10 +55,6 @@ const MyInfo = () => {
   const [open, setOpen] = React.useState<boolean>(false);
 
   const { userPk } = getUserInfo('userInfo');
-
-  React.useEffect(() => {
-    dispatch(MyPageCreators.fetchGetMyInfo(userPk));
-  }, []);
 
   const deleteUserInfo = () => {
     delToken();

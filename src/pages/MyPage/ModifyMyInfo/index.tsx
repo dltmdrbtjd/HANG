@@ -52,49 +52,31 @@ const MyPageModify = () => {
 
   const updateProfile = () => {
     const updateInfo = {
+      ...userInfo,
       nickname,
       intro,
       region,
       city,
-      profileImg,
     };
 
-    if (profileImg && typeof profileImg === 'object') {
-      uploadProfileImage(profileImg).then((res) => {
-        const updateProfile = {
-          ...updateInfo,
-          profileImg: res,
-        };
+    uploadProfileImage(profileImg).then((res) => {
+      const updateProfile = {
+        ...updateInfo,
+        profileImg: res,
+      };
 
-        apis
-          .UpdateProfile(updateProfile)
-          .then(() => {
-            const newNickname = updateInfo.nickname;
-            const { nickname } = getUserInfo('userInfo');
+      apis
+        .UpdateProfile(updateProfile)
+        .then(() => {
+          const userInfo = getUserInfo('userInfo');
 
-            if (newNickname !== nickname)
-              setUserInfo('userInfo', { ...userInfo, nickname: newNickname });
-          })
-          .then(() => dispatch(UpdateProfile(updateProfile)))
-          .then(() => history.replace('/mypage'))
-          .catch((err) => console.log(err));
-      });
-
-      return;
-    }
-
-    apis
-      .UpdateProfile(updateInfo)
-      .then(() => {
-        const newNickname = updateInfo.nickname;
-        const { nickname } = getUserInfo('userInfo');
-
-        if (newNickname !== nickname)
-          setUserInfo('userInfo', { ...userInfo, nickname: newNickname });
-      })
-      .then(() => dispatch(UpdateProfile(updateInfo)))
-      .then(() => history.replace('/mypage'))
-      .catch((err) => console.log(err));
+          if (nickname !== userInfo.nickname)
+            setUserInfo('userInfo', { ...userInfo, nickname });
+        })
+        .then(() => dispatch(UpdateProfile(updateProfile)))
+        .then(() => history.replace('/mypage'))
+        .catch((err) => console.log(err));
+    });
   };
 
   const regionArr = { 서울: 0, 부산: 1, 제주: 2 };

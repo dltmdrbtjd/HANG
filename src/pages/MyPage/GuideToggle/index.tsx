@@ -1,26 +1,27 @@
 import React from 'react';
 // apis
 import apis from 'src/shared/api';
+// redux
+import { SetGuideToggle } from 'src/redux/modules/MyPageModule/mypage';
+import { useDispatch } from 'react-redux';
 // elements
 import { Button, Span, Strong } from '../../../elements';
 // style
 import { FloatButton, ToggleLabelStyle, ToggleNameStyle } from './style';
 
 interface Props {
-  active: boolean;
+  active: number;
 }
 
 const GuideToggle: React.FC<Props> = ({ active }): React.ReactElement => {
-  const [checked, setChecked] = React.useState(active);
+  const dispatch = useDispatch();
 
   const handleToggle = () => {
-    setChecked((state) => !state);
-    apis.GuideToggle().catch((err) => console.log(err));
+    apis
+      .GuideToggle()
+      .then(() => dispatch(SetGuideToggle(Number(!active))))
+      .catch((err) => console.log(err));
   };
-
-  React.useEffect(() => {
-    setChecked(active);
-  }, [active]);
 
   return (
     <Button
@@ -28,7 +29,7 @@ const GuideToggle: React.FC<Props> = ({ active }): React.ReactElement => {
       width="76px"
       radius="30px"
       shadow="inset 2px 2px 3px rgba(136, 82, 0, 0.25)"
-      bgColor={checked ? 'brandColor' : 'gray'}
+      bgColor={active ? 'brandColor' : 'gray'}
       _onClick={handleToggle}
       addstyle={FloatButton}
     >
@@ -38,15 +39,15 @@ const GuideToggle: React.FC<Props> = ({ active }): React.ReactElement => {
         radius="50%"
         bgColor="white"
         shadow="2px 0px 3px rgba(136, 82, 0, 0.25)"
-        addstyle={ToggleLabelStyle(checked)}
+        addstyle={ToggleLabelStyle(active)}
       />
       <Strong
         fw="semibold"
         fs="sm"
         color="white"
-        addstyle={ToggleNameStyle(checked)}
+        addstyle={ToggleNameStyle(active)}
       >
-        {checked ? 'ON' : 'OFF'}
+        {active ? 'ON' : 'OFF'}
       </Strong>
     </Button>
   );
