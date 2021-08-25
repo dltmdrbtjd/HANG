@@ -88,6 +88,8 @@ const Search = () => {
   function SearchHandler() {
     setCityName(city);
     setGuName(gu);
+    setPage(1);
+    dispatch(SearchCreators.fetchSearchSend(SendSearch));
     if (category === 1) {
       if (gu === '' && city !== '') {
         setSubText('전체 여행자목록');
@@ -103,8 +105,6 @@ const Search = () => {
     } else {
       setSubText('회원목록');
     }
-    dispatch(SearchCreators.fetchSearchSend(SendSearch));
-    setPage(1);
   }
 
   // 무한스크롤 함수
@@ -147,7 +147,7 @@ const Search = () => {
             onClick={AllCategory}
             fw="bold"
           >
-            전체
+            모두
           </CategoryBtn>
         </Grid>
         <Grid width="auto">
@@ -201,7 +201,7 @@ const Search = () => {
         : ''}
       {userlist.length < 1 ? (
         <>
-          <Image width="80%" src={NotFound} addstyle={NotFoundImage} />
+          <Image src={NotFound} addstyle={NotFoundImage} />
           <Text textAlign="center">검색된 회원이 없습니다.</Text>
         </>
       ) : null}
