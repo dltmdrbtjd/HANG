@@ -92,13 +92,13 @@ const Search = () => {
     dispatch(SearchCreators.fetchSearchSend(SendSearch));
     if (category === 1) {
       if (gu === '' && city !== '') {
-        setSubText('전체 여행자목록');
+        setSubText('여행자목록');
         return;
       }
       setSubText('여행자목록');
     } else if (category === 2) {
       if (gu === '' && city !== '') {
-        setSubText('전체 길잡이목록');
+        setSubText('길잡이목록');
         return;
       }
       setSubText('길잡이목록');
@@ -189,8 +189,8 @@ const Search = () => {
       </Button>
       {userlist.length > 0 ? (
         <Text margin="28px 0 12px 0">
-          <Strong>{cityName ? `${cityName}` : '전체'}</Strong>
-          <Strong> {guName ? `${guName}의 ` : ''}</Strong>
+          <Strong>{cityName ? `${cityName}` : ''}</Strong>
+          <Strong> {guName ? `${guName}` : '전체'}</Strong>
           <Strong fw="md"> {subText}입니다.</Strong>
         </Text>
       ) : null}
