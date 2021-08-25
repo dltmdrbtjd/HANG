@@ -116,12 +116,19 @@ const MyInfo = () => {
 
         <DropDown
           icon={<SettingsIcon />}
-          contents={['프로필 수정', '차단 목록', '로그아웃', '회원 탈퇴']}
+          contents={[
+            '프로필 수정',
+            '차단 목록',
+            '로그아웃',
+            '회원 탈퇴',
+            '튜토리얼 보기',
+          ]}
           methods={[
             () => history.push('/mypage/modify'),
             () => history.push('/mypage/block'),
             SignOut,
             () => setOpen(true),
+            () => history.push('/tutorial'),
           ]}
           top="130px"
         />
