@@ -1,3 +1,8 @@
+export interface DisabledDate {
+  startDate: string;
+  endDate: string;
+}
+
 export interface TripInfo {
   tripId: number;
   userPk?: number;

@@ -1,7 +1,15 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  createSlice,
+  PayloadAction,
+  createAsyncThunk,
+  createSelector,
+} from '@reduxjs/toolkit';
 // apis
 import apis from 'src/shared/api';
+// moment
+import moment from 'moment';
 // types
+import { RootState } from 'src/redux/configureStore';
 import {
   TripInfo,
   AgreeProm,
@@ -10,6 +18,7 @@ import {
   MyInfo,
   MyPromise,
   MyPageState,
+  DisabledDate,
 } from './type';
 
 export const initialState: MyPageState = {
@@ -178,6 +187,38 @@ const mypageSlice = createSlice({
     },
   },
 });
+
+export const getDisabledDates = createSelector(
+  (state: RootState) => state.mypage.tripList,
+  (state: RootState) => state.mypage.promise.confirmed,
+  (tripList, confirmed) => {
+    const format = 'YYYY-MM-DD';
+    const tripListDates = tripList.reduce(
+      (acc: DisabledDate[], cur: TripInfo) => {
+        acc.push({
+          startDate: moment.utc(cur.startDate).format(format),
+          endDate: moment.utc(cur.endDate).format(format),
+        });
+
+        return acc;
+      },
+      [],
+    );
+    const confirmedDates = confirmed.reduce(
+      (acc: DisabledDate[], cur: PromInfo) => {
+        acc.push({
+          startDate: moment.utc(cur.startDate).format(format),
+          endDate: moment.utc(cur.endDate).format(format),
+        });
+
+        return acc;
+      },
+      [],
+    );
+
+    return tripListDates.concat(confirmedDates);
+  },
+);
 
 const MyPageCreators = {
   fetchGetMyInfo,
