@@ -5,6 +5,7 @@ export interface Props {
   isFlex?: boolean;
   padding?: string;
   height?: string;
+  addstyle?: any;
 }
 
 const Container: React.FC<Props> = ({

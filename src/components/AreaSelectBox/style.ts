@@ -4,14 +4,17 @@ const CityTab = css`
   flex-direction: column;
 
   &::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-    border-radius: 6px;
+    width: 22px;
+    border-radius: 15px;
+    background-color: rgba(0,0,0,0)
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: ${({theme}) => theme.color.OpacityGray};
-    border-radius: 6px;
+    width:5px;
+    background-clip: padding-box;
+    border-radius: 9999px;
+    border: 5px rgba(0,0,0,0) solid;
   }
 
   .submenu {

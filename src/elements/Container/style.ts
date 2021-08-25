@@ -6,6 +6,7 @@ export interface Prop {
   isFlex?: boolean;
   padding?: string;
   height?: string;
+  addstyle?: any;
 }
 
 export const ColumnContainer = css`
@@ -20,6 +21,7 @@ const ContainerStyle = styled.div<Prop>`
   min-height: ${({ height }) => height || '100vh'};
   margin: 0 auto;
   ${({ padding }) => borderBox(padding)};
+  ${({addstyle}) => addstyle};
 
   ${({ isFlex }) => isFlex && ColumnContainer};
 
