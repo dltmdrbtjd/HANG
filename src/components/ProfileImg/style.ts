@@ -1,4 +1,5 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
+import { limitWidth } from 'src/styles/Mixin';
 
 const setProfileImageSize = (size: string) => {
   switch (size) {
@@ -36,4 +37,8 @@ const ImagePosition = css`
   object-fit: cover;
 `;
 
-export { setProfileImageSize, ImagePosition };
+const DetailImageWrapper = styled.div`
+  ${limitWidth('80%')};
+`;
+
+export { setProfileImageSize, ImagePosition, DetailImageWrapper };

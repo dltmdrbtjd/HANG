@@ -11,22 +11,23 @@ import { history } from './redux/configureStore';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Alert from './components/Alert';
-// login status
-import { isLogin } from './shared/token';
+// user info
 import { getUserInfo } from './shared/userInfo';
+import { signInStatus } from './globalState/signInStatus';
 
 const App = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const userInfo = getUserInfo('userInfo');
+  const { isLogIn } = React.useContext(signInStatus);
+  console.log(isLogIn);
 
   React.useEffect(() => {
-    if (isLogin()) {
-      const { userPk } = userInfo;
+    if (isLogIn) {
+      const { userPk } = getUserInfo('userInfo');
 
       dispatch(MyPageCreators.fetchGetMyInfo(userPk));
       dispatch(MyPageCreators.fetchGetMyPromise());
     }
-  }, [userInfo]);
+  }, [isLogIn]);
 
   return (
     <ConnectedRouter history={history}>

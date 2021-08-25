@@ -9,17 +9,17 @@ interface Prop {
 }
 
 const TextHidden = css<Prop>`
-  @media ${({ theme }) => theme.deviceSize.tablet} {
-    width: 80%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-  }
+  height: calc(100% - 230px);
 
   a {
     text-indent: -9999px;
     overflow: hidden;
-    display: block;
+    height: 100%;
     ${flexBox('center', 'center')};
+  }
+
+  img {
+    max-height: 540px;
   }
 `;
 

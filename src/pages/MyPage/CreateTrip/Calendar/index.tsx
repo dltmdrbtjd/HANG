@@ -2,7 +2,7 @@ import React from 'react';
 import { DateRange } from 'react-date-range';
 // redux
 import { useSelector } from 'react-redux';
-import { RootState } from 'src/redux/configureStore';
+import { getDisabledDates } from 'src/redux/modules/MyPageModule/mypage';
 // material
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // format
@@ -17,20 +17,10 @@ import CalendarSelectButtonStyle, { SetArrowAngle } from './style';
 import Arrow from '../../../../Images/arrow.svg';
 
 const Calendar = ({ setSelectDate }) => {
-  const tripList: any = useSelector<RootState>(
-    (state) => state.mypage.tripList,
-  );
   const today = new Date();
   const format = 'YYYY-MM-DD';
 
-  const disabledDates = tripList.reduce((acc, cur) => {
-    acc.push({
-      startDate: moment.utc(cur.startDate).format(format),
-      endDate: moment.utc(cur.endDate).format(format),
-    });
-
-    return acc;
-  }, []);
+  const disabledDates = useSelector(getDisabledDates);
 
   const [date, setDate] = React.useState([
     {

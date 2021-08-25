@@ -4,6 +4,9 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 // api
 import apis from 'src/shared/api';
+// redux
+import { useDispatch } from 'react-redux';
+import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // image upload
 import uploadProfileImage from 'src/util/imageUpload';
 // elements
@@ -26,6 +29,8 @@ interface userInfo {
 }
 
 const SignUp = () => {
+  const dispatch = useDispatch();
+
   const [page, setPage] = React.useState<number>(1);
 
   const [region, setRegion] = React.useState<string>('서울');
@@ -35,6 +40,17 @@ const SignUp = () => {
   const [profile, setProfile] = React.useState(null);
 
   const SignUpDB = (userInfo: userInfo) => {
+    if (!profile) {
+      dispatch(
+        activeAlert({
+          status: true,
+          errorMsg: '프로필 이미지를 등록해주세요.',
+        }),
+      );
+
+      return;
+    }
+
     uploadProfileImage(profile).then((res) => {
       const profileImg = res;
 

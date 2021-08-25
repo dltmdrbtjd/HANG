@@ -12,7 +12,9 @@ import { getToken, setToken } from 'src/shared/token';
 import { setUserInfo } from 'src/shared/userInfo';
 // history
 import TermsOfUse from 'src/components/TermsOfUse';
-import { history } from '../../redux/configureStore';
+import { history } from 'src/redux/configureStore';
+// context
+import { signInStatus } from 'src/globalState/signInStatus';
 // elements
 import {
   Logo,
@@ -32,12 +34,14 @@ interface SignInStatus {
 }
 
 const SignIn = (): React.ReactElement => {
-  const [signInStatus, setSignInStatus] = React.useState<SignInStatus>({
+  const [loginSuccess, setLoginSuccess] = React.useState<SignInStatus>({
     status: true,
     errorMsg: '',
   });
 
   const [terms, setTerms] = React.useState<boolean>(false);
+  const { signIn } = React.useContext(signInStatus);
+
   const tutorial: string = localStorage.getItem('tutorial');
 
   const TermsHandler = (url: string) => {
@@ -55,12 +59,13 @@ const SignIn = (): React.ReactElement => {
       .SignIn(userInfo)
       .then(({ data }) => setToken(data.accessToken))
       .then(() => setUserInfo('userInfo', jwtDecode(getToken())))
+      .then(() => signIn())
       .then(() => {
         if (tutorial) history.replace('/');
         else history.push('/mini_tutorial');
       })
       .catch(() => {
-        setSignInStatus({
+        setLoginSuccess({
           status: false,
           errorMsg: '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.',
         });
@@ -123,9 +128,9 @@ const SignIn = (): React.ReactElement => {
               ) : null}
             </Grid>
 
-            {!signInStatus.status ? (
+            {!loginSuccess.status ? (
               <Text fs="sm" color="danger" margin="12px 8px 0">
-                {signInStatus.errorMsg}
+                {loginSuccess.errorMsg}
               </Text>
             ) : null}
 

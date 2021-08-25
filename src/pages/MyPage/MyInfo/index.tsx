@@ -10,6 +10,8 @@ import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // socket
 import socket from 'src/util/socket';
+// sign out
+import { signInStatus } from 'src/globalState/signInStatus';
 // token
 import { delToken } from 'src/shared/token';
 import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
@@ -56,9 +58,10 @@ const MyInfo = () => {
 
   const { userPk } = getUserInfo('userInfo');
 
+  const { signOut } = React.useContext(signInStatus);
+
   const deleteUserInfo = () => {
-    delToken();
-    delUserInfo('userInfo');
+    signOut();
 
     socket.emit('logout', { uid: userPk });
     socket.disconnect();
