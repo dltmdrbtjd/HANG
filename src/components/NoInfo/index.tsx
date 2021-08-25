@@ -25,7 +25,12 @@ const NoInfo: React.FC<Props> = ({ list, contents, imageUrl, children }) => {
       left="0"
       margin="auto"
     >
-      <Image width="70%" src={imageUrl} alt="no info" />
+      <Image
+        width="70%"
+        src={imageUrl}
+        alt="no info"
+        addstyle={limitWidth('350px')}
+      />
       <Text textAlign="center" margin="20px 0 0">
         {contents}
       </Text>

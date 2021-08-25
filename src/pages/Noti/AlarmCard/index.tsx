@@ -1,6 +1,5 @@
 import React from 'react';
 // history
-import maxWidth from './style';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Grid, Text, Strong } from '../../../elements';
@@ -20,20 +19,20 @@ export interface Props {
 const AlarmCard = ({ userInfo }: Props) => {
   return (
     <Grid
-      padding="20px 0 20px 20px"
+      padding="20px 0"
       opacity={!userInfo.checked ? '' : '50%'}
       isFlex
       ver="center"
       border="1px solid #E7E7E7"
       borDirection="bottom"
-      addstyle={maxWidth}
+      cursor="pointer"
       _onClick={() => history.push('/mypage/promise')}
     >
       <ProfileImage imgUrl={userInfo.profileImg} />
 
       <Text width="auto" margin="0 0 0 15px" overflow="visible">
         <Strong fw="bold">{userInfo.nickname}</Strong>
-        <Strong fw="md">{userInfo.guide ? '이' : '의'}</Strong>
+        <Strong fw="md">{userInfo.guide ? '님이' : '님의'}</Strong>
         <GuideNameplate>{userInfo.guide ? '길잡이' : '길잡이'}</GuideNameplate>
         {userInfo.guide ? '를 해준대요 !' : '를 해줄래요 ?'}
       </Text>

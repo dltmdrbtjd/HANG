@@ -2,9 +2,11 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
 import { AlarmCreators } from 'src/redux/modules/AlarmModule/alarm';
-import { Grid, Button } from '../../elements';
-import maxWidth from './style';
+import { limitWidth } from 'src/styles/Mixin';
+import { Grid, Button, Container } from '../../elements';
 import AlaremCard from './AlarmCard';
+import NoInfo from '../../components/NoInfo';
+import favoritenotfound from '../../Images/notfound/favoritenotfound.png';
 
 const Noti = () => {
   const dispatch = useDispatch();
@@ -18,26 +20,32 @@ const Noti = () => {
     dispatch(AlarmCreators.fetchAlarmLoad());
   }, []);
   return (
-    <Grid margin="-24px 0 80px" padding="90px 0 70px 0" overflow="auto">
-      {list
-        ? list.map((item, idx) => {
-            return <AlaremCard userInfo={item} key={idx} />;
-          })
-        : ''}
-
-      <Grid
-        width="90%"
-        position="fixed"
-        bottom="110px"
-        left="50%"
-        translate="-50%, 0"
-        addstyle={maxWidth}
+    <Container padding="66px 0 80px 0">
+      <NoInfo
+        list={list}
+        contents="아무런 알림이 없어요"
+        imageUrl={favoritenotfound}
       >
-        <Button width="100%" fs="la" _onClick={AlarmDeleteBtn}>
-          전체삭제
-        </Button>
-      </Grid>
-    </Grid>
+        {list
+          ? list.map((item, idx) => {
+              return <AlaremCard userInfo={item} key={idx} />;
+            })
+          : ''}
+
+        <Grid
+          width="90%"
+          position="fixed"
+          bottom="110px"
+          left="50%"
+          translate="-50%, 0"
+          addstyle={limitWidth('600px')}
+        >
+          <Button width="100%" fs="la" _onClick={AlarmDeleteBtn}>
+            전체삭제
+          </Button>
+        </Grid>
+      </NoInfo>
+    </Container>
   );
 };
 
