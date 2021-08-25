@@ -1,5 +1,6 @@
 import React from 'react';
 // history
+import TermsOfUse from 'src/components/TermsOfUse';
 import { history } from '../../../redux/configureStore';
 // elements
 import {
@@ -18,6 +19,8 @@ import { CalcHeight, LimitImageSize } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
 
 const Page3 = () => {
+  const [terms, setTerms] = React.useState<boolean>(false);
+
   return (
     <Grid position="relative" addstyle={CalcHeight}>
       <Container padding="0" height="100%">
@@ -55,7 +58,7 @@ const Page3 = () => {
         <Button
           fs="la"
           width="100%"
-          _onClick={() => history.push('/signup')}
+          _onClick={() => setTerms(true)}
           margin="0 0 8px"
         >
           회원가입
@@ -71,6 +74,7 @@ const Page3 = () => {
         >
           로그인
         </Button>
+        {terms && <TermsOfUse setTerms={setTerms} />}
       </Container>
     </Grid>
   );
