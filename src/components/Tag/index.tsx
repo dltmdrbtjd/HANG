@@ -15,8 +15,9 @@ const Tag = ({ list, padding, fs, bgColor, ...props }: TagType) => {
   return (
     <>
       {list.length
-        ? list.map((content: string) => (
+        ? list.map((content: string, idx: number) => (
             <Span
+              key={(idx * Date.now() + Math.random()).toString(36)}
               border="0.5px solid #E7E7E7"
               bgColor={bgColor}
               color="darkGray"
