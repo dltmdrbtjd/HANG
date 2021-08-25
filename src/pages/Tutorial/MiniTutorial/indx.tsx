@@ -4,33 +4,24 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { history } from 'src/redux/configureStore';
 import SwiperCore, { Pagination } from 'swiper';
 import 'swiper/components/pagination/pagination.scss';
-import { ButtonStyle, ImageStyle, boxWidth } from './style';
+import { ButtonStyle, ImageStyle, boxWidth } from '../style';
 import 'swiper/swiper.scss';
-import './swiper.scss';
+import '../swiper.scss';
 
-import tutorial1 from '../../Images/Tutorials/tutorial1.png';
-import tutorial2 from '../../Images/Tutorials/tutorial2.png';
-import tutorial3 from '../../Images/Tutorials/tutorial3.png';
-import tutorial4 from '../../Images/Tutorials/tutorial4.png';
-import tutorial5 from '../../Images/Tutorials/tutorial5.png';
-import tutorial6 from '../../Images/Tutorials/tutorial6.png';
-import tutorial7 from '../../Images/Tutorials/tutorial7.png';
-import tutorial8 from '../../Images/Tutorials/tutorial8.png';
+import tutorial1 from '../../../Images/Tutorials/tutorial1.png';
+import tutorial2 from '../../../Images/Tutorials/tutorial2.png';
+import tutorial9 from '../../../Images/Tutorials/tutorial9.png';
 
-const Tutorial = () => {
+const Minitutorial = () => {
   const [page, setPageNum] = React.useState<number>(0);
   SwiperCore.use([Pagination]);
 
-  const ImageArr = [
-    tutorial1,
-    tutorial2,
-    tutorial3,
-    tutorial4,
-    tutorial5,
-    tutorial6,
-    tutorial7,
-    tutorial8,
-  ];
+  const ImageArr = [tutorial1, tutorial9, tutorial2];
+
+  const SkipBtn = () => {
+    localStorage.setItem('tutorial', 'true');
+    history.push('/');
+  };
 
   React.useEffect(() => {
     setPageNum(0);
@@ -68,16 +59,16 @@ const Tutorial = () => {
       </Swiper>
       {page === 0 ? null : (
         <Button
-          _onClick={() => history.goBack()}
+          _onClick={SkipBtn}
           width="85%"
           height="54px"
           addstyle={ButtonStyle}
         >
-          돌아가기
+          홈으로 이동
         </Button>
       )}
     </Grid>
   );
 };
 
-export default Tutorial;
+export default Minitutorial;
