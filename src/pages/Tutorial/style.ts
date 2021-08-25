@@ -14,4 +14,8 @@ const ImageStyle = css`
   margin: 0 auto;
 `;
 
-export { ButtonStyle, ImageStyle };
+const boxWidth = css`
+  max-width: 768px;
+`;
+
+export { ButtonStyle, ImageStyle, boxWidth };
