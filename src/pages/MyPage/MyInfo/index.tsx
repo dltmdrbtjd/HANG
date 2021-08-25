@@ -189,17 +189,17 @@ const MyInfo = () => {
               }}
             />
           ))}
-
-          <Modal
-            open={open}
-            close={() => setOpen(false)}
-            mainText="회원 탈퇴"
-            subText2="탈퇴 하시겠습니까?"
-            agreeText="확인"
-            agree={WithDrawalUser}
-          />
         </Grid>
       </NoPosts>
+
+      <Modal
+        open={open}
+        close={() => setOpen(false)}
+        mainText="회원 탈퇴"
+        subText2="탈퇴 하시겠습니까?"
+        agreeText="확인"
+        agree={WithDrawalUser}
+      />
 
       {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
     </Container>
