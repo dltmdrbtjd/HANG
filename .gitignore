@@ -21,7 +21,7 @@
 *.pem
 
 # assetlinks
-/public/.well-known
+/public/.well_known
 /public/robots.txt
 /public/sitemap.xml
 
