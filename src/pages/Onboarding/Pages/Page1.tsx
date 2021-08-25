@@ -17,7 +17,7 @@ import { limitWidth } from '../../../styles/Mixin';
 
 const Page1 = () => {
   return (
-    <Grid position="relative" addstyle={CalcHeight}>
+    <Grid addstyle={CalcHeight}>
       <Container padding="0" height="100%">
         <MainTitle
           fs="xxl"

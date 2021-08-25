@@ -1,4 +1,6 @@
 import { css } from 'styled-components';
+// mixin
+import { flexBox } from 'src/styles/Mixin';
 
 interface Prop {
   theme: {
@@ -17,11 +19,9 @@ const CalcHeight = css`
   a {
     text-indent: -9999px;
     overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: grab;
     height: 100%;
+    cursor: grab;
+    ${flexBox('center', 'center')};
   }
 `;
 
