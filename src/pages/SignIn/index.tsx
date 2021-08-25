@@ -57,7 +57,7 @@ const SignIn = (): React.ReactElement => {
       .then(() => setUserInfo('userInfo', jwtDecode(getToken())))
       .then(() => {
         if (tutorial) history.replace('/');
-        else history.push('/tutorial');
+        else history.push('/mini_tutorial');
       })
       .catch(() => {
         setSignInStatus({

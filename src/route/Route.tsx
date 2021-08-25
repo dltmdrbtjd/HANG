@@ -3,6 +3,7 @@ import React from 'react';
 import { history } from 'src/redux/configureStore';
 import { Switch } from 'react-router-dom';
 import Tutorial from 'src/pages/Tutorial';
+import Minitutorial from 'src/pages/Tutorial/MiniTutorial/indx';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
 // components
@@ -77,6 +78,11 @@ const Route = () => {
           <PrivateRoute path={pathURI.block} component={Block} exact />
           <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
+          <PrivateRoute
+            path={pathURI.minitutorial}
+            component={Minitutorial}
+            exact
+          />
           <PrivateRoute path={pathURI.tutorial} component={Tutorial} exact />
           <PublicRoute component={NotFound} />
         </Switch>

@@ -16,6 +16,7 @@ const pathURI = {
   chat: '/chat',
   chatRoom: '/chat/room',
   tutorial: '/tutorial',
+  minitutorial: '/mini_tutorial',
 };
 
 const HeaderIncluded: string[] = [

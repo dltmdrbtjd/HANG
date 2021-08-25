@@ -30,7 +30,7 @@ const ToastMessageStyle = styled.div<Prop>`
   background-color: ${({ theme }) => theme.color.skyblue};
   position: fixed;
   z-index: 10;
-  bottom: 120px;
+  bottom: 160px;
   left: 50%;
   transform: translateX(-50%);
   animation: ${toast} 2s;
