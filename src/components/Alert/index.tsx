@@ -47,7 +47,7 @@ const Alert = (): React.ReactElement => {
                 <CancelIcon style={{ fontSize: '40px' }} />
               </Grid>
 
-              <SubTitle fw="semiBold" color="danger" margin="7px 0 10px">
+              <SubTitle fw="semiBold" color="danger" margin="0px 0 10px">
                 이런!
               </SubTitle>
 
@@ -57,7 +57,7 @@ const Alert = (): React.ReactElement => {
             </Grid>
 
             <Button
-              color="black"
+              color="darkGray"
               bgColor="lightGray"
               radius="none"
               width="100%"
