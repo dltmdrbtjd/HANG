@@ -11,8 +11,9 @@ import {
 // images
 import OnboardingImg2 from '../../../Images/onboarding2.svg';
 // style
-import { CalcHeight, LimitImageSize } from '../style';
+import { CalcHeight } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
+import { limitWidth } from '../../../styles/Mixin';
 
 const Page2 = () => {
   return (
@@ -47,7 +48,7 @@ const Page2 = () => {
             <Image
               width="auto"
               height="100%"
-              addstyle={LimitImageSize}
+              addstyle={limitWidth('100%')}
               src={OnboardingImg2}
             />
           </a>

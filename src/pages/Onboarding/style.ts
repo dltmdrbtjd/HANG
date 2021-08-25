@@ -25,10 +25,6 @@ const CalcHeight = css`
   }
 `;
 
-const LimitImageSize = css`
-  max-width: 100%;
-`;
-
 const PageMoveArrowStyle = css<Prop>`
   display: none;
 
@@ -37,4 +33,4 @@ const PageMoveArrowStyle = css<Prop>`
   }
 `;
 
-export { Transition, CalcHeight, LimitImageSize, PageMoveArrowStyle };
+export { Transition, CalcHeight, PageMoveArrowStyle };

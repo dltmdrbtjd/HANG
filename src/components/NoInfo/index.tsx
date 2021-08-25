@@ -1,21 +1,36 @@
 import React from 'react';
+import { limitWidth } from 'src/styles/Mixin';
 // elements
-import { Text } from '../../elements';
+import { Text, Image, Grid } from '../../elements';
 
 export interface Props {
   list: any[];
   contents: string;
-  children: React.ReactElement | React.ReactElement[];
+  imageUrl: string;
 }
 
-const NoInfo = ({ list, contents, children }: Props) => {
+const NoInfo: React.FC<Props> = ({ list, contents, imageUrl, children }) => {
   if (list.length) return <>{children}</>;
 
-  return <Text fs="la">{contents}</Text>;
-};
-
-NoInfo.defaultProps = {
-  contents: '아무런 정보가 없네요',
+  return (
+    <Grid
+      isFlex
+      column
+      hoz="center"
+      ver="center"
+      position="absolute"
+      top="0"
+      right="0"
+      bottom="0"
+      left="0"
+      margin="auto"
+    >
+      <Image width="70%" src={imageUrl} alt="no info" />
+      <Text textAlign="center" margin="20px 0 0">
+        {contents}
+      </Text>
+    </Grid>
+  );
 };
 
 export default NoInfo;

@@ -62,8 +62,10 @@ const outlineBox = (border: string, direction: string) => {
   }
 };
 
-const limitWidth = css`
-  flex: 1;
-`;
+const limitWidth = (width: string) => {
+  return css`
+    max-width: ${width};
+  `;
+};
 
 export { flexBox, floatBox, borderBox, outlineBox, limitWidth };

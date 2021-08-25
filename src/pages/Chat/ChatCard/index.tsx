@@ -8,7 +8,7 @@ import { Grid, Strong, Text, Span } from '../../../elements';
 // components
 import ProfileImg from '../../../components/ProfileImg';
 // reducer
-import { LimitWidth, BackgroundOpacity } from './style';
+import BackgroundOpacity from './style';
 import { textOverflow } from '../../../styles/Mixin';
 
 const ChatCard = ({
@@ -43,16 +43,18 @@ const ChatCard = ({
           <Grid isFlex width="80%">
             <ProfileImg imgUrl={profileImg} />
 
-            <Grid margin="0 0 0 24px" addstyle={LimitWidth}>
+            <Grid
+              width="calc(100% - 84px)"
+              margin="0 0 0 24px"
+              addstyle={textOverflow()}
+            >
               <Strong fw="bold" fs="la">
                 {nickname}
               </Strong>
 
-              {message ? (
-                <Text margin="6px 0 0" addstyle={textOverflow()}>
-                  {message}
-                </Text>
-              ) : null}
+              <Text margin="6px 0 0" addstyle={textOverflow()}>
+                {message}
+              </Text>
             </Grid>
           </Grid>
 
