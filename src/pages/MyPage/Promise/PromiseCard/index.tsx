@@ -27,7 +27,7 @@ import Modal from '../../../../components/Modal';
 import GuideNameplate from '../../../../components/GuideNameplate';
 // style
 import SubTitleTextHidden from '../../MyInfo/style';
-import { textOverflow, limitWidth } from '../../../../styles/Mixin';
+import { textOverflow } from '../../../../styles/Mixin';
 import { TextVerticalAlignCenter } from '../style';
 
 export interface Props {
@@ -147,11 +147,7 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
       >
         <ProfileImg size="large" imgUrl={promInfo.profileImg} />
 
-        <Grid
-          width="calc(100% - 114px)"
-          margin="0 0 0 14px"
-          addstyle={limitWidth}
-        >
+        <Grid width="calc(100% - 114px)" margin="0 0 0 14px">
           <Text
             margin="0 0 15px"
             wb="keep-all"

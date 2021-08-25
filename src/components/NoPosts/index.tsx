@@ -1,6 +1,4 @@
 import React from 'react';
-// style
-import { limitWidth } from 'src/styles/Mixin';
 // history
 import { history } from '../../redux/configureStore';
 // elements
@@ -43,7 +41,7 @@ const NoPosts = ({ list, title, coment, link, margin, children }: Props) => {
         <Image src={cloudIcon} alt="cloud" />
       </Button>
 
-      <Grid addstyle={limitWidth}>
+      <Grid width="calc(100% - 62px)">
         <MainTitle fs="lg" color="black" margin="0 0 6px">
           {title}
         </MainTitle>

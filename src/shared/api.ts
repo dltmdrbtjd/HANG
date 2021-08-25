@@ -54,7 +54,7 @@ instance.interceptors.response.use(
       window.alert('토근이 만료되었습니다. 다시 로그인해주세요.');
       delToken();
       delUserInfo('userInfo');
-      history.push('/signIn');
+      history.push('/signin');
     }
     return Promise.reject(error);
   },

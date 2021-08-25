@@ -4,7 +4,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { history } from 'src/redux/configureStore';
 import SwiperCore, { Pagination } from 'swiper';
 import 'swiper/components/pagination/pagination.scss';
-import { ButtonStyle, ImageStyle, boxWidth } from './style';
+import { limitWidth } from 'src/styles/Mixin';
+import { ButtonStyle, ImageStyle } from './style';
 import 'swiper/swiper.scss';
 import './swiper.scss';
 
@@ -46,7 +47,7 @@ const Tutorial = () => {
       position="relative"
       height="100vh"
       bgColor="darkGray"
-      addstyle={boxWidth}
+      addstyle={limitWidth('768px')}
       margin="0 auto"
       overflow="hidden"
     >

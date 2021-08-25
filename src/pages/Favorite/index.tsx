@@ -12,7 +12,7 @@ import { history, useTypedSelector } from '../../redux/configureStore';
 import { Container, Grid, Text } from '../../elements';
 import ProfileImg from '../../components/ProfileImg';
 // style
-import { limitWidth, textOverflow } from '../../styles/Mixin';
+import { textOverflow } from '../../styles/Mixin';
 
 const Favorite = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,6 @@ const Favorite = () => {
                   _onClick={() => {
                     history.push(`/detail?user=${item.userPk}`);
                   }}
-                  addstyle={limitWidth}
                 >
                   <Text fs="la" fw="bold">
                     {item.nickname}

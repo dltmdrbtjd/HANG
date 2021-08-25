@@ -9,13 +9,9 @@ const ButtonStyle = css`
   z-index: 10;
 `;
 
-const boxWidth = css`
-  max-width: 768px;
-`;
-
 const ImageStyle = css`
   max-width: 600px;
   margin: 0 auto;
 `;
 
-export {ButtonStyle, ImageStyle, boxWidth};
+export { ButtonStyle, ImageStyle };

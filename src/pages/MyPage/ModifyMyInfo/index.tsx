@@ -45,6 +45,12 @@ const MyPageModify = () => {
     errorMsg: '',
   });
 
+  const isDisabled = !(
+    nickname &&
+    nickname.length <= 16 &&
+    intro.length <= 100
+  );
+
   const updateProfile = () => {
     const updateInfo = {
       nickname,
@@ -113,7 +119,8 @@ const MyPageModify = () => {
           setNickname(e.target.value)
         }
         nickErrorMsg={
-          nickname.length > 16 ? '닉네임은 16자까지 입력할 수 있습니다' : null
+          (nickname.length < 1 && '닉네임을 입력해주세요.') ||
+          (nickname.length > 16 && '닉네임은 16자까지 입력할 수 있습니다')
         }
         nickDupCheck={nickDupCheck}
         setNickDupCheck={setNickDupCheck}
@@ -133,11 +140,9 @@ const MyPageModify = () => {
       </Grid>
 
       <Grid margin="60px 0 0">
-        <Grid isFlex hoz="space-between" ver="center" margin="0 0 12px">
-          <SubTitle fs="la">자기 소개</SubTitle>
-
-          <Span fs="xs">{100 - intro.length}자 남음</Span>
-        </Grid>
+        <SubTitle fs="la" margin="0 0 12px">
+          자기 소개
+        </SubTitle>
 
         <TextArea
           value={intro}
@@ -145,13 +150,20 @@ const MyPageModify = () => {
             setIntro(e.target.value)
           }
         />
+
+        <Grid fs="xs" textAlign="right">
+          {intro.length} / 100자
+        </Grid>
       </Grid>
 
       <Button
         width="100%"
         fs="la"
         margin="20px 0 40px"
-        disabled={intro.length > 100}
+        disabled={
+          isDisabled ||
+          (userInfo.nickname !== nickname && nickDupCheck.status !== 1)
+        }
         _onClick={updateProfile}
       >
         수정하기

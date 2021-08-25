@@ -158,81 +158,83 @@ const ChatRoom = () => {
   const date = chatLogs[0] ? moment(chatLogs[0].curTime) : moment();
 
   return (
-    <div ref={messageRef}>
-      <Container>
-        <Grid margin="0 0 95px">
-          <RoomHeader
-            methods={[QuitRoom, () => setOpen(true)]}
-            targetUserInfo={targetUserInfo}
-          />
+    <>
+      <RoomHeader
+        methods={[QuitRoom, () => setOpen(true)]}
+        targetUserInfo={targetUserInfo}
+      />
 
-          <Text
-            fs="xs"
-            wb="keep-all"
-            color="darkG"
-            padding="10px 12px"
-            ls="-0.5px"
-            addstyle={WarningText}
-          >
-            매너있는 채팅 부탁드립니다.
-            <br />
-            약속을 일방적으로 파기하거나 지키지 않을 경우 제재 대상이 될 수
-            있습니다.
-          </Text>
-
-          <Text fs="xs" textAlign="center" margin="0 0 20px">
-            {`${date.format(DATEFORMAT)} ${weekdays[date.days()]}`}
-          </Text>
-
-          <ShowChatLog userPk={userPk} chatLogs={chatLogs} />
-
-          <Grid
-            position="fixed"
-            bottom="110px"
-            left="50%"
-            translate="-50%, 0"
-            width="90%"
-            radius="12px"
-            bgColor="white"
-            border="1px solid #E7E7E7"
-            isFlex
-            hoz="space-between"
-            ver="center"
-            addstyle={setMediaLimitBoxSize('768px')}
-          >
-            <Input
-              placeholder="채팅 내용 입력"
-              border="none"
-              value={message}
-              addstyle={ChatInputAreaSize}
-              _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setMessage(e.target.value)
-              }
-              _onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                e.key === 'Enter' ? sendMessage() : null
-              }
-            />
-
-            <Button
-              padding="6px 15px"
-              margin="0 9px 0 0"
-              _onClick={() => sendMessage()}
+      <div ref={messageRef}>
+        <Container>
+          <Grid margin="0 0 95px">
+            <Text
+              fs="xs"
+              wb="keep-all"
+              color="darkG"
+              padding="10px 12px"
+              ls="-0.5px"
+              addstyle={WarningText}
             >
-              전송
-            </Button>
-          </Grid>
-        </Grid>
+              매너있는 채팅 부탁드립니다.
+              <br />
+              약속을 일방적으로 파기하거나 지키지 않을 경우 제재 대상이 될 수
+              있습니다.
+            </Text>
 
-        <Modal
-          open={open}
-          close={() => setOpen(false)}
-          mainText="차단하기"
-          subText2={`${targetUserInfo.nickname} 님을 정말 차단시겠습니까?`}
-          agreeText="확인"
-          agree={BlockUser}
-        />
-      </Container>
-    </div>
+            <Text fs="xs" textAlign="center" margin="0 0 20px">
+              {`${date.format(DATEFORMAT)} ${weekdays[date.days()]}`}
+            </Text>
+
+            <ShowChatLog userPk={userPk} chatLogs={chatLogs} />
+
+            <Grid
+              position="fixed"
+              bottom="110px"
+              left="50%"
+              translate="-50%, 0"
+              width="90%"
+              radius="12px"
+              bgColor="white"
+              border="1px solid #E7E7E7"
+              isFlex
+              hoz="space-between"
+              ver="center"
+              addstyle={setMediaLimitBoxSize('768px')}
+            >
+              <Input
+                placeholder="채팅 내용 입력"
+                border="none"
+                value={message}
+                addstyle={ChatInputAreaSize}
+                _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setMessage(e.target.value)
+                }
+                _onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                  e.key === 'Enter' ? sendMessage() : null
+                }
+              />
+
+              <Button
+                padding="6px 15px"
+                margin="0 9px 0 0"
+                _onClick={() => sendMessage()}
+              >
+                전송
+              </Button>
+            </Grid>
+          </Grid>
+
+          <Modal
+            open={open}
+            close={() => setOpen(false)}
+            mainText="차단하기"
+            subText2={`${targetUserInfo.nickname} 님을 정말 차단시겠습니까?`}
+            agreeText="확인"
+            agree={BlockUser}
+          />
+        </Container>
+      </div>
+    </>
   );
 };
 

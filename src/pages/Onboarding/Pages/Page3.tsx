@@ -14,8 +14,9 @@ import {
 // images
 import OnboardingImg3 from '../../../Images/onboarding3.svg';
 // style
-import { CalcHeight, LimitImageSize } from '../style';
+import { CalcHeight } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
+import { limitWidth } from '../../../styles/Mixin';
 
 const Page3 = () => {
   return (
@@ -46,7 +47,7 @@ const Page3 = () => {
             <Image
               width="auto"
               height="100%"
-              addstyle={LimitImageSize}
+              addstyle={limitWidth('100%')}
               src={OnboardingImg3}
             />
           </a>

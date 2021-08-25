@@ -12,6 +12,8 @@ import PromiseCard from '../PromiseCard';
 import NoInfo from '../../../../components/NoInfo';
 // style
 import { setMediaCardLayout } from '../../../../styles/Media';
+// image
+import favoritenotfound from '../../../../Images/notfound/favoritenotfound.png';
 
 const MyPromiseDetail = ({ type }: { type: string }) => {
   const promise = useSelector<RootState>((state) => state.mypage.promise);
@@ -42,7 +44,11 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
           {pageBreak[type].title}
         </SubTitle>
 
-        <NoInfo list={promise[type]} contents={pageBreak[type].postComent}>
+        <NoInfo
+          list={promise[type]}
+          contents={pageBreak[type].postComent}
+          imageUrl={favoritenotfound}
+        >
           <Grid addstyle={setMediaCardLayout()}>
             {promise[type].map((promInfo: PromInfo, idx: number) => (
               <PromiseCard

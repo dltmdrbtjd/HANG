@@ -14,7 +14,7 @@ import { history, useTypedSelector } from '../../redux/configureStore';
 import { Grid, Text, MainTitle, Container } from '../../elements/index';
 import PromiseCard from './style';
 import ProfileImg from '../../components/ProfileImg';
-import { limitWidth, textOverflow } from '../../styles/Mixin';
+import { textOverflow } from '../../styles/Mixin';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ const Home = () => {
                 }}
               >
                 <ProfileImg imgUrl={list.promise.profileImg} />
-                <Grid margin="0 0 0 10px" addstyle={limitWidth}>
+                <Grid margin="0 0 0 10px" width="calc(100% - 70px)">
                   <Grid>
                     <Text fs="la" fw="bold" addstyle={textOverflow()}>
                       {list.promise.nickname} 님과의 약속

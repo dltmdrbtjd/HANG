@@ -114,7 +114,7 @@ const CreateTrip = () => {
         />
 
         <Grid fs="xs" textAlign="right">
-          {60 - tripInfo.length} / 60자
+          {tripInfo.length} / 60자
         </Grid>
       </Grid>
 
