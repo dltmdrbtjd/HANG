@@ -147,7 +147,7 @@ const Search = () => {
             onClick={AllCategory}
             fw="bold"
           >
-            전체
+            모두
           </CategoryBtn>
         </Grid>
         <Grid width="auto">
@@ -201,7 +201,7 @@ const Search = () => {
         : ''}
       {userlist.length < 1 ? (
         <>
-          <Image width="80%" src={NotFound} addstyle={NotFoundImage} />
+          <Image src={NotFound} addstyle={NotFoundImage} />
           <Text textAlign="center">검색된 회원이 없습니다.</Text>
         </>
       ) : null}

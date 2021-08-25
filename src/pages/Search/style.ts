@@ -19,6 +19,8 @@ interface Prop {
 }
 
 const NotFoundImage = css`
+  max-width: 350px;
+  width: 70%;
   margin: 36px auto 14px auto;
 `;
 
