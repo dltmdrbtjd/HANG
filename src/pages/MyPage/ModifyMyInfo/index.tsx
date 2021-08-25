@@ -19,7 +19,6 @@ import {
   Button,
   TextArea,
   Container,
-  Span,
 } from '../../../elements';
 // container
 import InputImage from '../../../components/SelectImage';
