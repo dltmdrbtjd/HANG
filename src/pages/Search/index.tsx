@@ -189,7 +189,7 @@ const Search = () => {
       <Button _onClick={SearchHandler} fw="bold" width="100%" height="54px">
         검색
       </Button>
-      {userlist.length > 0 ? (
+      {userlist && userlist.length > 0 ? (
         <Text margin="28px 0 12px 0">
           <Strong>{cityName ? `${cityName}` : ''}</Strong>
           <Strong> {guName ? `${guName}` : '전체'}</Strong>
@@ -201,7 +201,7 @@ const Search = () => {
             return <SearchCard userInfo={item} key={idx} idx={idx} />;
           })
         : ''}
-      {userlist.length < 1 ? (
+      {userlist && userlist.length < 1 ? (
         <>
           <Image
             src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/searchnofound.png"
