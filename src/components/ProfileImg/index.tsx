@@ -26,6 +26,7 @@ const ProfileImg = ({ size, imgUrl }: Props) => {
   const bucketURL = 'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com';
 
   const [detail, setDetail] = React.useState<boolean>(false);
+  const activeImgDetail = /detail|mypage/;
 
   return (
     <>
@@ -34,9 +35,9 @@ const ProfileImg = ({ size, imgUrl }: Props) => {
         radius="50%"
         addstyle={setProfileImageSize(size)}
         position="relative"
-        cursor={/detail/.test(path) ? 'pointer' : null}
+        cursor={activeImgDetail.test(path) ? 'pointer' : null}
         _onClick={
-          /detail/.test(path) && imgUrl && imgUrl !== 'null'
+          activeImgDetail.test(path) && imgUrl && imgUrl !== 'null'
             ? () => setDetail(true)
             : null
         }
