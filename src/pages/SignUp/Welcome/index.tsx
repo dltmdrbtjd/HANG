@@ -3,8 +3,6 @@ import React from 'react';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Grid, Button, Image, MainTitle } from '../../../elements';
-// images
-import WelcomeImg from '../../../Images/welcome.gif';
 // style
 import TextHidden from './style';
 import { limitWidth } from '../../../styles/Mixin';
@@ -29,7 +27,7 @@ const Welcome = (): React.ReactElement => {
             width="auto"
             height="100%"
             addstyle={limitWidth('140%')}
-            src={WelcomeImg}
+            src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/welcome.gif"
           />
         </a>
       </Grid>

@@ -12,8 +12,6 @@ import {
   Button,
   Container,
 } from '../../../elements';
-// images
-import OnboardingImg3 from '../../../Images/onboarding3.svg';
 // style
 import { CalcHeight } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
@@ -51,7 +49,7 @@ const Page3 = () => {
               width="auto"
               height="100%"
               addstyle={limitWidth('100%')}
-              src={OnboardingImg3}
+              src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/onboarding/onboarding3.png"
             />
           </a>
         </Grid>

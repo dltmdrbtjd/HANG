@@ -21,8 +21,6 @@ import {
   Input,
   Container,
 } from '../../elements/index';
-// image
-import LogoImg from '../../Images/Logo.png';
 
 interface SignInStatus {
   status: boolean;
@@ -69,7 +67,11 @@ const SignIn = (): React.ReactElement => {
   return (
     <Container padding="0">
       <Grid height="300px" position="relative">
-        <Logo width="169px" height="162px" imgUrl={LogoImg} />
+        <Logo
+          width="169px"
+          height="162px"
+          imgUrl="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Logo.png"
+        />
       </Grid>
 
       <Formik

@@ -13,7 +13,6 @@ import ToastMessage from '../../components/ToastMessage';
 // style
 import { Button, Grid, Text, Strong, Container, Image } from '../../elements';
 import { CategoryBtn, NotFoundImage } from './style';
-import NotFound from '../../Images/notfound/searchnofound.png';
 
 export interface SearchData {
   keyword?: string | string[];
@@ -200,7 +199,10 @@ const Search = () => {
         : ''}
       {userlist.length < 1 ? (
         <>
-          <Image src={NotFound} addstyle={NotFoundImage} />
+          <Image
+            src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/searchnofound.png"
+            addstyle={NotFoundImage}
+          />
           <Text textAlign="center">검색된 회원이 없습니다.</Text>
         </>
       ) : null}

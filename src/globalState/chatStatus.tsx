@@ -21,9 +21,9 @@ const ChatStatus = ({ children }) => {
   const userPkList: number[] = useSelector(getUserPkList);
 
   const [chatLog, setChatLog] = React.useState<NewMessage>({
-    userPk: 0,
-    message: '',
-    time: 0,
+    userPk: null,
+    message: null,
+    time: null,
   });
 
   const { isLogIn } = React.useContext(signInStatus);

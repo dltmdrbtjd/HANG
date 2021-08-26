@@ -11,7 +11,6 @@ import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Container, Grid, Text, Image } from '../../elements';
 import ProfileImg from '../../components/ProfileImg';
-import FavoriteNotFound from '../../Images/notfound/favoritenotfound.png';
 // style
 import { textOverflow } from '../../styles/Mixin';
 import NotFound from './style';
@@ -82,7 +81,10 @@ const Favorite = () => {
         : ''}
       {FavoriteList && FavoriteList.length < 1 ? (
         <Grid addstyle={NotFound}>
-          <Image width="100%" src={FavoriteNotFound} />
+          <Image
+            width="100%"
+            src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/favoritenotfound.png"
+          />
           <Text margin="12px 0 0 0" textAlign="center">
             관심목록에 추가된 사람이 없습니다.
           </Text>

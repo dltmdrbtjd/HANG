@@ -17,8 +17,6 @@ import { Grid, Text, Button, Container } from '../../../elements';
 import ProfileImg from '../../../components/ProfileImg';
 import ToastMessage from '../../../components/ToastMessage';
 import NoInfo from '../../../components/NoInfo';
-// image
-import blockednotfound from '../../../Images/notfound/blockednotfound.png';
 
 const Block = () => {
   const dispatch = useDispatch();
@@ -49,7 +47,7 @@ const Block = () => {
       <NoInfo
         list={blockList}
         contents="차단목록에 추가된 사람이 없습니다."
-        imageUrl={blockednotfound}
+        imageUrl="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/blockednotfound.png"
       >
         {blockList.map((block, idx) => {
           return (

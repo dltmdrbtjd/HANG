@@ -6,7 +6,7 @@ import { Text, Image, Grid } from '../../elements';
 export interface Props {
   list: any[];
   contents: string;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 const NoInfo: React.FC<Props> = ({ list, contents, imageUrl, children }) => {
@@ -36,6 +36,11 @@ const NoInfo: React.FC<Props> = ({ list, contents, imageUrl, children }) => {
       </Text>
     </Grid>
   );
+};
+
+NoInfo.defaultProps = {
+  imageUrl:
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/favoritenotfound.png',
 };
 
 export default NoInfo;
