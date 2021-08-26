@@ -29,7 +29,7 @@ const NoInfo: React.FC<Props> = ({
       ver="center"
       margin={margin}
       addstyle={
-        !staticBox ? floatBox('absolute', '0', '0', '0', '0', '0') : null
+        !staticBox ? floatBox('absolute', '0', '0', '0', '0', '-1') : null
       }
     >
       <Image
