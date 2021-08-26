@@ -9,28 +9,19 @@ import { ButtonStyle, ImageStyle } from './style';
 import 'swiper/swiper.scss';
 import './swiper.scss';
 
-import tutorial1 from '../../Images/Tutorials/tutorial1.png';
-import tutorial2 from '../../Images/Tutorials/tutorial2.png';
-import tutorial3 from '../../Images/Tutorials/tutorial3.png';
-import tutorial4 from '../../Images/Tutorials/tutorial4.png';
-import tutorial5 from '../../Images/Tutorials/tutorial5.png';
-import tutorial6 from '../../Images/Tutorials/tutorial6.png';
-import tutorial7 from '../../Images/Tutorials/tutorial7.png';
-import tutorial8 from '../../Images/Tutorials/tutorial8.png';
-
 const Tutorial = () => {
   const [page, setPageNum] = React.useState<number>(0);
   SwiperCore.use([Pagination]);
 
   const ImageArr = [
-    tutorial1,
-    tutorial2,
-    tutorial3,
-    tutorial4,
-    tutorial5,
-    tutorial6,
-    tutorial7,
-    tutorial8,
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial1.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial2.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial3.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial4.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial5.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial6.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial7.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial8.png',
   ];
 
   React.useEffect(() => {

@@ -12,8 +12,6 @@ import { Container } from '../../elements';
 // components
 import ChatCard from './ChatCard';
 import NoInfo from '../../components/NoInfo';
-// image
-import chatnotfound from '../../Images/notfound/chatnotfound.png';
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -28,7 +26,7 @@ const Chat = () => {
       <NoInfo
         list={roomList}
         contents="현재 대화중인 사람이 없습니다."
-        imageUrl={chatnotfound}
+        imageUrl="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/chatnotfound.png"
       >
         {roomList.map((room: ReadChatInfo, idx: number) => {
           const lastChat: LastChat = room.lastChat[0];

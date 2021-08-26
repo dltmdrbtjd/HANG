@@ -11,8 +11,6 @@ import { Container, Logo, Grid, Button } from '../../elements';
 import NotiBadge from './NotiBadge';
 // style
 import HeaderStyle from './style';
-// images
-import LogoImg from '../../Images/Symbol.png';
 
 const Header = () => {
   const path: string = useLocation().pathname;
@@ -76,7 +74,11 @@ const Header = () => {
           ) : null}
 
           <Logo
-            imgUrl={isHome ? LogoImg : null}
+            imgUrl={
+              isHome
+                ? 'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Symbol.png'
+                : null
+            }
             height={isHome ? '36px' : null}
             width={isHome ? '36px' : null}
           >

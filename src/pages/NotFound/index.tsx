@@ -11,8 +11,7 @@ import {
   Grid,
   Container,
 } from '../../elements';
-// images
-import NotFoundImg from '../../Images/404_image.png';
+// style
 import { setMediaLimitBoxSize } from '../../styles/Media';
 
 const NotFound = () => {
@@ -29,7 +28,10 @@ const NotFound = () => {
       </Text>
 
       <Grid margin="0 auto 40px" addstyle={setMediaLimitBoxSize('680px')}>
-        <Image src={NotFoundImg} alt="404 Not Found" />
+        <Image
+          src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/404_image.png"
+          alt="404 Not Found"
+        />
       </Grid>
 
       <Button

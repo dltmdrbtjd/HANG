@@ -8,15 +8,15 @@ import { ButtonStyle, ImageStyle, boxWidth } from '../style';
 import 'swiper/swiper.scss';
 import '../swiper.scss';
 
-import tutorial1 from '../../../Images/Tutorials/tutorial1.png';
-import tutorial2 from '../../../Images/Tutorials/tutorial2.png';
-import tutorial9 from '../../../Images/Tutorials/tutorial9.png';
-
 const Minitutorial = () => {
   const [page, setPageNum] = React.useState<number>(0);
   SwiperCore.use([Pagination]);
 
-  const ImageArr = [tutorial1, tutorial9, tutorial2];
+  const ImageArr = [
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial1.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial9.png',
+    'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/Tutorials/tutorial2.png',
+  ];
 
   const SkipBtn = () => {
     localStorage.setItem('tutorial', 'true');
