@@ -18,7 +18,6 @@ import {
   MyInfo,
   MyPromise,
   MyPageState,
-  DisabledDate,
 } from './type';
 
 export const initialState: MyPageState = {
@@ -33,6 +32,7 @@ export const initialState: MyPageState = {
     region: '',
     userId: '',
     userPk: 0,
+    tags: '',
   },
   tripList: [],
   promise: {

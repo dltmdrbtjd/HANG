@@ -54,6 +54,7 @@ export interface MyInfo {
   region: string;
   userId: string;
   userPk: number;
+  tags: string;
 }
 
 export interface MyPromise {

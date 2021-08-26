@@ -35,6 +35,10 @@ import FlexWrapper from './style';
 const MyPageModify = () => {
   const dispatch = useDispatch();
   const userInfo: any = useTypedSelector((state) => state.mypage.myInfo);
+  const keywords =
+    userInfo.tags.length > 1
+      ? userInfo.tags.split(':').map((tag: string) => +tag)
+      : [NaN, NaN, NaN, NaN];
 
   const [region, setRegion] = React.useState<string>(userInfo.region);
   const [city, setCity] = React.useState<string>(userInfo.city);
@@ -42,8 +46,10 @@ const MyPageModify = () => {
     userInfo.profileImg,
   );
   const [nickname, setNickname] = React.useState<string>(userInfo.nickname);
-  const [tendency, setTendency] = React.useState<number[]>([NaN, NaN, NaN]);
-  const [MBTI, setMBTI] = React.useState<number>(NaN);
+  const [tendency, setTendency] = React.useState<number[]>(
+    keywords.slice(0, 3),
+  );
+  const [MBTI, setMBTI] = React.useState<number>(keywords[3]);
   const [intro, setIntro] = React.useState<string>(
     userInfo.intro && userInfo.intro === '0'
       ? `안녕하세요 ${nickname}입니다`
