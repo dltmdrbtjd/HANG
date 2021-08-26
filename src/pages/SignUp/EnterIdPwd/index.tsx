@@ -8,7 +8,7 @@ import { Grid, Button, Text, Label, MainTitle } from '../../../elements';
 // components
 import ValidateInput from '../ValidateInput';
 // style
-import { setMediaMargin } from '../../../styles/Media';
+import { setMediaMargin, setMediaFontSize } from '../../../styles/Media';
 import SignUpWrapperHeight from '../style';
 
 interface Props {
@@ -55,7 +55,13 @@ const EnterIdPwd: React.FC<Props> = ({
 
       <Grid>
         <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 36px')}>
-          <Label fs="lg" id="id" lh="2" fw="semiBold">
+          <Label
+            fs="lg"
+            id="id"
+            lh="2"
+            fw="semiBold"
+            addstyle={setMediaFontSize('sxl')}
+          >
             아이디
           </Label>
 
@@ -87,7 +93,13 @@ const EnterIdPwd: React.FC<Props> = ({
         </Grid>
 
         <Grid>
-          <Label fs="lg" id="password" lh="2" fw="semiBold">
+          <Label
+            fs="lg"
+            id="password"
+            lh="2"
+            fw="semiBold"
+            addstyle={setMediaFontSize('sxl')}
+          >
             비밀번호
           </Label>
 

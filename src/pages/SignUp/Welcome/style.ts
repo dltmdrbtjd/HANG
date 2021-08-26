@@ -17,10 +17,6 @@ const TextHidden = css<Prop>`
     height: 100%;
     ${flexBox('center', 'center')};
   }
-
-  img {
-    max-height: 540px;
-  }
 `;
 
 export default TextHidden;

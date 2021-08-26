@@ -200,30 +200,15 @@ export const getDisabledDates = createSelector(
   (state: RootState) => state.mypage.promise.confirmed,
   (tripList, confirmed) => {
     const format = 'YYYY-MM-DD';
-    const tripListDates = tripList.reduce(
-      (acc: DisabledDate[], cur: TripInfo) => {
-        acc.push({
-          startDate: moment.utc(cur.startDate).format(format),
-          endDate: moment.utc(cur.endDate).format(format),
-        });
+    const registeredTripEvent = tripList.concat(confirmed);
+    const disabledDates = registeredTripEvent.map((disabled) => {
+      return {
+        startDate: moment.utc(disabled.startDate).format(format),
+        endDate: moment.utc(disabled.endDate).format(format),
+      };
+    });
 
-        return acc;
-      },
-      [],
-    );
-    const confirmedDates = confirmed.reduce(
-      (acc: DisabledDate[], cur: PromInfo) => {
-        acc.push({
-          startDate: moment.utc(cur.startDate).format(format),
-          endDate: moment.utc(cur.endDate).format(format),
-        });
-
-        return acc;
-      },
-      [],
-    );
-
-    return tripListDates.concat(confirmedDates);
+    return disabledDates;
   },
 );
 

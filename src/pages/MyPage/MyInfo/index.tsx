@@ -5,7 +5,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 // apis
 import apis from 'src/shared/api';
 // redux
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, shallowEqual } from 'react-redux';
 import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // sign out
@@ -16,7 +16,7 @@ import { getUserInfo } from 'src/shared/userInfo';
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
 import socketIOClient from 'socket.io-client';
-import { history, RootState } from '../../../redux/configureStore';
+import { history, useTypedSelector } from '../../../redux/configureStore';
 // elements
 import {
   Grid,
@@ -45,7 +45,7 @@ const MyInfo = () => {
   const ENDPOINT = 'https://soujinko.shop';
   const socket = socketIOClient(ENDPOINT);
 
-  const { myInfo, tripList, message }: any = useSelector<RootState>(
+  const { myInfo, tripList, message }: any = useTypedSelector(
     (state) => ({
       myInfo: state.mypage.myInfo,
       tripList: state.mypage.tripList,

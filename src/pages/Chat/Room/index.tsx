@@ -6,7 +6,7 @@ import {
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
 // socket
-import socket from 'src/util/socket';
+import socketIOClient from 'socket.io-client';
 // apis
 import apis from 'src/shared/api';
 // moment
@@ -57,6 +57,9 @@ const ShowChatLog = React.memo<ShowChatLogType>(({ userPk, chatLogs }) => {
 });
 
 const ChatRoom = () => {
+  const ENDPOINT = 'https://soujinko.shop';
+  const socket = socketIOClient(ENDPOINT);
+
   const targetUserInfo = getUserInfo('targetUserInfo');
   const targetUserPk = targetUserInfo.targetPk;
 

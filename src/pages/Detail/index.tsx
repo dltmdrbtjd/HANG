@@ -5,9 +5,10 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
 import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 import apis from 'src/shared/api';
-import socket from 'src/util/socket';
 // user info
 import { setUserInfo } from 'src/shared/userInfo';
+// socket
+import socketIOClient from 'socket.io-client';
 // redux
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
@@ -31,6 +32,9 @@ import chat from '../../Images/NavigationIcons/onchat.svg';
 
 const Detail = () => {
   const dispatch = useDispatch();
+
+  const ENDPOINT = 'https://soujinko.shop';
+  const socket = socketIOClient(ENDPOINT);
 
   const { eventList, userInfo, message }: any = useTypedSelector(
     (state) => ({
