@@ -93,6 +93,7 @@ const ChatRoom = () => {
   const BlockUser = () => {
     apis
       .AddBlockList({ targetPk: targetUserPk })
+      .then(() => apis.LikeToggle({ targetPk: targetUserPk, block: 1 }))
       .then(() => QuitRoom())
       .catch((err) => console.log(err));
   };

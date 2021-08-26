@@ -37,6 +37,12 @@ export interface RejectProm {
   requestId: number;
 }
 
+export interface BlockedUser {
+  nickname: string;
+  profileImg: string;
+  userPk: number;
+}
+
 export interface MyInfo {
   age: string;
   city: string;
@@ -60,6 +66,9 @@ export interface MyPageState {
   myInfo: MyInfo;
   tripList: TripInfo[];
   promise: MyPromise;
-  blockList: any[];
+  blockedUser: {
+    blockedUsers: BlockedUser[];
+    blockedPk: string[];
+  };
   loading: boolean;
 }

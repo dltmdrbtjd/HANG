@@ -7,6 +7,7 @@ import {
   SignUpType,
   PauthType,
   DuplicateType,
+  FavoriteType,
   SignInType,
   SearchType,
   GuideRequestType,
@@ -94,7 +95,8 @@ const apis = {
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),
 
   // favorite
-  LikeToggle: (targetPk: number) => instance.post('/api/like', targetPk),
+  LikeToggle: (targetInfo: FavoriteType) =>
+    instance.post('/api/like', targetInfo),
   LikeLoad: () => instance.get('/api/like'),
 
   // myinfo

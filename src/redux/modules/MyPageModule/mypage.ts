@@ -40,7 +40,10 @@ export const initialState: MyPageState = {
     requested: [],
     confirmed: [],
   },
-  blockList: [],
+  blockedUser: {
+    blockedUsers: [],
+    blockedPk: [],
+  },
   loading: false,
 };
 
@@ -86,7 +89,11 @@ const fetchGetBlockList = createAsyncThunk(
   async (): Promise<any> => {
     try {
       const { data } = await apis.GetBlockList();
-      const payload = data ? data.blockedUsers : [];
+      const payload = {
+        blockedUsers: data ? data.blockedUsers : [],
+        blockedPk: data ? data.blockedPk : [],
+      };
+      console.log(data);
 
       return payload;
     } catch (err) {
@@ -135,7 +142,7 @@ const mypageSlice = createSlice({
     },
 
     DeleteBlockList: (state, action: PayloadAction<number>) => {
-      state.blockList = state.blockList.filter(
+      state.blockedUser.blockedUsers = state.blockedUser.blockedUsers.filter(
         (block) => block.userPk !== action.payload,
       );
     },
@@ -180,7 +187,7 @@ const mypageSlice = createSlice({
     },
     [fetchGetBlockList.fulfilled.type]: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.blockList = action.payload;
+      state.blockedUser = action.payload;
     },
     [fetchGetBlockList.rejected.type]: (state) => {
       state.loading = false;
