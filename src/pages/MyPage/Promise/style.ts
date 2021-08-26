@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 // mixin
 import { flexBox } from '../../../styles/Mixin';
-import SubTitleTextHidden from '../MyInfo/style';
 
 interface Prop {
   theme: {

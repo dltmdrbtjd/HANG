@@ -1,10 +1,6 @@
 import React from 'react';
-// redux
-import { useDispatch, useSelector } from 'react-redux';
 // global state
 import { signInStatus } from 'src/globalState/signInStatus';
-// type
-import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // material
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
@@ -18,24 +14,9 @@ import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
 import apis from '../../../shared/api';
-// reducer
-import {
-  ChatAlarmCheck,
-  ChatHistoryUpdate,
-  CreateChatRoom,
-  getUserPkList,
-} from '../../../redux/modules/ChatModule/chat';
 
 const NotiBadge = () => {
-  const dispatch = useDispatch();
-  const userPkList = useSelector(getUserPkList);
-
   const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
-  const [chatLog, setChatLog] = React.useState<NewMessage>({
-    userPk: 0,
-    message: '',
-    time: 0,
-  });
 
   const { isLogIn } = React.useContext(signInStatus);
 
@@ -60,37 +41,7 @@ const NotiBadge = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
-
-  React.useEffect(() => {
-    if (isLogIn) {
-      socket.on('unchecked', () => {
-        dispatch(ChatAlarmCheck(Number(true)));
-      });
-
-      socket.on('newMessage', (data: NewMessage) => {
-        setChatLog(data);
-
-        dispatch(ChatHistoryUpdate(data));
-      });
-    }
-  }, []);
-
-  React.useEffect(() => {
-    if (chatLog.userPk && !userPkList.includes(chatLog.userPk)) {
-      socket.emit('newRoom', { targetPk: chatLog.userPk });
-      socket.on('newRoom', (data) => {
-        dispatch(
-          CreateChatRoom({
-            lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
-            unchecked: 1,
-            targetPk: chatLog.userPk,
-            ...data,
-          }),
-        );
-      });
-    }
-  }, [chatLog]);
+  }, [isLogIn]);
 
   return (
     <Button form="text" arialabel="badge">

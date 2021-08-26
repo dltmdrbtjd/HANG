@@ -19,11 +19,18 @@ import {
   Button,
   TextArea,
   Container,
+  Text,
 } from '../../../elements';
-// container
+// components
 import InputImage from '../../../components/SelectImage';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 import NicknameDupCheck from '../../../pages/SignUp/FillOutProfile/NicknameDupCheck/indext';
+import Tag from '../../../components/Tag';
+import { tendencyKeyword, mbti } from '../../../components/Tag/tagList';
+// style
+import { limitWidth } from '../../../styles/Mixin';
+import { setMediaBoxSize, setMediaFontSize } from '../../../styles/Media';
+import FlexWrapper from './style';
 
 const MyPageModify = () => {
   const dispatch = useDispatch();
@@ -108,7 +115,7 @@ const MyPageModify = () => {
       />
 
       <Grid margin="60px 0 0">
-        <SubTitle fs="la" margin="0 0 12px">
+        <SubTitle fs="la" margin="0 0 12px" addstyle={setMediaFontSize('sxl')}>
           지역 선택
         </SubTitle>
 
@@ -121,26 +128,71 @@ const MyPageModify = () => {
       </Grid>
 
       <Grid margin="60px 0 0">
-        <SubTitle fs="la" margin="0 0 12px">
-          자기 소개
+        <SubTitle fs="la" margin="0 0 18px" addstyle={setMediaFontSize('sxl')}>
+          본인을 소개해 주세요
         </SubTitle>
 
-        <TextArea
-          value={intro}
-          _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setIntro(e.target.value)
-          }
-        />
+        <Grid margin="0 0 24px">
+          <Grid isFlex hoz="space-between" ver="center" margin="0 0 12px">
+            <SubTitle addstyle={setMediaFontSize('la')}>성향 키워드</SubTitle>
 
-        <Grid fs="xs" textAlign="right">
-          {intro.length} / 100자
+            <Text fs="xs" color="darkGray">
+              *3개까지 선택할 수 있어요
+            </Text>
+          </Grid>
+
+          <Grid addstyle={limitWidth('500px')}>
+            <Tag
+              fs="sm"
+              bgColor="white"
+              cursor="pointer"
+              tabFont="lg"
+              padding="7px 19px"
+              list={tendencyKeyword}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid margin="0 0 50px">
+          <SubTitle margin="0 0 12px" addstyle={setMediaFontSize('la')}>
+            MBTI
+          </SubTitle>
+
+          <Grid addstyle={FlexWrapper}>
+            <Tag
+              fs="sm"
+              bgColor="white"
+              cursor="pointer"
+              tabFont="lg"
+              padding="7px 19px"
+              list={mbti}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid>
+          <SubTitle margin="0 0 12px" addstyle={setMediaFontSize('la')}>
+            자기소개
+          </SubTitle>
+
+          <TextArea
+            value={intro}
+            _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setIntro(e.target.value)
+            }
+            addstyle={setMediaBoxSize(null, '170px')}
+          />
+
+          <Grid fs="xs" textAlign="right">
+            {intro.length} / 100자
+          </Grid>
         </Grid>
       </Grid>
 
       <Button
         width="100%"
         fs="la"
-        margin="20px 0 40px"
+        margin="24px 0 40px"
         disabled={
           isDisabled ||
           (userInfo.nickname !== nickname && nickDupCheck.status !== 1)

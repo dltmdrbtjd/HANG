@@ -1,20 +1,24 @@
 import React from 'react';
 // token
-import { getToken, delToken } from 'src/shared/token';
-import { delUserInfo } from 'src/shared/userInfo';
+import jwtDecode from 'jwt-decode';
+import { getToken, delToken, setToken } from 'src/shared/token';
+import { delUserInfo, setUserInfo } from 'src/shared/userInfo';
 
 export const signInStatus = React.createContext(null);
 
 const useProvideSignIn = () => {
   const [isLogIn, setIsLogIn] = React.useState<boolean>(!!getToken());
 
-  const signIn = () => {
+  const signIn = (token: string) => {
+    setToken(token);
+    setUserInfo('userInfo', jwtDecode(token));
     setIsLogIn(true);
   };
 
   const signOut = () => {
     delToken();
     delUserInfo('userInfo');
+    delUserInfo('targetUserInfo');
     setIsLogIn(false);
   };
 

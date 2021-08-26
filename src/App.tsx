@@ -14,11 +14,12 @@ import Alert from './components/Alert';
 // user info
 import { getUserInfo } from './shared/userInfo';
 import { signInStatus } from './globalState/signInStatus';
+// global state
+import ChatStatus from './globalState/chatStatus';
 
 const App = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { isLogIn } = React.useContext(signInStatus);
-  console.log(isLogIn);
 
   React.useEffect(() => {
     if (isLogIn) {
@@ -31,12 +32,14 @@ const App = (): React.ReactElement => {
 
   return (
     <ConnectedRouter history={history}>
-      <Header />
+      <ChatStatus>
+        <Header />
 
-      <Route />
-      <Navigation />
+        <Route />
+        <Navigation />
 
-      <Alert />
+        <Alert />
+      </ChatStatus>
     </ConnectedRouter>
   );
 };

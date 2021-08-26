@@ -1,25 +1,18 @@
 import React from 'react';
 // redux
-import { useDispatch } from 'react-redux';
-import NoInfo from 'src/components/NoInfo';
 import { useTypedSelector } from 'src/redux/configureStore';
-import { ChatCreators } from 'src/redux/modules/ChatModule/chat';
 // time
 import timeFormat from 'src/util/timeFormat';
 // elements
 import { Container } from '../../elements';
 // components
 import ChatCard from './ChatCard';
+import NoInfo from '../../components/NoInfo';
 // image
 import chatnotfound from '../../Images/notfound/chatnotfound.png';
 
 const Chat = () => {
-  const dispatch = useDispatch();
   const roomList: any = useTypedSelector((state) => state.chat.list);
-
-  React.useEffect(() => {
-    dispatch(ChatCreators.fetchGetChatRoomList());
-  }, []);
 
   return (
     <Container padding="66px 0 80px">

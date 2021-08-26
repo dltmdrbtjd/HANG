@@ -7,7 +7,6 @@ import {
 import { RootState } from 'src/redux/configureStore';
 // apis
 import apis from 'src/shared/api';
-import { getUserInfo } from 'src/shared/userInfo';
 // type
 import { ChatInfo, NewMessage, ChatState } from './type';
 
@@ -51,6 +50,17 @@ const chatSlice = createSlice({
       );
     },
 
+    ChatLogChecked: (state, action: PayloadAction<number>) => {
+      console.log(action.payload);
+      state.list = state.list.map((room) => {
+        if (room.targetPk === action.payload) {
+          return { ...room, unchecked: '0' };
+        }
+
+        return room;
+      });
+    },
+
     ChatHistoryUpdate: (state, action: PayloadAction<NewMessage>) => {
       const chatLog = action.payload;
       const roomIdx = state.list.findIndex(
@@ -85,6 +95,8 @@ const chatSlice = createSlice({
       state,
       action: PayloadAction<any[]>,
     ) => {
+      state.loading = false;
+
       state.list = action.payload.sort((a, b) => {
         if (!(a.lastChat[0] && b.lastChat[0])) return 1;
 
@@ -94,7 +106,7 @@ const chatSlice = createSlice({
         return bLastChat.curTime - aLastChat.curTime;
       });
 
-      state.alarmCount = state.list.reduce(
+      state.alarmCount = action.payload.reduce(
         (acc, cur) => acc + parseInt(cur.unchecked, 10),
         0,
       );
@@ -131,6 +143,7 @@ export const {
   ChatAlarmCheck,
   CreateChatRoom,
   DeleteChatRoom,
+  ChatLogChecked,
   ChatHistoryUpdate,
 } = actions;
 export default reducer;
