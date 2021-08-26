@@ -40,7 +40,6 @@ const Search = () => {
   const [traveler, setTraveler] = React.useState<boolean>(false);
   const [guide, setGuide] = React.useState<boolean>(false);
   const [subText, setSubText] = React.useState<string>('회원목록');
-
   // 도시,구 state
   const [city, setCity] = React.useState<string>('');
   const [gu, setGu] = React.useState<string>('');
@@ -68,8 +67,8 @@ const Search = () => {
 
   function AllCategory() {
     setCategory(0);
-    setTraveler(true);
-    setGuide(true);
+    setTraveler(false);
+    setGuide(false);
   }
 
   function Travelerhandler() {
