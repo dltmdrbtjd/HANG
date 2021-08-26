@@ -69,14 +69,18 @@ const Route = () => {
           <PrivateRoute path={pathURI.mypage} component={MyInfo} exact />
           <PrivateRoute path={pathURI.promise} component={MyPromise} exact />
           <PrivateRoute
-            path="/mypage/create_trip"
+            path={pathURI.createTrip}
             component={CreateTrip}
             exact
           />
           <PrivateRoute path={pathURI.chat} component={Chat} exact />
           <PrivateRoute path={pathURI.chatRoom} component={ChatRoom} exact />
           <PrivateRoute path={pathURI.block} component={Block} exact />
-          <PrivateRoute path="/mypage/modify" component={MyPageModify} exact />
+          <PrivateRoute
+            path={pathURI.modifyMyInfo}
+            component={MyPageModify}
+            exact
+          />
           <PrivateRoute path={pathURI.noti} component={Noti} exact />
           <PrivateRoute
             path={pathURI.minitutorial}

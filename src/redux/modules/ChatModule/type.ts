@@ -10,16 +10,24 @@ export interface LastChat {
   curTime: number;
 }
 
-export interface ChatInfo {
-  lastChat: string[] | LastChat[];
+export interface LoadChatInfo {
+  lastChat: string[];
   nickname: string;
   profileImg: string;
   targetPk: number;
   unchecked: string;
 }
 
+export interface ReadChatInfo {
+  lastChat: LastChat[];
+  nickname: string;
+  profileImg: string;
+  targetPk: number;
+  unchecked: number;
+}
+
 export interface ChatState {
   alarmCount: number;
-  list: ChatInfo[];
+  list: ReadChatInfo[];
   loading: boolean;
 }

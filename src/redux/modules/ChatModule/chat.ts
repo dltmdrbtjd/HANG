@@ -8,7 +8,7 @@ import { RootState } from 'src/redux/configureStore';
 // apis
 import apis from 'src/shared/api';
 // type
-import { ChatInfo, NewMessage, ChatState } from './type';
+import { LoadChatInfo, ReadChatInfo, NewMessage, ChatState } from './type';
 
 export const initialState: ChatState = {
   alarmCount: 0,
@@ -44,23 +44,6 @@ const chatSlice = createSlice({
       state.alarmCount += 1;
     },
 
-    DeleteChatRoom: (state, action: PayloadAction<number>) => {
-      state.list = state.list.filter(
-        (room) => room.targetPk !== action.payload,
-      );
-    },
-
-    ChatLogChecked: (state, action: PayloadAction<number>) => {
-      console.log(action.payload);
-      state.list = state.list.map((room) => {
-        if (room.targetPk === action.payload) {
-          return { ...room, unchecked: '0' };
-        }
-
-        return room;
-      });
-    },
-
     ChatHistoryUpdate: (state, action: PayloadAction<NewMessage>) => {
       const chatLog = action.payload;
       const roomIdx = state.list.findIndex(
@@ -71,7 +54,7 @@ const chatSlice = createSlice({
         const { unchecked } = state.list[roomIdx];
         const updateRoom = {
           ...state.list[roomIdx],
-          unchecked: String(parseInt(unchecked, 10) + 1),
+          unchecked: unchecked + 1,
           lastChat: [
             {
               message: chatLog.message,
@@ -93,21 +76,31 @@ const chatSlice = createSlice({
     },
     [fetchGetChatRoomList.fulfilled.type]: (
       state,
-      action: PayloadAction<any[]>,
+      action: PayloadAction<LoadChatInfo[]>,
     ) => {
       state.loading = false;
 
-      state.list = action.payload.sort((a, b) => {
+      const chatRoomList: ReadChatInfo[] = action.payload.map(
+        (chat): ReadChatInfo => {
+          return {
+            ...chat,
+            lastChat: [JSON.parse(chat.lastChat[0])],
+            unchecked: parseInt(chat.unchecked, 10),
+          };
+        },
+      );
+
+      state.list = chatRoomList.sort((a, b) => {
         if (!(a.lastChat[0] && b.lastChat[0])) return 1;
 
-        const aLastChat = JSON.parse(a.lastChat[0]);
-        const bLastChat = JSON.parse(b.lastChat[0]);
+        const aLastChat = a.lastChat[0];
+        const bLastChat = b.lastChat[0];
 
         return bLastChat.curTime - aLastChat.curTime;
       });
 
-      state.alarmCount = action.payload.reduce(
-        (acc, cur) => acc + parseInt(cur.unchecked, 10),
+      state.alarmCount = chatRoomList.reduce(
+        (acc, cur) => acc + cur.unchecked,
         0,
       );
     },
@@ -126,12 +119,12 @@ export const getUserPkList = createSelector(
 export const getUnchecked = (targetPk: number) =>
   createSelector(
     (state: RootState) => state.chat.list,
-    (chatInfoList: ChatInfo[]) => {
+    (chatInfoList: ReadChatInfo[]) => {
       const [userPkList] = chatInfoList.filter(
-        (chatInfo: ChatInfo) => chatInfo.targetPk === targetPk,
+        (chatInfo: ReadChatInfo) => chatInfo.targetPk === targetPk,
       );
 
-      return userPkList ? parseInt(userPkList.unchecked, 10) : null;
+      return userPkList ? userPkList.unchecked : null;
     },
   );
 
@@ -139,11 +132,5 @@ export const ChatCreators = {
   fetchGetChatRoomList,
 };
 const { reducer, actions } = chatSlice;
-export const {
-  ChatAlarmCheck,
-  CreateChatRoom,
-  DeleteChatRoom,
-  ChatLogChecked,
-  ChatHistoryUpdate,
-} = actions;
+export const { ChatAlarmCheck, CreateChatRoom, ChatHistoryUpdate } = actions;
 export default reducer;

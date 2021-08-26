@@ -24,7 +24,7 @@ const Block = () => {
   const dispatch = useDispatch();
   const { blockList, message } = useTypedSelector(
     (state) => ({
-      blockList: state.mypage.blockList,
+      blockList: state.mypage.blockedUser.blockedUsers,
       message: state.toastMessage.Message,
     }),
     shallowEqual,

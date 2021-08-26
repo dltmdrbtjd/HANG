@@ -64,8 +64,14 @@ const EventCard = ({
     >
       <Grid padding="20px">
         <Text color="darkGray">
-          {userInfo && moment.utc(userInfo.startDate).format('MM. DD')} -{' '}
-          {userInfo && moment.utc(userInfo.endDate).format('MM. DD')}
+          {userInfo &&
+            moment
+              .utc(userInfo.startDate)
+              .add(9, 'hours')
+              .format('MM. DD')}{' '}
+          -{' '}
+          {userInfo &&
+            moment.utc(userInfo.endDate).add(9, 'hours').format('MM. DD')}
         </Text>
         <MainTitle fs="la">
           {userInfo && userInfo.region} {userInfo && userInfo.city}

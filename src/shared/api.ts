@@ -7,6 +7,7 @@ import {
   SignUpType,
   PauthType,
   DuplicateType,
+  FavoriteType,
   SignInType,
   SearchType,
   GuideRequestType,
@@ -49,7 +50,7 @@ instance.interceptors.response.use(
       history.go(0);
     } else if (
       error.response.status === 401 &&
-      !['/signup', '/signIn', '/onboarding'].includes(path)
+      !['/signup', '/signin', '/onboarding'].includes(path)
     ) {
       window.alert('토근이 만료되었습니다. 다시 로그인해주세요.');
       delToken();
@@ -94,7 +95,8 @@ const apis = {
   DoGuide: (info: DoGuideType) => instance.post('/api/traveler', info),
 
   // favorite
-  LikeToggle: (targetPk: number) => instance.post('/api/like', targetPk),
+  LikeToggle: (targetInfo: FavoriteType) =>
+    instance.post('/api/like', targetInfo),
   LikeLoad: () => instance.get('/api/like'),
 
   // myinfo

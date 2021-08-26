@@ -10,6 +10,8 @@ const pathURI = {
   request: '/detail/request',
   favorite: '/favorite',
   mypage: '/mypage',
+  createTrip: '/mypage/create_trip',
+  modifyMyInfo: '/mypage/modify',
   promise: '/mypage/promise',
   block: '/mypage/block',
   noti: '/noti',
@@ -27,12 +29,12 @@ const HeaderIncluded: string[] = [
   '/favorite',
   '/mypage',
   '/mypage/block',
+  '/mypage/create_trip',
+  '/mypage/modify',
   '/mypage/promise',
   '/noti',
   '/chat',
   '/chat/room',
-  '/mypage/modify',
-  '/mypage/create_trip',
 ];
 
 export { pathURI, HeaderIncluded };

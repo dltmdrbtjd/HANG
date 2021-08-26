@@ -44,8 +44,15 @@ const GuideRequest = () => {
 
   const openModalHandler = () => {
     setModal(true);
-    setStartDate(moment.utc(myPromise[index].startDate).format('YYYY-MM-DD'));
-    setEndDate(moment.utc(myPromise[index].endDate).format('YYYY-MM-DD'));
+    setStartDate(
+      moment
+        .utc(myPromise[index].startDate)
+        .add(9, 'hours')
+        .format('YYYY-MM-DD'),
+    );
+    setEndDate(
+      moment.utc(myPromise[index].endDate).add(9, 'hours').format('YYYY-MM-DD'),
+    );
   };
 
   const agreeModalHandler = (userInfo) => {
@@ -113,8 +120,8 @@ const GuideRequest = () => {
               </Grid>
               <Label id={item.city}>
                 <Text fs="sm">
-                  {moment.utc(item.startDate).format('MM. DD')} -{' '}
-                  {moment.utc(item.endDate).format('MM. DD')}
+                  {moment.utc(item.startDate).add(9, 'hours').format('MM. DD')}{' '}
+                  - {moment.utc(item.endDate).add(9, 'hours').format('MM. DD')}
                 </Text>
                 <Text fs="la" fw="bold">
                   {item.region} {item.city}
