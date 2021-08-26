@@ -33,7 +33,7 @@ import ProfileCard from '../../../components/ProfileCard';
 import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
 import DropDown from '../../../components/DropDown';
-import NoPosts from '../../../components/NoPosts';
+import NoInfo from '../../../components/NoInfo';
 import ToastMessage from '../../../components/ToastMessage';
 import Modal from '../../../components/Modal';
 // style
@@ -158,11 +158,11 @@ const MyInfo = () => {
         </Button>
       </Grid>
 
-      <NoPosts
+      <NoInfo
         list={tripList}
-        title="여행 이벤트 등록하기"
-        coment="여행 이벤트를 등록해보세요"
-        link="/mypage/create_trip"
+        contents="등록된 여행 이벤트가 없습니다."
+        imageUrl="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/eventnotfound.png"
+        staticBox
         margin="60px 0"
       >
         <Grid margin="0 0 60px" addstyle={setMediaCardLayout()}>
@@ -185,7 +185,7 @@ const MyInfo = () => {
             />
           ))}
         </Grid>
-      </NoPosts>
+      </NoInfo>
 
       <Modal
         open={open}

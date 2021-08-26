@@ -22,7 +22,7 @@ import {
 } from '../../../elements';
 // component
 import PromiseCard from './PromiseCard';
-import NoPosts from '../../../components/NoPosts';
+import NoInfo from '../../../components/NoInfo';
 import MyPromiseDetail from './MyPromise';
 // style
 import { setTabletWrapper, setTabletPromiseCard } from './style';
@@ -69,12 +69,10 @@ const MyPromise = () => {
 
       {!openDetail.open ? (
         <Grid margin="0 0 60px">
-          <NoPosts
+          <NoInfo
             list={received.concat(requested).concat(confirmed)}
-            title="약속 잡으러 가기"
-            coment="다른 사람들과 여행 약속을 잡아보세요"
-            link="/"
-            margin="60px 0 0"
+            contents="아직 약속이 없어요"
+            imageUrl="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/eventnotfound.png"
           >
             {received.length ? (
               <Grid margin="60px 0 0">
@@ -199,7 +197,7 @@ const MyPromise = () => {
                 </Grid>
               </Grid>
             ) : null}
-          </NoPosts>
+          </NoInfo>
         </Grid>
       ) : (
         <MyPromiseDetail type={openDetail.type} />

@@ -42,7 +42,11 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
           {pageBreak[type].title}
         </SubTitle>
 
-        <NoInfo list={promise[type]} contents={pageBreak[type].postComent}>
+        <NoInfo
+          list={promise[type]}
+          contents={pageBreak[type].postComent}
+          imageUrl="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/eventnotfound.png"
+        >
           <Grid addstyle={setMediaCardLayout()}>
             {promise[type].map((promInfo: PromInfo, idx: number) => (
               <PromiseCard
