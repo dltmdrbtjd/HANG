@@ -11,6 +11,8 @@ import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
 import { textOverflow, textOverflowWrap } from '../../styles/Mixin';
 import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
+// tags
+import { tendencyKeyword, mbti } from '../Tag/tagList';
 
 export interface Props {
   userInfo?: any;
@@ -79,7 +81,7 @@ const ProfileCard = ({ userInfo }: Props) => {
       </Grid>
       <Hr width="100%" margin="13px 0" />
       <Grid>
-        {userInfo.intro && userInfo.intro !== 'none' ? (
+        {userInfo.intro && userInfo.intro !== '0' ? (
           <>
             <Text
               fs="sm"
