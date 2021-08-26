@@ -2,7 +2,6 @@ import React from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 import { MyPageCreators } from 'src/redux/modules/MyPageModule/mypage';
-import { ChatCreators } from 'src/redux/modules/ChatModule/chat';
 // route
 import { ConnectedRouter } from 'connected-react-router';
 import Route from './route/Route';
@@ -28,7 +27,6 @@ const App = (): React.ReactElement => {
 
       dispatch(MyPageCreators.fetchGetMyInfo(userPk));
       dispatch(MyPageCreators.fetchGetMyPromise());
-      dispatch(ChatCreators.fetchGetChatRoomList());
     }
   }, [isLogIn]);
 

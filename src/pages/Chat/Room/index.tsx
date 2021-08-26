@@ -2,9 +2,7 @@ import React from 'react';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  DeleteChatRoom,
   ChatAlarmCheck,
-  ChatLogChecked,
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
 // socket
@@ -18,13 +16,13 @@ import { history, useTypedSelector } from '../../../redux/configureStore';
 // user info
 import { delUserInfo, getUserInfo } from '../../../shared/userInfo';
 // elements
-import { Grid, Text, Input, Button, Container } from '../../../elements';
+import { Grid, Text, Button, Container } from '../../../elements';
 // components
 import SpeechBubble from './SpeechBubble';
 import RoomHeader from './RoomHeader';
 import Modal from '../../../components/Modal';
 // style
-import { WarningText, ChatInputAreaSize } from './style';
+import { WarningText, ChatInputArea } from './style';
 import { setMediaLimitBoxSize } from '../../../styles/Media';
 
 interface ChatLogType {
@@ -78,6 +76,7 @@ const ChatRoom = () => {
   const [open, setOpen] = React.useState<boolean>(false);
 
   const messageRef = React.useRef<HTMLDivElement>(null);
+  const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 
   const roomName =
     (userPk < targetUserPk && `${userPk}:${targetUserPk}`) ||
@@ -86,7 +85,6 @@ const ChatRoom = () => {
   const QuitRoom = () => {
     socket.emit('ByeBye', { roomName, userPk });
     // quit
-    dispatch(DeleteChatRoom(targetUserPk));
     delUserInfo('targetUserInfo');
 
     history.replace('/chat');
@@ -105,10 +103,26 @@ const ChatRoom = () => {
     }
   };
 
+  const handleResizeHeight = React.useCallback(() => {
+    if (textAreaRef.current && textAreaRef.current.scrollHeight < 150) {
+      textAreaRef.current.style.height = 'auto';
+      textAreaRef.current.style.height = `${
+        textAreaRef.current.scrollHeight - 24
+      }px`;
+    }
+  }, []);
+
+  const handleInitailzed = () => {
+    if (textAreaRef.current) textAreaRef.current.style.height = 'auto';
+  };
+
+  const marginBottom =
+    textAreaRef.current && parseInt(textAreaRef.current.style.height, 10)
+      ? parseInt(textAreaRef.current.style.height, 10) + 70
+      : 90;
+
   React.useEffect(() => {
     if (alarmCount > 0) dispatch(ChatAlarmCheck(alarmCount - unchecked));
-
-    dispatch(ChatLogChecked(targetUserPk));
 
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
@@ -125,7 +139,7 @@ const ChatRoom = () => {
 
   React.useEffect(() => {
     scrollToBottom();
-  }, [chatLogs]);
+  }, [chatLogs, marginBottom]);
 
   React.useEffect(() => {
     socket.on('updateMessage', (data) => {
@@ -145,6 +159,7 @@ const ChatRoom = () => {
       });
 
       setMessage('');
+      handleInitailzed();
     }
   };
 
@@ -169,7 +184,7 @@ const ChatRoom = () => {
 
       <div ref={messageRef}>
         <Container>
-          <Grid margin="0 0 95px">
+          <Grid margin={`0 0 ${marginBottom}px`}>
             <Text
               fs="xs"
               wb="keep-all"
@@ -201,25 +216,29 @@ const ChatRoom = () => {
               border="1px solid #E7E7E7"
               isFlex
               hoz="space-between"
-              ver="center"
+              ver="flex-end"
               addstyle={setMediaLimitBoxSize('768px')}
             >
-              <Input
+              <ChatInputArea
+                ref={textAreaRef}
+                rows={1}
                 placeholder="채팅 내용 입력"
-                border="none"
                 value={message}
-                addstyle={ChatInputAreaSize}
-                _onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setMessage(e.target.value)
-                }
-                _onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                  e.key === 'Enter' ? sendMessage() : null
-                }
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    if (!e.shiftKey) {
+                      e.preventDefault();
+                      sendMessage();
+                    }
+                  }
+                }}
+                onInput={handleResizeHeight}
               />
 
               <Button
                 padding="6px 15px"
-                margin="0 9px 0 0"
+                margin="0 9px 6px 0"
                 _onClick={() => sendMessage()}
               >
                 전송

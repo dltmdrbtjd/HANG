@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface Prop {
   theme: {
@@ -13,8 +13,24 @@ const WarningText = css<Prop>`
   border: 0.5px solid ${({ theme }) => theme.color.lightGray};
 `;
 
-const ChatInputAreaSize = css`
-  width: calc(100% - 75px);
+const ChatInputArea = styled.textarea`
+  width: calc(100% - 100px);
+  padding: 12px;
+  border: none;
+  resize: none;
+  background: none;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.color.gray};
+    border-radius: 15px;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
-export { WarningText, ChatInputAreaSize };
+export { WarningText, ChatInputArea };
