@@ -18,11 +18,8 @@ const SearchBar = ({ margin, ...props }) => {
   }, []);
 
   const KeyPressHandler = (e: any) => {
-    if (path.includes('/search')) {
-      return;
-    }
     if (e.key === 'Enter') {
-      history.push(`/search?keyword=${keyword}`);
+      props.EnterEvent();
     }
   };
 

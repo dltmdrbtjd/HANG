@@ -131,7 +131,11 @@ const Search = () => {
 
   return (
     <Container>
-      <SearchBar margin="0" setFindUser={setFindUser} />
+      <SearchBar
+        margin="0"
+        setFindUser={setFindUser}
+        EnterEvent={SearchHandler}
+      />
       <Grid width="100%" margin="16px 0" isFlex hoz="flex-start">
         <Grid width="auto">
           <CategoryBtn
