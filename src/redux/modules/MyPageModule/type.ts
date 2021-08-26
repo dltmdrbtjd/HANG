@@ -10,7 +10,7 @@ export interface TripInfo {
   city: string;
   startDate: string;
   endDate: string;
-  tripInfo: string;
+  tripInfo?: string;
   partner?: number;
 }
 

@@ -21,6 +21,7 @@ const Calendar = ({ setSelectDate }) => {
   const format = 'YYYY-MM-DD';
 
   const disabledDates = useSelector(getDisabledDates);
+  console.log(disabledDates);
 
   const [date, setDate] = React.useState([
     {
@@ -85,6 +86,7 @@ const Calendar = ({ setSelectDate }) => {
             }}
             moveRangeOnFirstSelection={false}
             minDate={new Date()}
+            maxDate={new Date(today.setFullYear(today.getFullYear() + 1))}
             ranges={date}
             rangeColors={['#D4F0FF']}
             direction="horizontal"
