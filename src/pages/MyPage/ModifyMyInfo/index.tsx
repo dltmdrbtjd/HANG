@@ -36,15 +36,20 @@ const MyPageModify = () => {
   const dispatch = useDispatch();
   const userInfo: any = useTypedSelector((state) => state.mypage.myInfo);
 
-  const [region, setRegion] = React.useState(userInfo.region);
-  const [city, setCity] = React.useState(userInfo.city);
-  const [profileImg, setProfileImg] = React.useState(userInfo.profileImg);
-  const [nickname, setNickname] = React.useState(userInfo.nickname);
-  const [intro, setIntro] = React.useState(
-    userInfo.intro && userInfo.intro === 'none'
+  const [region, setRegion] = React.useState<string>(userInfo.region);
+  const [city, setCity] = React.useState<string>(userInfo.city);
+  const [profileImg, setProfileImg] = React.useState<string>(
+    userInfo.profileImg,
+  );
+  const [nickname, setNickname] = React.useState<string>(userInfo.nickname);
+  const [tendency, setTendency] = React.useState<number[]>([NaN, NaN, NaN]);
+  const [MBTI, setMBTI] = React.useState<number>(NaN);
+  const [intro, setIntro] = React.useState<string>(
+    userInfo.intro && userInfo.intro === '0'
       ? `안녕하세요 ${nickname}입니다`
       : userInfo.intro,
   );
+  const tags = `${tendency.join(':')}:${MBTI}`;
 
   const [nickDupCheck, setNickDupCheck] = React.useState<Status>({
     status: 0,
@@ -62,6 +67,7 @@ const MyPageModify = () => {
       ...userInfo,
       nickname,
       intro,
+      tags,
       region,
       city,
     };
@@ -87,6 +93,37 @@ const MyPageModify = () => {
   };
 
   const regionArr = { 서울: 0, 부산: 1, 제주: 2 };
+
+  const selectTendencyTags = (tag: number) => {
+    if (tendency.includes(tag)) {
+      const disabled = tendency.map((active) => {
+        if (active === tag) return NaN;
+
+        return active;
+      });
+      setTendency(disabled);
+
+      return;
+    }
+
+    if (tendency.length >= 3) {
+      const newTendencyList = tendency.slice(1);
+      setTendency([...newTendencyList, tag]);
+
+      return;
+    }
+
+    setTendency([...tendency, tag]);
+  };
+
+  const selectMBTITags = (tag: number) => {
+    if (tag === MBTI) {
+      setMBTI(NaN);
+      return;
+    }
+
+    setMBTI(tag);
+  };
 
   React.useEffect(() => {
     setRegion(userInfo.region);
@@ -142,14 +179,21 @@ const MyPageModify = () => {
           </Grid>
 
           <Grid addstyle={limitWidth('500px')}>
-            <Tag
-              fs="sm"
-              bgColor="white"
-              cursor="pointer"
-              tabFont="lg"
-              padding="7px 19px"
-              list={tendencyKeyword}
-            />
+            {tendencyKeyword.map((content: string, idx: number) => (
+              <Tag
+                key={(idx * Date.now() + Math.random()).toString(36)}
+                fs="sm"
+                bgColor="white"
+                cursor="pointer"
+                tabFont="lg"
+                padding="7px 19px"
+                list={mbti}
+                active={tendency.includes(idx)}
+                _onClick={() => selectTendencyTags(idx)}
+              >
+                {content}
+              </Tag>
+            ))}
           </Grid>
         </Grid>
 
@@ -159,14 +203,21 @@ const MyPageModify = () => {
           </SubTitle>
 
           <Grid addstyle={FlexWrapper}>
-            <Tag
-              fs="sm"
-              bgColor="white"
-              cursor="pointer"
-              tabFont="lg"
-              padding="7px 19px"
-              list={mbti}
-            />
+            {mbti.map((content: string, idx: number) => (
+              <Tag
+                key={(idx * Date.now() + Math.random()).toString(36)}
+                fs="sm"
+                bgColor="white"
+                cursor="pointer"
+                tabFont="lg"
+                padding="7px 19px"
+                list={mbti}
+                active={MBTI === idx}
+                _onClick={() => selectMBTITags(idx)}
+              >
+                {content}
+              </Tag>
+            ))}
           </Grid>
         </Grid>
 
