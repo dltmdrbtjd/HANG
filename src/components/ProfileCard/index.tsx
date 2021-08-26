@@ -88,15 +88,17 @@ const ProfileCard = ({ userInfo }: Props) => {
             >
               {userInfo.intro}
             </Text>
-            <Text
-              cursor="pointer"
-              textAlign="center"
-              margin="10px 0 0 0"
-              color="gray"
-              _onClick={IntroHandler}
-            >
-              {!moreIntro ? '더 보기' : '닫기'}
-            </Text>
+            {userInfo.intro.split('\n').length > 3 ? (
+              <Text
+                cursor="pointer"
+                textAlign="center"
+                margin="10px 0 0 0"
+                color="gray"
+                _onClick={IntroHandler}
+              >
+                {!moreIntro ? '더 보기' : '닫기'}
+              </Text>
+            ) : null}
           </>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>
