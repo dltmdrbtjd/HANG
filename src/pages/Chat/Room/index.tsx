@@ -116,10 +116,9 @@ const ChatRoom = () => {
     if (textAreaRef.current) textAreaRef.current.style.height = 'auto';
   };
 
-  const marginBottom =
-    textAreaRef.current && parseInt(textAreaRef.current.style.height, 10)
-      ? parseInt(textAreaRef.current.style.height, 10) + 70
-      : 90;
+  const textAreaHeight =
+    textAreaRef.current && parseInt(textAreaRef.current.style.height, 10);
+  const marginBottom = textAreaHeight ? textAreaHeight + 70 : 90;
 
   React.useEffect(() => {
     if (alarmCount > 0) dispatch(ChatAlarmCheck(alarmCount - unchecked));
