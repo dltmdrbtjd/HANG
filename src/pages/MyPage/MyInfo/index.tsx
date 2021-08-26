@@ -8,16 +8,14 @@ import apis from 'src/shared/api';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
-// socket
-import socket from 'src/util/socket';
 // sign out
 import { signInStatus } from 'src/globalState/signInStatus';
 // token
-import { delToken } from 'src/shared/token';
-import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
+import { getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
+import socketIOClient from 'socket.io-client';
 import { history, RootState } from '../../../redux/configureStore';
 // elements
 import {
@@ -44,6 +42,8 @@ import { setMediaCardLayout } from '../../../styles/Media';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
+  const ENDPOINT = 'https://soujinko.shop';
+  const socket = socketIOClient(ENDPOINT);
 
   const { myInfo, tripList, message }: any = useSelector<RootState>(
     (state) => ({
@@ -61,10 +61,9 @@ const MyInfo = () => {
   const { signOut } = React.useContext(signInStatus);
 
   const deleteUserInfo = () => {
-    signOut();
-
     socket.emit('logout', { uid: userPk });
     socket.disconnect();
+    signOut();
   };
 
   const DeleteTrip = (tripId: DeleteTripEventType) => {
