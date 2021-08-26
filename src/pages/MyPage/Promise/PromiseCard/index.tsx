@@ -160,8 +160,8 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
           </Text>
 
           <Text color="darkGray">
-            {moment.utc(promInfo.startDate).format('MM.DD')} -{' '}
-            {moment.utc(promInfo.endDate).format('MM.DD')}
+            {moment.utc(promInfo.startDate).add(9, 'hours').format('MM.DD')} -{' '}
+            {moment.utc(promInfo.endDate).add(9, 'hours').format('MM.DD')}
           </Text>
 
           <Text fs="la" fw="bold" addstyle={textOverflow()}>

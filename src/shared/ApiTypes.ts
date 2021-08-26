@@ -31,6 +31,12 @@ export type SignInType = {
   password: string;
 };
 
+// detail module => api types
+export type FavoriteType = {
+  targetPk: number;
+  block?: number;
+};
+
 // search module => api types
 export type SearchType = {
   keyword?: string;

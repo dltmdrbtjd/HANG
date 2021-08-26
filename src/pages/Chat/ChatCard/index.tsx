@@ -13,9 +13,9 @@ import { textOverflow } from '../../../styles/Mixin';
 
 const ChatCard = ({
   targetUserPk,
-  profileImg,
-  nickname,
   message,
+  nickname,
+  profileImg,
   unchecked,
   time,
 }) => {
