@@ -43,6 +43,7 @@ const CreateTrip = () => {
     },
   ]);
   const [tripInfo, setTripInfo] = React.useState('');
+  const [tags, setTags] = React.useState<number[]>([]);
 
   const CreateTrip = () => {
     if (!tripInfo) {
@@ -56,12 +57,24 @@ const CreateTrip = () => {
       return;
     }
 
+    if (!tags[0]) {
+      dispatch(
+        activeAlert({
+          status: true,
+          errorMsg: '여행 태그를 하나 이상 선택해주세요',
+        }),
+      );
+
+      return;
+    }
+
     const trip = {
       region,
       city,
       startDate: moment(date[0].startDate).format('YYYY-MM-DD'),
       endDate: moment(date[0].endDate).format('YYYY-MM-DD'),
       tripInfo,
+      tags: tags.join(':'),
     };
 
     apis
@@ -82,6 +95,24 @@ const CreateTrip = () => {
           );
         }
       });
+  };
+
+  const selectTags = (tag: number) => {
+    if (tags.includes(tag)) {
+      const disabled = tags.filter((active) => active !== tag);
+      setTags(disabled);
+
+      return;
+    }
+
+    if (tags.length >= 3) {
+      const newTendencyList = tags.slice(1);
+      setTags([...newTendencyList, tag]);
+
+      return;
+    }
+
+    setTags([...tags, tag]);
   };
 
   React.useEffect(() => {
@@ -119,14 +150,21 @@ const CreateTrip = () => {
           </Grid>
 
           <Grid addstyle={limitWidth('500px')}>
-            <Tag
-              fs="sm"
-              bgColor="white"
-              cursor="pointer"
-              tabFont="lg"
-              padding="7px 19px"
-              list={tripKeyword}
-            />
+            {tripKeyword.map((content: string, idx: number) => (
+              <Tag
+                key={(idx * Date.now() + Math.random()).toString(36)}
+                fs="sm"
+                bgColor="white"
+                cursor="pointer"
+                tabFont="lg"
+                padding="7px 19px"
+                list={tripKeyword}
+                active={tags.includes(idx)}
+                _onClick={() => selectTags(idx)}
+              >
+                {content}
+              </Tag>
+            ))}
           </Grid>
         </Grid>
 

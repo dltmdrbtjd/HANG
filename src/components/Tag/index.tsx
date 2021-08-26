@@ -11,29 +11,36 @@ interface TagType extends Props {
   padding?: string;
   fs?: string;
   tabFont?: string;
+  active?: boolean;
 }
 
-const Tag = ({ list, padding, fs, bgColor, tabFont, ...props }: TagType) => {
+const Tag: React.FC<TagType> = ({
+  list,
+  padding,
+  fs,
+  bgColor,
+  tabFont,
+  active,
+  children,
+  ...props
+}) => {
   return (
     <>
-      {list.length
-        ? list.map((content: string, idx: number) => (
-            <Span
-              key={(idx * Date.now() + Math.random()).toString(36)}
-              border="0.5px solid #E7E7E7"
-              bgColor={bgColor}
-              color="darkGray"
-              padding={padding}
-              radius="40px"
-              margin="0 8px 8px 0 "
-              fs={fs}
-              addstyle={setMediaFontSize(tabFont)}
-              {...props}
-            >
-              #{content}
-            </Span>
-          ))
-        : null}
+      {list.length ? (
+        <Span
+          border="0.5px solid #E7E7E7"
+          bgColor={active ? 'brandColor' : bgColor}
+          color={active ? 'white' : 'darkGray'}
+          padding={padding}
+          radius="40px"
+          margin="0 8px 8px 0"
+          fs={fs}
+          addstyle={setMediaFontSize(tabFont)}
+          {...props}
+        >
+          #{children}
+        </Span>
+      ) : null}
     </>
   );
 };

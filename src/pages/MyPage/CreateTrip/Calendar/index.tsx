@@ -21,7 +21,6 @@ const Calendar = ({ setSelectDate }) => {
   const format = 'YYYY-MM-DD';
 
   const disabledDates = useSelector(getDisabledDates);
-  console.log(disabledDates);
 
   const [date, setDate] = React.useState([
     {
