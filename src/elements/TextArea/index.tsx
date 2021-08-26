@@ -3,6 +3,7 @@ import TextAreaStyle from './style';
 
 export interface Props {
   _onChange?: any;
+  _onKeyPress?: any;
   addstyle?: any;
   value?: string;
   placeholder?: string;
@@ -20,6 +21,7 @@ export interface Props {
 const TextArea: React.FC<Props> = ({
   placeholder,
   _onChange,
+  _onKeyPress,
   value,
   ...props
 }): React.ReactElement => {
@@ -27,6 +29,7 @@ const TextArea: React.FC<Props> = ({
     <TextAreaStyle
       {...props}
       onChange={_onChange}
+      onKeyPress={_onKeyPress}
       value={value}
       placeholder={placeholder}
     />
@@ -35,13 +38,12 @@ const TextArea: React.FC<Props> = ({
 
 TextArea.defaultProps = {
   width: '100%',
-  height: '100px',
   bgColor: 'white',
+  height: '100px',
   color: 'black',
   fs: 'md',
   padding: '12px',
   radius: '14px',
-  rows: 20,
   border: '1px solid #E7E7E7',
   _onChange: () => {},
 };

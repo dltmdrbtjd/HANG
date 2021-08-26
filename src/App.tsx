@@ -2,6 +2,7 @@ import React from 'react';
 // redux
 import { useDispatch } from 'react-redux';
 import { MyPageCreators } from 'src/redux/modules/MyPageModule/mypage';
+import { ChatCreators } from 'src/redux/modules/ChatModule/chat';
 // route
 import { ConnectedRouter } from 'connected-react-router';
 import Route from './route/Route';
@@ -14,11 +15,12 @@ import Alert from './components/Alert';
 // user info
 import { getUserInfo } from './shared/userInfo';
 import { signInStatus } from './globalState/signInStatus';
+// global state
+import ChatStatus from './globalState/chatStatus';
 
 const App = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { isLogIn } = React.useContext(signInStatus);
-  console.log(isLogIn);
 
   React.useEffect(() => {
     if (isLogIn) {
@@ -26,17 +28,20 @@ const App = (): React.ReactElement => {
 
       dispatch(MyPageCreators.fetchGetMyInfo(userPk));
       dispatch(MyPageCreators.fetchGetMyPromise());
+      dispatch(ChatCreators.fetchGetChatRoomList());
     }
   }, [isLogIn]);
 
   return (
     <ConnectedRouter history={history}>
-      <Header />
+      <ChatStatus>
+        <Header />
 
-      <Route />
-      <Navigation />
+        <Route />
+        <Navigation />
 
-      <Alert />
+        <Alert />
+      </ChatStatus>
     </ConnectedRouter>
   );
 };

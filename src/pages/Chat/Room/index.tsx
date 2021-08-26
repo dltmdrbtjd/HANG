@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   DeleteChatRoom,
   ChatAlarmCheck,
+  ChatLogChecked,
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
 // socket
@@ -106,6 +107,8 @@ const ChatRoom = () => {
 
   React.useEffect(() => {
     if (alarmCount > 0) dispatch(ChatAlarmCheck(alarmCount - unchecked));
+
+    dispatch(ChatLogChecked(targetUserPk));
 
     socket.emit('join', { joiningUserPk: userPk, targetUserPk, nickname });
 
