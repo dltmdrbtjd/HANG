@@ -8,7 +8,7 @@ import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
 
 // style
-import { textOverflow } from '../../styles/Mixin';
+import { textOverflow, textOverflowWrap } from '../../styles/Mixin';
 import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 
@@ -70,7 +70,7 @@ const ProfileCard = ({ userInfo }: Props) => {
       <Hr width="100%" margin="13px 0" />
       <Grid>
         {userInfo.intro && userInfo.intro !== 'none' ? (
-          <Text fs="sm" ws="pre-line">
+          <Text fs="sm" ws="pre-line" addstyle={textOverflowWrap(3)}>
             {userInfo.intro}
           </Text>
         ) : (
