@@ -5,7 +5,6 @@ import { history } from '../../../redux/configureStore';
 import { Grid, Button, Image, MainTitle } from '../../../elements';
 // style
 import TextHidden from './style';
-import { limitWidth } from '../../../styles/Mixin';
 
 const Welcome = (): React.ReactElement => {
   return (
@@ -24,9 +23,7 @@ const Welcome = (): React.ReactElement => {
         >
           People vector created by freepik - www.freepik.com
           <Image
-            width="auto"
-            height="100%"
-            addstyle={limitWidth('140%')}
+            width="140%"
             src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/welcome.gif"
           />
         </a>

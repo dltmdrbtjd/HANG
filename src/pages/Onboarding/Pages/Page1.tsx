@@ -35,7 +35,7 @@ const Page1 = () => {
           당신만 알고 있는 맛집, 숨은 명소들을 알려주는 여행 길잡이가 되어보세요
         </Text>
 
-        <Grid height="calc(100% - 210px)">
+        <Grid height="calc(100% - 210px)" position="relative">
           <a
             target="_blank"
             rel="noreferrer"

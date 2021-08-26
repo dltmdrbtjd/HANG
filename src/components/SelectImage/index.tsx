@@ -8,7 +8,7 @@ import { Grid, Label, Input } from '../../elements';
 // components
 import ProfileImg from '../ProfileImg';
 // style
-import HideElem from './style';
+import HideElem, { Pointer } from './style';
 
 export interface Props {
   setProfile: any;
@@ -55,13 +55,7 @@ const SelectImage = ({ setProfile, profile }: Props) => {
   };
 
   return (
-    <Grid
-      position="relative"
-      width="100px"
-      height="100px"
-      margin="0 auto 30px"
-      cursor="pointer"
-    >
+    <Grid position="relative" width="100px" height="100px" margin="0 auto 30px">
       <Label
         id="input--image"
         position="absolute"
@@ -70,6 +64,7 @@ const SelectImage = ({ setProfile, profile }: Props) => {
         width="100%"
         height="100%"
         z="9"
+        addstyle={Pointer}
       />
 
       <Input

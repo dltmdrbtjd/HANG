@@ -16,7 +16,7 @@ import InputImage from '../../../components/SelectImage';
 import AreaSelectBox from '../../../components/AreaSelectBox';
 import SelectBox from './SelectBox';
 // style
-import { setMediaMargin } from '../../../styles/Media';
+import { setMediaFontSize, setMediaMargin } from '../../../styles/Media';
 import SignUpWrapperHeight from '../style';
 
 const FillOutProfile = ({
@@ -57,7 +57,7 @@ const FillOutProfile = ({
 
       <Grid isFlex hoz="space-between" addstyle={setMediaMargin('0 0 20px')}>
         <Grid>
-          <Text lh="2" fw="semiBold" fs="lg">
+          <Text lh="2" fw="semiBold" fs="lg" addstyle={setMediaFontSize('sxl')}>
             연령대
           </Text>
 
@@ -69,7 +69,7 @@ const FillOutProfile = ({
         </Grid>
 
         <Grid>
-          <Text lh="2" fw="semiBold" fs="lg">
+          <Text lh="2" fw="semiBold" fs="lg" addstyle={setMediaFontSize('sxl')}>
             성별
           </Text>
 
@@ -100,7 +100,7 @@ const FillOutProfile = ({
       </Grid>
 
       <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 40px')}>
-        <Text lh="2" fw="semiBold" fs="lg">
+        <Text lh="2" fw="semiBold" fs="lg" addstyle={setMediaFontSize('sxl')}>
           지역 선택
         </Text>
 

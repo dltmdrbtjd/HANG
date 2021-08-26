@@ -38,7 +38,7 @@ const Page3 = () => {
           당신만의 행복한 여행을 만들러 갈까요?
         </Text>
 
-        <Grid height="calc(100% - 260px)" margin="30px 0">
+        <Grid height="calc(100% - 280px)" margin="30px 0">
           <a
             target="_blank"
             rel="noreferrer"
