@@ -23,6 +23,10 @@ const CalcHeight = css`
     cursor: grab;
     ${flexBox('center', 'center')};
   }
+
+  img {
+    max-height: 600px;
+  }
 `;
 
 const PageMoveArrowStyle = css<Prop>`
