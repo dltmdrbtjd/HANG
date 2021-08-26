@@ -13,8 +13,7 @@ import socket from 'src/util/socket';
 // sign out
 import { signInStatus } from 'src/globalState/signInStatus';
 // token
-import { delToken } from 'src/shared/token';
-import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
+import { getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history

@@ -55,7 +55,13 @@ const SelectImage = ({ setProfile, profile }: Props) => {
   };
 
   return (
-    <Grid position="relative" width="100px" height="100px" margin="0 auto 30px">
+    <Grid
+      position="relative"
+      width="100px"
+      height="100px"
+      margin="0 auto 30px"
+      cursor="pointer"
+    >
       <Label
         id="input--image"
         position="absolute"

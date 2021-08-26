@@ -18,8 +18,8 @@ export const chatLogStatus = React.createContext(null);
 
 const ChatStatus = ({ children }) => {
   const dispatch = useDispatch();
+  const userPkList: number[] = useSelector(getUserPkList);
 
-  const userPkList = useSelector(getUserPkList);
   const [chatLog, setChatLog] = React.useState<NewMessage>({
     userPk: 0,
     message: '',
@@ -35,7 +35,6 @@ const ChatStatus = ({ children }) => {
       });
 
       socket.on('newMessage', (data: NewMessage) => {
-        console.log('new message 호출');
         setChatLog(data);
         dispatch(ChatHistoryUpdate(data));
       });
@@ -43,7 +42,7 @@ const ChatStatus = ({ children }) => {
   }, [isLogIn]);
 
   React.useEffect(() => {
-    if (isLogIn && chatLog.userPk && !userPkList.includes(chatLog.userPk)) {
+    if (chatLog.userPk && !userPkList.includes(chatLog.userPk)) {
       socket.emit('newRoom', { targetPk: chatLog.userPk });
       socket.on('newRoom', (data) => {
         dispatch(
@@ -56,7 +55,7 @@ const ChatStatus = ({ children }) => {
         );
       });
     }
-  }, [chatLog, isLogIn]);
+  }, [chatLog]);
 
   return (
     <chatLogStatus.Provider value={{ count: 0 }}>
