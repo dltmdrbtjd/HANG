@@ -19,6 +19,16 @@ export interface Props {
 const ProfileCard = ({ userInfo }: Props) => {
   const dispatch = useDispatch();
 
+  const [moreIntro, setMoreIntro] = React.useState<boolean>(false);
+
+  function IntroHandler() {
+    if (moreIntro) {
+      setMoreIntro(false);
+    } else {
+      setMoreIntro(true);
+    }
+  }
+
   const LikeToggle = () => {
     dispatch(
       FavoriteCreators.fetchFavoriteToggle({ targetPk: userInfo.userPk }),
@@ -70,9 +80,24 @@ const ProfileCard = ({ userInfo }: Props) => {
       <Hr width="100%" margin="13px 0" />
       <Grid>
         {userInfo.intro && userInfo.intro !== 'none' ? (
-          <Text fs="sm" ws="pre-line" addstyle={textOverflowWrap(3)}>
-            {userInfo.intro}
-          </Text>
+          <>
+            <Text
+              fs="sm"
+              ws="pre-line"
+              addstyle={!moreIntro ? textOverflowWrap(3) : ''}
+            >
+              {userInfo.intro}
+            </Text>
+            <Text
+              cursor="pointer"
+              textAlign="center"
+              margin="10px 0 0 0"
+              color="gray"
+              _onClick={IntroHandler}
+            >
+              {!moreIntro ? '더 보기' : '닫기'}
+            </Text>
+          </>
         ) : (
           <Text fs="sm">안녕하세요 {userInfo.nickname}입니다.</Text>
         )}
