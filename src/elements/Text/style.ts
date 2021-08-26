@@ -16,6 +16,7 @@ export interface Prop {
   wb?: string;
   ws?: string;
   addstyle?: any;
+  cursor?: string;
   theme: {
     [propName: string]: any;
   };
@@ -25,6 +26,7 @@ const TextStyle = styled.p<Prop>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   margin: ${({ margin }) => margin};
+  cursor: ${({ cursor }) => cursor};
   ${({ padding }) => borderBox(padding)};
   ${({ fs, fw, color, lh, textAlign }) =>
     textProps(fs, fw, color, lh, textAlign)};
