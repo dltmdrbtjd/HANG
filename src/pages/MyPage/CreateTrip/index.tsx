@@ -74,7 +74,7 @@ const CreateTrip = () => {
       startDate: moment(date[0].startDate).format('YYYY-MM-DD'),
       endDate: moment(date[0].endDate).format('YYYY-MM-DD'),
       tripInfo,
-      tags: `${tags.join(':')}:`,
+      tags: tags.join(':'),
     };
 
     apis
