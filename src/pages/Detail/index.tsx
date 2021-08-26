@@ -11,7 +11,15 @@ import { setUserInfo } from 'src/shared/userInfo';
 // redux
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
-import { Grid, MainTitle, Button, Image, Container } from '../../elements';
+import {
+  Grid,
+  MainTitle,
+  Button,
+  Image,
+  Container,
+  Text,
+} from '../../elements';
+import NotFoundImage from './style';
 // component
 import ProfileCard from '../../components/ProfileCard';
 import EventCard from '../../components/EventCard';
@@ -20,6 +28,7 @@ import ToastMessage from '../../components/ToastMessage';
 import { setMediaCardLayout } from '../../styles/Media';
 // image
 import chat from '../../Images/NavigationIcons/onchat.svg';
+import NotFound from '../../Images/notfound/eventnotfound.png';
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -118,6 +127,12 @@ const Detail = () => {
               );
             })}
           </Grid>
+        ) : null}
+        {eventList.length < 1 ? (
+          <>
+            <Image src={NotFound} addstyle={NotFoundImage} />
+            <Text textAlign="center">등록된 여행 이벤트가 없습니다.</Text>
+          </>
         ) : null}
         {message && <ToastMessage msg="신청이 완료되었습니다" />}
       </Grid>
