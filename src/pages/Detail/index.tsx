@@ -28,7 +28,6 @@ import ToastMessage from '../../components/ToastMessage';
 import { setMediaCardLayout } from '../../styles/Media';
 // image
 import chat from '../../Images/NavigationIcons/onchat.svg';
-import NotFound from '../../Images/notfound/eventnotfound.png';
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -130,7 +129,10 @@ const Detail = () => {
         ) : null}
         {eventList.length < 1 ? (
           <>
-            <Image src={NotFound} addstyle={NotFoundImage} />
+            <Image
+              src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/eventnotfound.png"
+              addstyle={NotFoundImage}
+            />
             <Text textAlign="center">등록된 여행 이벤트가 없습니다.</Text>
           </>
         ) : null}

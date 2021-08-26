@@ -82,6 +82,14 @@ const chatSlice = createSlice({
 
       const chatRoomList: ReadChatInfo[] = action.payload.map(
         (chat): ReadChatInfo => {
+          if (!chat.lastChat[0]) {
+            return {
+              ...chat,
+              lastChat: [],
+              unchecked: parseInt(chat.unchecked, 10),
+            };
+          }
+
           return {
             ...chat,
             lastChat: [JSON.parse(chat.lastChat[0])],
