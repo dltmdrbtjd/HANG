@@ -1,39 +1,69 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { limitWidth } from 'src/styles/Mixin';
+
+interface Prop {
+  cursor: string;
+  size: string;
+}
+
+interface Theme {
+  theme: {
+    [propName: string]: any;
+  };
+}
 
 const setProfileImageSize = (size: string) => {
   switch (size) {
     case 'large':
       return css`
         width: 100px;
-        padding-bottom: 100px;
+        height: 100px;
       `;
 
     case 'medium':
       return css`
         width: 80px;
-        padding-bottom: 80px;
+        height: 80px;
       `;
 
     case 'small':
       return css`
         width: 40px;
-        padding-bottom: 40px;
+        height: 40px;
       `;
 
     default:
       return css`
         width: 60px;
-        padding-bottom: 60px;
+        height: 60px;
       `;
   }
 };
 
-const ImagePosition = css`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+const ImageLazyLoadingWrapper = styled.div<Prop>`
+  overflow: hidden;
+  border-radius: 50%;
+  cursor: ${({ cursor }) => cursor};
+  ${({ size }) => setProfileImageSize(size)};
+`;
+
+const loading = keyframes`
+  to {
+    background-position-x: -200%;
+  }
+`;
+
+const ImagePlaceholder = styled.div<Theme>`
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  background-size: 200% 100%;
+  animation: 1s ${loading} linear infinite;
+`;
+
+const ImageFit = css`
   object-fit: cover;
 `;
 
@@ -41,4 +71,9 @@ const DetailImageWrapper = styled.div`
   ${limitWidth('80%')};
 `;
 
-export { setProfileImageSize, ImagePosition, DetailImageWrapper };
+export {
+  ImageLazyLoadingWrapper,
+  ImageFit,
+  ImagePlaceholder,
+  DetailImageWrapper,
+};

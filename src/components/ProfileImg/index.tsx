@@ -4,16 +4,15 @@ import { useLocation } from 'react-router-dom';
 // material
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // elements
-import { Grid, Image, BlurBox } from '../../elements/index';
+import { Image, BlurBox } from '../../elements/index';
 // style
 import {
-  setProfileImageSize,
-  ImagePosition,
+  ImageLazyLoadingWrapper,
+  ImageFit,
+  ImagePlaceholder,
   DetailImageWrapper,
 } from './style';
 import { limitWidth } from '../../styles/Mixin';
-// image
-import defaultProfile from '../../Images/profile.png';
 
 export interface Props {
   size?: string;
@@ -28,27 +27,54 @@ const ProfileImg = ({ size, imgUrl }: Props) => {
   const [detail, setDetail] = React.useState<boolean>(false);
   const activeImgDetail = /detail|mypage/;
 
+  const [target, setTarget] = React.useState(null);
+  const [imageLoad, setImageLoad] = React.useState<boolean>(false);
+  const [isVisible, setIsVisible] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const options = { threshold: 0.3 };
+
+    const infiniteScroll = ([entries], observer: IntersectionObserver) => {
+      if (entries.isIntersecting) {
+        observer.unobserve(entries.target);
+        setIsVisible(true);
+      }
+    };
+
+    const io = new IntersectionObserver(infiniteScroll, options);
+    if (target) io.observe(target);
+
+    return () => io && io.disconnect();
+  }, [target]);
+
   return (
     <>
-      <Grid
-        overflow="hidden"
-        radius="50%"
-        addstyle={setProfileImageSize(size)}
-        position="relative"
+      <ImageLazyLoadingWrapper
+        ref={setTarget}
         cursor={activeImgDetail.test(path) ? 'pointer' : null}
-        _onClick={
+        size={size}
+        onClick={
           activeImgDetail.test(path) && imgUrl && imgUrl !== 'null'
             ? () => setDetail(true)
             : null
         }
       >
-        <Image
-          height="100%"
-          src={imgUrl && imgUrl !== 'null' ? imgUrl : defaultProfile}
-          alt="profile image"
-          addstyle={ImagePosition}
-        />
-      </Grid>
+        {(imageLoad && isVisible) || <ImagePlaceholder />}
+
+        {isVisible ? (
+          <Image
+            height="100%"
+            src={
+              imgUrl && imgUrl !== 'null'
+                ? imgUrl
+                : 'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/profile.png'
+            }
+            alt="profile image"
+            addstyle={ImageFit}
+            _onLoad={() => setImageLoad(true)}
+          />
+        ) : null}
+      </ImageLazyLoadingWrapper>
 
       {detail ? (
         <BlurBox isFlex ver="center" hoz="center">
