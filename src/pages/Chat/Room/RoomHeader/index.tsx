@@ -2,6 +2,8 @@ import React from 'react';
 // icon
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+// user info
+import { getUserInfo } from 'src/shared/userInfo';
 // history
 import { history } from '../../../../redux/configureStore';
 // elements
@@ -12,7 +14,9 @@ import DropDown from '../../../../components/DropDown';
 // style
 import HeaderStyle from '../../../../components/Header/style';
 
-const RoomHeader = ({ methods, targetUserInfo }) => {
+const RoomHeader = ({ methods }) => {
+  const targetUserInfo = getUserInfo('targetUserInfo');
+
   return (
     <HeaderStyle>
       <Container height="66px" padding="0">
@@ -54,4 +58,4 @@ const RoomHeader = ({ methods, targetUserInfo }) => {
   );
 };
 
-export default RoomHeader;
+export default React.memo(RoomHeader);
