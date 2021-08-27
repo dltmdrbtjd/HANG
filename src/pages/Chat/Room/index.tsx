@@ -10,6 +10,7 @@ import { AddBlockList } from 'src/redux/modules/MyPageModule/mypage';
 import { TargetUserInfo } from 'src/shared/userInfo';
 // socket
 import socketIOClient from 'socket.io-client';
+import { SocketContext } from 'src/context/socket';
 // apis
 import apis from 'src/shared/api';
 // moment
@@ -60,8 +61,9 @@ const ShowChatLog = React.memo<ShowChatLogType>(({ userPk, chatLogs }) => {
 });
 
 const ChatRoom = () => {
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = socketIOClient(ENDPOINT);
+  // const ENDPOINT = 'https://soujinko.shop';
+  // const socket = socketIOClient(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const targetUserInfo: TargetUserInfo = getUserInfo('targetUserInfo');
   const targetUserPk = targetUserInfo.targetPk;
@@ -153,6 +155,7 @@ const ChatRoom = () => {
   React.useEffect(() => {
     socket.on('updateMessage', (data) => {
       setChatLog(data);
+      console.log(data);
     });
 
     setChatLogs(chatLogs.concat(chatLog));
