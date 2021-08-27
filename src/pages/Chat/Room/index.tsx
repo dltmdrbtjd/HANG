@@ -5,6 +5,9 @@ import {
   ChatAlarmCheck,
   getUnchecked,
 } from 'src/redux/modules/ChatModule/chat';
+import { AddBlockList } from 'src/redux/modules/MyPageModule/mypage';
+// type
+import { TargetUserInfo } from 'src/shared/userInfo';
 // socket
 import socketIOClient from 'socket.io-client';
 // apis
@@ -60,7 +63,7 @@ const ChatRoom = () => {
   const ENDPOINT = 'https://soujinko.shop';
   const socket = socketIOClient(ENDPOINT);
 
-  const targetUserInfo = getUserInfo('targetUserInfo');
+  const targetUserInfo: TargetUserInfo = getUserInfo('targetUserInfo');
   const targetUserPk = targetUserInfo.targetPk;
 
   const dispatch = useDispatch();
@@ -97,6 +100,9 @@ const ChatRoom = () => {
     apis
       .AddBlockList({ targetPk: targetUserPk })
       .then(() => apis.LikeToggle({ targetPk: targetUserPk, block: 1 }))
+      .then(() =>
+        dispatch(AddBlockList({ ...targetUserInfo, userPk: targetUserPk })),
+      )
       .then(() => QuitRoom())
       .catch((err) => console.log(err));
   };
