@@ -18,6 +18,7 @@ import {
   MyInfo,
   MyPromise,
   MyPageState,
+  BlockedUser,
 } from './type';
 
 export const initialState: MyPageState = {
@@ -40,10 +41,7 @@ export const initialState: MyPageState = {
     requested: [],
     confirmed: [],
   },
-  blockedUser: {
-    blockedUsers: [],
-    blockedPk: [],
-  },
+  blockedUsers: [],
   loading: false,
 };
 
@@ -93,7 +91,8 @@ const fetchGetBlockList = createAsyncThunk(
         blockedUsers: data ? data.blockedUsers : [],
         blockedPk: data ? data.blockedPk : [],
       };
-      console.log(data);
+
+      console.log(payload);
 
       return payload;
     } catch (err) {
@@ -141,14 +140,17 @@ const mypageSlice = createSlice({
       );
     },
 
+    AddBlockList: (state, action: PayloadAction<BlockedUser>) => {
+      state.blockedUsers.unshift(action.payload);
+    },
+
     DeleteBlockList: (state, action: PayloadAction<number>) => {
-      state.blockedUser.blockedUsers = state.blockedUser.blockedUsers.filter(
+      state.blockedUsers = state.blockedUsers.filter(
         (block) => block.userPk !== action.payload,
       );
     },
 
     SetGuideToggle: (state, action: PayloadAction<number>) => {
-      console.log(action.payload);
       state.myInfo.guide = action.payload;
     },
   },
@@ -187,7 +189,24 @@ const mypageSlice = createSlice({
     },
     [fetchGetBlockList.fulfilled.type]: (state, action: PayloadAction<any>) => {
       state.loading = false;
-      state.blockedUser = action.payload;
+      const blockedUsers = action.payload.blockedUsers.map(
+        (userInfo: BlockedUser) => {
+          const index = action.payload.blockedPk.findIndex(
+            (userPk: number) => userPk === userInfo.userPk,
+          );
+
+          if (index === -1)
+            return {
+              userPk: userInfo.userPk,
+              nickname: null,
+              profileImg: null,
+            };
+
+          return userInfo;
+        },
+      );
+
+      state.blockedUsers = blockedUsers;
     },
     [fetchGetBlockList.rejected.type]: (state) => {
       state.loading = false;
@@ -227,6 +246,7 @@ export const {
   AgreePromise,
   RejectPromise,
   CancelPromise,
+  AddBlockList,
   DeleteBlockList,
   SetGuideToggle,
 } = actions;

@@ -57,7 +57,7 @@ const CreateTrip = () => {
       return;
     }
 
-    if (!tags[0]) {
+    if (!tags.length) {
       dispatch(
         activeAlert({
           status: true,

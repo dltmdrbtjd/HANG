@@ -67,9 +67,6 @@ export interface MyPageState {
   myInfo: MyInfo;
   tripList: TripInfo[];
   promise: MyPromise;
-  blockedUser: {
-    blockedUsers: BlockedUser[];
-    blockedPk: string[];
-  };
+  blockedUsers: BlockedUser[];
   loading: boolean;
 }

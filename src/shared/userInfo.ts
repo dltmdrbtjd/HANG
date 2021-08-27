@@ -5,7 +5,7 @@ interface UserInfo {
   userPk: number;
 }
 
-interface TargetUserInfo {
+export interface TargetUserInfo {
   nickname: string;
   profileImg: null | string;
   targetPk: number;
