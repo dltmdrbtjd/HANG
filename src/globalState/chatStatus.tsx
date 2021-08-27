@@ -30,6 +30,20 @@ const ChatStatus = ({ children }) => {
 
   const { isLogIn } = React.useContext(signInStatus);
 
+  const createChatRoom = React.useCallback(
+    (data) => {
+      dispatch(
+        CreateChatRoom({
+          lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
+          unchecked: 1,
+          targetPk: chatLog.userPk,
+          ...data,
+        }),
+      );
+    },
+    [chatLog],
+  );
+
   React.useEffect(() => {
     if (isLogIn) {
       socket.on('unchecked', () => {
@@ -42,14 +56,7 @@ const ChatStatus = ({ children }) => {
       });
 
       socket.on('newRoom', (data) => {
-        dispatch(
-          CreateChatRoom({
-            lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
-            unchecked: 1,
-            targetPk: chatLog.userPk,
-            ...data,
-          }),
-        );
+        createChatRoom(data);
       });
     }
   }, [isLogIn]);

@@ -19,10 +19,10 @@ export interface ChatLogType {
   userPk: number;
 }
 
-const { targetPk } = getUserInfo('targetUserInfo');
-const { userPk, nickname } = getUserInfo('userInfo');
-
 const useProviderChatLogs = () => {
+  const { targetPk } = getUserInfo('targetUserInfo');
+  const { userPk } = getUserInfo('userInfo');
+
   const roomName =
     (userPk < targetPk && `${userPk}:${targetPk}`) || `${targetPk}:${userPk}`;
 
@@ -55,6 +55,9 @@ const useProviderChatLogs = () => {
 const ChatContext = ({ children }) => {
   const chat = useProviderChatLogs();
   const { roomName, chatLogState } = chat;
+
+  const { targetPk } = getUserInfo('targetUserInfo');
+  const { userPk, nickname } = getUserInfo('userInfo');
 
   const socket = React.useContext(SocketContext);
 
