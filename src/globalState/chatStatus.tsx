@@ -9,9 +9,8 @@ import {
 } from 'src/redux/modules/ChatModule/chat';
 // type
 import { NewMessage } from 'src/redux/modules/ChatModule/type';
-// socket
-import socketIOClient from 'socket.io-client';
 // signin status
+import { SocketContext } from 'src/context/socket';
 import { signInStatus } from './signInStatus';
 
 export const chatLogStatus = React.createContext(null);
@@ -20,8 +19,7 @@ const ChatStatus = ({ children }) => {
   const dispatch = useDispatch();
   const userPkList: number[] = useSelector(getUserPkList);
 
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = socketIOClient(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const [chatLog, setChatLog] = React.useState<NewMessage>({
     userPk: null,

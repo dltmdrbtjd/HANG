@@ -8,6 +8,7 @@ import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { DetailLikeUpdate } from 'src/redux/modules/DetailModule/detail';
 
 // style
+import { TagsBox } from 'src/styles/Mixin/boxStyle';
 import { textOverflow, textOverflowWrap } from '../../styles/Mixin';
 import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
@@ -109,7 +110,7 @@ const ProfileCard = ({ userInfo }: Props) => {
           </Grid>
         ) : null}
       </Grid>
-      <Grid margin="8px 0 0 0">
+      <Grid margin="8px 0 0 0" addstyle={TagsBox}>
         {Tags &&
           Tags.map((item, idx) => {
             return (

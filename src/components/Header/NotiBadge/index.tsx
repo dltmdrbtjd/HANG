@@ -5,8 +5,7 @@ import { signInStatus } from 'src/globalState/signInStatus';
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 // history
-// import socket from 'src/util/socket';
-import io from 'socket.io-client';
+import { SocketContext } from 'src/context/socket';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
@@ -20,8 +19,7 @@ const NotiBadge = () => {
   const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
 
   const { isLogIn } = React.useContext(signInStatus);
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = io(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const userPk = isLogIn && getUserInfo('userInfo').userPk;
 

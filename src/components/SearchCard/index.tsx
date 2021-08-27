@@ -8,6 +8,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import { SearchLikeUpdate } from 'src/redux/modules/SearchModule/search';
 import { FavoriteCreators } from 'src/redux/modules/FavoriteModule/favorite';
 import { HomeLikeUpdate } from 'src/redux/modules/HomeModule/home';
+import { TagsBox } from 'src/styles/Mixin/boxStyle';
 import { history } from '../../redux/configureStore';
 import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
@@ -117,7 +118,7 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
               {userInfo && userInfo.city}
             </Text>
           </Grid>
-          <Grid margin="8px 0 0 0">
+          <Grid addstyle={TagsBox} width="90%" margin="8px 0 0 0">
             {Tags &&
               Tags.map((item, idx) => {
                 return (
