@@ -81,22 +81,24 @@ const MyPromise = () => {
                     받은 요청
                   </SubTitle>
 
-                  <Button
-                    isFlex
-                    ver="center"
-                    form="text"
-                    color="darkGray"
-                    fw="regular"
-                    _onClick={() =>
-                      setOpenDetail({ open: true, type: 'received' })
-                    }
-                  >
-                    더 보기{' '}
-                    <ArrowForwardIosIcon
-                      fontSize="small"
-                      style={{ marginLeft: '5px' }}
-                    />
-                  </Button>
+                  {received.length > 3 ? (
+                    <Button
+                      isFlex
+                      ver="center"
+                      form="text"
+                      color="darkGray"
+                      fw="regular"
+                      _onClick={() =>
+                        setOpenDetail({ open: true, type: 'received' })
+                      }
+                    >
+                      더 보기{' '}
+                      <ArrowForwardIosIcon
+                        fontSize="small"
+                        style={{ marginLeft: '5px' }}
+                      />
+                    </Button>
+                  ) : null}
                 </Grid>
 
                 <Grid addstyle={setTabletWrapper}>
@@ -121,23 +123,24 @@ const MyPromise = () => {
                     보낸 요청
                   </SubTitle>
 
-                  <Button
-                    isFlex
-                    ver="center"
-                    form="text"
-                    color="darkGray"
-                    fw="regular"
-                    _onClick={() =>
-                      setOpenDetail({ open: true, type: 'requested' })
-                    }
-                  >
-                    더 보기{' '}
-                    <ArrowForwardIosIcon
-                      fontSize="small"
-                      type="requested"
-                      style={{ marginLeft: '5px' }}
-                    />
-                  </Button>
+                  {requested.length > 3 ? (
+                    <Button
+                      isFlex
+                      ver="center"
+                      form="text"
+                      color="darkGray"
+                      fw="regular"
+                      _onClick={() =>
+                        setOpenDetail({ open: true, type: 'received' })
+                      }
+                    >
+                      더 보기{' '}
+                      <ArrowForwardIosIcon
+                        fontSize="small"
+                        style={{ marginLeft: '5px' }}
+                      />
+                    </Button>
+                  ) : null}
                 </Grid>
 
                 <Grid addstyle={setTabletWrapper}>
@@ -163,23 +166,24 @@ const MyPromise = () => {
                     확정된 약속
                   </SubTitle>
 
-                  <Button
-                    isFlex
-                    ver="center"
-                    form="text"
-                    color="darkGray"
-                    fw="regular"
-                    _onClick={() =>
-                      setOpenDetail({ open: true, type: 'confirmed' })
-                    }
-                  >
-                    더 보기{' '}
-                    <ArrowForwardIosIcon
-                      fontSize="small"
-                      type="confirmed"
-                      style={{ marginLeft: '5px' }}
-                    />
-                  </Button>
+                  {confirmed.length > 3 ? (
+                    <Button
+                      isFlex
+                      ver="center"
+                      form="text"
+                      color="darkGray"
+                      fw="regular"
+                      _onClick={() =>
+                        setOpenDetail({ open: true, type: 'received' })
+                      }
+                    >
+                      더 보기{' '}
+                      <ArrowForwardIosIcon
+                        fontSize="small"
+                        style={{ marginLeft: '5px' }}
+                      />
+                    </Button>
+                  ) : null}
                 </Grid>
 
                 <Grid addstyle={setTabletWrapper}>
