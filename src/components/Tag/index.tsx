@@ -9,6 +9,7 @@ interface TagType extends Props {
   list: string[];
   bgColor?: string;
   padding?: string;
+  margin?: string;
   fs?: string;
   tabFont?: string;
   active?: boolean;
@@ -17,6 +18,7 @@ interface TagType extends Props {
 const Tag: React.FC<TagType> = ({
   list,
   padding,
+  margin,
   fs,
   bgColor,
   tabFont,
@@ -31,9 +33,9 @@ const Tag: React.FC<TagType> = ({
           border="0.5px solid #E7E7E7"
           bgColor={active ? 'brandColor' : bgColor}
           color={active ? 'white' : 'darkGray'}
-          padding="4px 10px"
+          padding={padding}
           radius="40px"
-          margin="0 2px 0 0"
+          margin={margin}
           fs={fs}
           addstyle={setMediaFontSize(tabFont)}
           {...props}
@@ -47,9 +49,10 @@ const Tag: React.FC<TagType> = ({
 
 Tag.defaultProps = {
   bgColor: 'bgColor',
-  padding: '5px 12px',
+  padding: '4px 10px',
   fs: 'status',
   tabFont: 'status',
+  margin: '0 2px 0 0',
 };
 
 export default Tag;

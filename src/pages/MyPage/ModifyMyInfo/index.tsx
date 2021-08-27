@@ -193,6 +193,7 @@ const MyPageModify = () => {
                 cursor="pointer"
                 tabFont="lg"
                 padding="7px 19px"
+                margin="0 8px 8px 0"
                 list={mbti}
                 active={tendency.includes(idx)}
                 _onClick={() => selectTendencyTags(idx)}
@@ -217,6 +218,7 @@ const MyPageModify = () => {
                 cursor="pointer"
                 tabFont="lg"
                 padding="7px 19px"
+                margin="0 8px 8px 0"
                 list={mbti}
                 active={MBTI === idx}
                 _onClick={() => selectMBTITags(idx)}

@@ -92,8 +92,6 @@ const fetchGetBlockList = createAsyncThunk(
         blockedPk: data ? data.blockedPk : [],
       };
 
-      console.log(payload);
-
       return payload;
     } catch (err) {
       console.log(err);
