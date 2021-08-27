@@ -6,10 +6,7 @@ import apis from 'src/shared/api';
 // redux
 import { shallowEqual, useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
-import {
-  MyPageCreators,
-  DeleteBlockList,
-} from 'src/redux/modules/MyPageModule/mypage';
+import { DeleteBlockList } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // elements
 import { Grid, Text, Button, Container } from '../../../elements';
@@ -22,15 +19,11 @@ const Block = () => {
   const dispatch = useDispatch();
   const { blockList, message } = useTypedSelector(
     (state) => ({
-      blockList: state.mypage.blockedUser.blockedUsers,
+      blockList: state.mypage.blockedUsers,
       message: state.toastMessage.Message,
     }),
     shallowEqual,
   );
-
-  React.useEffect(() => {
-    dispatch(MyPageCreators.fetchGetBlockList());
-  }, []);
 
   const deleteBlockList = (targetPk: number) => {
     apis
@@ -64,7 +57,7 @@ const Block = () => {
                 <ProfileImg imgUrl={block.profileImg} />
 
                 <Text fs="la" fw="bold" margin="0 0 0 24px">
-                  {block.nickname}
+                  {block.nickname || '이미 탈퇴한 유저입니다.'}
                 </Text>
               </Grid>
 
@@ -76,7 +69,8 @@ const Block = () => {
                 color="brandColor"
                 _onClick={() => deleteBlockList(block.userPk)}
               >
-                차단됨 <BlockIcon style={{ marginLeft: '4px' }} />
+                {block.nickname ? '차단됨' : '삭제하기'}{' '}
+                <BlockIcon style={{ marginLeft: '4px' }} />
               </Button>
             </Grid>
           );

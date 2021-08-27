@@ -54,20 +54,17 @@ const ProfileImg = ({ size, imgUrl }: Props) => {
         cursor={activeImgDetail.test(path) ? 'pointer' : null}
         size={size}
         onClick={
-          activeImgDetail.test(path) && imgUrl && imgUrl !== 'null'
-            ? () => setDetail(true)
-            : null
+          activeImgDetail.test(path) && imgUrl ? () => setDetail(true) : null
         }
       >
-        {(imageLoad && isVisible) || <ImagePlaceholder />}
+        {imageLoad || <ImagePlaceholder />}
 
         {isVisible ? (
           <Image
             height="100%"
             src={
-              imgUrl && imgUrl !== 'null'
-                ? imgUrl
-                : 'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/profile.png'
+              imgUrl ||
+              'https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/profile.png'
             }
             alt="profile image"
             addstyle={ImageFit}

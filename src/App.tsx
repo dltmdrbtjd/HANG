@@ -27,6 +27,7 @@ const App = (): React.ReactElement => {
 
       dispatch(MyPageCreators.fetchGetMyInfo(userPk));
       dispatch(MyPageCreators.fetchGetMyPromise());
+      dispatch(MyPageCreators.fetchGetBlockList());
     }
   }, [isLogIn]);
 

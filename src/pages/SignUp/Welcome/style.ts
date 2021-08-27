@@ -8,7 +8,7 @@ interface Prop {
   };
 }
 
-const TextHidden = css<Prop>`
+const ImageWrapper = css<Prop>`
   height: calc(100% - 230px);
 
   a {
@@ -17,6 +17,10 @@ const TextHidden = css<Prop>`
     height: 100%;
     ${flexBox('center', 'center')};
   }
+
+  img {
+    max-height: 544.5px;
+  }
 `;
 
-export default TextHidden;
+export default ImageWrapper;
