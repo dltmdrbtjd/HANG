@@ -13,6 +13,8 @@ import { Grid, Text } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 // style
 import { textOverflow } from '../../styles/Mixin';
+import Tag from '../Tag';
+import { tendencyKeyword, mbti } from '../Tag/tagList';
 
 export type Props = {
   userInfo: any;
@@ -43,13 +45,42 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
     }
   };
 
+  function TagCheck() {
+    if (userInfo.tags !== '0') {
+      return userInfo.tags.split(':').map((i) => +i);
+    }
+    return null;
+  }
+  const UserTag = TagCheck();
+
+  function TagListCheck() {
+    if (UserTag === null) {
+      return undefined;
+    }
+    return [
+      tendencyKeyword[UserTag[0]],
+      tendencyKeyword[UserTag[1]],
+      tendencyKeyword[UserTag[2]],
+      mbti[UserTag[3]],
+    ];
+  }
+  const UserTagList = TagListCheck();
+
+  function LastTagCheck() {
+    if (UserTagList !== undefined) {
+      return UserTagList.filter((nan) => nan !== undefined);
+    }
+    return undefined;
+  }
+  const Tags = LastTagCheck();
+
   return (
     <Grid padding="6px 0">
       <Grid
         position="relative"
         isFlex
         ver="center"
-        padding="12px 20px"
+        padding="12px 12px"
         radius="14px"
         bgColor="white"
         border="0.5px solid #e7e7e7"
@@ -63,8 +94,7 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
           <ProfileImg size="medium" imgUrl={userInfo && userInfo.profileImg} />
         </Grid>
         <Grid
-          width="calc(100% - 120px)"
-          height="47px"
+          width="100%"
           margin="0 0 0 10px"
           cursor="pointer"
           isFlex
@@ -72,19 +102,31 @@ const SearchCard = ({ userInfo, category, idx }: Props) => {
           hoz="space-between"
           _onClick={() => history.push(`/detail?user=${userInfo.userPk}`)}
         >
-          <Text fs="la" fw="bold" addstyle={textOverflow()}>
-            {userInfo && userInfo.nickname}
-          </Text>
-          <Text
-            color="darkGray"
-            fs="sm"
-            // mobile={SetTabFontSize('sm')}
-            addstyle={textOverflow()}
-          >
-            {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
-            {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
-            {userInfo && userInfo.city}
-          </Text>
+          <Grid>
+            <Text fs="la" fw="bold" addstyle={textOverflow()}>
+              {userInfo && userInfo.nickname}
+            </Text>
+            <Text
+              color="darkGray"
+              fs="sm"
+              // mobile={SetTabFontSize('sm')}
+              addstyle={textOverflow()}
+            >
+              {userInfo && userInfo.gender === 1 ? '남자' : '여자'} ·{' '}
+              {userInfo && userInfo.age}대 · {userInfo && userInfo.region}{' '}
+              {userInfo && userInfo.city}
+            </Text>
+          </Grid>
+          <Grid margin="8px 0 0 0">
+            {Tags &&
+              Tags.map((item, idx) => {
+                return (
+                  <Tag list={Tags} key={idx}>
+                    {item}
+                  </Tag>
+                );
+              })}
+          </Grid>
         </Grid>
 
         <Grid

@@ -13,6 +13,7 @@ import { Grid, Text, Hr } from '../../elements';
 import ProfileImg from '../ProfileImg/index';
 // tags
 import { tendencyKeyword, mbti } from '../Tag/tagList';
+import Tag from '../Tag';
 
 export interface Props {
   userInfo?: any;
@@ -41,6 +42,35 @@ const ProfileCard = ({ userInfo }: Props) => {
       dispatch(DetailLikeUpdate(true));
     }
   };
+
+  function TagCheck() {
+    if (userInfo.tags && userInfo.tags !== '0') {
+      return userInfo.tags.split(':').map((i) => +i);
+    }
+    return null;
+  }
+  const UserTag = TagCheck();
+
+  function TagListCheck() {
+    if (UserTag === null) {
+      return undefined;
+    }
+    return [
+      tendencyKeyword[UserTag[0]],
+      tendencyKeyword[UserTag[1]],
+      tendencyKeyword[UserTag[2]],
+      mbti[UserTag[3]],
+    ];
+  }
+  const UserTagList = TagListCheck();
+
+  function LastTagCheck() {
+    if (UserTagList !== undefined) {
+      return UserTagList.filter((nan) => nan !== undefined);
+    }
+    return undefined;
+  }
+  const Tags = LastTagCheck();
 
   return (
     <Grid
@@ -78,6 +108,16 @@ const ProfileCard = ({ userInfo }: Props) => {
             {userInfo.like ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </Grid>
         ) : null}
+      </Grid>
+      <Grid margin="8px 0 0 0">
+        {Tags &&
+          Tags.map((item, idx) => {
+            return (
+              <Tag list={Tags} key={idx}>
+                {item}
+              </Tag>
+            );
+          })}
       </Grid>
       <Hr width="100%" margin="13px 0" />
       <Grid>
