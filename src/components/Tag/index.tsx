@@ -31,9 +31,9 @@ const Tag: React.FC<TagType> = ({
           border="0.5px solid #E7E7E7"
           bgColor={active ? 'brandColor' : bgColor}
           color={active ? 'white' : 'darkGray'}
-          padding={padding}
+          padding="4px 10px"
           radius="40px"
-          margin="0 8px 8px 0"
+          margin="0 2px 0 0"
           fs={fs}
           addstyle={setMediaFontSize(tabFont)}
           {...props}

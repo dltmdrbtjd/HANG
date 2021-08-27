@@ -6,6 +6,9 @@ import { Grid, Text, MainTitle, Button } from 'src/elements';
 import { textOverflowWrap } from 'src/styles/Mixin';
 import Modal from '../Modal';
 
+import { tendencyKeyword, mbti } from '../Tag/tagList';
+import Tag from '../Tag';
+
 interface Info {
   city: string;
   endDate: string;
@@ -16,6 +19,7 @@ interface Info {
   tripInfo: string;
   nickname: string;
   userPk: number;
+  tags?: string;
 }
 
 export interface Props {
@@ -51,6 +55,35 @@ const EventCard = ({
     setModal(false);
   };
 
+  function TagCheck() {
+    if (userInfo.tags && userInfo.tags !== '0') {
+      return userInfo.tags.split(':').map((i) => +i);
+    }
+    return null;
+  }
+  const UserTag = TagCheck();
+
+  function TagListCheck() {
+    if (UserTag === null) {
+      return undefined;
+    }
+    return [
+      tendencyKeyword[UserTag[0]],
+      tendencyKeyword[UserTag[1]],
+      tendencyKeyword[UserTag[2]],
+      mbti[UserTag[3]],
+    ];
+  }
+  const UserTagList = TagListCheck();
+
+  function LastTagCheck() {
+    if (UserTagList !== undefined) {
+      return UserTagList.filter((nan) => nan !== undefined);
+    }
+    return undefined;
+  }
+  const Tags = LastTagCheck();
+
   return (
     <Grid
       margin="10px 0 20px"
@@ -63,16 +96,28 @@ const EventCard = ({
       hoz="space-between"
     >
       <Grid padding="20px">
-        <Text color="darkGray">
-          {userInfo &&
-            moment
-              .utc(userInfo.startDate)
-              .add(9, 'hours')
-              .format('MM. DD')}{' '}
-          -{' '}
-          {userInfo &&
-            moment.utc(userInfo.endDate).add(9, 'hours').format('MM. DD')}
-        </Text>
+        <Grid isFlex hoz="space-between" ver="center">
+          <Text color="darkGray">
+            {userInfo &&
+              moment
+                .utc(userInfo.startDate)
+                .add(9, 'hours')
+                .format('MM. DD')}{' '}
+            -{' '}
+            {userInfo &&
+              moment.utc(userInfo.endDate).add(9, 'hours').format('MM. DD')}
+          </Text>
+          <Grid margin="0 0 0 0" width="auto">
+            {Tags &&
+              Tags.map((item, idx) => {
+                return (
+                  <Tag list={Tags} key={idx}>
+                    {item}
+                  </Tag>
+                );
+              })}
+          </Grid>
+        </Grid>
         <MainTitle fs="la">
           {userInfo && userInfo.region} {userInfo && userInfo.city}
         </MainTitle>
