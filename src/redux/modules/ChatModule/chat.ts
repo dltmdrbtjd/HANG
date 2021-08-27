@@ -22,7 +22,6 @@ const fetchGetChatRoomList = createAsyncThunk(
     try {
       const { data } = await apis.GetChatRoom();
       const payload = data.result;
-      console.log(data);
 
       return payload;
     } catch (err) {

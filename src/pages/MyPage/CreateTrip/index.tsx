@@ -158,6 +158,7 @@ const CreateTrip = () => {
                 cursor="pointer"
                 tabFont="lg"
                 padding="7px 19px"
+                margin="0 8px 8px 0"
                 list={tripKeyword}
                 active={tags.includes(idx)}
                 _onClick={() => selectTags(idx)}
