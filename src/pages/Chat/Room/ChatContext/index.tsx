@@ -29,13 +29,10 @@ const useProviderChatLogs = () => {
   const [chatLogs, setChatLogs] = React.useState<ChatLogType[]>([]);
   const [inputBoxHeight, setInputBoxHeight] = React.useState<number>(90);
 
-  const chatLogState = React.useMemo(
-    () => ({
-      chatLogs,
-      setChatLogs,
-    }),
-    [chatLogs],
-  );
+  const chatLogState = {
+    chatLogs,
+    setChatLogs,
+  };
 
   const inputBoxHeightState = React.useMemo(
     () => ({
@@ -67,6 +64,7 @@ const ChatContext = ({ children }) => {
 
   React.useEffect(() => {
     if (alarmCount > 0) dispatch(ChatAlarmCheck(alarmCount - unchecked));
+    console.log('chat context 호출');
 
     socket.emit('join', {
       joiningUserPk: userPk,
@@ -85,6 +83,7 @@ const ChatContext = ({ children }) => {
     });
 
     return () => {
+      console.log('chat context leave');
       socket.emit('leave', { roomName, userPk });
     };
   }, []);

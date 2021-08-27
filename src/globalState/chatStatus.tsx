@@ -12,9 +12,14 @@ import {
 // type
 import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // signin status
-import { signInStatus } from './signInStatus';
+import { signInStatus } from 'src/context/signInContext';
 
 export const chatLogStatus = React.createContext(null);
+
+interface NewRoomType {
+  nickname: string;
+  profileImg: string;
+}
 
 const ChatStatus = ({ children }) => {
   const dispatch = useDispatch();
@@ -30,19 +35,18 @@ const ChatStatus = ({ children }) => {
 
   const { isLogIn } = React.useContext(signInStatus);
 
-  const createChatRoom = React.useCallback(
-    (data) => {
-      dispatch(
-        CreateChatRoom({
-          lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
-          unchecked: 1,
-          targetPk: chatLog.userPk,
-          ...data,
-        }),
-      );
-    },
-    [chatLog],
-  );
+  const newRoom = (userInfo: NewRoomType) => {
+    dispatch(
+      CreateChatRoom({
+        lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
+        unchecked: 1,
+        targetPk: chatLog.userPk,
+        ...userInfo,
+      }),
+    );
+  };
+
+  const createChatRoom = React.useMemo(() => newRoom, [chatLog]);
 
   React.useEffect(() => {
     if (isLogIn) {
@@ -66,11 +70,7 @@ const ChatStatus = ({ children }) => {
       socket.emit('newRoom', { targetPk: chatLog.userPk });
   }, [chatLog]);
 
-  return (
-    <chatLogStatus.Provider value={{ count: 0 }}>
-      {children}
-    </chatLogStatus.Provider>
-  );
+  return <>{children}</>;
 };
 
 export default ChatStatus;

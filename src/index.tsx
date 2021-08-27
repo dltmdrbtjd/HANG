@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 // theme
 import GlobalThemeProvider from './styles/GlobalThemeProvider';
 // global state
-import SignInStatus from './globalState/signInStatus';
+import SignInStatus from './context/signInContext';
 
 ReactDOM.render(
   <Provider store={store}>

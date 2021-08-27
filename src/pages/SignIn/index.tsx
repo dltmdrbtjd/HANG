@@ -10,7 +10,7 @@ import apis from 'src/shared/api';
 import TermsOfUse from 'src/components/TermsOfUse';
 import { history } from 'src/redux/configureStore';
 // context
-import { signInStatus } from 'src/globalState/signInStatus';
+import { signInStatus } from 'src/context/signInContext';
 // elements
 import {
   Logo,
