@@ -4,6 +4,7 @@ import moment from 'moment';
 // style, component
 import { Grid, Text, MainTitle, Button } from 'src/elements';
 import { textOverflowWrap } from 'src/styles/Mixin';
+import { TagsBox } from 'src/styles/Mixin/boxStyle';
 import Modal from '../Modal';
 
 import { tendencyKeyword, mbti } from '../Tag/tagList';
@@ -107,7 +108,7 @@ const EventCard = ({
             {userInfo &&
               moment.utc(userInfo.endDate).add(9, 'hours').format('MM. DD')}
           </Text>
-          <Grid margin="0 0 0 0" width="auto">
+          <Grid margin="0 0 0 0" width="auto" addstyle={TagsBox}>
             {Tags &&
               Tags.map((item, idx) => {
                 return (

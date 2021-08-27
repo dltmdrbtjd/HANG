@@ -68,4 +68,13 @@ const limitWidth = (width: string) => {
   `;
 };
 
-export { flexBox, floatBox, borderBox, outlineBox, limitWidth };
+const TagsBox = css`
+  overflow: scroll;
+  white-space: nowrap;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export { flexBox, floatBox, borderBox, outlineBox, limitWidth, TagsBox };
