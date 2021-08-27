@@ -1,4 +1,6 @@
 import React from 'react';
+// socket
+import { SocketContext } from 'src/context/socket';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -10,7 +12,6 @@ import {
 // type
 import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // signin status
-import { SocketContext } from 'src/context/socket';
 import { signInStatus } from './signInStatus';
 
 export const chatLogStatus = React.createContext(null);
@@ -39,12 +40,7 @@ const ChatStatus = ({ children }) => {
         setChatLog(data);
         dispatch(ChatHistoryUpdate(data));
       });
-    }
-  }, [isLogIn]);
 
-  React.useEffect(() => {
-    if (chatLog.userPk && !userPkList.includes(chatLog.userPk)) {
-      socket.emit('newRoom', { targetPk: chatLog.userPk });
       socket.on('newRoom', (data) => {
         dispatch(
           CreateChatRoom({
@@ -56,6 +52,11 @@ const ChatStatus = ({ children }) => {
         );
       });
     }
+  }, [isLogIn]);
+
+  React.useEffect(() => {
+    if (chatLog.userPk && !userPkList.includes(chatLog.userPk))
+      socket.emit('newRoom', { targetPk: chatLog.userPk });
   }, [chatLog]);
 
   return (
