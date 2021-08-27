@@ -14,6 +14,7 @@ import apis from 'src/shared/api';
 import socketIOClient from 'socket.io-client';
 // style
 import ToastMessage from 'src/components/ToastMessage';
+import { SocketContext } from 'src/context/socket';
 import {
   Grid,
   MainTitle,
@@ -36,8 +37,7 @@ const GuideRequest = () => {
     shallowEqual,
   );
 
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = socketIOClient(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const [checked, setChecked] = React.useState<number>(0);
   const [index, setIndex] = React.useState<number>(0);

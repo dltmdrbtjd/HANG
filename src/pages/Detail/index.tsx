@@ -10,6 +10,7 @@ import { setUserInfo } from 'src/shared/userInfo';
 // socket
 import socketIOClient from 'socket.io-client';
 // redux
+import { SocketContext } from 'src/context/socket';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import {
@@ -33,8 +34,7 @@ import chat from '../../Images/NavigationIcons/onchat.svg';
 const Detail = () => {
   const dispatch = useDispatch();
 
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = socketIOClient(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const { eventList, userInfo, message }: any = useTypedSelector(
     (state) => ({
