@@ -19,14 +19,6 @@ const ChatStatus = ({ children }) => {
 
   const socket = React.useContext(SocketContext);
 
-  const [chatLog, setChatLog] = React.useState<NewMessage>({
-    userPk: null,
-    message: null,
-    time: null,
-  });
-
-  const chatLogMemorize = React.useMemo(() => chatLog, [chatLog]);
-
   const { isLogIn } = React.useContext(signInStatus);
 
   React.useEffect(() => {
@@ -36,14 +28,13 @@ const ChatStatus = ({ children }) => {
       });
 
       socket.on('newMessage', (data: NewMessage) => {
-        setChatLog(data);
         dispatch(ChatHistoryUpdate(data));
       });
     }
   }, [isLogIn]);
 
   return (
-    <chatLogStatus.Provider value={chatLogMemorize}>
+    <chatLogStatus.Provider value={{ count: 0 }}>
       {children}
     </chatLogStatus.Provider>
   );

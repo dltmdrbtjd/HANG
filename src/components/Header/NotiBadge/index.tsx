@@ -42,7 +42,11 @@ const NotiBadge = () => {
         })
         .catch((err) => console.log(err));
     }
-  }, [isLogIn]);
+
+    return () => {
+      socket.off('requested');
+    };
+  }, []);
 
   return (
     <Button form="text" arialabel="badge">

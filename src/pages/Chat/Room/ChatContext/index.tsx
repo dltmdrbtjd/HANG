@@ -5,10 +5,7 @@ import { getUserInfo } from 'src/shared/userInfo';
 import { SocketContext } from 'src/context/socket';
 // redux
 import { useDispatch } from 'react-redux';
-import {
-  CheckChatAlarm,
-  CreateChatRoom,
-} from 'src/redux/modules/ChatModule/chat';
+import { CheckChatAlarm } from 'src/redux/modules/ChatModule/chat';
 
 export const chatStatus = React.createContext(null);
 
@@ -81,6 +78,8 @@ const ChatContext = ({ children }) => {
 
     return () => {
       socket.emit('leave', { roomName, userPk });
+      socket.off('chatLogs');
+      socket.off('updateMessage');
     };
   }, []);
 

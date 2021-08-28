@@ -30,4 +30,5 @@ export interface ChatState {
   alarmCount: number;
   list: ReadChatInfo[];
   loading: boolean;
+  newMessage: NewMessage;
 }

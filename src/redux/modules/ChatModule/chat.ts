@@ -14,6 +14,11 @@ export const initialState: ChatState = {
   alarmCount: 0,
   list: [],
   loading: false,
+  newMessage: {
+    userPk: null,
+    message: null,
+    time: null,
+  },
 };
 
 const fetchGetChatRoomList = createAsyncThunk(
@@ -64,7 +69,19 @@ const chatSlice = createSlice({
     },
 
     CreateChatRoom: (state, action) => {
-      state.list.unshift(action.payload);
+      const newChatRoom = {
+        lastChat: [
+          {
+            message: state.newMessage.message,
+            curTime: state.newMessage.time,
+          },
+        ],
+        unchecked: 1,
+        targetPk: state.newMessage.userPk,
+        ...action.payload,
+      };
+
+      state.list.unshift(newChatRoom);
       state.alarmCount += 1;
     },
 
@@ -73,6 +90,8 @@ const chatSlice = createSlice({
       const roomIdx = state.list.findIndex(
         (room) => room.targetPk === chatLog.userPk,
       );
+
+      state.newMessage = chatLog;
 
       if (roomIdx === -1) return;
 
@@ -90,6 +109,11 @@ const chatSlice = createSlice({
 
       state.list.splice(roomIdx, 1);
       state.list.unshift(updateRoom);
+
+      if (state.alarmCount <= 0) {
+        state.alarmCount = 1;
+        return;
+      }
 
       state.alarmCount += 1;
     },
