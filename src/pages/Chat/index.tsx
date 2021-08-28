@@ -1,10 +1,17 @@
 import React from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
-import { ChatCreators } from 'src/redux/modules/ChatModule/chat';
+import {
+  ChatCreators,
+  CreateChatRoom,
+  getUserPkList,
+} from 'src/redux/modules/ChatModule/chat';
 // type
 import { ReadChatInfo, LastChat } from 'src/redux/modules/ChatModule/type';
+// socket
+import { SocketContext } from 'src/context/socket';
+import { chatLogStatus } from 'src/globalState/chatStatus';
 // time
 import timeFormat from 'src/util/timeFormat';
 // elements
@@ -16,10 +23,37 @@ import NoInfo from '../../components/NoInfo';
 const Chat = () => {
   const dispatch = useDispatch();
   const roomList: any = useTypedSelector((state) => state.chat.list);
+  const userPkList: number[] = useSelector(getUserPkList);
+
+  const { userPk, message, time } = React.useContext(chatLogStatus);
+  const socket = React.useContext(SocketContext);
+  console.log(userPk, message, time);
 
   React.useEffect(() => {
     dispatch(ChatCreators.fetchGetChatRoomList());
+
+    socket.on('newRoom', (data) => {
+      dispatch(
+        CreateChatRoom({
+          lastChat: [{ message, curTime: time }],
+          unchecked: 1,
+          targetPk: userPk,
+          ...data,
+        }),
+      );
+    });
+
+    return () => {
+      socket.off('newRoom', () => {
+        console.log('new room off');
+      });
+    };
   }, []);
+
+  React.useEffect(() => {
+    if (userPk && !userPkList.includes(userPk))
+      socket.emit('newRoom', { targetPk: userPk });
+  }, [userPk]);
 
   return (
     <Container padding="66px 0 80px">
