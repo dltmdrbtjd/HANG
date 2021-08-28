@@ -11,7 +11,6 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // apis , socket
 import apis from 'src/shared/api';
-// import { SocketContext } from 'src/context/socket';
 import io from 'socket.io-client';
 import {
   Grid,

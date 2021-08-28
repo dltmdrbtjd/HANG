@@ -2,7 +2,6 @@ import React from 'react';
 // user info
 import { getUserInfo } from 'src/shared/userInfo';
 // socket
-import { SocketContext } from 'src/context/socket';
 import io from 'socket.io-client';
 // redux
 import { useDispatch } from 'react-redux';
