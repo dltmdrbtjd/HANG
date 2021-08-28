@@ -10,6 +10,7 @@ import { history } from 'src/redux/configureStore';
 // apis
 import apis from 'src/shared/api';
 // elements
+import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import {
   Grid,
   MainTitle,
@@ -22,7 +23,6 @@ import {
 // components
 import Calendar from './Calendar';
 import AreaSelectBox from '../../../components/AreaSelectBox';
-import ToastMessage from '../../../components/ToastMessage';
 import Tag from '../../../components/Tag';
 import { tripKeyword } from '../../../components/Tag/tagList';
 // style
@@ -80,6 +80,9 @@ const CreateTrip = () => {
     apis
       .CreateTripEvent(trip)
       .then(({ data }) => {
+        dispatch(
+          fetchMessage({ Message: true, text: '여행 등록이 완료되었습니다.' }),
+        );
         dispatch(CreateTripEvent({ ...trip, tripId: data.newTripId }));
       })
       .then(() => {
@@ -195,8 +198,6 @@ const CreateTrip = () => {
       >
         등록하기
       </Button>
-
-      <ToastMessage msg="" />
     </Container>
   );
 };
