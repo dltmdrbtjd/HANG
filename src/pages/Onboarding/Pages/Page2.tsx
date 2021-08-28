@@ -9,9 +9,8 @@ import {
   Container,
 } from '../../../elements';
 // style
-import { CalcHeight } from '../style';
+import { CalcHeight, OnboardingImageSize } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
-import { limitWidth } from '../../../styles/Mixin';
 
 const Page2 = () => {
   return (
@@ -36,7 +35,7 @@ const Page2 = () => {
           <br /> 동네 구석구석 여행해 보세요
         </Text>
 
-        <Grid height="calc(100% - 210px)">
+        <Grid height="calc(100% - 210px)" addstyle={OnboardingImageSize}>
           <a
             target="_blank"
             rel="noreferrer"
@@ -44,9 +43,8 @@ const Page2 = () => {
           >
             Menu vector created by pikisuperstar - www.freepik.com
             <Image
-              width="auto"
+              width="100%"
               height="100%"
-              addstyle={limitWidth('100%')}
               src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/onboarding/onboarding2.png"
             />
           </a>

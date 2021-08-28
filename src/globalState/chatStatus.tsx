@@ -14,8 +14,6 @@ import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // signin status
 import { signInStatus } from 'src/context/signInContext';
 
-export const chatLogStatus = React.createContext(null);
-
 interface NewRoomType {
   nickname: string;
   profileImg: string;
