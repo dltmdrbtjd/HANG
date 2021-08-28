@@ -5,7 +5,10 @@ import { getUserInfo } from 'src/shared/userInfo';
 import { SocketContext } from 'src/context/socket';
 // redux
 import { useDispatch } from 'react-redux';
-import { CheckChatAlarm } from 'src/redux/modules/ChatModule/chat';
+import {
+  CheckChatAlarm,
+  CreateChatRoom,
+} from 'src/redux/modules/ChatModule/chat';
 
 export const chatStatus = React.createContext(null);
 
@@ -47,6 +50,7 @@ const useProviderChatLogs = () => {
 
 const ChatContext = ({ children }) => {
   const chat = useProviderChatLogs();
+
   const { roomName, chatLogState } = chat;
 
   const { targetPk } = getUserInfo('targetUserInfo');
@@ -58,7 +62,6 @@ const ChatContext = ({ children }) => {
 
   React.useEffect(() => {
     dispatch(CheckChatAlarm(targetPk));
-    console.log('chat context 호출');
 
     socket.emit('join', {
       joiningUserPk: userPk,
@@ -77,7 +80,6 @@ const ChatContext = ({ children }) => {
     });
 
     return () => {
-      console.log('chat context leave');
       socket.emit('leave', { roomName, userPk });
     };
   }, []);

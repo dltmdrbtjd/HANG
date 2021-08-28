@@ -48,11 +48,14 @@ const chatSlice = createSlice({
       const roomIdx = state.list.findIndex(
         (room) => room.targetPk === action.payload,
       );
+
+      if (roomIdx === -1) return;
+
       const targetRoom = state.list[roomIdx];
 
       state.list[roomIdx] = { ...targetRoom, unchecked: 0 };
 
-      if (state.alarmCount <= 0) {
+      if (state.alarmCount - targetRoom.unchecked <= 0) {
         state.alarmCount = 0;
         return;
       }
@@ -71,7 +74,7 @@ const chatSlice = createSlice({
         (room) => room.targetPk === chatLog.userPk,
       );
 
-      if (roomIdx !== -1) return;
+      if (roomIdx === -1) return;
 
       const targetRoom = state.list[roomIdx];
       const updateRoom = {

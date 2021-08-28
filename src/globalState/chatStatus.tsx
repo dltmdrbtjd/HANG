@@ -2,11 +2,9 @@ import React from 'react';
 // socket
 import { SocketContext } from 'src/context/socket';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
-  getUserPkList,
   ChatHistoryUpdate,
-  CreateChatRoom,
   ChatAlarmCheck,
 } from 'src/redux/modules/ChatModule/chat';
 // type
@@ -14,9 +12,10 @@ import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // signin status
 import { signInStatus } from 'src/context/signInContext';
 
+export const chatLogStatus = React.createContext(null);
+
 const ChatStatus = ({ children }) => {
   const dispatch = useDispatch();
-  const userPkList: number[] = useSelector(getUserPkList);
 
   const socket = React.useContext(SocketContext);
 
@@ -25,6 +24,8 @@ const ChatStatus = ({ children }) => {
     message: null,
     time: null,
   });
+
+  const chatLogMemorize = React.useMemo(() => chatLog, [chatLog]);
 
   const { isLogIn } = React.useContext(signInStatus);
 
@@ -38,26 +39,14 @@ const ChatStatus = ({ children }) => {
         setChatLog(data);
         dispatch(ChatHistoryUpdate(data));
       });
-
-      socket.on('newRoom', (data) => {
-        dispatch(
-          CreateChatRoom({
-            lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
-            unchecked: 1,
-            targetPk: chatLog.userPk,
-            ...data,
-          }),
-        );
-      });
     }
   }, [isLogIn]);
 
-  React.useEffect(() => {
-    if (chatLog.userPk && !userPkList.includes(chatLog.userPk))
-      socket.emit('newRoom', { targetPk: chatLog.userPk });
-  }, [chatLog]);
-
-  return <>{children}</>;
+  return (
+    <chatLogStatus.Provider value={chatLogMemorize}>
+      {children}
+    </chatLogStatus.Provider>
+  );
 };
 
 export default ChatStatus;
