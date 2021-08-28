@@ -35,26 +35,20 @@ import { NavigationIcons, NavigationStyle } from './style';
 import '../Header/NotiBadge/style.css';
 // path
 import { HeaderIncluded } from '../../route/Path';
-// signin status
-import { signInStatus } from '../../context/signInContext';
 
 const Navigation = () => {
   const dispatch = useDispatch();
   const path: string = useLocation().pathname;
   const chatAlarmChecked = useTypedSelector((state) => state.chat.alarmCount);
 
-  const { isLogIn } = React.useContext(signInStatus);
-
   React.useEffect(() => {
-    if (isLogIn) {
-      socket.on('unchecked', () => {
-        dispatch(ChatAlarmCheck());
-      });
+    socket.on('unchecked', () => {
+      dispatch(ChatAlarmCheck());
+    });
 
-      socket.on('newMessage', (data: NewMessage) => {
-        dispatch(ChatHistoryUpdate(data));
-      });
-    }
+    socket.on('newMessage', (data: NewMessage) => {
+      dispatch(ChatHistoryUpdate(data));
+    });
   }, []);
 
   return HeaderIncluded.includes(path) ? (

@@ -10,9 +10,7 @@ import { AddBlockList } from 'src/redux/modules/MyPageModule/mypage';
 import { history } from 'src/redux/configureStore';
 // user info
 import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
-// context
-// import io from 'socket.io-client';
-// import { SocketContext } from 'src/context/socket';
+// socket
 import { socket } from 'src/util/socket';
 import { chatStatus } from '../ChatContext';
 // elements
@@ -34,8 +32,6 @@ const weekdays = [
   '금요일',
   '토요일',
 ];
-
-// const socket = React.useContext(SocketContext);
 
 const ChatRoomWrapper = () => {
   const { roomName } = React.useContext(chatStatus);
