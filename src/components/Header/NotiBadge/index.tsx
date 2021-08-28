@@ -28,8 +28,6 @@ const NotiBadge = () => {
   };
   const socket = io('https://soujinko.shop');
 
-  // const socket = React.useContext(SocketContext);
-
   React.useEffect(() => {
     socket.emit('login', { uid: userPk });
     socket.on('requested', (data) => {

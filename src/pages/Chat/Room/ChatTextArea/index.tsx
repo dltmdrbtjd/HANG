@@ -13,7 +13,6 @@ import { ChatInputArea } from '../style';
 const socket = io('https://soujinko.shop');
 
 const ChatTextArea = () => {
-  // const socket = React.useContext(SocketContext);
   const { roomName, inputBoxHeightState } = React.useContext(chatStatus);
 
   const { userPk } = getUserInfo('userInfo');

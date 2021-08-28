@@ -5,13 +5,11 @@ import { useTypedSelector } from 'src/redux/configureStore';
 import {
   ChatCreators,
   CreateChatRoom,
-  getUserPkList,
+  getRoomIdx,
 } from 'src/redux/modules/ChatModule/chat';
 // type
 import { ReadChatInfo, LastChat } from 'src/redux/modules/ChatModule/type';
 // socket
-// import { chatLogStatus } from 'src/globalState/chatStatus';
-// import { SocketContext } from 'src/context/socket';
 import io from 'socket.io-client';
 // time
 import timeFormat from 'src/util/timeFormat';
@@ -27,10 +25,10 @@ const Chat = () => {
   const dispatch = useDispatch();
   const roomList: any = useTypedSelector((state) => state.chat.list);
   const { userPk } = useTypedSelector((state) => state.chat.newMessage);
-  const userPkList: number[] = useSelector(getUserPkList);
+  const roomIdx = useSelector(getRoomIdx);
 
   React.useEffect(() => {
-    if (userPk && !userPkList.includes(userPk)) {
+    if (userPk && roomIdx === -1) {
       socket.emit('newRoom', { targetPk: userPk });
     }
   }, [userPk]);

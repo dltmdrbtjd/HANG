@@ -55,8 +55,6 @@ const ChatContext = ({ children }) => {
   const { targetPk } = getUserInfo('targetUserInfo');
   const { userPk, nickname } = getUserInfo('userInfo');
 
-  // const socket = React.useContext(SocketContext);
-
   const dispatch = useDispatch();
 
   React.useEffect(() => {
