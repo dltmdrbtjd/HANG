@@ -21,6 +21,7 @@ import { Grid, Text, Container } from '../../../../elements';
 import RoomHeader from '../RoomHeader';
 import SpeechBubble from '../SpeechBubble';
 import ChatTextArea from '../ChatTextArea';
+import Modal from '../../../../components/Modal';
 // style
 import { WarningText } from '../style';
 
@@ -38,12 +39,13 @@ const weekdays = [
 
 const ChatRoomWrapper = () => {
   const { roomName } = React.useContext(chatStatus);
+  const [open, setOpen] = React.useState<boolean>(false);
 
   const dispatch = useDispatch();
 
   const targetUserInfo = getUserInfo('targetUserInfo');
   const { userPk } = getUserInfo('userInfo');
-  const { targetPk } = targetUserInfo;
+  const { targetPk, nickname } = targetUserInfo;
 
   const QuitRoom = () => {
     socket.emit('quit', { roomName, userPk });
@@ -82,7 +84,7 @@ const ChatRoomWrapper = () => {
 
   return (
     <>
-      <RoomHeader methods={[QuitRoom, () => {}]} />
+      <RoomHeader methods={[QuitRoom, () => setOpen(true)]} />
 
       <div ref={containerRef}>
         <Container>
@@ -111,6 +113,16 @@ const ChatRoomWrapper = () => {
           </Grid>
         </Container>
       </div>
+
+      <Modal
+        open={open}
+        close={() => setOpen(false)}
+        mainText="차단하기"
+        subText={`${nickname} 님을`}
+        subText2="차단 하시겠습니까?"
+        agreeText="확인"
+        agree={BlockUser}
+      />
     </>
   );
 };

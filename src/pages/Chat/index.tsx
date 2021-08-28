@@ -10,10 +10,7 @@ import {
 // type
 import { ReadChatInfo, LastChat } from 'src/redux/modules/ChatModule/type';
 // socket
-// import { chatLogStatus } from 'src/globalState/chatStatus';
-// import { SocketContext } from 'src/context/socket';
 import { socket } from 'src/util/socket';
-// import io from 'socket.io-client';
 // time
 import timeFormat from 'src/util/timeFormat';
 // elements
@@ -22,19 +19,16 @@ import { Container } from '../../elements';
 import ChatCard from './ChatCard';
 import NoInfo from '../../components/NoInfo';
 
-// const socket = React.useContext(SocketContext);
-
 const Chat = () => {
   const dispatch = useDispatch();
   const roomList: any = useTypedSelector((state) => state.chat.list);
-  const { userPk } = useTypedSelector((state) => state.chat.newMessage);
+  const newMessage = useTypedSelector((state) => state.chat.newMessage);
   const roomIdx = useSelector(getRoomIdx);
 
   React.useEffect(() => {
-    if (userPk && roomIdx === -1) {
-      socket.emit('newRoom', { targetPk: userPk });
-    }
-  }, [userPk]);
+    if (newMessage.userPk && roomIdx === -1)
+      socket.emit('newRoom', { targetPk: newMessage.userPk });
+  }, [newMessage]);
 
   React.useEffect(() => {
     dispatch(ChatCreators.fetchGetChatRoomList());

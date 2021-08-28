@@ -46,12 +46,12 @@ const RoomHeader = ({ methods }) => {
             </Grid>
           </Grid>
 
-          {/* <DropDown
+          <DropDown
             icon={<MoreVertIcon />}
             contents={['채팅방 나가기', '차단하고 나가기']}
             methods={methods}
             top="70px"
-          /> */}
+          />
         </Grid>
       </Container>
     </HeaderStyle>
