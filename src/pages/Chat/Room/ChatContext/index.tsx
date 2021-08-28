@@ -2,8 +2,6 @@ import React from 'react';
 // user info
 import { getUserInfo } from 'src/shared/userInfo';
 // socket
-// import io from 'socket.io-client';
-// import { SocketContext } from 'src/context/socket';
 import { socket } from 'src/util/socket';
 // redux
 import { useDispatch } from 'react-redux';
@@ -16,8 +14,6 @@ export interface ChatLogType {
   message: string;
   userPk: number;
 }
-
-// const socket = React.useContext(SocketContext);
 
 const useProviderChatLogs = () => {
   const { targetPk } = getUserInfo('targetUserInfo');

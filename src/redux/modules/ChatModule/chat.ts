@@ -69,12 +69,6 @@ const chatSlice = createSlice({
     },
 
     CreateChatRoom: (state, action) => {
-      const roomIdx = state.list.findIndex(
-        (room) => room.targetPk === state.newMessage.userPk,
-      );
-
-      if (roomIdx !== -1) return;
-
       const newChatRoom = {
         lastChat: [
           {
