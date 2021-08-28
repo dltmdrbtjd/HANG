@@ -10,7 +10,10 @@ import {
 // type
 import { ReadChatInfo, LastChat } from 'src/redux/modules/ChatModule/type';
 // socket
-import io from 'socket.io-client';
+// import { chatLogStatus } from 'src/globalState/chatStatus';
+// import { SocketContext } from 'src/context/socket';
+import { socket } from 'src/util/socket';
+// import io from 'socket.io-client';
 // time
 import timeFormat from 'src/util/timeFormat';
 // elements
@@ -19,7 +22,7 @@ import { Container } from '../../elements';
 import ChatCard from './ChatCard';
 import NoInfo from '../../components/NoInfo';
 
-const socket = io('https://soujinko.shop');
+// const socket = React.useContext(SocketContext);
 
 const Chat = () => {
   const dispatch = useDispatch();
