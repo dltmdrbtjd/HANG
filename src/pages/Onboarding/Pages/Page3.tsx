@@ -13,9 +13,8 @@ import {
   Container,
 } from '../../../elements';
 // style
-import { CalcHeight } from '../style';
+import { CalcHeight, OnboardingImageSize } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
-import { limitWidth } from '../../../styles/Mixin';
 
 const Page3 = () => {
   const [terms, setTerms] = React.useState<boolean>(false);
@@ -38,7 +37,11 @@ const Page3 = () => {
           당신만의 행복한 여행을 만들러 갈까요?
         </Text>
 
-        <Grid height="calc(100% - 280px)" margin="30px 0">
+        <Grid
+          height="calc(100% - 280px)"
+          margin="30px 0"
+          addstyle={OnboardingImageSize}
+        >
           <a
             target="_blank"
             rel="noreferrer"
@@ -46,9 +49,8 @@ const Page3 = () => {
           >
             People vector created by stories - www.freepik.com
             <Image
-              width="auto"
+              width="100%"
               height="100%"
-              addstyle={limitWidth('100%')}
               src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/onboarding/onboarding3.png"
             />
           </a>

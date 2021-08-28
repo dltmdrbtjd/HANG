@@ -1,6 +1,6 @@
 import React from 'react';
 // global state
-import { signInStatus } from 'src/globalState/signInStatus';
+import { signInStatus } from 'src/context/signInContext';
 // material
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';

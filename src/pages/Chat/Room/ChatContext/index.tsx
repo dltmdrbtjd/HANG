@@ -4,12 +4,8 @@ import { getUserInfo } from 'src/shared/userInfo';
 // socket
 import { SocketContext } from 'src/context/socket';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
-import { useTypedSelector } from 'src/redux/configureStore';
-import {
-  getUnchecked,
-  ChatAlarmCheck,
-} from 'src/redux/modules/ChatModule/chat';
+import { useDispatch } from 'react-redux';
+import { CheckChatAlarm } from 'src/redux/modules/ChatModule/chat';
 
 export const chatStatus = React.createContext(null);
 
@@ -29,13 +25,10 @@ const useProviderChatLogs = () => {
   const [chatLogs, setChatLogs] = React.useState<ChatLogType[]>([]);
   const [inputBoxHeight, setInputBoxHeight] = React.useState<number>(90);
 
-  const chatLogState = React.useMemo(
-    () => ({
-      chatLogs,
-      setChatLogs,
-    }),
-    [chatLogs],
-  );
+  const chatLogState = {
+    chatLogs,
+    setChatLogs,
+  };
 
   const inputBoxHeightState = React.useMemo(
     () => ({
@@ -62,11 +55,10 @@ const ChatContext = ({ children }) => {
   const socket = React.useContext(SocketContext);
 
   const dispatch = useDispatch();
-  const alarmCount = useTypedSelector((state) => state.chat.alarmCount);
-  const unchecked: number = useSelector(getUnchecked(targetPk));
 
   React.useEffect(() => {
-    if (alarmCount > 0) dispatch(ChatAlarmCheck(alarmCount - unchecked));
+    dispatch(CheckChatAlarm(targetPk));
+    console.log('chat context 호출');
 
     socket.emit('join', {
       joiningUserPk: userPk,
@@ -85,6 +77,7 @@ const ChatContext = ({ children }) => {
     });
 
     return () => {
+      console.log('chat context leave');
       socket.emit('leave', { roomName, userPk });
     };
   }, []);

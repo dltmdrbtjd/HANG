@@ -15,6 +15,10 @@ const Transition = css`
 const CalcHeight = css`
   width: 100vw;
   height: calc(100vh - 70px);
+`;
+
+const OnboardingImageSize = css`
+  max-height: 800px;
 
   a {
     text-indent: -9999px;
@@ -25,7 +29,7 @@ const CalcHeight = css`
   }
 
   img {
-    max-height: 600px;
+    object-fit: contain;
   }
 `;
 
@@ -37,4 +41,4 @@ const PageMoveArrowStyle = css<Prop>`
   }
 `;
 
-export { Transition, CalcHeight, PageMoveArrowStyle };
+export { Transition, CalcHeight, OnboardingImageSize, PageMoveArrowStyle };

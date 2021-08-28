@@ -29,12 +29,19 @@ const ChatTextArea = () => {
       }px`;
 
       inputBoxHeightState.setInputBoxHeight(
-        textAreaRef.current.style.height !== 'auto'
-          ? parseInt(textAreaRef.current.style.height, 10) + 70
-          : 90,
+        textAreaRef.current.style.height === 'auto'
+          ? 90
+          : parseInt(textAreaRef.current.style.height, 10) + 70,
       );
     }
   }, []);
+
+  const handleTextAreaInitailized = () => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = 'auto';
+      inputBoxHeightState.setInputBoxHeight(90);
+    }
+  };
 
   const sendMessage = () => {
     if (message) {
@@ -75,6 +82,7 @@ const ChatTextArea = () => {
             if (!e.shiftKey) {
               e.preventDefault();
               sendMessage();
+              handleTextAreaInitailized();
             }
           }
         }}
