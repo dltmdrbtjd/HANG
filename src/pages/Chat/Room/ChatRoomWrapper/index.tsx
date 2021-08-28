@@ -1,5 +1,4 @@
 import React from 'react';
-// socket
 // moment
 import moment from 'moment';
 // apis
@@ -38,7 +37,6 @@ const weekdays = [
 // const socket = React.useContext(SocketContext);
 
 const ChatRoomWrapper = () => {
-  // const socket = React.useContext(SocketContext);
   const { roomName } = React.useContext(chatStatus);
 
   const dispatch = useDispatch();

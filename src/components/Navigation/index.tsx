@@ -1,8 +1,17 @@
 import React from 'react';
 // material
 import Badge from '@material-ui/core/Badge';
+// socket
+import io from 'socket.io-client';
 // redux
 import { history, useTypedSelector } from 'src/redux/configureStore';
+import { useDispatch } from 'react-redux';
+import {
+  ChatHistoryUpdate,
+  ChatAlarmCheck,
+} from 'src/redux/modules/ChatModule/chat';
+// type
+import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // router
 import { useLocation } from 'react-router';
 // serach
@@ -26,10 +35,29 @@ import { NavigationIcons, NavigationStyle } from './style';
 import '../Header/NotiBadge/style.css';
 // path
 import { HeaderIncluded } from '../../route/Path';
+// signin status
+import { signInStatus } from '../../context/signInContext';
+
+const socket = io('https://soujinko.shop');
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const path: string = useLocation().pathname;
   const chatAlarmChecked = useTypedSelector((state) => state.chat.alarmCount);
+
+  const { isLogIn } = React.useContext(signInStatus);
+
+  React.useEffect(() => {
+    socket.on('unchecked', () => {
+      console.log('useEffect 발생');
+      dispatch(ChatAlarmCheck());
+    });
+
+    socket.on('newMessage', (data: NewMessage) => {
+      console.log('new message on');
+      dispatch(ChatHistoryUpdate(data));
+    });
+  }, []);
 
   return HeaderIncluded.includes(path) ? (
     <Grid

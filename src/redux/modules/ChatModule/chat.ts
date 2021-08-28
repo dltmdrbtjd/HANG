@@ -69,6 +69,12 @@ const chatSlice = createSlice({
     },
 
     CreateChatRoom: (state, action) => {
+      const roomIdx = state.list.findIndex(
+        (room) => room.targetPk === state.newMessage.userPk,
+      );
+
+      if (roomIdx !== -1) return;
+
       const newChatRoom = {
         lastChat: [
           {
@@ -163,12 +169,15 @@ const chatSlice = createSlice({
   },
 });
 
-export const getUserPkList = createSelector(
+export const getRoomIdx = createSelector(
   (state: RootState) => state.chat.list,
-  (chatInfoList) => {
-    const userPkList = chatInfoList.map((chatInfo) => chatInfo.targetPk);
+  (state: RootState) => state.chat.newMessage,
+  (chatInfoList, newMessage) => {
+    const roomIdx = chatInfoList.findIndex(
+      (room) => room.targetPk === newMessage.userPk,
+    );
 
-    return userPkList;
+    return roomIdx;
   },
 );
 

@@ -15,7 +15,6 @@ import Alert from './components/Alert';
 import { getUserInfo } from './shared/userInfo';
 import { signInStatus } from './context/signInContext';
 // global state
-import ChatStatus from './globalState/chatStatus';
 import ToastMessage from './components/ToastMessage';
 
 const App = (): React.ReactElement => {
@@ -34,15 +33,13 @@ const App = (): React.ReactElement => {
 
   return (
     <ConnectedRouter history={history}>
-      <ChatStatus>
-        <Header />
+      <Header />
 
-        <Route />
-        <Navigation />
+      <Route />
+      <Navigation />
 
-        <Alert />
-        <ToastMessage />
-      </ChatStatus>
+      <Alert />
+      <ToastMessage />
     </ConnectedRouter>
   );
 };
