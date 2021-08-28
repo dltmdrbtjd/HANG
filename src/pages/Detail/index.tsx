@@ -8,7 +8,10 @@ import apis from 'src/shared/api';
 // user info
 import { setUserInfo } from 'src/shared/userInfo';
 // redux
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+// import { SocketContext } from 'src/context/socket';
+// import { socket } from 'src/context/socket';
+import { socket } from 'src/util/socket';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import {
@@ -28,7 +31,7 @@ import { setMediaCardLayout } from '../../styles/Media';
 // image
 import chat from '../../Images/NavigationIcons/onchat.svg';
 
-const socket = io('https://soujinko.shop');
+// const socket = React.useContext(SocketContext);
 
 const Detail = () => {
   const dispatch = useDispatch();

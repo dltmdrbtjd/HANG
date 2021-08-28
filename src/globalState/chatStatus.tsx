@@ -1,7 +1,8 @@
 import React from 'react';
 // socket
 // import { SocketContext } from 'src/context/socket';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+import { socket } from 'src/util/socket';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -15,7 +16,7 @@ import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // signin status
 import { signInStatus } from 'src/context/signInContext';
 
-const socket = io('https://soujinko.shop');
+// const socket = React.useContext(SocketContext);
 
 const ChatStatus = ({ children }) => {
   const dispatch = useDispatch();

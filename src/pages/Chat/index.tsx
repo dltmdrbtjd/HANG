@@ -12,7 +12,8 @@ import { ReadChatInfo, LastChat } from 'src/redux/modules/ChatModule/type';
 // socket
 // import { chatLogStatus } from 'src/globalState/chatStatus';
 // import { SocketContext } from 'src/context/socket';
-import io from 'socket.io-client';
+import { socket } from 'src/util/socket';
+// import io from 'socket.io-client';
 // time
 import timeFormat from 'src/util/timeFormat';
 // elements
@@ -21,13 +22,14 @@ import { Container } from '../../elements';
 import ChatCard from './ChatCard';
 import NoInfo from '../../components/NoInfo';
 
-const socket = io('https://soujinko.shop');
+// const socket = React.useContext(SocketContext);
 
 const Chat = () => {
   const dispatch = useDispatch();
   const roomList: any = useTypedSelector((state) => state.chat.list);
   const { userPk } = useTypedSelector((state) => state.chat.newMessage);
   const userPkList: number[] = useSelector(getUserPkList);
+  // const socket = React.useContext(SocketContext);
 
   React.useEffect(() => {
     if (userPk && !userPkList.includes(userPk)) {
