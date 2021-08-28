@@ -15,7 +15,7 @@ import { getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
-import socketIOClient from 'socket.io-client';
+import { SocketContext } from 'src/context/socket';
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // elements
 import {
@@ -42,8 +42,7 @@ import { setMediaCardLayout } from '../../../styles/Media';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = socketIOClient(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const { myInfo, tripList, message }: any = useTypedSelector(
     (state) => ({
