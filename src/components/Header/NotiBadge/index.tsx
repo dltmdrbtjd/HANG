@@ -5,7 +5,8 @@ import { signInStatus } from 'src/context/signInContext';
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 // history
-import { SocketContext } from 'src/context/socket';
+// import { SocketContext } from 'src/context/socket';
+import io from 'socket.io-client';
 import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
@@ -25,21 +26,23 @@ const NotiBadge = () => {
     setNewAlarm(false);
     history.push('/noti');
   };
+  const socket = io('https://soujinko.shop');
 
-  const socket = React.useContext(SocketContext);
-  
-      apis
-        .AlarmCheck()
-        .then((res) => {
-          setNewAlarm(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
+  // const socket = React.useContext(SocketContext);
 
-    return () => {
-      socket.off('requested');
-    };
-  }, []);
+  React.useEffect(() => {
+    socket.emit('login', { uid: userPk });
+    socket.on('requested', (data) => {
+      setNewAlarm(data);
+    });
+
+    apis
+      .AlarmCheck()
+      .then((res) => {
+        setNewAlarm(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [newAlarm]);
 
   return (
     <Button form="text" arialabel="badge">

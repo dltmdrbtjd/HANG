@@ -13,6 +13,7 @@ import { history } from 'src/redux/configureStore';
 // user info
 import { delUserInfo, getUserInfo } from 'src/shared/userInfo';
 // context
+import io from 'socket.io-client';
 import { chatStatus } from '../ChatContext';
 // elements
 import { Grid, Text, Container } from '../../../../elements';
@@ -33,8 +34,10 @@ const weekdays = [
   '토요일',
 ];
 
+const socket = io('https://soujinko.shop');
+
 const ChatRoomWrapper = () => {
-  const socket = React.useContext(SocketContext);
+  // const socket = React.useContext(SocketContext);
   const { roomName } = React.useContext(chatStatus);
 
   const dispatch = useDispatch();
