@@ -27,20 +27,19 @@ const NotiBadge = () => {
   };
 
   const socket = React.useContext(SocketContext);
+  
+      apis
+        .AlarmCheck()
+        .then((res) => {
+          setNewAlarm(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
 
-  React.useEffect(() => {
-    socket.emit('login', { uid: userPk });
-    socket.on('requested', (data) => {
-      setNewAlarm(data);
-    });
-
-    apis
-      .AlarmCheck()
-      .then((res) => {
-        setNewAlarm(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, [newAlarm]);
+    return () => {
+      socket.off('requested');
+    };
+  }, []);
 
   return (
     <Button form="text" arialabel="badge">

@@ -23,37 +23,27 @@ import NoInfo from '../../components/NoInfo';
 const Chat = () => {
   const dispatch = useDispatch();
   const roomList: any = useTypedSelector((state) => state.chat.list);
+  const { userPk } = useTypedSelector((state) => state.chat.newMessage);
   const userPkList: number[] = useSelector(getUserPkList);
-
-  const { userPk, message, time } = React.useContext(chatLogStatus);
   const socket = React.useContext(SocketContext);
-  console.log(userPk, message, time);
+
+  React.useEffect(() => {
+    if (userPk && !userPkList.includes(userPk)) {
+      socket.emit('newRoom', { targetPk: userPk });
+    }
+  }, [userPk]);
 
   React.useEffect(() => {
     dispatch(ChatCreators.fetchGetChatRoomList());
 
     socket.on('newRoom', (data) => {
-      dispatch(
-        CreateChatRoom({
-          lastChat: [{ message, curTime: time }],
-          unchecked: 1,
-          targetPk: userPk,
-          ...data,
-        }),
-      );
+      dispatch(CreateChatRoom(data));
     });
 
     return () => {
-      socket.off('newRoom', () => {
-        console.log('new room off');
-      });
+      socket.off('newRoom');
     };
   }, []);
-
-  React.useEffect(() => {
-    if (userPk && !userPkList.includes(userPk))
-      socket.emit('newRoom', { targetPk: userPk });
-  }, [userPk]);
 
   return (
     <Container padding="66px 0 80px">
