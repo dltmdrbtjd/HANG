@@ -11,9 +11,6 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // apis , socket
 import apis from 'src/shared/api';
-import socketIOClient from 'socket.io-client';
-// style
-import ToastMessage from 'src/components/ToastMessage';
 import { SocketContext } from 'src/context/socket';
 import {
   Grid,
@@ -63,7 +60,9 @@ const GuideRequest = () => {
       .GuideRequest(userInfo)
       .then(() => {
         socket.emit('request', { uid: userPk });
-        dispatch(fetchMessage({ Message: true }));
+        dispatch(
+          fetchMessage({ Message: true, text: '신청이 완료되었습니다.' }),
+        );
         history.goBack();
       })
       .catch((err) => {
@@ -93,7 +92,6 @@ const GuideRequest = () => {
 
   React.useEffect(() => {
     dispatch(DetailCreators.fetctMyTripInfo());
-    dispatch(fetchMessage({ Message: false }));
   }, []);
 
   return (
@@ -160,7 +158,6 @@ const GuideRequest = () => {
         subText={ModalMessage}
         subText2="길잡이를 부탁하시겠습니까?"
       />
-      <ToastMessage msg="" />
     </Container>
   );
 };
