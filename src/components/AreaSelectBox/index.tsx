@@ -14,6 +14,12 @@ export interface Props {
 const AreaSelectBox = ({ city, region, ...props }: Props) => {
   const path = useLocation().pathname;
 
+  const [currentCity, setCurrentCity] = React.useState<number>(0);
+  const [currentGu, setCurrntGu] = React.useState<number>(0);
+
+  const [cityName, setCityName] = React.useState<string>('');
+  const [guName, setGuName] = React.useState<string>('');
+
   let Citys = CityArr;
   if (
     path.includes('/mypage/modify') ||
@@ -23,16 +29,35 @@ const AreaSelectBox = ({ city, region, ...props }: Props) => {
     Citys = CityArr.filter((region) => region.gu.length > 1);
   }
 
-  const [currentCity, setCurrentCity] = React.useState<number>(0);
-  const [currentGu, setCurrntGu] = React.useState<number>(0);
-
-  const [cityName, setCityName] = React.useState<string>('');
-  const [guName, setGuName] = React.useState<string>('');
+  React.useEffect(() => {
+    if (
+      (path.includes('/mypage/modify') ||
+        path.includes('/signup') ||
+        path.includes('/mypage/create_trip')) &&
+      currentCity === 0
+    ) {
+      setCityName('서울');
+    }
+  }, []);
 
   const SelectCityHandler = (idx: number, city: string) => {
     setCurrentCity(idx);
     setCityName(city);
-    if (idx === 0) {
+    if (
+      (path.includes('/mypage/modify') ||
+        path.includes('/signup') ||
+        path.includes('/mypage/create_trip')) &&
+      idx === 0
+    ) {
+      setCityName('서울');
+      setGuName('');
+      setCurrntGu(0);
+    } else if (
+      !path.includes('/mypage/modify') &&
+      !path.includes('/signup') &&
+      !path.includes('/mypage/create_trip') &&
+      idx === 0
+    ) {
       setCityName('');
       setGuName('');
       setCurrntGu(0);
@@ -55,9 +80,13 @@ const AreaSelectBox = ({ city, region, ...props }: Props) => {
 
   React.useEffect(() => {
     let RegionNum;
-    if (city === 0 || (city && region)) {
+    if (city >= 0 || (city && region)) {
       RegionNum = Citys[city].gu.indexOf(region);
       setCurrentCity(city);
+      if (RegionNum < 0) {
+        setCurrntGu(0);
+        return;
+      }
       setCurrntGu(RegionNum);
     }
   }, []);
