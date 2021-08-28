@@ -19,8 +19,6 @@ const NotiBadge = () => {
   const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
 
   const { isLogIn } = React.useContext(signInStatus);
-  const socket = React.useContext(SocketContext);
-
   const userPk = isLogIn && getUserInfo('userInfo').userPk;
 
   const NotiOff = () => {
@@ -28,13 +26,8 @@ const NotiBadge = () => {
     history.push('/noti');
   };
 
-  React.useEffect(() => {
-    if (isLogIn) {
-      socket.emit('login', { uid: userPk });
-      socket.on('requested', (data) => {
-        setNewAlarm(data);
-      });
-
+  const socket = React.useContext(SocketContext);
+  
       apis
         .AlarmCheck()
         .then((res) => {

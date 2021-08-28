@@ -4,12 +4,10 @@ import { useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import { useTypedSelector } from 'src/redux/configureStore';
 import { SearchCreators } from 'src/redux/modules/SearchModule/search';
-import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // components
 import SearchBar from '../../components/SearchBar';
 import AreaSelectBox from '../../components/AreaSelectBox';
 import SearchCard from '../../components/SearchCard';
-import ToastMessage from '../../components/ToastMessage';
 // style
 import { Button, Grid, Text, Strong, Container, Image } from '../../elements';
 import { CategoryBtn, NotFoundImage } from './style';
@@ -26,10 +24,9 @@ export interface SearchData {
 const Search = () => {
   const dispatch = useDispatch();
 
-  const { userlist, nextItem, message }: any = useTypedSelector((state) => ({
+  const { userlist, nextItem }: any = useTypedSelector((state) => ({
     userlist: state.search.list,
     nextItem: state.search.nextItem,
-    message: state.toastMessage.Message,
   }));
   // pageNum
   const [page, setPage] = React.useState<number>(1);
@@ -125,7 +122,6 @@ const Search = () => {
   React.useEffect(() => {
     setPage(1);
     dispatch(SearchCreators.fetchSearchSend(SendSearch));
-    dispatch(fetchMessage({ Message: false }));
   }, []);
 
   return (
@@ -211,7 +207,6 @@ const Search = () => {
         </>
       ) : null}
       <div ref={ref} style={{ marginTop: '100px', height: '20px' }} />
-      {message && <ToastMessage msg="관심목록에 추가되었습니다" />}
     </Container>
   );
 };

@@ -34,7 +34,6 @@ import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
 import DropDown from '../../../components/DropDown';
 import NoInfo from '../../../components/NoInfo';
-import ToastMessage from '../../../components/ToastMessage';
 import Modal from '../../../components/Modal';
 // style
 import { setSubTitleFont, setNicknameFont } from './style';
@@ -42,13 +41,13 @@ import { setMediaCardLayout } from '../../../styles/Media';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
+
   const socket = React.useContext(SocketContext);
 
-  const { myInfo, tripList, message }: any = useTypedSelector(
+  const { myInfo, tripList }: any = useTypedSelector(
     (state) => ({
       myInfo: state.mypage.myInfo,
       tripList: state.mypage.tripList,
-      message: state.toastMessage.Message,
     }),
     shallowEqual,
   );
@@ -70,7 +69,12 @@ const MyInfo = () => {
       .DeleteTripEvent(tripId)
       .then(() => {
         dispatch(DeleteTripEvent(tripId.tripId));
-        dispatch(fetchMessage({ Message: true, error: '' }));
+        dispatch(
+          fetchMessage({
+            Message: true,
+            text: '여행 이벤트가 삭제되었습니다.',
+          }),
+        );
       })
       .catch((err) => console.log(err));
   };
@@ -194,8 +198,6 @@ const MyInfo = () => {
         agreeText="확인"
         agree={WithDrawalUser}
       />
-
-      {message && <ToastMessage msg="여행 이벤트가 삭제되었습니다." />}
     </Container>
   );
 };

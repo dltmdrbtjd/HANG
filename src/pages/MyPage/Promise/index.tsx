@@ -8,7 +8,6 @@ import { PromInfo } from 'src/redux/modules/MyPageModule/type';
 // icon
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 // history
-import ToastMessage from 'src/components/ToastMessage';
 import { history, RootState } from '../../../redux/configureStore';
 // elements
 import {
@@ -28,8 +27,6 @@ import MyPromiseDetail from './MyPromise';
 import { setTabletWrapper, setTabletPromiseCard } from './style';
 
 const MyPromise = () => {
-  const [msg, setMsg] = React.useState<string>('');
-
   const { received, requested, confirmed }: any = useSelector<RootState>(
     (state) => ({
       received: state.mypage.promise.received,
@@ -108,7 +105,6 @@ const MyPromise = () => {
                         key={(Date.now() + Math.random()).toString(36)}
                         type="received"
                         promInfo={promInfo}
-                        stateSetter={setMsg}
                       />
                     ))}
                   </Grid>
@@ -148,7 +144,6 @@ const MyPromise = () => {
                     {requested.slice(0, 3).map((promInfo: PromInfo) => (
                       <PromiseCard
                         key={(Date.now() + Math.random()).toString(36)}
-                        stateSetter={setMsg}
                         guide
                         type="requested"
                         promInfo={promInfo}
@@ -191,7 +186,6 @@ const MyPromise = () => {
                     {confirmed.slice(0, 3).map((promInfo: PromInfo) => (
                       <PromiseCard
                         key={(Date.now() + Math.random()).toString(36)}
-                        stateSetter={setMsg}
                         guide={Boolean(promInfo.guide)}
                         promInfo={promInfo}
                         type="confirmed"
@@ -206,7 +200,6 @@ const MyPromise = () => {
       ) : (
         <MyPromiseDetail type={openDetail.type} />
       )}
-      <ToastMessage msg={msg} />
     </Container>
   );
 };

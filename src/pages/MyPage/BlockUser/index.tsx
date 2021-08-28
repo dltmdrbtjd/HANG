@@ -12,15 +12,13 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { Grid, Text, Button, Container } from '../../../elements';
 // components
 import ProfileImg from '../../../components/ProfileImg';
-import ToastMessage from '../../../components/ToastMessage';
 import NoInfo from '../../../components/NoInfo';
 
 const Block = () => {
   const dispatch = useDispatch();
-  const { blockList, message } = useTypedSelector(
+  const { blockList } = useTypedSelector(
     (state) => ({
       blockList: state.mypage.blockedUsers,
-      message: state.toastMessage.Message,
     }),
     shallowEqual,
   );
@@ -30,7 +28,7 @@ const Block = () => {
       .DeleteBlockList({ targetPk })
       .then(() => {
         dispatch(DeleteBlockList(targetPk));
-        dispatch(fetchMessage({ Message: true }));
+        dispatch(fetchMessage({ Message: true, text: '차단 해제됐습니다.' }));
       })
       .catch((err) => console.log(err));
   };
@@ -75,8 +73,6 @@ const Block = () => {
             </Grid>
           );
         })}
-
-        {message && <ToastMessage msg="차단 해제됐습니다." />}
       </NoInfo>
     </Container>
   );
