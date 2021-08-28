@@ -7,7 +7,7 @@ import { textOverflowWrap } from 'src/styles/Mixin';
 import { TagsBox } from 'src/styles/Mixin/boxStyle';
 import Modal from '../Modal';
 
-import { tendencyKeyword, mbti } from '../Tag/tagList';
+import { tripKeyword, mbti } from '../Tag/tagList';
 import Tag from '../Tag';
 
 interface Info {
@@ -69,10 +69,9 @@ const EventCard = ({
       return undefined;
     }
     return [
-      tendencyKeyword[UserTag[0]],
-      tendencyKeyword[UserTag[1]],
-      tendencyKeyword[UserTag[2]],
-      mbti[UserTag[3]],
+      tripKeyword[UserTag[0]],
+      tripKeyword[UserTag[1]],
+      tripKeyword[UserTag[2]],
     ];
   }
   const UserTagList = TagListCheck();
