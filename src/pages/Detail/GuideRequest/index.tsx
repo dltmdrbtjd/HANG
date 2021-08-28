@@ -11,7 +11,9 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // apis , socket
 import apis from 'src/shared/api';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
+// import { SocketContext } from 'src/context/socket';
+import { socket } from 'src/util/socket';
 import {
   Grid,
   MainTitle,
@@ -24,7 +26,7 @@ import { RadioBtn, maxWidth } from './style';
 // components
 import Modal from '../../../components/Modal';
 
-const socket = io('https://soujinko.shop');
+// const socket = React.useContext(SocketContext);
 
 const GuideRequest = () => {
   const dispatch = useDispatch();
