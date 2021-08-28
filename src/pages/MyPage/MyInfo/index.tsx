@@ -9,13 +9,13 @@ import { useDispatch, shallowEqual } from 'react-redux';
 import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // sign out
-import { signInStatus } from 'src/globalState/signInStatus';
+import { signInStatus } from 'src/context/signInContext';
 // token
 import { getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
-import socketIOClient from 'socket.io-client';
+import { SocketContext } from 'src/context/socket';
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // elements
 import {
@@ -42,8 +42,7 @@ import { setMediaCardLayout } from '../../../styles/Media';
 
 const MyInfo = () => {
   const dispatch = useDispatch();
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = socketIOClient(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const { myInfo, tripList, message }: any = useTypedSelector(
     (state) => ({

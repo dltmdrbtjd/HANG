@@ -9,9 +9,8 @@ import {
   Container,
 } from '../../../elements';
 // style
-import { CalcHeight } from '../style';
+import { CalcHeight, OnboardingImageSize } from '../style';
 import { setMediaFontSize } from '../../../styles/Media';
-import { limitWidth } from '../../../styles/Mixin';
 
 const Page1 = () => {
   return (
@@ -35,7 +34,7 @@ const Page1 = () => {
           당신만 알고 있는 맛집, 숨은 명소들을 알려주는 여행 길잡이가 되어보세요
         </Text>
 
-        <Grid height="calc(100% - 210px)" position="relative">
+        <Grid height="calc(100% - 210px)" addstyle={OnboardingImageSize}>
           <a
             target="_blank"
             rel="noreferrer"
@@ -43,9 +42,8 @@ const Page1 = () => {
           >
             Travel vector created by stories - www.freepik.com
             <Image
-              width="auto"
+              width="100%"
               height="100%"
-              addstyle={limitWidth('100%')}
               src="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/onboarding/onboarding1.png"
             />
           </a>

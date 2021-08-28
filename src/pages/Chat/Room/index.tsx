@@ -12,4 +12,4 @@ const ChatRoom = () => {
   );
 };
 
-export default React.memo(ChatRoom);
+export default ChatRoom;

@@ -80,7 +80,7 @@ const ChatRoomWrapper = () => {
 
   return (
     <>
-      <RoomHeader methods={[QuitRoom, BlockUser]} />
+      <RoomHeader methods={[QuitRoom, () => {}]} />
 
       <div ref={containerRef}>
         <Container>

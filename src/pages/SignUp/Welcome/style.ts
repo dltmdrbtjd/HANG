@@ -19,7 +19,7 @@ const ImageWrapper = css<Prop>`
   }
 
   img {
-    max-height: 544.5px;
+    object-fit: contain;
   }
 `;
 

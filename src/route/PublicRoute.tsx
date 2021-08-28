@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { signInStatus } from 'src/globalState/signInStatus';
+import { signInStatus } from 'src/context/signInContext';
 
 interface Public {
   component: React.ElementType;

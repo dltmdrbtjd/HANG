@@ -11,7 +11,7 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // apis , socket
 import apis from 'src/shared/api';
-import socketIOClient from 'socket.io-client';
+import { SocketContext } from 'src/context/socket';
 // style
 import ToastMessage from 'src/components/ToastMessage';
 import {
@@ -36,8 +36,7 @@ const GuideRequest = () => {
     shallowEqual,
   );
 
-  const ENDPOINT = 'https://soujinko.shop';
-  const socket = socketIOClient(ENDPOINT);
+  const socket = React.useContext(SocketContext);
 
   const [checked, setChecked] = React.useState<number>(0);
   const [index, setIndex] = React.useState<number>(0);

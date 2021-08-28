@@ -13,7 +13,7 @@ import Navigation from './components/Navigation';
 import Alert from './components/Alert';
 // user info
 import { getUserInfo } from './shared/userInfo';
-import { signInStatus } from './globalState/signInStatus';
+import { signInStatus } from './context/signInContext';
 // global state
 import ChatStatus from './globalState/chatStatus';
 

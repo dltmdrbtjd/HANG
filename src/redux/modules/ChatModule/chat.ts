@@ -35,8 +35,29 @@ const chatSlice = createSlice({
   name: 'chat',
   initialState,
   reducers: {
-    ChatAlarmCheck: (state, action: PayloadAction<number>) => {
-      state.alarmCount = action.payload;
+    ChatAlarmCheck: (state) => {
+      if (state.alarmCount <= 0) {
+        state.alarmCount = 1;
+        return;
+      }
+
+      state.alarmCount += 1;
+    },
+
+    CheckChatAlarm: (state, action: PayloadAction<number>) => {
+      const roomIdx = state.list.findIndex(
+        (room) => room.targetPk === action.payload,
+      );
+      const targetRoom = state.list[roomIdx];
+
+      state.list[roomIdx] = { ...targetRoom, unchecked: 0 };
+
+      if (state.alarmCount <= 0) {
+        state.alarmCount = 0;
+        return;
+      }
+
+      state.alarmCount -= targetRoom.unchecked;
     },
 
     CreateChatRoom: (state, action) => {
@@ -50,24 +71,24 @@ const chatSlice = createSlice({
         (room) => room.targetPk === chatLog.userPk,
       );
 
-      if (roomIdx !== -1) {
-        const { unchecked } = state.list[roomIdx];
-        const updateRoom = {
-          ...state.list[roomIdx],
-          unchecked: unchecked + 1,
-          lastChat: [
-            {
-              message: chatLog.message,
-              curTime: chatLog.time,
-            },
-          ],
-        };
+      if (roomIdx !== -1) return;
 
-        state.list.splice(roomIdx, 1);
-        state.list.unshift(updateRoom);
+      const targetRoom = state.list[roomIdx];
+      const updateRoom = {
+        ...targetRoom,
+        unchecked: targetRoom.unchecked + 1,
+        lastChat: [
+          {
+            message: chatLog.message,
+            curTime: chatLog.time,
+          },
+        ],
+      };
 
-        state.alarmCount += 1;
-      }
+      state.list.splice(roomIdx, 1);
+      state.list.unshift(updateRoom);
+
+      state.alarmCount += 1;
     },
   },
   extraReducers: {
@@ -124,21 +145,14 @@ export const getUserPkList = createSelector(
   },
 );
 
-export const getUnchecked = (targetPk: number) =>
-  createSelector(
-    (state: RootState) => state.chat.list,
-    (chatInfoList: ReadChatInfo[]) => {
-      const [userPkList] = chatInfoList.filter(
-        (chatInfo: ReadChatInfo) => chatInfo.targetPk === targetPk,
-      );
-
-      return userPkList ? userPkList.unchecked : null;
-    },
-  );
-
 export const ChatCreators = {
   fetchGetChatRoomList,
 };
 const { reducer, actions } = chatSlice;
-export const { ChatAlarmCheck, CreateChatRoom, ChatHistoryUpdate } = actions;
+export const {
+  ChatAlarmCheck,
+  CheckChatAlarm,
+  CreateChatRoom,
+  ChatHistoryUpdate,
+} = actions;
 export default reducer;
