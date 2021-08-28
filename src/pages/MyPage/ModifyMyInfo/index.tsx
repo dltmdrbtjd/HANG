@@ -38,7 +38,7 @@ const MyPageModify = () => {
   const keywords =
     userInfo.tags.length > 1
       ? userInfo.tags.split(':').map((tag: string) => +tag)
-      : [NaN, NaN, NaN, NaN];
+      : ['n', 'n', 'n', 'n'];
 
   const [region, setRegion] = React.useState<string>(userInfo.region);
   const [city, setCity] = React.useState<string>(userInfo.city);
@@ -46,16 +46,15 @@ const MyPageModify = () => {
     userInfo.profileImg,
   );
   const [nickname, setNickname] = React.useState<string>(userInfo.nickname);
-  const [tendency, setTendency] = React.useState<number[]>(
-    keywords.slice(0, 3),
-  );
-  const [MBTI, setMBTI] = React.useState<number>(keywords[3]);
+  const [tendency, setTendency] = React.useState<any>(keywords.slice(0, 3));
+  const [MBTI, setMBTI] = React.useState<number | string>(keywords[3]);
   const [intro, setIntro] = React.useState<string>(
     userInfo.intro && userInfo.intro === '0'
       ? `안녕하세요 ${nickname}입니다`
       : userInfo.intro,
   );
   const tags = `${tendency.join(':')}:${MBTI}`;
+  console.log(userInfo);
 
   const [nickDupCheck, setNickDupCheck] = React.useState<Status>({
     status: 0,
@@ -67,6 +66,8 @@ const MyPageModify = () => {
     nickname.length <= 16 &&
     intro.length <= 100
   );
+
+  console.log(tags);
 
   const updateProfile = () => {
     const updateInfo = {
@@ -103,7 +104,7 @@ const MyPageModify = () => {
   const selectTendencyTags = (tag: number) => {
     if (tendency.includes(tag)) {
       const disabled = tendency.map((active) => {
-        if (active === tag) return NaN;
+        if (active === tag) return 'n';
 
         return active;
       });
@@ -124,7 +125,7 @@ const MyPageModify = () => {
 
   const selectMBTITags = (tag: number) => {
     if (tag === MBTI) {
-      setMBTI(NaN);
+      setMBTI('n');
       return;
     }
 
