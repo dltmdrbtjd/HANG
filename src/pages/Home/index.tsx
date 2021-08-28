@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import SearchBar from 'src/components/SearchBar';
 import SearchCard from 'src/components/SearchCard';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
-import ToastMessage from '../../components/ToastMessage';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import { Grid, Text, MainTitle, Container } from '../../elements/index';
@@ -31,7 +30,6 @@ const Home = () => {
 
   React.useEffect(() => {
     dispatch(HomeCreators.fetchHomeLoad());
-    dispatch(fetchMessage({ Message: false }));
   }, []);
   return (
     <Container>
@@ -119,7 +117,6 @@ const Home = () => {
             : ''}
         </Grid>
       </Grid>
-      <ToastMessage msg="관심목록에 추가되었습니다" />
     </Container>
   );
 };

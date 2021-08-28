@@ -34,10 +34,9 @@ export interface Props {
   promInfo: PromInfo;
   guide?: boolean;
   type: string;
-  stateSetter?: any;
 }
 
-const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
+const PromiseCard = ({ promInfo, guide, type }: Props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [promiseType, setPromiseType] = React.useState(type);
@@ -80,9 +79,13 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
       subText2: '길잡이가 되어주시겠습니까?',
       agreeText: '확인',
       agree: () => {
-        stateSetter(`${promInfo.nickname} 님의 요청을 수락했습니다.`);
         AgreeProm();
-        dispatch(fetchMessage({ Message: true }));
+        dispatch(
+          fetchMessage({
+            Message: true,
+            text: `${promInfo.nickname} 님의 요청을 수락했습니다.`,
+          }),
+        );
       },
     },
 
@@ -92,9 +95,13 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
       subText2: '요청을 거절하시겠습니까?',
       agreeText: '확인',
       agree: () => {
-        stateSetter(`${promInfo.nickname} 님의 요청을 거절했습니다.`);
         RejectProm();
-        dispatch(fetchMessage({ Message: true }));
+        dispatch(
+          fetchMessage({
+            Message: true,
+            text: `${promInfo.nickname} 님의 요청을 거절했습니다.`,
+          }),
+        );
       },
     },
 
@@ -104,9 +111,8 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
       subText2: '요청을 취소하시겠습니까?',
       agreeText: '확인',
       agree: () => {
-        stateSetter(`요청을 취소했습니다.`);
         RejectProm();
-        dispatch(fetchMessage({ Message: true }));
+        dispatch(fetchMessage({ Message: true, text: '요청을 취소했습니다.' }));
       },
     },
 
@@ -115,9 +121,13 @@ const PromiseCard = ({ promInfo, guide, type, stateSetter }: Props) => {
       subText: `${promInfo.nickname} 님과의`,
       subText2: '약속을 취소하시겠습니까?',
       agree: () => {
-        stateSetter(`${promInfo.nickname} 님과의 약속이 취소되었습니다.`);
         cancelConfiremedProm();
-        dispatch(fetchMessage({ Message: true }));
+        dispatch(
+          fetchMessage({
+            Message: true,
+            text: `${promInfo.nickname} 님과의 약속이 취소되었습니다.`,
+          }),
+        );
       },
     },
   };

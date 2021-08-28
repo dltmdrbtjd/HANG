@@ -7,8 +7,6 @@ import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 import apis from 'src/shared/api';
 // user info
 import { setUserInfo } from 'src/shared/userInfo';
-// socket
-import socketIOClient from 'socket.io-client';
 // redux
 import { SocketContext } from 'src/context/socket';
 import { history, useTypedSelector } from '../../redux/configureStore';
@@ -25,7 +23,6 @@ import NotFoundImage from './style';
 // component
 import ProfileCard from '../../components/ProfileCard';
 import EventCard from '../../components/EventCard';
-import ToastMessage from '../../components/ToastMessage';
 // style
 import { setMediaCardLayout } from '../../styles/Media';
 // image
@@ -36,11 +33,10 @@ const Detail = () => {
 
   const socket = React.useContext(SocketContext);
 
-  const { eventList, userInfo, message }: any = useTypedSelector(
+  const { eventList, userInfo }: any = useTypedSelector(
     (state) => ({
       eventList: state.detail.tripInfo,
       userInfo: state.detail.userInfo,
-      message: state.toastMessage.Message,
     }),
     shallowEqual,
   );
@@ -58,7 +54,9 @@ const Detail = () => {
       .DoGuide({ tripId: pk })
       .then(() => {
         socket.emit('request', { uid: userPk });
-        dispatch(fetchMessage({ Message: true }));
+        dispatch(
+          fetchMessage({ Message: true, text: '신청이 완료되었습니다.' }),
+        );
       })
       .catch((err) => {
         dispatch(
@@ -140,7 +138,6 @@ const Detail = () => {
             <Text textAlign="center">등록된 여행 이벤트가 없습니다.</Text>
           </>
         ) : null}
-        {message && <ToastMessage msg="신청이 완료되었습니다" />}
       </Grid>
     </Container>
   );

@@ -5,7 +5,6 @@ import { RootState } from 'src/redux/configureStore';
 // type
 import { PromInfo } from 'src/redux/modules/MyPageModule/type';
 // elements
-import ToastMessage from 'src/components/ToastMessage';
 import { SubTitle, Grid } from '../../../../elements';
 // components
 import PromiseCard from '../PromiseCard';
@@ -51,7 +50,6 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
             {promise[type].map((promInfo: PromInfo, idx: number) => (
               <PromiseCard
                 key={(Date.now() + Math.random() * idx).toString(36)}
-                stateSetter={setMsg}
                 type={type}
                 guide={
                   {}.hasOwnProperty.call(pageBreak[type], 'guide')
@@ -63,8 +61,6 @@ const MyPromiseDetail = ({ type }: { type: string }) => {
             ))}
           </Grid>
         </NoInfo>
-
-        <ToastMessage msg={msg} />
       </Grid>
     </>
   );

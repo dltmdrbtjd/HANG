@@ -16,6 +16,7 @@ import { getUserInfo } from './shared/userInfo';
 import { signInStatus } from './globalState/signInStatus';
 // global state
 import ChatStatus from './globalState/chatStatus';
+import ToastMessage from './components/ToastMessage';
 
 const App = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const App = (): React.ReactElement => {
         <Navigation />
 
         <Alert />
+        <ToastMessage />
       </ChatStatus>
     </ConnectedRouter>
   );

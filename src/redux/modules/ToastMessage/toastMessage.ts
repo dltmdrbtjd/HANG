@@ -4,7 +4,7 @@ import { messageState } from './type';
 
 const initialState: messageState = {
   Message: false,
-  error: '',
+  text:'',
 }
 
 const toastMessageSlice = createSlice({
@@ -13,7 +13,7 @@ const toastMessageSlice = createSlice({
   reducers:{
     fetchMessage: (state,action: PayloadAction<messageState>) => {
       state.Message = action.payload.Message;
-      state.error = action.payload.error;
+      state.text = action.payload.text;
     },
   },
 });
