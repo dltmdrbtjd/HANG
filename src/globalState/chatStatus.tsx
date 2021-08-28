@@ -14,11 +14,6 @@ import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // signin status
 import { signInStatus } from 'src/context/signInContext';
 
-interface NewRoomType {
-  nickname: string;
-  profileImg: string;
-}
-
 const ChatStatus = ({ children }) => {
   const dispatch = useDispatch();
   const userPkList: number[] = useSelector(getUserPkList);
@@ -33,23 +28,10 @@ const ChatStatus = ({ children }) => {
 
   const { isLogIn } = React.useContext(signInStatus);
 
-  const newRoom = (userInfo: NewRoomType) => {
-    dispatch(
-      CreateChatRoom({
-        lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
-        unchecked: 1,
-        targetPk: chatLog.userPk,
-        ...userInfo,
-      }),
-    );
-  };
-
-  const createChatRoom = React.useMemo(() => newRoom, [chatLog]);
-
   React.useEffect(() => {
     if (isLogIn) {
       socket.on('unchecked', () => {
-        dispatch(ChatAlarmCheck(Number(true)));
+        dispatch(ChatAlarmCheck());
       });
 
       socket.on('newMessage', (data: NewMessage) => {
@@ -58,7 +40,14 @@ const ChatStatus = ({ children }) => {
       });
 
       socket.on('newRoom', (data) => {
-        createChatRoom(data);
+        dispatch(
+          CreateChatRoom({
+            lastChat: [{ message: chatLog.message, curTime: chatLog.time }],
+            unchecked: 1,
+            targetPk: chatLog.userPk,
+            ...data,
+          }),
+        );
       });
     }
   }, [isLogIn]);
