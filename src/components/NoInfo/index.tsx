@@ -19,7 +19,7 @@ const NoInfo: React.FC<Props> = ({
   margin,
   children,
 }) => {
-  if (list.length) return <>{children}</>;
+  if (list && list.length) return <>{children}</>;
 
   return (
     <Grid
