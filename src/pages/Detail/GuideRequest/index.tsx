@@ -11,7 +11,8 @@ import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 // apis , socket
 import apis from 'src/shared/api';
-import { SocketContext } from 'src/context/socket';
+// import { SocketContext } from 'src/context/socket';
+import io from 'socket.io-client';
 import {
   Grid,
   MainTitle,
@@ -24,6 +25,8 @@ import { RadioBtn, maxWidth } from './style';
 // components
 import Modal from '../../../components/Modal';
 
+const socket = io('https://soujinko.shop');
+
 const GuideRequest = () => {
   const dispatch = useDispatch();
   const { myPromise, userPk }: any = useTypedSelector(
@@ -34,7 +37,7 @@ const GuideRequest = () => {
     shallowEqual,
   );
 
-  const socket = React.useContext(SocketContext);
+  // const socket = React.useContext(SocketContext);
 
   const [checked, setChecked] = React.useState<number>(0);
   const [index, setIndex] = React.useState<number>(0);

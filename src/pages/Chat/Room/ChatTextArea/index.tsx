@@ -1,6 +1,7 @@
 import React from 'react';
 // context
 import { SocketContext } from 'src/context/socket';
+import io from 'socket.io-client';
 import { chatStatus } from '../ChatContext';
 // user info
 import { getUserInfo } from '../../../../shared/userInfo';
@@ -10,8 +11,10 @@ import { Button, Grid } from '../../../../elements';
 import { setMediaLimitBoxSize } from '../../../../styles/Media';
 import { ChatInputArea } from '../style';
 
+const socket = io('https://soujinko.shop');
+
 const ChatTextArea = () => {
-  const socket = React.useContext(SocketContext);
+  // const socket = React.useContext(SocketContext);
   const { roomName, inputBoxHeightState } = React.useContext(chatStatus);
 
   const { userPk } = getUserInfo('userInfo');

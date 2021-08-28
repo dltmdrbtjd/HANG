@@ -9,6 +9,7 @@ import apis from 'src/shared/api';
 import { setUserInfo } from 'src/shared/userInfo';
 // redux
 import { SocketContext } from 'src/context/socket';
+import io from 'socket.io-client';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import {
@@ -28,10 +29,12 @@ import { setMediaCardLayout } from '../../styles/Media';
 // image
 import chat from '../../Images/NavigationIcons/onchat.svg';
 
+const socket = io('https://soujinko.shop');
+
 const Detail = () => {
   const dispatch = useDispatch();
 
-  const socket = React.useContext(SocketContext);
+  // const socket = React.useContext(SocketContext);
 
   const { eventList, userInfo }: any = useTypedSelector(
     (state) => ({

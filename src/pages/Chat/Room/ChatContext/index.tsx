@@ -3,6 +3,7 @@ import React from 'react';
 import { getUserInfo } from 'src/shared/userInfo';
 // socket
 import { SocketContext } from 'src/context/socket';
+import io from 'socket.io-client';
 // redux
 import { useDispatch } from 'react-redux';
 import { CheckChatAlarm } from 'src/redux/modules/ChatModule/chat';
@@ -14,6 +15,8 @@ export interface ChatLogType {
   message: string;
   userPk: number;
 }
+
+const socket = io('https://soujinko.shop');
 
 const useProviderChatLogs = () => {
   const { targetPk } = getUserInfo('targetUserInfo');
@@ -53,7 +56,7 @@ const ChatContext = ({ children }) => {
   const { targetPk } = getUserInfo('targetUserInfo');
   const { userPk, nickname } = getUserInfo('userInfo');
 
-  const socket = React.useContext(SocketContext);
+  // const socket = React.useContext(SocketContext);
 
   const dispatch = useDispatch();
 
