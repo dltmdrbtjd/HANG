@@ -1,6 +1,5 @@
 import React from 'react';
 // socket
-import { SocketContext } from 'src/context/socket';
 // moment
 import moment from 'moment';
 // apis

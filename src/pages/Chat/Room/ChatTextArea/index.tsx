@@ -1,6 +1,5 @@
 import React from 'react';
 // context
-import { SocketContext } from 'src/context/socket';
 import io from 'socket.io-client';
 import { chatStatus } from '../ChatContext';
 // user info
