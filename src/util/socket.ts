@@ -1,4 +1,4 @@
 import io from 'socket.io-client';
 
-const EndPoint = 'https://soujinko.shop';
-export const socket = io(EndPoint);
+const EndPoint = 'https://ruzan.shop';
+export const socket = io(EndPoint, {transports:['websocket']});
