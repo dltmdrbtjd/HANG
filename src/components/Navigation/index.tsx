@@ -2,7 +2,7 @@ import React from 'react';
 // material
 import Badge from '@material-ui/core/Badge';
 // socket
-import io from 'socket.io-client';
+import { socket } from 'src/util/socket';
 // redux
 import { history, useTypedSelector } from 'src/redux/configureStore';
 import { useDispatch } from 'react-redux';
@@ -38,8 +38,6 @@ import { HeaderIncluded } from '../../route/Path';
 // signin status
 import { signInStatus } from '../../context/signInContext';
 
-const socket = io('https://soujinko.shop');
-
 const Navigation = () => {
   const dispatch = useDispatch();
   const path: string = useLocation().pathname;
@@ -48,15 +46,15 @@ const Navigation = () => {
   const { isLogIn } = React.useContext(signInStatus);
 
   React.useEffect(() => {
-    socket.on('unchecked', () => {
-      console.log('useEffect 발생');
-      dispatch(ChatAlarmCheck());
-    });
+    if (isLogIn) {
+      socket.on('unchecked', () => {
+        dispatch(ChatAlarmCheck());
+      });
 
-    socket.on('newMessage', (data: NewMessage) => {
-      console.log('new message on');
-      dispatch(ChatHistoryUpdate(data));
-    });
+      socket.on('newMessage', (data: NewMessage) => {
+        dispatch(ChatHistoryUpdate(data));
+      });
+    }
   }, []);
 
   return HeaderIncluded.includes(path) ? (
