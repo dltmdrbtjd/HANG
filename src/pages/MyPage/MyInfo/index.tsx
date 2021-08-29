@@ -15,7 +15,6 @@ import { getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
-import io from 'socket.io-client';
 import { socket } from 'src/util/socket';
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // elements
@@ -39,8 +38,6 @@ import Modal from '../../../components/Modal';
 // style
 import { setSubTitleFont, setNicknameFont } from './style';
 import { setMediaCardLayout } from '../../../styles/Media';
-
-// const socket = io('https://soujinko.shop');
 
 const MyInfo = () => {
   const dispatch = useDispatch();
