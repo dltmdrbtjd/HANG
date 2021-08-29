@@ -142,7 +142,7 @@ const MyPageModify = () => {
       <Grid>
         <MainTitle fs="sxl">프로필 수정</MainTitle>
 
-        <InputImage setProfile={setProfileImg} profile={profileImg} />
+        <InputImage setProfile={setProfileImg} profile={userInfo.profileImg} />
       </Grid>
 
       <NicknameDupCheck
