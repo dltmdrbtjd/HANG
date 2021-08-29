@@ -102,7 +102,7 @@ const Navigation = () => {
           onClick={() => history.push('/chat')}
         >
           <Badge
-            invisible={!(chatAlarmChecked && chatAlarmChecked > 0)}
+            invisible={!(chatAlarmChecked > 0)}
             variant="dot"
             overlap="circular"
             color="secondary"
