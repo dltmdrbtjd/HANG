@@ -15,7 +15,6 @@ import { getUserInfo } from 'src/shared/userInfo';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
-import io from 'socket.io-client';
 import { socket } from 'src/util/socket';
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // elements
@@ -40,8 +39,6 @@ import Modal from '../../../components/Modal';
 import { setSubTitleFont, setNicknameFont } from './style';
 import { setMediaCardLayout } from '../../../styles/Media';
 
-// const socket = io('https://soujinko.shop');
-
 const MyInfo = () => {
   const dispatch = useDispatch();
 
@@ -53,7 +50,7 @@ const MyInfo = () => {
     shallowEqual,
   );
 
-  const [open, setOpen] = React.useState<boolean>(false);
+  // const [open, setOpen] = React.useState<boolean>(false);
 
   const { userPk } = getUserInfo('userInfo');
 
@@ -88,13 +85,13 @@ const MyInfo = () => {
       .catch((err) => console.error(err));
   };
 
-  const WithDrawalUser = () => {
-    apis
-      .Withdrawal()
-      .then(() => deleteUserInfo())
-      .then(() => history.replace('/signin'))
-      .catch((err) => console.log(err));
-  };
+  // const WithDrawalUser = () => {
+  //   apis
+  //     .Withdrawal()
+  //     .then(() => deleteUserInfo())
+  //     .then(() => history.replace('/signin'))
+  //     .catch((err) => console.log(err));
+  // };
 
   return (
     <Container>
@@ -115,18 +112,11 @@ const MyInfo = () => {
 
         <DropDown
           icon={<SettingsIcon />}
-          contents={[
-            '프로필 수정',
-            '차단 목록',
-            '로그아웃',
-            '회원 탈퇴',
-            '튜토리얼 보기',
-          ]}
+          contents={['프로필 수정', '차단 목록', '로그아웃', '튜토리얼 보기']}
           methods={[
             () => history.push('/mypage/modify'),
             () => history.push('/mypage/block'),
             SignOut,
-            () => setOpen(true),
             () => history.push('/tutorial'),
           ]}
           top="130px"
@@ -191,14 +181,14 @@ const MyInfo = () => {
         </Grid>
       </NoInfo>
 
-      <Modal
+      {/* <Modal
         open={open}
         close={() => setOpen(false)}
         mainText="회원 탈퇴"
         subText2="탈퇴 하시겠습니까?"
         agreeText="확인"
         agree={WithDrawalUser}
-      />
+      /> */}
     </Container>
   );
 };
