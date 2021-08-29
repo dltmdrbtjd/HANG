@@ -6,10 +6,15 @@ import { useLocation } from 'react-router';
 // style
 import SearchIcon from '@material-ui/icons/Search';
 import { Grid, Input } from 'src/elements';
-// redux
-import { history } from 'src/redux/configureStore';
 
-const SearchBar = ({ margin, ...props }) => {
+export interface Props {
+  margin?: string;
+  callback?: () => void;
+  EnterEvent?: any;
+  setFindUser?: any;
+}
+
+const SearchBar = ({ callback, margin, EnterEvent, setFindUser }: Props) => {
   const [keyword, SetKeyWord] = React.useState<string>('');
   const path: string = useLocation().pathname;
 
@@ -19,13 +24,13 @@ const SearchBar = ({ margin, ...props }) => {
 
   const KeyPressHandler = (e: any) => {
     if (e.key === 'Enter') {
-      props.EnterEvent();
+      EnterEvent();
     }
   };
 
   React.useEffect(() => {
     if (path.includes('/search')) {
-      props.setFindUser(keyword);
+      setFindUser(keyword);
     }
   }, [keyword]);
 
@@ -46,6 +51,8 @@ const SearchBar = ({ margin, ...props }) => {
         right="13px"
         top="10px"
         color="gray"
+        cursor="pointer"
+        _onClick={callback}
       >
         <SearchIcon style={{ fontSize: '27px' }} />
       </Grid>
