@@ -49,7 +49,7 @@
 |<img width="317" alt="KakaoTalk_20210829_212833" src="https://user-images.githubusercontent.com/59644518/131250645-6a77ad86-0e28-4a6f-857b-97895952d421.png">|<img width="318" alt="KakaoTalk_20210829_213112" src="https://user-images.githubusercontent.com/59644518/131250593-25cc732f-4780-420c-b7d5-2cea7ff0e96a.png">|<img width="316" alt="KakaoTalk_20210829_212632" src="https://user-images.githubusercontent.com/59644518/131250595-053488d7-f85b-4778-bd54-d89e1e72a059.png">|<img width="316" alt="KakaoTalk_20210829_212856" src="https://user-images.githubusercontent.com/59644518/131250596-0ebf397e-eac4-4a73-a15e-57f61f28d464.png">|<img width="317" alt="KakaoTalk_20210829_212833" src="https://user-images.githubusercontent.com/59644518/131250645-6a77ad86-0e28-4a6f-857b-97895952d421.png">|<img width="316" alt="KakaoTalk_20210829_212944" src="https://user-images.githubusercontent.com/59644518/131250625-c44da251-8c74-4bf0-9adb-a1dc9c7334d6.png">|
 
 ## 🛠 기술스택
-![Stack2](https://user-images.githubusercontent.com/59644518/131254630-54d87a90-f65a-4b25-bfdd-ae49c8bd5271.png)
+![Stack](https://user-images.githubusercontent.com/59644518/131254702-f92170c3-6c53-4b5f-ae77-ee3eb58e71c7.png)
 
 
 ## 📌 팀원소개
