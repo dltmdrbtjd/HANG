@@ -29,16 +29,17 @@ const AreaSelectBox = ({ city, region, ...props }: Props) => {
     Citys = CityArr.filter((region) => region.gu.length > 1);
   }
 
-  // React.useEffect(() => {
-  //   if (
-  //     (path.includes('/mypage/modify') ||
-  //       path.includes('/signup') ||
-  //       path.includes('/mypage/create_trip')) &&
-  //     currentCity === 0
-  //   ) {
-  //     setCityName('서울');
-  //   }
-  // }, []);
+  React.useEffect(() => {
+    if (
+      (path.includes('/mypage/modify') ||
+        path.includes('/signup') ||
+        path.includes('/mypage/create_trip')) &&
+      city === 0
+    ) {
+      setCityName('서울');
+      setGuName(region);
+    }
+  }, []);
 
   const SelectCityHandler = (idx: number, city: string) => {
     setCurrentCity(idx);

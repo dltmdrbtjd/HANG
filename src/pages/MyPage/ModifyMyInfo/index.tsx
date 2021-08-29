@@ -129,6 +129,11 @@ const MyPageModify = () => {
     setMBTI(tag);
   };
 
+  React.useEffect(() => {
+    setRegion(userInfo.region);
+    setCity(userInfo.city);
+  }, []);
+
   return (
     <Container>
       <Grid>
