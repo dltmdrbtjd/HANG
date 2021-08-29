@@ -54,7 +54,6 @@ const MyPageModify = () => {
       : userInfo.intro,
   );
   const tags = `${tendency.join(':')}:${MBTI}`;
-  console.log(userInfo);
 
   const [nickDupCheck, setNickDupCheck] = React.useState<Status>({
     status: 0,
@@ -66,8 +65,6 @@ const MyPageModify = () => {
     nickname.length <= 16 &&
     intro.length <= 100
   );
-
-  console.log(tags);
 
   const updateProfile = () => {
     const updateInfo = {
@@ -131,11 +128,6 @@ const MyPageModify = () => {
 
     setMBTI(tag);
   };
-
-  React.useEffect(() => {
-    setRegion(userInfo.region);
-    setCity(userInfo.city);
-  }, []);
 
   return (
     <Container>
