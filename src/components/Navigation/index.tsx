@@ -1,17 +1,8 @@
 import React from 'react';
 // material
 import Badge from '@material-ui/core/Badge';
-// socket
-import { socket } from 'src/util/socket';
 // redux
 import { history, useTypedSelector } from 'src/redux/configureStore';
-import { useDispatch } from 'react-redux';
-import {
-  ChatHistoryUpdate,
-  ChatAlarmCheck,
-} from 'src/redux/modules/ChatModule/chat';
-// type
-import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // router
 import { useLocation } from 'react-router';
 // serach
@@ -37,21 +28,8 @@ import '../Header/NotiBadge/style.css';
 import { HeaderIncluded } from '../../route/Path';
 
 const Navigation = () => {
-  const dispatch = useDispatch();
   const path: string = useLocation().pathname;
   const chatAlarmChecked = useTypedSelector((state) => state.chat.alarmCount);
-
-  React.useEffect(() => {
-    if (path !== '/chat') {
-      socket.on('unchecked', () => {
-        dispatch(ChatAlarmCheck());
-      });
-    }
-
-    socket.on('newMessage', (data: NewMessage) => {
-      dispatch(ChatHistoryUpdate(data));
-    });
-  }, []);
 
   return HeaderIncluded.includes(path) ? (
     <Grid

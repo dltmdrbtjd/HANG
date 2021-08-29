@@ -1,6 +1,4 @@
 import React from 'react';
-// global state
-import { signInStatus } from 'src/context/signInContext';
 // material
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
@@ -10,6 +8,7 @@ import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
 // userInfo
+import { isLogin } from '../../../shared/token';
 import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
@@ -20,8 +19,7 @@ import apis from '../../../shared/api';
 const NotiBadge = () => {
   const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
 
-  const { isLogIn } = React.useContext(signInStatus);
-  const userPk = isLogIn && getUserInfo('userInfo').userPk;
+  const userPk = isLogin() && getUserInfo('userInfo').userPk;
 
   const NotiOff = () => {
     setNewAlarm(false);

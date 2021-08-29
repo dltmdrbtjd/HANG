@@ -53,7 +53,6 @@ const MyInfo = () => {
   // const [open, setOpen] = React.useState<boolean>(false);
 
   const { userPk } = getUserInfo('userInfo');
-
   const { signOut } = React.useContext(signInStatus);
 
   const deleteUserInfo = () => {
