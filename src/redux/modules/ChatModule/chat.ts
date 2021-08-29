@@ -1,14 +1,14 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  PayloadAction,
-  createSelector,
-} from '@reduxjs/toolkit';
-import { RootState } from 'src/redux/configureStore';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // apis
 import apis from 'src/shared/api';
 // type
-import { LoadChatInfo, ReadChatInfo, NewMessage, ChatState } from './type';
+import {
+  LoadChatInfo,
+  ShowChatInfo,
+  NewMessage,
+  NewRoom,
+  ChatState,
+} from './type';
 
 export const initialState: ChatState = {
   alarmCount: 0,
@@ -18,6 +18,7 @@ export const initialState: ChatState = {
     userPk: null,
     message: null,
     time: null,
+    roomIdx: null,
   },
 };
 
@@ -68,7 +69,7 @@ const chatSlice = createSlice({
       state.alarmCount -= targetRoom.unchecked;
     },
 
-    CreateChatRoom: (state, action) => {
+    CreateChatRoom: (state, action: PayloadAction<NewRoom>) => {
       const newChatRoom = {
         lastChat: [
           {
@@ -82,7 +83,6 @@ const chatSlice = createSlice({
       };
 
       state.list.unshift(newChatRoom);
-      state.alarmCount += 1;
     },
 
     ChatHistoryUpdate: (state, action: PayloadAction<NewMessage>) => {
@@ -91,7 +91,13 @@ const chatSlice = createSlice({
         (room) => room.targetPk === chatLog.userPk,
       );
 
-      state.newMessage = chatLog;
+      state.newMessage = { ...chatLog, roomIdx };
+
+      if (state.alarmCount <= 0) {
+        state.alarmCount = 1;
+      } else {
+        state.alarmCount += 1;
+      }
 
       if (roomIdx === -1) return;
 
@@ -109,13 +115,6 @@ const chatSlice = createSlice({
 
       state.list.splice(roomIdx, 1);
       state.list.unshift(updateRoom);
-
-      if (state.alarmCount <= 0) {
-        state.alarmCount = 1;
-        return;
-      }
-
-      state.alarmCount += 1;
     },
   },
   extraReducers: {
@@ -128,23 +127,28 @@ const chatSlice = createSlice({
     ) => {
       state.loading = false;
 
-      const chatRoomList: ReadChatInfo[] = action.payload.map(
-        (chat): ReadChatInfo => {
-          if (!chat.lastChat[0]) {
-            return {
-              ...chat,
-              lastChat: [],
-              unchecked: parseInt(chat.unchecked, 10),
-            };
-          }
+      const {
+        chatRoomList,
+        alarmCount,
+      }: { chatRoomList: ShowChatInfo[]; alarmCount: number } =
+        action.payload.reduce(
+          (acc, cur): { chatRoomList: ShowChatInfo[]; alarmCount: number } => {
+            const unchecked = parseInt(cur.unchecked, 10);
+            const chatRoom = cur.lastChat[0]
+              ? { ...cur, lastChat: [JSON.parse(cur.lastChat[0])], unchecked }
+              : {
+                  ...cur,
+                  lastChat: [],
+                  unchecked,
+                };
 
-          return {
-            ...chat,
-            lastChat: [JSON.parse(chat.lastChat[0])],
-            unchecked: parseInt(chat.unchecked, 10),
-          };
-        },
-      );
+            return {
+              chatRoomList: [...acc.chatRoomList, chatRoom],
+              alarmCount: acc.alarmCount + unchecked,
+            };
+          },
+          { chatRoomList: [], alarmCount: 0 },
+        );
 
       state.list = chatRoomList.sort((a, b) => {
         if (!(a.lastChat[0] && b.lastChat[0])) return 1;
@@ -155,25 +159,10 @@ const chatSlice = createSlice({
         return bLastChat.curTime - aLastChat.curTime;
       });
 
-      state.alarmCount = chatRoomList.reduce(
-        (acc, cur) => acc + cur.unchecked,
-        0,
-      );
+      state.alarmCount = alarmCount;
     },
   },
 });
-
-export const getRoomIdx = createSelector(
-  (state: RootState) => state.chat.list,
-  (state: RootState) => state.chat.newMessage,
-  (chatInfoList, newMessage) => {
-    const roomIdx = chatInfoList.findIndex(
-      (room) => room.targetPk === newMessage.userPk,
-    );
-
-    return roomIdx;
-  },
-);
 
 export const ChatCreators = {
   fetchGetChatRoomList,

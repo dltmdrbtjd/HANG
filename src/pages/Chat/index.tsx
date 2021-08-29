@@ -1,14 +1,13 @@
 import React from 'react';
 // redux
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
 import {
   ChatCreators,
   CreateChatRoom,
-  getRoomIdx,
 } from 'src/redux/modules/ChatModule/chat';
 // type
-import { ReadChatInfo, LastChat } from 'src/redux/modules/ChatModule/type';
+import { ShowChatInfo, LastChat } from 'src/redux/modules/ChatModule/type';
 // socket
 import { socket } from 'src/util/socket';
 // time
@@ -23,10 +22,9 @@ const Chat = () => {
   const dispatch = useDispatch();
   const roomList: any = useTypedSelector((state) => state.chat.list);
   const newMessage = useTypedSelector((state) => state.chat.newMessage);
-  const roomIdx = useSelector(getRoomIdx);
 
   React.useEffect(() => {
-    if (newMessage.userPk && roomIdx === -1)
+    if (newMessage.userPk && newMessage.roomIdx === -1)
       socket.emit('newRoom', { targetPk: newMessage.userPk });
   }, [newMessage]);
 
@@ -49,7 +47,7 @@ const Chat = () => {
         contents="현재 대화중인 사람이 없습니다."
         imageUrl="https://hang-image-upload.s3.ap-northeast-2.amazonaws.com/localImage/notfound/chatnotfound.png"
       >
-        {roomList.map((room: ReadChatInfo, idx: number) => {
+        {roomList.map((room: ShowChatInfo, idx: number) => {
           const lastChat: LastChat = room.lastChat[0];
 
           return (

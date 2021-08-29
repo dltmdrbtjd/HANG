@@ -1,7 +1,5 @@
 import React from 'react';
 // context
-// import io from 'socket.io-client';
-// import { SocketContext } from 'src/context/socket';
 import { socket } from 'src/util/socket';
 import { chatStatus } from '../ChatContext';
 // user info
@@ -12,7 +10,11 @@ import { Button, Grid } from '../../../../elements';
 import { setMediaLimitBoxSize } from '../../../../styles/Media';
 import { ChatInputArea } from '../style';
 
-// const socket = React.useContext(SocketContext);
+const isMobile = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent,
+  );
+};
 
 const ChatTextArea = () => {
   const { roomName, inputBoxHeightState } = React.useContext(chatStatus);
@@ -56,6 +58,7 @@ const ChatTextArea = () => {
       });
 
       setMessage('');
+      handleTextAreaInitailized();
     }
   };
 
@@ -81,11 +84,12 @@ const ChatTextArea = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={(e) => {
+          if (isMobile()) return;
+
           if (e.key === 'Enter') {
             if (!e.shiftKey) {
               e.preventDefault();
               sendMessage();
-              handleTextAreaInitailized();
             }
           }
         }}
