@@ -10,7 +10,7 @@ export interface Props {
   icon: React.ReactElement;
   contents: string[];
   methods: any[];
-  top: string;
+  top?: string;
 }
 
 const Dropdown = ({ icon, contents, methods, top }: Props) => {
