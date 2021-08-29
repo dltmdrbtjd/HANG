@@ -16,7 +16,7 @@ export interface Props {
 }
 
 const SelectImage = ({ setProfile, profile }: Props) => {
-  const [profileImg, setProfileImg] = React.useState<string>(profile || null);
+  const [profileImg, setProfileImg] = React.useState<string>();
   const bufToString = (buf: ArrayBuffer | string): string => {
     if (typeof buf === 'string') return buf;
 
@@ -53,6 +53,10 @@ const SelectImage = ({ setProfile, profile }: Props) => {
       console.log(error);
     }
   };
+
+  React.useEffect(() => {
+    setProfileImg(profile || null);
+  }, []);
 
   return (
     <Grid position="relative" width="100px" height="100px" margin="0 auto 30px">
