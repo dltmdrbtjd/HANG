@@ -130,6 +130,7 @@ const Search = () => {
         margin="0"
         setFindUser={setFindUser}
         EnterEvent={SearchHandler}
+        callback={SearchHandler}
       />
       <Grid width="100%" margin="16px 0" isFlex hoz="flex-start">
         <Grid width="auto">
