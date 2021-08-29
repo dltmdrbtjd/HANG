@@ -42,9 +42,11 @@ const Navigation = () => {
   const chatAlarmChecked = useTypedSelector((state) => state.chat.alarmCount);
 
   React.useEffect(() => {
-    socket.on('unchecked', () => {
-      dispatch(ChatAlarmCheck());
-    });
+    if (path !== '/chat') {
+      socket.on('unchecked', () => {
+        dispatch(ChatAlarmCheck());
+      });
+    }
 
     socket.on('newMessage', (data: NewMessage) => {
       dispatch(ChatHistoryUpdate(data));

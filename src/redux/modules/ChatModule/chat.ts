@@ -42,12 +42,7 @@ const chatSlice = createSlice({
   initialState,
   reducers: {
     ChatAlarmCheck: (state) => {
-      if (state.alarmCount <= 0) {
-        state.alarmCount = 1;
-        return;
-      }
-
-      state.alarmCount += 1;
+      state.alarmCount = 1;
     },
 
     CheckChatAlarm: (state, action: PayloadAction<number>) => {
