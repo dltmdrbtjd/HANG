@@ -30,13 +30,20 @@ const AreaSelectBox = ({ city, region, ...props }: Props) => {
   }
 
   React.useEffect(() => {
+    if (path.includes('/signup') && currentCity === 0) {
+      setCityName('서울');
+    }
+  }, []);
+
+  React.useEffect(() => {
     if (
       (path.includes('/mypage/modify') ||
         path.includes('/signup') ||
         path.includes('/mypage/create_trip')) &&
-      currentCity === 0
+      city === 0
     ) {
       setCityName('서울');
+      setGuName(region);
     }
   }, []);
 
