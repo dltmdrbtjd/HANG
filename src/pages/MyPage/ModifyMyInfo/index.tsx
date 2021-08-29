@@ -40,19 +40,13 @@ const MyPageModify = () => {
       ? userInfo.tags.split(':').map((tag: string) => +tag)
       : ['n', 'n', 'n', 'n'];
 
-  const [region, setRegion] = React.useState<string>(userInfo.region);
-  const [city, setCity] = React.useState<string>(userInfo.city);
-  const [profileImg, setProfileImg] = React.useState<string>(
-    userInfo.profileImg,
-  );
-  const [nickname, setNickname] = React.useState<string>(userInfo.nickname);
-  const [tendency, setTendency] = React.useState<any>(keywords.slice(0, 3));
-  const [MBTI, setMBTI] = React.useState<number | string>(keywords[3]);
-  const [intro, setIntro] = React.useState<string>(
-    userInfo.intro && userInfo.intro === '0'
-      ? `안녕하세요 ${nickname}입니다`
-      : userInfo.intro,
-  );
+  const [region, setRegion] = React.useState<string>('');
+  const [city, setCity] = React.useState<string>('');
+  const [profileImg, setProfileImg] = React.useState<string>('');
+  const [nickname, setNickname] = React.useState<string>('');
+  const [tendency, setTendency] = React.useState([]);
+  const [MBTI, setMBTI] = React.useState<number | string>();
+  const [intro, setIntro] = React.useState<string>('');
   const tags = `${tendency.join(':')}:${MBTI}`;
 
   const [nickDupCheck, setNickDupCheck] = React.useState<Status>({
@@ -129,12 +123,26 @@ const MyPageModify = () => {
     setMBTI(tag);
   };
 
+  React.useEffect(() => {
+    setProfileImg(userInfo.profileImg);
+    setNickname(userInfo.nickname);
+    setIntro(
+      userInfo.intro && userInfo.intro === '0'
+        ? `안녕하세요 ${nickname}입니다`
+        : userInfo.intro,
+    );
+    setRegion(userInfo.region);
+    setCity(userInfo.city);
+    setTendency(keywords.slice(0, 3));
+    setMBTI(keywords[3]);
+  }, [userInfo]);
+
   return (
     <Container>
       <Grid>
         <MainTitle fs="sxl">프로필 수정</MainTitle>
 
-        <InputImage setProfile={setProfileImg} profile={userInfo.profileImg} />
+        <InputImage setProfile={setProfileImg} profile={profileImg} />
       </Grid>
 
       <NicknameDupCheck
