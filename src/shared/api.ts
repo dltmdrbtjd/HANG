@@ -25,7 +25,6 @@ import { delUserInfo, setUserInfo } from './userInfo';
 // 추후에 백엔드 서버 열리면 baseURL 변경됩니다.
 const instance = axios.create({
   baseURL: 'https://ruzan.shop',
-  // baseURL: 'https://ruzan.shop',
   withCredentials: true,
   timeout: 3000,
 });

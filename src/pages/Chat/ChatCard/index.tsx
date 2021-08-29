@@ -3,6 +3,10 @@ import React from 'react';
 import { setUserInfo } from 'src/shared/userInfo';
 // history
 import { history } from '../../../redux/configureStore';
+// type
+import { LastChat } from '../../../redux/modules/ChatModule/type';
+// function
+import timeFormat from '../../../util/timeFormat';
 // elements
 import { Grid, Strong, Text, Span } from '../../../elements';
 // components
@@ -11,23 +15,17 @@ import ProfileImg from '../../../components/ProfileImg';
 import BackgroundOpacity from './style';
 import { textOverflow } from '../../../styles/Mixin';
 
-const ChatCard = ({
-  targetUserPk,
-  message,
-  nickname,
-  profileImg,
-  unchecked,
-  time,
-}) => {
+const ChatCard = ({ roomInfo }) => {
   const chooseChatRoom = () => {
     setUserInfo('targetUserInfo', {
-      nickname,
-      profileImg,
-      targetPk: targetUserPk,
+      nickname: roomInfo.nickname,
+      profileImg: roomInfo.profileImg,
+      targetPk: roomInfo.targetPk,
     });
 
     history.push('/chat/room');
   };
+  const lastChat: LastChat = roomInfo.lastChat[0];
 
   return (
     <Grid position="relative" cursor="pointer" _onClick={chooseChatRoom}>
@@ -41,7 +39,7 @@ const ChatCard = ({
       >
         <Grid isFlex hoz="space-between">
           <Grid isFlex width="80%">
-            <ProfileImg imgUrl={profileImg} />
+            <ProfileImg imgUrl={roomInfo.profileImg} />
 
             <Grid
               width="calc(100% - 84px)"
@@ -49,23 +47,25 @@ const ChatCard = ({
               addstyle={textOverflow()}
             >
               <Strong fw="bold" fs="la">
-                {nickname}
+                {roomInfo.nickname}
               </Strong>
 
               <Text margin="6px 0 0" addstyle={textOverflow()}>
-                {message}
+                {lastChat
+                  ? lastChat.message
+                  : `${roomInfo.nickname} 님과 채팅을 시작해보세요`}
               </Text>
             </Grid>
           </Grid>
 
           <Grid width="auto" isFlex ver="flex-end" column>
-            {time ? (
+            {lastChat ? (
               <Span fs="xs" lh="24px">
-                {time}
+                {timeFormat(lastChat.curTime)}
               </Span>
             ) : null}
 
-            {unchecked ? (
+            {roomInfo.unchecked ? (
               <Span
                 fs="xs"
                 isFlex
@@ -78,7 +78,7 @@ const ChatCard = ({
                 color="white"
                 margin="6px 0 0"
               >
-                {unchecked < 10 ? unchecked : '9+'}
+                {roomInfo.unchecked < 10 ? roomInfo.unchecked : '9+'}
               </Span>
             ) : null}
           </Grid>
@@ -104,4 +104,4 @@ const ChatCard = ({
   );
 };
 
-export default ChatCard;
+export default React.memo(ChatCard);

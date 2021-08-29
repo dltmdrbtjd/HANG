@@ -2,6 +2,12 @@ export interface NewMessage {
   userPk: number;
   message: string;
   time: number;
+  roomIdx: number;
+}
+
+export interface NewRoom {
+  nickname: string;
+  profileImg: string | null;
 }
 
 export interface LastChat {
@@ -18,7 +24,7 @@ export interface LoadChatInfo {
   unchecked: string;
 }
 
-export interface ReadChatInfo {
+export interface ShowChatInfo {
   lastChat: LastChat[];
   nickname: string;
   profileImg: string;
@@ -28,7 +34,7 @@ export interface ReadChatInfo {
 
 export interface ChatState {
   alarmCount: number;
-  list: ReadChatInfo[];
+  list: ShowChatInfo[];
   loading: boolean;
   newMessage: NewMessage;
 }
