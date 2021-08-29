@@ -129,8 +129,6 @@ const MyPageModify = () => {
     setMBTI(tag);
   };
 
-  console.log(region, city);
-
   return (
     <Container>
       <Grid>
