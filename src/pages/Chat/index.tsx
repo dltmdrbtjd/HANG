@@ -1,6 +1,6 @@
 import React from 'react';
 // redux
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch } from 'react-redux';
 import { useTypedSelector } from 'src/redux/configureStore';
 import {
   ChatCreators,
@@ -18,8 +18,13 @@ import NoInfo from '../../components/NoInfo';
 
 const Chat = () => {
   const dispatch = useDispatch();
-  const roomList: any = useTypedSelector((state) => state.chat.list);
-  const newMessage = useTypedSelector((state) => state.chat.newMessage);
+  const { roomList, newMessage } = useTypedSelector(
+    (state) => ({
+      roomList: state.chat.list,
+      newMessage: state.chat.newMessage,
+    }),
+    shallowEqual,
+  );
 
   React.useEffect(() => {
     if (newMessage.userPk && newMessage.roomIdx === -1)

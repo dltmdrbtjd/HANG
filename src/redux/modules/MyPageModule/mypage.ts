@@ -57,7 +57,7 @@ const fetchGetMyInfo = createAsyncThunk(
 
       return payload;
     } catch (err) {
-      return false;
+      throw new Error(err);
     }
   },
 );
@@ -75,7 +75,7 @@ const fetchGetMyPromise = createAsyncThunk(
 
       return payload;
     } catch (err) {
-      return false;
+      throw new Error(err);
     }
   },
 );
@@ -92,7 +92,7 @@ const fetchGetBlockList = createAsyncThunk(
 
       return payload;
     } catch (err) {
-      return false;
+      throw new Error(err);
     }
   },
 );

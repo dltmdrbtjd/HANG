@@ -8,8 +8,6 @@ import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
 // userInfo
-import { isLogin } from '../../../shared/token';
-import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
 import apis from '../../../shared/api';
@@ -17,15 +15,12 @@ import apis from '../../../shared/api';
 const NotiBadge = () => {
   const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
 
-  const userPk = isLogin() && getUserInfo('userInfo').userPk;
-
   const NotiOff = () => {
     setNewAlarm(false);
     history.push('/noti');
   };
 
   React.useEffect(() => {
-    socket.emit('login', { uid: userPk });
     socket.on('requested', (data) => {
       setNewAlarm(data);
     });
