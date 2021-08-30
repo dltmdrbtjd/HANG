@@ -33,7 +33,7 @@ export type SignInType = {
 
 // detail module => api types
 export type FavoriteType = {
-  targetPk: number;
+  targetPk?: any;
   block?: number;
 };
 
