@@ -6,12 +6,12 @@ import { DetailCreators } from 'src/redux/modules/DetailModule/detail';
 import { activeAlert } from 'src/redux/modules/AlertModule/alert';
 import apis from 'src/shared/api';
 // user info
-import { setUserInfo } from 'src/shared/userInfo';
+import { setUserInfo, delUserInfo, getUserInfo } from 'src/shared/userInfo';
+import Dropdown from 'src/components/DropDown';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 // redux
-// import io from 'socket.io-client';
-// import { SocketContext } from 'src/context/socket';
-// import { socket } from 'src/context/socket';
 import { socket } from 'src/util/socket';
+import { AddBlockList } from 'src/redux/modules/MyPageModule/mypage';
 import { history, useTypedSelector } from '../../redux/configureStore';
 // style
 import {
@@ -31,12 +31,8 @@ import { setMediaCardLayout } from '../../styles/Media';
 // image
 import chat from '../../Images/NavigationIcons/onchat.svg';
 
-// const socket = React.useContext(SocketContext);
-
 const Detail = () => {
   const dispatch = useDispatch();
-
-  // const socket = React.useContext(SocketContext);
 
   const { eventList, userInfo }: any = useTypedSelector(
     (state) => ({
@@ -46,13 +42,30 @@ const Detail = () => {
     shallowEqual,
   );
 
+  const query = queryString.parse(location.search);
+  const { userPk } = getUserInfo('userInfo');
+  const targetPk = query.user;
+
+  function BlockRoom() {
+    socket.emit('quit', { userPk, targetPk });
+    delUserInfo('targetUserInfo');
+    history.goBack();
+  }
+
+  function BlockUser() {
+    apis
+      .AddBlockList({ targetPk })
+      .then(() => apis.LikeToggle({ targetPk, block: 1 }))
+      .then(() => dispatch(AddBlockList({ ...userInfo, userPk: targetPk })))
+      .then(() => BlockRoom())
+      .catch((err) => console.log(err));
+  }
+
   const GuideHandler = () => {
     history.push(
       `/detail/request?user=${userInfo.userPk}&nickname=${userInfo.nickname}`,
     );
   };
-
-  const query = queryString.parse(location.search);
 
   const TraveleRequestHandler = (pk, userPk) => {
     apis
@@ -90,7 +103,14 @@ const Detail = () => {
   return (
     <Container>
       <Grid>
-        <MainTitle fs="xl">프로필</MainTitle>
+        <Grid isFlex hoz="space-between" ver="center">
+          <MainTitle fs="xl">프로필</MainTitle>
+          <Dropdown
+            icon={<MoreVertIcon />}
+            contents={['차단하기']}
+            methods={[BlockUser]}
+          />
+        </Grid>
         <ProfileCard userInfo={userInfo} />
         <Grid isFlex hoz="flex-end" margin="17px 0 60px 0">
           <Button
