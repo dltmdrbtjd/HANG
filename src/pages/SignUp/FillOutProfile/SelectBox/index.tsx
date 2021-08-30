@@ -63,7 +63,7 @@ const SelectBox = () => {
           border={selectBox.open ? 'none' : '0.5px solid #E7E7E7'}
           addstyle={flexBox('space-between', 'center', 'inline-flex')}
         >
-          <Strong fw="regular">{ageState.state}</Strong>
+          <Strong fw="regular">{ageState.state || '연령대 선택'}</Strong>
 
           <Span addstyle={SetArrowAngle(selectBox.angle)}>
             <Image width="10px" src={Arrow} alt="arrow" />

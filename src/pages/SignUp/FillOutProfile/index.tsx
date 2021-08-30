@@ -116,7 +116,7 @@ const FillOutProfile = ({ formik }) => {
               fs="lg"
               addstyle={setMediaFontSize('sxl')}
             >
-              지역 선택
+              거주지 선택
             </Text>
 
             <AreaSelectBox

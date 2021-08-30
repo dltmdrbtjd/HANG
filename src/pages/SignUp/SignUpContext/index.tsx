@@ -29,7 +29,7 @@ const useProvideSignUp = () => {
   const [region, setRegion] = React.useState<string>('서울');
   const [city, setCity] = React.useState<string>('');
   const [gender, setGender] = React.useState<number>(null);
-  const [age, setAge] = React.useState('연령대 선택');
+  const [age, setAge] = React.useState('');
   const [profile, setProfile] = React.useState(null);
 
   const pageState = {

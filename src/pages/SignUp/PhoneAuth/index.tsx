@@ -27,10 +27,8 @@ const PhoneValidationCheck = ({ formik }) => {
           </MainTitle>
 
           <PhoneAuth
-            pNum={formik.values.pNum}
-            setPnum={formik.handleChange('pNum')}
+            formik={formik}
             status={1}
-            errorMsg={formik.errors.pNum}
             smsVeri={smsVeri}
             setSMSVeri={setSMSVeri}
           />
