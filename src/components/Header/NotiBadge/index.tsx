@@ -1,6 +1,4 @@
 import React from 'react';
-// global state
-import { signInStatus } from 'src/context/signInContext';
 // material
 import Badge from '@material-ui/core/Badge';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
@@ -10,18 +8,12 @@ import { history } from '../../../redux/configureStore';
 // elements
 import { Button, Grid } from '../../../elements';
 // userInfo
-import { getUserInfo } from '../../../shared/userInfo';
 import './style.css';
 // api
 import apis from '../../../shared/api';
 
-// const socket = React.useContext(SocketContext);
-
 const NotiBadge = () => {
   const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
-
-  const { isLogIn } = React.useContext(signInStatus);
-  const userPk = isLogIn && getUserInfo('userInfo').userPk;
 
   const NotiOff = () => {
     setNewAlarm(false);
@@ -29,7 +21,6 @@ const NotiBadge = () => {
   };
 
   React.useEffect(() => {
-    socket.emit('login', { uid: userPk });
     socket.on('requested', (data) => {
       setNewAlarm(data);
     });

@@ -15,15 +15,15 @@ import EnterPassword from './EnterPassword';
 import { Container } from '../../../elements';
 
 interface userInfo {
+  userId: string;
   pNum: string;
   password: string;
 }
 
 const ForgotPassword = () => {
   const [page, setPage] = React.useState<number>(1);
-  const [userId, setUserId] = React.useState<string>('');
 
-  const ForgotPasswordDB = (password: string) => {
+  const ForgotPasswordDB = (userId: string, password: string) => {
     apis
       .ForgotPwd({ userId, newPassword: password })
       .then(() => history.replace('/signin'))
@@ -34,6 +34,7 @@ const ForgotPassword = () => {
     <Container padding="50px 0 20px 0">
       <Formik
         initialValues={{
+          userId: '',
           pNum: '',
           password: '',
         }}
@@ -52,30 +53,17 @@ const ForgotPassword = () => {
             .min(8, '비밀번호를 8자 이상 입력해 주세요'),
         })}
         onSubmit={(values: userInfo, { setSubmitting }) => {
-          ForgotPasswordDB(values.password);
+          ForgotPasswordDB(values.userId, values.password);
           setSubmitting(false);
         }}
       >
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             {page === 1 ? (
-              <EnterUserInfo
-                pNum={formik.values.pNum}
-                setPnum={formik.handleChange('pNum')}
-                errorMsg={formik.errors.pNum}
-                setPage={setPage}
-                userId={userId}
-                setUserId={setUserId}
-              />
+              <EnterUserInfo formik={formik} setPage={setPage} />
             ) : null}
 
-            {page === 2 ? (
-              <EnterPassword
-                password={formik.values.password}
-                setPassword={formik.handleChange('password')}
-                pwdErrorMsg={formik.errors.password}
-              />
-            ) : null}
+            {page === 2 ? <EnterPassword formik={formik} /> : null}
           </form>
         )}
       </Formik>

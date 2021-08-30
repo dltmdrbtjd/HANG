@@ -1,15 +1,12 @@
 import React from 'react';
 // elements
 import { Grid, Button, Hr } from '../../../elements/index';
+import { signUpStatus } from '../SignUpContext';
 // style
 import setSmallMobileMargin from './style';
 
-interface Page {
-  curPage: number;
-  setPage?: any;
-}
-
-const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
+const StatusBar = () => {
+  const { pageState } = React.useContext(signUpStatus);
   const pageNav = [1, 2, 3];
 
   return (
@@ -18,10 +15,10 @@ const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
         {pageNav.map((page: number, idx: number) => {
           let color = 'gray';
 
-          if (page === curPage) color = 'brandColor';
-          else if (page < curPage) color = 'white';
+          if (page === pageState.page) color = 'brandColor';
+          else if (page < pageState.page) color = 'white';
 
-          const isPastPage = page <= curPage;
+          const isPastPage = page <= pageState.page;
 
           return (
             <React.Fragment
@@ -33,11 +30,13 @@ const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
                 width="16px"
                 height="16px"
                 color={color}
-                bgColor={page < curPage ? 'brandColor' : 'bgColor'}
+                bgColor={page < pageState.page ? 'brandColor' : 'bgColor'}
                 fs="status"
                 fw="bold"
                 _onClick={
-                  curPage < 4 && isPastPage ? () => setPage(page) : null
+                  pageState.page < 4 && isPastPage
+                    ? () => pageState.setPage(page)
+                    : null
                 }
                 border={`1px solid ${isPastPage ? '#FF9900' : '#C4C4C4'}`}
               >
@@ -47,7 +46,7 @@ const StatusBar: React.FC<Page> = ({ curPage, setPage }) => {
               {idx < pageNav.length - 1 ? (
                 <Hr
                   width="85px"
-                  bgColor={page < curPage ? 'brandColor' : 'lightGray'}
+                  bgColor={page < pageState.page ? 'brandColor' : 'lightGray'}
                 />
               ) : null}
             </React.Fragment>

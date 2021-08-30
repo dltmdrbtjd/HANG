@@ -7,7 +7,7 @@ import ValidateInput from '../../ValidateInput';
 import { ForgotPwdWrapperHeight } from '../../style';
 import { setMediaMargin } from '../../../../styles/Media';
 
-const EnterPassword = ({ password, setPassword, pwdErrorMsg }) => {
+const EnterPassword = ({ formik }) => {
   const [pwdCheck, setPwdCheck] = React.useState<string>('');
 
   return (
@@ -23,16 +23,17 @@ const EnterPassword = ({ password, setPassword, pwdErrorMsg }) => {
             placeholder="비밀번호 입력"
             type="password"
             name="password"
-            value={password}
-            _onChange={setPassword}
+            value={formik.values.password}
+            _onChange={formik.handleChange('password')}
             status={
-              (pwdErrorMsg && 'danger') || (password && !pwdErrorMsg && 'safe')
+              (formik.errors.password && 'danger') ||
+              (formik.values.password && !formik.errors.password && 'safe')
             }
           />
 
-          {pwdErrorMsg ? (
+          {formik.errors.password ? (
             <Text fs="sm" color="danger" margin="8px 0 0">
-              {pwdErrorMsg}
+              {formik.errors.password}
             </Text>
           ) : null}
         </Grid>
@@ -46,12 +47,12 @@ const EnterPassword = ({ password, setPassword, pwdErrorMsg }) => {
               setPwdCheck(e.target.value)
             }
             status={
-              (pwdCheck !== password && 'danger') ||
-              (pwdCheck && pwdCheck === password && 'safe')
+              (pwdCheck !== formik.values.password && 'danger') ||
+              (pwdCheck && pwdCheck === formik.values.password && 'safe')
             }
           />
 
-          {pwdCheck !== password ? (
+          {pwdCheck !== formik.values.password ? (
             <Text fs="sm" color="danger" margin="8px 0 0">
               비밀번호가 일치하지 않습니다
             </Text>
@@ -65,7 +66,13 @@ const EnterPassword = ({ password, setPassword, pwdErrorMsg }) => {
         fw="bold"
         width="100%"
         margin="60px 0 0"
-        disabled={!(password && !pwdErrorMsg && pwdCheck === password)}
+        disabled={
+          !(
+            formik.values.password &&
+            !formik.errors.password &&
+            pwdCheck === formik.values.password
+          )
+        }
       >
         비밀번호 변경
       </Button>

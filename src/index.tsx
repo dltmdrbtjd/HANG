@@ -7,15 +7,11 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 // theme
 import GlobalThemeProvider from './styles/GlobalThemeProvider';
-// global state
-import SignInStatus from './context/signInContext';
 
 ReactDOM.render(
   <Provider store={store}>
     <GlobalThemeProvider>
-      <SignInStatus>
-        <App />
-      </SignInStatus>
+      <App />
     </GlobalThemeProvider>
   </Provider>,
   document.getElementById('root'),

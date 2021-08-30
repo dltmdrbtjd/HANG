@@ -34,7 +34,6 @@ const weekdays = [
 ];
 
 const ChatRoomWrapper = () => {
-  const { roomName } = React.useContext(chatStatus);
   const [open, setOpen] = React.useState<boolean>(false);
 
   const dispatch = useDispatch();
@@ -44,7 +43,7 @@ const ChatRoomWrapper = () => {
   const { targetPk, nickname } = targetUserInfo;
 
   const QuitRoom = () => {
-    socket.emit('quit', { roomName, userPk });
+    socket.emit('quit', { targetPk, userPk });
     delUserInfo('targetUserInfo');
 
     history.replace('/chat');

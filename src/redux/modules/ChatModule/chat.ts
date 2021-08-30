@@ -31,7 +31,7 @@ const fetchGetChatRoomList = createAsyncThunk(
 
       return payload;
     } catch (err) {
-      return false;
+      throw new Error(err);
     }
   },
 );
