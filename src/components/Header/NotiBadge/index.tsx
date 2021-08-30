@@ -14,8 +14,6 @@ import './style.css';
 // api
 import apis from '../../../shared/api';
 
-// const socket = React.useContext(SocketContext);
-
 const NotiBadge = () => {
   const [newAlarm, setNewAlarm] = React.useState<boolean>(false);
 

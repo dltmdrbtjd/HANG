@@ -41,6 +41,15 @@ const PromiseCard = ({ promInfo, guide, type }: Props) => {
   const [open, setOpen] = React.useState(false);
   const [promiseType, setPromiseType] = React.useState(type);
 
+  const ActiveToastMessage = (text: string) => {
+    dispatch(
+      fetchMessage({
+        Message: true,
+        text,
+      }),
+    );
+  };
+
   const AgreeProm = () => {
     apis
       .AgreePromise({ tripId: promInfo.tripId, requestId: promInfo.requestId })
@@ -80,12 +89,7 @@ const PromiseCard = ({ promInfo, guide, type }: Props) => {
       agreeText: '확인',
       agree: () => {
         AgreeProm();
-        dispatch(
-          fetchMessage({
-            Message: true,
-            text: `${promInfo.nickname} 님의 요청을 수락했습니다.`,
-          }),
-        );
+        ActiveToastMessage(`${promInfo.nickname} 님의 요청을 수락했습니다.`);
       },
     },
 
@@ -96,12 +100,7 @@ const PromiseCard = ({ promInfo, guide, type }: Props) => {
       agreeText: '확인',
       agree: () => {
         RejectProm();
-        dispatch(
-          fetchMessage({
-            Message: true,
-            text: `${promInfo.nickname} 님의 요청을 거절했습니다.`,
-          }),
-        );
+        ActiveToastMessage(`${promInfo.nickname} 님의 요청을 거절했습니다.`);
       },
     },
 
@@ -112,7 +111,9 @@ const PromiseCard = ({ promInfo, guide, type }: Props) => {
       agreeText: '확인',
       agree: () => {
         RejectProm();
-        dispatch(fetchMessage({ Message: true, text: '요청을 취소했습니다.' }));
+        ActiveToastMessage(
+          `${promInfo.nickname} 님에게 보낸 요청을 취소했습니다.`,
+        );
       },
     },
 
@@ -122,11 +123,8 @@ const PromiseCard = ({ promInfo, guide, type }: Props) => {
       subText2: '약속을 취소하시겠습니까?',
       agree: () => {
         cancelConfiremedProm();
-        dispatch(
-          fetchMessage({
-            Message: true,
-            text: `${promInfo.nickname} 님과의 약속이 취소되었습니다.`,
-          }),
+        ActiveToastMessage(
+          `${promInfo.nickname} 님과의 약속이 취소되었습니다.`,
         );
       },
     },

@@ -28,7 +28,7 @@ const Block = () => {
       .DeleteBlockList({ targetPk })
       .then(() => {
         dispatch(DeleteBlockList(targetPk));
-        dispatch(fetchMessage({ Message: true, text: '차단 해제됐습니다.' }));
+        dispatch(fetchMessage({ Message: true, text: '차단 해제되었습니다.' }));
       })
       .catch((err) => console.log(err));
   };
