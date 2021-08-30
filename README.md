@@ -48,6 +48,10 @@
 |:--:|:--:|:--:|:--:|:--:|
 |<img width="316" alt="KakaoTalk_20210829_212944" src="https://user-images.githubusercontent.com/59644518/131286175-44c2881c-dd0a-4fab-a077-e749e4556812.png">|<img width="318" alt="KakaoTalk_20210829_213112" src="https://user-images.githubusercontent.com/59644518/131250593-25cc732f-4780-420c-b7d5-2cea7ff0e96a.png">|<img width="316" alt="KakaoTalk_20210829_212632" src="https://user-images.githubusercontent.com/59644518/131250595-053488d7-f85b-4778-bd54-d89e1e72a059.png">|<img width="316" alt="KakaoTalk_20210829_212856" src="https://user-images.githubusercontent.com/59644518/131250596-0ebf397e-eac4-4a73-a15e-57f61f28d464.png">|<img width="317" alt="KakaoTalk_20210829_212833" src="https://user-images.githubusercontent.com/59644518/131250645-6a77ad86-0e28-4a6f-857b-97895952d421.png">|<img width="316" alt="KakaoTalk_20210829_212944" src="https://user-images.githubusercontent.com/59644518/131250625-c44da251-8c74-4bf0-9adb-a1dc9c7334d6.png">|
 
+## 🎫 프로젝트 구조
+![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png)
+
+
 ## 🛠 기술스택
 ![Stack](https://user-images.githubusercontent.com/59644518/131254702-f92170c3-6c53-4b5f-ae77-ee3eb58e71c7.png)
 
