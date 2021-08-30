@@ -1,3 +1,5 @@
+import serialize from 'serialize-javascript';
+
 interface UserInfo {
   exp: number;
   iat: number;
@@ -15,7 +17,7 @@ const setUserInfo = (
   key: string,
   userInfo: UserInfo | TargetUserInfo,
 ): void => {
-  localStorage.setItem(key, JSON.stringify(userInfo));
+  localStorage.setItem(key, serialize(userInfo, { isJSON: true }));
 };
 
 const getUserInfo = (key: string): any => {
