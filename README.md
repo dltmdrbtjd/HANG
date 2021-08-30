@@ -41,7 +41,7 @@
 ## 📌 주요 기능
 |로그인 페이지|회원가입 페이지|즐겨찾기 페이지|검색 페이지|채팅 페이지|
 |:--:|:--:|:--:|:--:|:--:|
-|<img width="320" alt="KakaoTalk_20210829_212233" src="https://user-images.githubusercontent.com/59644518/131250542-f7f2de55-9176-4260-951e-4b9fab684801.png">|<img width="317" alt="회원가입" src="https://user-images.githubusercontent.com/59644518/131250546-6eef1640-d90d-41b9-8e45-655303365648.png">|<img width="316" alt="KakaoTalk_20210829_212429" src="https://user-images.githubusercontent.com/59644518/131250549-beeac597-43c3-42f9-adf6-43639e9609ce.png">|<img width="318" alt="KakaoTalk_20210829_212507" src="https://user-images.githubusercontent.com/59644518/131250551-d02e0d6c-35b4-4c59-a94f-fb0149578dbb.png">|<img width="316" alt="KakaoTalk_20210829_212609" src="https://user-images.githubusercontent.com/59644518/131250582-b7024e0e-d6cf-4abe-8c75-43dde8c0e298.png">|
+|<img width="320" alt="KakaoTalk_20210829_212233" src="https://user-images.githubusercontent.com/59644518/131250542-f7f2de55-9176-4260-951e-4b9fab684801.png">|<img width="317" alt="회원가입" src="https://user-images.githubusercontent.com/59644518/131250546-6eef1640-d90d-41b9-8e45-655303365648.png">|<img width="318" alt="KakaoTalk_20210830_134449" src="https://user-images.githubusercontent.com/59644518/131286418-03822a20-f4aa-4561-a251-534d35b95ed8.png">|<img width="318" alt="KakaoTalk_20210829_212507" src="https://user-images.githubusercontent.com/59644518/131250551-d02e0d6c-35b4-4c59-a94f-fb0149578dbb.png">|<img width="316" alt="KakaoTalk_20210829_212609" src="https://user-images.githubusercontent.com/59644518/131250582-b7024e0e-d6cf-4abe-8c75-43dde8c0e298.png">|
 
 
 |차단 페이지|유저상세 페이지|마이 페이지|약속 페이지|알림 페이지|
