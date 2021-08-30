@@ -14,10 +14,8 @@ export interface Status {
 }
 
 interface Props {
-  pNum: string;
-  setPnum: any;
+  formik: any;
   status: number;
-  errorMsg: string;
   smsVeri: Status;
   setSMSVeri: any;
 }
@@ -25,10 +23,8 @@ interface Props {
 export const currentType: string[] = ['primary', 'safe', 'danger'];
 
 const PhoneAuth: React.FC<Props> = ({
-  pNum,
-  setPnum,
+  formik,
   status,
-  errorMsg,
   smsVeri,
   setSMSVeri,
 }) => {
@@ -45,7 +41,7 @@ const PhoneAuth: React.FC<Props> = ({
 
   const PhoneVerification = () => {
     apis
-      .PhoneVerification({ pNum, status })
+      .PhoneVerification({ pNum: formik.values.pNum, status })
       .then(() => setPhoneVeri({ status: 1, errorMsg: '' }))
       .catch(() =>
         setPhoneVeri({ status: 2, errorMsg: phoneAuthErrMsg[status] }),
@@ -54,7 +50,7 @@ const PhoneAuth: React.FC<Props> = ({
 
   const SMSVerification = () => {
     apis
-      .Pauth({ pNum, aNum })
+      .Pauth({ pNum: formik.values.pNum, aNum })
       .then(() => setSMSVeri({ status: 1, errorMsg: '' }))
       .catch(() =>
         setSMSVeri({ status: 2, errorMsg: '인증 번호가 유효하지 않습니다.' }),
@@ -63,40 +59,37 @@ const PhoneAuth: React.FC<Props> = ({
 
   return (
     <Grid>
-      <Grid
-        isFlex
-        hoz="space-between"
-        margin="0 0 15px"
-        addstyle={setMediaMargin('0 0 20px')}
-      >
+      <Grid isFlex hoz="space-between" addstyle={setMediaMargin('0 0 20px')}>
         <ValidateInput
           placeholder="전화번호 입력"
           type="tel"
           width="58%"
           name="pNum"
-          value={pNum}
-          _onChange={setPnum}
+          value={formik.values.pNum}
+          _onChange={formik.handleChange('pNum')}
           status={currentType[phoneVeri.status]}
         />
 
         <Button
           width="40%"
-          disabled={!(pNum && !errorMsg)}
+          disabled={
+            !(formik.values.pNum && !formik.errors.pNum) || smsVeri.status === 1
+          }
           _onClick={PhoneVerification}
         >
           인증번호 받기
         </Button>
       </Grid>
 
-      {errorMsg || phoneVeri.status === 2 ? (
-        <Text fs="sm" color="danger">
-          {errorMsg || phoneVeri.errorMsg}
+      {formik.errors.pNum || phoneVeri.status === 2 ? (
+        <Text fs="sm" color="danger" margin="15px 0 0">
+          {formik.errors.pNum || phoneVeri.errorMsg}
         </Text>
       ) : null}
 
       {phoneVeri.status === 1 ? (
         <>
-          <Grid isFlex hoz="space-between">
+          <Grid isFlex hoz="space-between" margin="15px 0 0">
             <ValidateInput
               placeholder="인증번호 입력"
               width="58%"
@@ -107,7 +100,11 @@ const PhoneAuth: React.FC<Props> = ({
               }
             />
 
-            <Button width="40%" disabled={!aNum} _onClick={SMSVerification}>
+            <Button
+              width="40%"
+              disabled={!aNum || smsVeri.status === 1}
+              _onClick={SMSVerification}
+            >
               인증 확인
             </Button>
           </Grid>

@@ -15,8 +15,6 @@ import { setMediaCardLayout } from '../../../../styles/Media';
 const MyPromiseDetail = ({ type }: { type: string }) => {
   const promise = useSelector<RootState>((state) => state.mypage.promise);
 
-  const [msg, setMsg] = React.useState<string>('');
-
   const pageBreak = {
     received: {
       title: '받은 요청',

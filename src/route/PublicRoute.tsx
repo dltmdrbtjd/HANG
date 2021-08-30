@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { signInStatus } from 'src/context/signInContext';
+import { isLogin } from 'src/shared/token';
 
 interface Public {
   component: React.ElementType;
@@ -10,13 +10,11 @@ interface Public {
 }
 
 const PublicRoute = ({ component: Component, restricted, ...rest }: Public) => {
-  const { isLogIn } = React.useContext(signInStatus);
-
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLogIn && restricted ? <Redirect to="/" /> : <Component {...props} />
+        isLogin() && restricted ? <Redirect to="/" /> : <Component {...props} />
       }
     />
   );

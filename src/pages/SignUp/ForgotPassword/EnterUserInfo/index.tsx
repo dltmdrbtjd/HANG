@@ -9,14 +9,7 @@ import PhoneAuth, { Status } from '../../PhoneAuth/PhoneAuth';
 import { ForgotPwdWrapperHeight } from '../../style';
 import { setMediaMargin } from '../../../../styles/Media';
 
-const EnterUserInfo = ({
-  pNum,
-  setPnum,
-  errorMsg,
-  userId,
-  setUserId,
-  setPage,
-}) => {
+const EnterUserInfo = ({ formik, setPage }) => {
   const [existsStatus, setExistsStatus] = React.useState({
     status: true,
     errorMsg: '',
@@ -28,7 +21,7 @@ const EnterUserInfo = ({
 
   const ExistsIdAndPhoneNumberDB = () => {
     apis
-      .Exists({ userId, pNum })
+      .Exists({ userId: formik.values.userId, pNum: formik.values.pNum })
       .then(() => setPage((page: number) => page + 1))
       .catch(() =>
         setExistsStatus({
@@ -48,15 +41,13 @@ const EnterUserInfo = ({
         <Grid margin="0 0 15px" addstyle={setMediaMargin('0 0 20px')}>
           <Input
             placeholder="아이디 입력"
-            value={userId}
-            _onChange={(e) => setUserId(e.target.value)}
+            value={formik.values.userId}
+            _onChange={formik.handleChange('userId')}
           />
         </Grid>
 
         <PhoneAuth
-          pNum={pNum}
-          setPnum={setPnum}
-          errorMsg={errorMsg}
+          formik={formik}
           status={0}
           smsVeri={smsVeri}
           setSMSVeri={setSMSVeri}

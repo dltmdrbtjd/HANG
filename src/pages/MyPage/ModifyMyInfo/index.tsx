@@ -45,9 +45,8 @@ const MyPageModify = () => {
   const [profileImg, setProfileImg] = React.useState<string>('');
   const [nickname, setNickname] = React.useState<string>('');
   const [tendency, setTendency] = React.useState([]);
-  const [MBTI, setMBTI] = React.useState<number | string>();
+  const [MBTI, setMBTI] = React.useState<number | string>('');
   const [intro, setIntro] = React.useState<string>('');
-  const tags = `${tendency.join(':')}:${MBTI}`;
 
   const [nickDupCheck, setNickDupCheck] = React.useState<Status>({
     status: 0,
@@ -65,7 +64,7 @@ const MyPageModify = () => {
       ...userInfo,
       nickname,
       intro,
-      tags,
+      tags: `${tendency.join(':')}:${MBTI}`,
       region,
       city,
     };
@@ -94,24 +93,16 @@ const MyPageModify = () => {
 
   const selectTendencyTags = (tag: number) => {
     if (tendency.includes(tag)) {
-      const disabled = tendency.map((active) => {
-        if (active === tag) return 'n';
+      const disabled = tendency.filter((active) => active !== tag);
+      disabled.unshift('n');
 
-        return active;
-      });
       setTendency(disabled);
 
       return;
     }
 
-    if (tendency.length >= 3) {
-      const newTendencyList = tendency.slice(1);
-      setTendency([...newTendencyList, tag]);
-
-      return;
-    }
-
-    setTendency([...tendency, tag]);
+    const newTendencyList = tendency.slice(1);
+    setTendency(newTendencyList.concat(tag));
   };
 
   const selectMBTITags = (tag: number) => {
@@ -127,8 +118,8 @@ const MyPageModify = () => {
     setProfileImg(userInfo.profileImg);
     setNickname(userInfo.nickname);
     setIntro(
-      userInfo.intro && userInfo.intro === '0'
-        ? `안녕하세요 ${nickname}입니다`
+      !userInfo.intro || userInfo.intro === '0'
+        ? `안녕하세요 ${userInfo.nickname}입니다`
         : userInfo.intro,
     );
     setRegion(userInfo.region);

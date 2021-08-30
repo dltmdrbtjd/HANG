@@ -76,8 +76,6 @@ const ChatContext = ({ children }) => {
 
     return () => {
       socket.emit('leave', { roomName, userPk });
-      socket.off('chatLogs');
-      socket.off('updateMessage');
     };
   }, []);
 

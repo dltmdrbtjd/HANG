@@ -6,11 +6,15 @@ import * as yup from 'yup';
 import { SignInType } from 'src/shared/ApiTypes';
 // apis
 import apis from 'src/shared/api';
+// token
+import jwtDecode from 'jwt-decode';
+import { setToken } from 'src/shared/token';
+import { setUserInfo } from 'src/shared/userInfo';
 // history
 import TermsOfUse from 'src/components/TermsOfUse';
 import { history } from 'src/redux/configureStore';
 // context
-import { signInStatus } from 'src/context/signInContext';
+import { signInStatus } from 'src/globalState/signInContext';
 // elements
 import {
   Logo,
@@ -51,7 +55,11 @@ const SignIn = (): React.ReactElement => {
   const SignIn = (userInfo: SignInType): void => {
     apis
       .SignIn(userInfo)
-      .then(({ data }) => signIn(data.accessToken))
+      .then(({ data }) => {
+        setToken(data.accessToken);
+        setUserInfo('userInfo', jwtDecode(data.accessToken));
+      })
+      .then(() => signIn())
       .then(() => {
         if (tutorial) history.replace('/');
         else history.push('/mini_tutorial');

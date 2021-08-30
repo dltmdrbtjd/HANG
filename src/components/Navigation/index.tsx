@@ -1,15 +1,15 @@
 import React from 'react';
 // material
 import Badge from '@material-ui/core/Badge';
-// socket
-import { socket } from 'src/util/socket';
 // redux
-import { history, useTypedSelector } from 'src/redux/configureStore';
 import { useDispatch } from 'react-redux';
+import { history, useTypedSelector } from 'src/redux/configureStore';
 import {
   ChatHistoryUpdate,
   ChatAlarmCheck,
 } from 'src/redux/modules/ChatModule/chat';
+// socket
+import { socket } from 'src/util/socket';
 // type
 import { NewMessage } from 'src/redux/modules/ChatModule/type';
 // router

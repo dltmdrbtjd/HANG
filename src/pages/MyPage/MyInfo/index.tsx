@@ -9,13 +9,10 @@ import { useDispatch, shallowEqual } from 'react-redux';
 import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // sign out
-import { signInStatus } from 'src/context/signInContext';
-// token
-import { getUserInfo } from 'src/shared/userInfo';
+import { signInStatus } from 'src/globalState/signInContext';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
 // history
-import { socket } from 'src/util/socket';
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // elements
 import {
@@ -34,7 +31,6 @@ import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
 import DropDown from '../../../components/DropDown';
 import NoInfo from '../../../components/NoInfo';
-import Modal from '../../../components/Modal';
 // style
 import { setSubTitleFont, setNicknameFont } from './style';
 import { setMediaCardLayout } from '../../../styles/Media';
@@ -50,17 +46,7 @@ const MyInfo = () => {
     shallowEqual,
   );
 
-  // const [open, setOpen] = React.useState<boolean>(false);
-
-  const { userPk } = getUserInfo('userInfo');
-
   const { signOut } = React.useContext(signInStatus);
-
-  const deleteUserInfo = () => {
-    socket.emit('logout', { uid: userPk });
-    socket.disconnect();
-    signOut();
-  };
 
   const DeleteTrip = (tripId: DeleteTripEventType) => {
     apis
@@ -80,18 +66,10 @@ const MyInfo = () => {
   const SignOut = () => {
     apis
       .SignOut()
-      .then(() => deleteUserInfo())
+      .then(() => signOut())
       .then(() => history.replace('/signin'))
       .catch((err) => console.error(err));
   };
-
-  // const WithDrawalUser = () => {
-  //   apis
-  //     .Withdrawal()
-  //     .then(() => deleteUserInfo())
-  //     .then(() => history.replace('/signin'))
-  //     .catch((err) => console.log(err));
-  // };
 
   return (
     <Container>
@@ -180,15 +158,6 @@ const MyInfo = () => {
           ))}
         </Grid>
       </NoInfo>
-
-      {/* <Modal
-        open={open}
-        close={() => setOpen(false)}
-        mainText="회원 탈퇴"
-        subText2="탈퇴 하시겠습니까?"
-        agreeText="확인"
-        agree={WithDrawalUser}
-      /> */}
     </Container>
   );
 };
