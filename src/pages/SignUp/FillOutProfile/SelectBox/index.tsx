@@ -4,6 +4,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 // style
 import { flexBox } from 'src/styles/Mixin';
 import { SetArrowAngle } from 'src/pages/MyPage/CreateTrip/Calendar/style';
+// context
+import { signUpStatus } from '../../SignUpContext';
 // elements
 import {
   Button,
@@ -17,14 +19,10 @@ import {
 // image
 import Arrow from '../../../../Images/arrow.svg';
 
-interface Props {
-  initailOption: string;
-  contents: string[];
-  setState: any;
-}
+const SelectBox = () => {
+  const { ageState } = React.useContext(signUpStatus);
+  const ageOptions = ['10대', '20대', '30대', '40대', '50대', '60대 이상'];
 
-const SelectBox: React.FC<Props> = ({ initailOption, contents, setState }) => {
-  const [option, setOption] = React.useState(initailOption);
   const [selectBox, setSelectBox] = React.useState<{
     angle: number;
     open: boolean;
@@ -65,7 +63,7 @@ const SelectBox: React.FC<Props> = ({ initailOption, contents, setState }) => {
           border={selectBox.open ? 'none' : '0.5px solid #E7E7E7'}
           addstyle={flexBox('space-between', 'center', 'inline-flex')}
         >
-          <Strong fw="regular">{option}</Strong>
+          <Strong fw="regular">{ageState.state}</Strong>
 
           <Span addstyle={SetArrowAngle(selectBox.angle)}>
             <Image width="10px" src={Arrow} alt="arrow" />
@@ -82,19 +80,18 @@ const SelectBox: React.FC<Props> = ({ initailOption, contents, setState }) => {
               radius="0 0 10px 10px"
               shadow={selectBox.open && '0px 2px 3px rgba(136, 136, 136, 0.25)'}
             >
-              {contents.map((content: string) => (
+              {ageOptions.map((content: string) => (
                 <List
                   isFlex
                   ver="center"
                   height="32px"
                   padding=" 0 12px"
                   fs="sm"
-                  bgColor={option === content ? 'skyblue' : null}
+                  bgColor={ageState.state === content ? 'skyblue' : null}
                   key={(Date.now() + Math.random()).toString(36)}
                   _onClick={(e: React.MouseEvent) => {
                     handleClose(e);
-                    setOption(content);
-                    setState(content);
+                    ageState.setState(content);
                   }}
                 >
                   {content}
