@@ -31,7 +31,7 @@ const NotiBadge = () => {
         setNewAlarm(res.data);
       })
       .catch((err) => console.log(err));
-  }, [newAlarm]);
+  }, []);
 
   return (
     <Button form="text" arialabel="badge">

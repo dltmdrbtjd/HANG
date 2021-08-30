@@ -145,12 +145,10 @@ const chatSlice = createSlice({
         );
 
       state.list = chatRoomList.sort((a, b) => {
-        if (!(a.lastChat[0] && b.lastChat[0])) return 1;
+        const pastChat = a.lastChat[0] ? a.lastChat[0].curTime : 0;
+        const currentChat = b.lastChat[0] ? b.lastChat[0].curTime : 0;
 
-        const aLastChat = a.lastChat[0];
-        const bLastChat = b.lastChat[0];
-
-        return bLastChat.curTime - aLastChat.curTime;
+        return currentChat - pastChat;
       });
 
       state.alarmCount = alarmCount;
