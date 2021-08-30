@@ -14,7 +14,7 @@ import { setUserInfo } from 'src/shared/userInfo';
 import TermsOfUse from 'src/components/TermsOfUse';
 import { history } from 'src/redux/configureStore';
 // context
-import { signInStatus } from 'src/context/signInContext';
+import { signInStatus } from 'src/globalState/signInContext';
 // elements
 import {
   Logo,

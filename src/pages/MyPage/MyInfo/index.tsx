@@ -9,7 +9,7 @@ import { useDispatch, shallowEqual } from 'react-redux';
 import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // sign out
-import { signInStatus } from 'src/context/signInContext';
+import { signInStatus } from 'src/globalState/signInContext';
 // token
 import { getUserInfo } from 'src/shared/userInfo';
 // type

@@ -10,7 +10,7 @@ import Navigation from './components/Navigation';
 import Alert from './components/Alert';
 // global state
 import ToastMessage from './components/ToastMessage';
-import SignInStatus from './context/signInContext';
+import SignInStatus from './globalState/signInContext';
 
 const App = (): React.ReactElement => {
   return (
