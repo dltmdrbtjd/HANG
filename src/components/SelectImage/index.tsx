@@ -56,7 +56,7 @@ const SelectImage = ({ setProfile, profile }: Props) => {
 
   React.useEffect(() => {
     setProfileImg(profile || null);
-  }, []);
+  }, [profile]);
 
   return (
     <Grid position="relative" width="100px" height="100px" margin="0 auto 30px">
