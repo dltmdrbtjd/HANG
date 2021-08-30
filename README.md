@@ -52,7 +52,7 @@
 ![프로젝트 구조](https://user-images.githubusercontent.com/59644518/131306840-2ccd7bf7-62b8-43dd-9beb-cf4dddd13cb8.png)
 
 
-## 🛠 기술스택
+## 🛠 Front-End 기술스택
 ![Stack](https://user-images.githubusercontent.com/59644518/131254702-f92170c3-6c53-4b5f-ae77-ee3eb58e71c7.png)
 
 
