@@ -8,10 +8,10 @@ export type SignUpType = {
   userId: string;
   nickname: string;
   password: string;
-  age: number;
   region: string;
   city: string;
   profileImg: string | null;
+  age: number;
   gender: number;
   pNum: string;
 };

@@ -51,7 +51,7 @@ const Alert = (): React.ReactElement => {
                 이런!
               </SubTitle>
 
-              <Text fw="semiBold" wb="keep-all">
+              <Text fw="semiBold" wb="keep-all" ws="pre-line">
                 {errorMsg}
               </Text>
             </Grid>

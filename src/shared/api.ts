@@ -122,7 +122,7 @@ const apis = {
 
   // myinfo block
   GetBlockList: () => instance.get('api/users/block'),
-  AddBlockList: (targetPk: { targetPk: number }) =>
+  AddBlockList: (targetPk: { targetPk: number | string | string[] }) =>
     instance.post('api/users/block', targetPk),
   DeleteBlockList: (targetPk: { targetPk: number }) =>
     instance.patch('api/users/block', targetPk),
