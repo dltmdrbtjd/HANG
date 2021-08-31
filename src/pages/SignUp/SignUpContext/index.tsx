@@ -11,7 +11,7 @@ import { userInfo } from '../SignUpWrapper';
 
 export const signUpStatus = React.createContext(null);
 
-const createMemorizeState = (state, setState) => {
+const createMemorizeState = (state: string | number, setState) => {
   return React.useMemo(
     () => ({
       state,
@@ -29,8 +29,8 @@ const useProvideSignUp = () => {
   const [region, setRegion] = React.useState<string>('서울');
   const [city, setCity] = React.useState<string>('');
   const [gender, setGender] = React.useState<number>(null);
-  const [age, setAge] = React.useState('');
-  const [profile, setProfile] = React.useState(null);
+  const [age, setAge] = React.useState<string>('');
+  const [profile, setProfile] = React.useState<string>(null);
 
   const pageState = {
     page,
@@ -67,7 +67,14 @@ const useProvideSignUp = () => {
           age: parseInt(age, 10),
         })
         .then(() => setPage((page: number) => page + 1))
-        .catch((err) => console.log(err));
+        .catch(() =>
+          dispatch(
+            activeAlert({
+              status: true,
+              errorMsg: '회원가입에 실패 하였습니다.\n나중에 다시 시도해주세요',
+            }),
+          ),
+        );
     });
   };
 
