@@ -7,10 +7,10 @@ import { textOverflowWrap } from 'src/styles/Mixin';
 import { TagsBox } from 'src/styles/Mixin/boxStyle';
 import Modal from '../Modal';
 
-import { tripKeyword, mbti } from '../Tag/tagList';
+import { tripKeyword } from '../Tag/tagList';
 import Tag from '../Tag';
 
-interface Info {
+export interface Info {
   city: string;
   endDate: string;
   partner: any;

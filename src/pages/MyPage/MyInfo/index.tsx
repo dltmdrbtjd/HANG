@@ -5,13 +5,17 @@ import SettingsIcon from '@material-ui/icons/Settings';
 // apis
 import apis from 'src/shared/api';
 // redux
-import { useDispatch, shallowEqual } from 'react-redux';
-import { DeleteTripEvent } from 'src/redux/modules/MyPageModule/mypage';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  DeleteTripEvent,
+  getValidTripList,
+} from 'src/redux/modules/MyPageModule/mypage';
 import { fetchMessage } from 'src/redux/modules/ToastMessage/toastMessage';
 // sign out
 import { signInStatus } from 'src/globalState/signInContext';
 // type
 import { DeleteTripEventType } from 'src/shared/ApiTypes';
+import { Info } from 'src/components/EventCard';
 // history
 import { history, useTypedSelector } from '../../../redux/configureStore';
 // elements
@@ -38,13 +42,8 @@ import { setMediaCardLayout } from '../../../styles/Media';
 const MyInfo = () => {
   const dispatch = useDispatch();
 
-  const { myInfo, tripList }: any = useTypedSelector(
-    (state) => ({
-      myInfo: state.mypage.myInfo,
-      tripList: state.mypage.tripList,
-    }),
-    shallowEqual,
-  );
+  const myInfo: any = useTypedSelector((state) => state.mypage.myInfo);
+  const tripList = useSelector(getValidTripList);
 
   const { signOut } = React.useContext(signInStatus);
 
@@ -138,7 +137,7 @@ const MyInfo = () => {
         margin="60px 0"
       >
         <Grid margin="0 0 60px" addstyle={setMediaCardLayout()}>
-          {tripList.map((tripInfo, idx: number) => (
+          {tripList.map((tripInfo: Info, idx: number) => (
             <EventCard
               key={(idx * Date.now() + Math.random()).toString(36)}
               btnText="삭제하기"
