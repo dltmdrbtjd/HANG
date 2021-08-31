@@ -9,6 +9,8 @@ import {
   DuplicateType,
   FavoriteType,
   SignInType,
+  ForgotPwdType,
+  ExistsType,
   SearchType,
   GuideRequestType,
   DoGuideType,
@@ -72,8 +74,10 @@ const apis = {
     instance.post('/api/users/duplicate', user),
   SignIn: (user: SignInType) => instance.post('/api/users/signin', user),
   SignOut: () => instance.delete('/api/users/signout'),
-  ForgotPwd: (userInfo) => instance.post('/api/users/password', userInfo),
-  Exists: (userInfo) => instance.post('/api/users/exists', userInfo),
+  ForgotPwd: (userInfo: ForgotPwdType) =>
+    instance.post('/api/users/password', userInfo),
+  Exists: (userInfo: ExistsType) =>
+    instance.post('/api/users/exists', userInfo),
   Withdrawal: () => instance.delete('/api/users/quit'),
 
   // alarm
@@ -118,7 +122,7 @@ const apis = {
 
   // myinfo block
   GetBlockList: () => instance.get('api/users/block'),
-  AddBlockList: (targetPk: { targetPk: any }) =>
+  AddBlockList: (targetPk: { targetPk: number }) =>
     instance.post('api/users/block', targetPk),
   DeleteBlockList: (targetPk: { targetPk: number }) =>
     instance.patch('api/users/block', targetPk),

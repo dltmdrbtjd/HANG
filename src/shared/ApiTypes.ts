@@ -31,6 +31,16 @@ export type SignInType = {
   password: string;
 };
 
+export type ForgotPwdType = {
+  userId: string;
+  newPassword: string;
+};
+
+export type ExistsType = {
+  userId: string;
+  pNum: string;
+};
+
 // detail module => api types
 export type FavoriteType = {
   targetPk?: any;
