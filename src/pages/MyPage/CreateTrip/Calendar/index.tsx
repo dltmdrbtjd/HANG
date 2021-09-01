@@ -89,16 +89,19 @@ const Calendar = ({ setSelectDate }) => {
             ranges={date}
             rangeColors={['#D4F0FF']}
             direction="horizontal"
-            disabledDay={(current) => {
-              return disabledDates.some((disabledDate) => {
+            disabledDay={(current: Date) =>
+              disabledDates.some((disabledDate) => {
                 const curDate = moment(current).format(format);
+                const startDate = moment(disabledDate.startDate)
+                  .subtract(1, 'days')
+                  .format(format);
+                const endDate = moment(disabledDate.endDate)
+                  .add(1, 'days')
+                  .format(format);
 
-                return moment(curDate).isBetween(
-                  moment(disabledDate.startDate).format(format),
-                  moment(disabledDate.endDate).format(format),
-                );
-              });
-            }}
+                return moment(curDate).isBetween(startDate, endDate);
+              })
+            }
           />
         </ClickAwayListener>
       ) : null}
