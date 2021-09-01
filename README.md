@@ -16,7 +16,6 @@
   <img src='https://img.shields.io/badge/socket.io-v4.1.3-white?logo=Socket.io'/>
   <img src='https://img.shields.io/badge/yarn-v1.22.11-yellow?logo=yarn'/>
   <img src='https://img.shields.io/badge/AWS-Amazon AWS-yellow?logo=Amazon AWS'/>
-  <img src="https://img.shields.io/badge/jest-v27.0.1-orange?logo=jest"/>
   <img src='https://img.shields.io/badge/prettier-v2.3.2-pink?logo=prettier'/>
   <img src='https://img.shields.io/badge/eslint-v7.31.0-yellow?logo=eslint'/>
 </p>
