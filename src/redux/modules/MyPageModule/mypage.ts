@@ -226,6 +226,19 @@ export const getDisabledDates = createSelector(
   },
 );
 
+export const getValidTripList = createSelector(
+  (state: RootState) => state.mypage.tripList,
+  (tripList) => {
+    const validTripList = tripList.filter((tripInfo) => {
+      const date = moment(tripInfo.endDate).diff(moment(), 'days');
+
+      return date >= 0;
+    });
+
+    return validTripList;
+  },
+);
+
 const MyPageCreators = {
   fetchGetMyInfo,
   fetchGetMyPromise,

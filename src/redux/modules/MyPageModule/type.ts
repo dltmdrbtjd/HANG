@@ -12,6 +12,7 @@ export interface TripInfo {
   endDate: string;
   tripInfo?: string;
   partner?: number;
+  tags?: string;
 }
 
 export interface PromInfo {
