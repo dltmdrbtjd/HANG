@@ -230,7 +230,9 @@ export const getValidTripList = createSelector(
   (state: RootState) => state.mypage.tripList,
   (tripList) => {
     const validTripList = tripList.filter((tripInfo) => {
-      const date = moment(tripInfo.endDate).diff(moment(), 'days');
+      const date = moment
+        .duration(moment(tripInfo.endDate).add(9, 'hours').diff(moment()))
+        .asDays();
 
       return date >= 0;
     });
