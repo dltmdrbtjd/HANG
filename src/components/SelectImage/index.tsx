@@ -28,7 +28,6 @@ const SelectImage = ({ setProfile, profile }: Props) => {
     e: React.ChangeEvent<HTMLInputElement>,
   ): Promise<void> => {
     const options = {
-      maxSizeMB: 10,
       maxWidthOrHeight: 500,
       useWebWorker: true,
     };
