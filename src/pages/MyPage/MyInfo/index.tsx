@@ -35,6 +35,7 @@ import GuideToggle from '../GuideToggle';
 import EventCard from '../../../components/EventCard';
 import DropDown from '../../../components/DropDown';
 import NoInfo from '../../../components/NoInfo';
+import Modal from '../../../components/Modal';
 // style
 import { setSubTitleFont, setNicknameFont } from './style';
 import { setMediaCardLayout } from '../../../styles/Media';
@@ -44,6 +45,8 @@ const MyInfo = () => {
 
   const myInfo: any = useTypedSelector((state) => state.mypage.myInfo);
   const tripList = useSelector(getValidTripList);
+
+  const [open, setOpen] = React.useState(false);
 
   const { signOut } = React.useContext(signInStatus);
 
@@ -70,6 +73,14 @@ const MyInfo = () => {
       .catch((err) => console.error(err));
   };
 
+  const Withdrawal = () => {
+    apis
+      .Withdrawal()
+      .then(() => signOut())
+      .then(() => history.replace('/signin'))
+      .catch((err) => console.error(err));
+  };
+
   return (
     <Container>
       <Grid isFlex ver="center" hoz="space-between" margin="0 0 16px">
@@ -89,11 +100,18 @@ const MyInfo = () => {
 
         <DropDown
           icon={<SettingsIcon />}
-          contents={['프로필 수정', '차단 목록', '로그아웃', '튜토리얼 보기']}
+          contents={[
+            '프로필 수정',
+            '차단 목록',
+            '로그아웃',
+            '회원탈퇴',
+            '튜토리얼 보기',
+          ]}
           methods={[
             () => history.push('/mypage/modify'),
             () => history.push('/mypage/block'),
             SignOut,
+            () => setOpen(true),
             () => history.push('/tutorial'),
           ]}
           top="130px"
@@ -157,6 +175,15 @@ const MyInfo = () => {
           ))}
         </Grid>
       </NoInfo>
+
+      <Modal
+        open={open}
+        close={() => setOpen(false)}
+        mainText="회원탈퇴"
+        subText="탈퇴하시겠습니까?"
+        agree={Withdrawal}
+        agreeText="확인"
+      />
     </Container>
   );
 };
