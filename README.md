@@ -60,5 +60,6 @@
 - 이승규 : https://github.com/dltmdrbtjd
 - 홍성훈 : https://github.com/HseongH
 ### 백엔드
+- BackEnd github : https://github.com/HANG-Project/HANG-BackEnd
 - 고수진 : https://github.com/soujinko
 - 변정섭 : https://github.com/BJS-kr
