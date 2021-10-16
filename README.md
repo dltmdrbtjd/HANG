@@ -20,8 +20,7 @@
   <img src='https://img.shields.io/badge/eslint-v7.31.0-yellow?logo=eslint'/>
 </p>
 
-## 🏘 <a href="https://hanging.kr">Home Page</a> / <a href="https://play.google.com/store/apps/details?id=kr.hanging.twa">PlayStore</a>
-나만 아는곳, 너만 아는 곳. 함께 여행을 떠나봐요 ! 
+## 🏘 나만 아는곳, 너만 아는 곳. 함께 여행을 떠나봐요 !
 
 ## 🎉 행(HANG) 서비스 소개
 ### 🚶‍♂️ 본인이 잘 아는지역을 누군가에게 소개해보세요
